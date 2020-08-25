@@ -11,6 +11,12 @@ class Game extends Sprite {
 		// background.filters = [new BlurFilter(10, 10)];
 		this.addChild(background);
 
+        
+        this.addEventListener(MouseEvent.CLICK, this_clickHandler);
+    }
+    
+    private function this_clickHandler(evetn:MouseEvent):void {
+        
     }
 
 	public function resize(newWidth:Int, newHeight:Int):Void {
