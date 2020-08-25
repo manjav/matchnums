@@ -1,7 +1,10 @@
 package com.grantech.matchnums;
+
+import openfl.events.MouseEvent;
 import openfl.display.Sprite;
 
 class Game extends Sprite {
+	public var currentScale:Float = 1;
 	public function new() {
 		super();
 
@@ -20,5 +23,25 @@ class Game extends Sprite {
     }
 
 	public function resize(newWidth:Int, newHeight:Int):Void {
+		var maxWidth = newWidth * 0.90;
+		var maxHeight = newHeight * 0.86;
+
+		currentScale = scaleX = scaleY = 1;
+
+		var currentWidth = width;
+		var currentHeight = height;
+
+		var maxScaleX = maxWidth / currentWidth;
+		var maxScaleY = maxHeight / currentHeight;
+
+		if (maxScaleX < maxScaleY)
+			currentScale = maxScaleX;
+		else
+			currentScale = maxScaleY;
+
+		scaleX = currentScale;
+		scaleY = currentScale;
+
+		x = (newWidth - (currentWidth * currentScale)) * 0.5;
 	}
 }
