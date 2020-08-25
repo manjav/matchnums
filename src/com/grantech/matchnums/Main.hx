@@ -8,6 +8,7 @@ import openfl.events.Event;
 class Main extends Sprite {
 	private var background:Bitmap;
 	private var footer:Bitmap;
+	private var game:Game;
 
 	public function new() {
 		super();
@@ -24,16 +25,20 @@ class Main extends Sprite {
 
 		this.addChild(this.background);
 		this.addChild(this.footer);
+		this.addChild(this.game);
 	}
 
 	private function initialize():Void {
 		this.background = new Bitmap(Assets.getBitmapData("images/background_tile.png"));
 		this.footer = new Bitmap(Assets.getBitmapData("images/center_bottom.png"));
+		this.game = new Game();
 	}
 
 	private function resize(newWidth:Int, newHeight:Int):Void {
 		this.background.width = newWidth;
 		this.background.height = newHeight;
+
+		this.game.resize(newWidth, newHeight);
 
 		this.footer.scaleX = this.game.currentScale;
 		this.footer.scaleY = this.game.currentScale;
