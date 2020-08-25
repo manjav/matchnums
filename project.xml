@@ -13,4 +13,6 @@
 	<haxelib name="actuate" />
 
 	<icon path="Assets/images/icon.svg" />
+	<assets path="Assets/images" rename="images" include="*" exclude="icon.svg" />
+	<assets path="Assets/fonts" rename="fonts" include="*.ttf" />
 </project>
