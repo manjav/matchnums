@@ -29,8 +29,8 @@ class Game extends Sprite {
         this.addEventListener(MouseEvent.CLICK, this_clickHandler);
     }
     
-    private function this_clickHandler(evetn:MouseEvent):void {
-        
+	private function this_clickHandler(event:MouseEvent):Void {
+		trace(event);
     }
 
 	public function resize(newWidth:Int, newHeight:Int):Void {
