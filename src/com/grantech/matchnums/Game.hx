@@ -8,6 +8,8 @@ class Game extends Sprite {
 	private static var NUM_ROWS = 7;
 
 	public var currentScale:Float = 1;
+	public var tiles:Array<Array<Num>>;
+
 	public function new() {
 		super();
 
@@ -17,6 +19,7 @@ class Game extends Sprite {
 		// background.filters = [new BlurFilter(10, 10)];
 		this.addChild(background);
 
+		this.tiles = new Array<Array<Num>>();
 		for (c in 0...NUM_COLUMNS) {
 			for (r in 0...NUM_ROWS) {
                 var num = new Num(c, r, Math.round(Math.random() * 8) + 1);
