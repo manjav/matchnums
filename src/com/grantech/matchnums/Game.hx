@@ -4,6 +4,9 @@ import openfl.events.MouseEvent;
 import openfl.display.Sprite;
 
 class Game extends Sprite {
+	private static var NUM_COLUMNS = 5;
+	private static var NUM_ROWS = 7;
+
 	public var currentScale:Float = 1;
 	public function new() {
 		super();
@@ -14,6 +17,14 @@ class Game extends Sprite {
 		// background.filters = [new BlurFilter(10, 10)];
 		this.addChild(background);
 
+		for (c in 0...NUM_COLUMNS) {
+			for (r in 0...NUM_ROWS) {
+                var num = new Num(c, r, Math.round(Math.random() * 8) + 1);
+                num.x = c * 176;
+                num.y = r * 176;
+				addChild(num);
+			}
+        }
         
         this.addEventListener(MouseEvent.CLICK, this_clickHandler);
     }
