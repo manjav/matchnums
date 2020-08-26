@@ -15,4 +15,11 @@
 	<icon path="Assets/images/icon.svg" />
 	<assets path="Assets/images" rename="images" include="*" exclude="icon.svg" />
 	<assets path="Assets/fonts" rename="fonts" include="*.ttf" />
+	
+	<!-- <config:android target-sdk-version="28"/> -->
+	<section if="release-sign">
+		<certificate path="certs/bbg.keystore" password="123456" alias="boom" alias-password="654321" if="android" />
+		<certificate path="certs/bbg.p12" if="blackberry" />
+	</section>
+
 </project>
