@@ -22,4 +22,6 @@
 		<certificate path="certs/bbg.p12" if="blackberry" />
 	</section>
 
+	<architecture exclude="armv7" if="android" />
+	<haxeflag name="-dce" value="full" />
 </project>
