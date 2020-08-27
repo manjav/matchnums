@@ -29,10 +29,10 @@ class Game extends Sprite {
 			}
         }
         
-        this.addEventListener(MouseEvent.CLICK, this_clickHandler);
+        this.addEventListener(MouseEvent.CLICK, this.clickHandler);
     }
     
-	private function this_clickHandler(event:MouseEvent):Void {
+	private function clickHandler(event:MouseEvent):Void {
 		trace(event);
     }
 

@@ -11,10 +11,25 @@
 	
 	<haxelib name="openfl" />
 	<haxelib name="actuate" />
-
+		
 	<icon path="Assets/images/icon.svg" />
 	<assets path="Assets/images" rename="images" include="*" exclude="icon.svg" />
 	<assets path="Assets/fonts" rename="fonts" include="*.ttf" />
+	
+	<!-- <set name="use-mp3" if="web" unless="emscripten" />
+	<assets path="Assets/sounds" rename="sounds" if="use-mp3">
+		<sound path="3.mp3" id="sound3" />
+		<sound path="4.mp3" id="sound4" />
+		<sound path="5.mp3" id="sound5" />
+		<music path="theme.mp3" id="soundTheme" />
+	</assets>
+	<assets path="Assets/sounds" rename="sounds" if="html5" />
+	<assets path="Assets/sounds" rename="sounds" unless="use-mp3">
+		<sound path="3.wav" id="sound3" />
+		<sound path="4.wav" id="sound4" />
+		<sound path="5.wav" id="sound5" />
+		<music path="theme.ogg" id="soundTheme" />
+	</assets> -->
 	
 	<!-- <config:android target-sdk-version="28"/> -->
 	<architecture exclude="armv7" if="android" />
