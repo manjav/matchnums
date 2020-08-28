@@ -22,7 +22,7 @@ class Game extends Sprite {
 		this.tiles = new Array<Array<Cell>>();
 		for (c in 0...NUM_COLUMNS) {
 			for (r in 0...NUM_ROWS) {
-                var num = new Cell(c, r, Math.round(Math.random() * 8) + 1);
+                var num = Cell.instantiate(c, r, Math.round(Math.random() * 8) + 1);
                 num.x = c * 176;
                 num.y = r * 176;
 				addChild(num);

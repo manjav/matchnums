@@ -50,14 +50,18 @@ class Cell extends Sprite {
 		return this;
 	}
 
-		var textDisplay = new TextField();
-		textDisplay.autoSize = CENTER;
-		textDisplay.selectable = false;
-		textDisplay.text = Math.pow(2, value) + "";
-		textDisplay.embedFonts = true;
-		textDisplay.defaultTextFormat = new TextFormat("Arial Rounded MT Bold", 72, 0xFFFFFF, true);
-		textDisplay.x = (this.width - textDisplay.width) * 0.5;
-		textDisplay.y = (this.height - textDisplay.height) * 0.5;
-		this.addChild(textDisplay);
+	static private var pool:Array<Cell> = new Array();
+	static private var i:Int = 0;
+
+	static public function dispose(cell:Cell):Void {
+		pool[i++] = cell;
+	}
+
+	static public function instantiate(column:Int, row:Int, value:Int):Cell {
+		if (i > 0) {
+			i--;
+			return pool[i].update(column, row, value);
+		}
+		return new Cell(column, row, value);
 	}
 }
