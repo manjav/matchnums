@@ -1,9 +1,9 @@
 package com.grantech.matchnums;
 
-import openfl.geom.ColorTransform;
 import openfl.Assets;
 import openfl.display.Bitmap;
 import openfl.display.Sprite;
+import openfl.geom.ColorTransform;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
 
@@ -41,12 +41,15 @@ class Cell extends Sprite {
 		this.column = column;
 		this.row = row;
 		this.value = value;
+
 		var color = new ColorTransform();
 		color.color = COLORS[value];
 		this.background.transform.colorTransform = color;
+
 		this.textDisplay.text = Math.pow(2, value) + "";
 		this.textDisplay.x = (this.width - this.textDisplay.width) * 0.5;
 		this.textDisplay.y = (this.height - this.textDisplay.height) * 0.5;
+		
 		return this;
 	}
 
