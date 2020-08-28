@@ -19,12 +19,17 @@ class Cell extends Sprite {
 	public function new(column:Int, row:Int, value:Int) {
 		super();
 
+		this.update(column, row, value);
+	}
+
+	public function update(column:Int, row:Int, value:Int):Cell {
+		this.column = column;
+		this.row = row;
+		this.value = value;
 		var color = new ColorTransform();
 		color.color = COLORS[value];
-		var background = new Bitmap(Assets.getBitmapData("images/tile.png"));
-		background.transform.colorTransform = color;
-		background.smoothing = true;
-		this.addChild(background);
+		return this;
+	}
 
 		var textDisplay = new TextField();
 		textDisplay.autoSize = CENTER;
