@@ -16,8 +16,23 @@ class Cell extends Sprite {
 	public var row:Int;
 	public var value:Int;
 
+	private var background:Bitmap;
+	private var textDisplay:TextField;
+
 	public function new(column:Int, row:Int, value:Int) {
 		super();
+
+		this.background = new Bitmap(Assets.getBitmapData("images/tile.png"));
+		this.background.smoothing = true;
+		this.addChild(this.background);
+		
+		this.textDisplay = new TextField();
+		this.textDisplay.autoSize = CENTER;
+		this.textDisplay.mouseEnabled = false;
+		this.textDisplay.selectable = false;
+		this.textDisplay.embedFonts = true;
+		this.textDisplay.defaultTextFormat = new TextFormat("Arial Rounded MT Bold", 72, 0xFFFFFF, true);
+		this.addChild(this.textDisplay);
 
 		this.update(column, row, value);
 	}
@@ -28,6 +43,10 @@ class Cell extends Sprite {
 		this.value = value;
 		var color = new ColorTransform();
 		color.color = COLORS[value];
+		this.background.transform.colorTransform = color;
+		this.textDisplay.text = Math.pow(2, value) + "";
+		this.textDisplay.x = (this.width - this.textDisplay.width) * 0.5;
+		this.textDisplay.y = (this.height - this.textDisplay.height) * 0.5;
 		return this;
 	}
 

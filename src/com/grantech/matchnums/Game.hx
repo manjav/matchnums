@@ -33,7 +33,9 @@ class Game extends Sprite {
     }
     
 	private function clickHandler(event:MouseEvent):Void {
-		trace(event);
+		var cell = cast(event.target, Cell);
+		if(cell != null)
+			cell.update(cell.column, cell.row, Math.round(Math.random() * 8) + 1);
     }
 
 	public function resize(newWidth:Int, newHeight:Int):Void {
