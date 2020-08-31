@@ -37,7 +37,7 @@ class Game extends Sprite {
 			return;
 		}
 
-		var column = Math.floor(event.localX / CELL_SIZE);
+		var column = Math.floor(this.mouseX / CELL_SIZE);
 		var cell = Cell.instantiate(column, -1, Math.ceil(Math.random() * 8));
 		cell.x = column * CELL_SIZE;
 		this.floatings.push(cell);
