@@ -1,5 +1,8 @@
 package com.grantech.matchnums;
 
+import motion.easing.Linear;
+import motion.easing.Bounce;
+import motion.Actuate;
 import openfl.events.MouseEvent;
 import openfl.display.Sprite;
 
@@ -24,12 +27,22 @@ class Game extends Sprite {
 
 		this.cells = new Array<Array<Cell>>();
 		this.floatings = new Array<Cell>();
-        
-        this.addEventListener(MouseEvent.CLICK, this.clickHandler);
-    }
-    
+
+		this.addEventListener(MouseEvent.CLICK, this.clickHandler);
+	}
+
 	private function clickHandler(event:MouseEvent):Void {
 		if (this.floatings.length > 0) {
+			while (this.floatings.length > 0) {
+				var f = this.floatings.pop();
+				if (this.cells[f.column] == null)
+					this.cells[f.column] = new Array<Cell>();
+
+				var target = this.cells[f.column].length;
+				Actuate.tween(f, 0.2, {y: CELL_SIZE * (NUM_ROWS - target), ease: Bounce.easeOut});
+				f.row = target;
+				this.cells[f.column].push(f);
+			}
 			return;
 		}
 
@@ -40,7 +53,7 @@ class Game extends Sprite {
 		var distance = CELL_SIZE * (NUM_ROWS - cells.length);
 		Actuate.tween(cell, distance * 0.3, {y: distance, ease: Linear.easeNone});
 		this.addChild(cell);
-    }
+	}
 
 	public function resize(newWidth:Int, newHeight:Int):Void {
 		var maxWidth = newWidth * 0.90;
