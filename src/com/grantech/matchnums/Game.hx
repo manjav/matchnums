@@ -33,6 +33,13 @@ class Game extends Sprite {
 			return;
 		}
 
+		var column = Math.floor(Math.random() * NUM_COLUMNS);
+		var cell = Cell.instantiate(Math.floor(Math.random() * NUM_COLUMNS), -1, column);
+		cell.x = column * CELL_SIZE;
+		this.floatings.push(cell);
+		var distance = CELL_SIZE * (NUM_ROWS - cells.length);
+		Actuate.tween(cell, distance * 0.3, {y: distance, ease: Linear.easeNone});
+		this.addChild(cell);
     }
 
 	public function resize(newWidth:Int, newHeight:Int):Void {
