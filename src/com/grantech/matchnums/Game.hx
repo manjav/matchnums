@@ -1,5 +1,6 @@
 package com.grantech.matchnums;
 
+import motion.easing.Back;
 import motion.easing.Linear;
 import motion.easing.Bounce;
 import motion.Actuate;
@@ -8,7 +9,7 @@ import openfl.display.Sprite;
 
 class Game extends Sprite {
 	private static var NUM_COLUMNS = 5;
-	private static var NUM_ROWS = 7;
+	private static var NUM_ROWS = 6;
 	private static var CELL_SIZE = 176;
 
 	public var currentScale:Float = 1;
@@ -21,7 +22,7 @@ class Game extends Sprite {
 
 		var background = new Sprite();
 		background.graphics.beginFill(0xFFFFFF, 0.4);
-		background.graphics.drawRect(0, 0, CELL_SIZE * NUM_COLUMNS, CELL_SIZE * NUM_ROWS);
+		background.graphics.drawRect(0, 0, CELL_SIZE * NUM_COLUMNS, CELL_SIZE * (NUM_ROWS + 1));
 		// background.filters = [new BlurFilter(10, 10)];
 		this.addChild(background);
 
@@ -39,7 +40,8 @@ class Game extends Sprite {
 					this.cells[f.column] = new Array<Cell>();
 
 				var target = this.cells[f.column].length;
-				Actuate.tween(f, 0.2, {y: CELL_SIZE * (NUM_ROWS - target), ease: Bounce.easeOut});
+				Actuate.stop(f);
+				Actuate.tween(f, 0.5, {y: CELL_SIZE * (NUM_ROWS - target)}).ease(Back.easeOut);
 				f.row = target;
 				this.cells[f.column].push(f);
 			}
@@ -51,7 +53,7 @@ class Game extends Sprite {
 		cell.x = column * CELL_SIZE;
 		this.floatings.push(cell);
 		var distance = CELL_SIZE * (NUM_ROWS - cells.length);
-		Actuate.tween(cell, distance * 0.3, {y: distance, ease: Linear.easeNone});
+		Actuate.tween(cell, distance * 0.03, {y: distance}).ease(Linear.easeNone);
 		this.addChild(cell);
 	}
 
