@@ -27,6 +27,8 @@ class Game extends Sprite {
 
 		this.cells = new Array<Array<Cell>>();
 		this.floatings = new Array<Cell>();
+		for (i in 0...NUM_COLUMNS)
+			this.cells[i] = new Array<Cell>();
 
 		this.addEventListener(MouseEvent.CLICK, this.clickHandler);
 	}
@@ -41,7 +43,7 @@ class Game extends Sprite {
 		var cell = Cell.instantiate(column, -1, Math.ceil(Math.random() * 8));
 		cell.x = column * CELL_SIZE;
 		this.floatings.push(cell);
-		var distance = CELL_SIZE * (NUM_ROWS - cells.length);
+		var distance = CELL_SIZE * (NUM_ROWS - this.cells[column].length);
 		Actuate.tween(cell, distance * 0.005, {y: distance}).ease(Linear.easeNone).onComplete(finalizeFloatings);
 		this.addChild(cell);
 	}
@@ -49,8 +51,6 @@ class Game extends Sprite {
 	private function finalizeFloatings():Void {
 		while (this.floatings.length > 0) {
 			var f = this.floatings.pop();
-			if (this.cells[f.column] == null)
-				this.cells[f.column] = new Array<Cell>();
 
 			var target = this.cells[f.column].length;
 			Actuate.stop(f);
