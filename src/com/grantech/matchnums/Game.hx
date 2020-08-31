@@ -9,7 +9,9 @@ class Game extends Sprite {
 	private static var CELL_SIZE = 176;
 
 	public var currentScale:Float = 1;
-	public var tiles:Array<Array<Cell>>;
+
+	private var cells:Array<Array<Cell>>;
+	private var floatings:Array<Cell>;
 
 	public function new() {
 		super();
@@ -20,23 +22,17 @@ class Game extends Sprite {
 		// background.filters = [new BlurFilter(10, 10)];
 		this.addChild(background);
 
-		this.tiles = new Array<Array<Cell>>();
-		for (c in 0...NUM_COLUMNS) {
-			for (r in 0...NUM_ROWS) {
-                var num = Cell.instantiate(c, r, Math.round(Math.random() * 8) + 1);
-                num.x = c * 176;
-                num.y = r * 176;
-				addChild(num);
-			}
-        }
+		this.cells = new Array<Array<Cell>>();
+		this.floatings = new Array<Cell>();
         
         this.addEventListener(MouseEvent.CLICK, this.clickHandler);
     }
     
 	private function clickHandler(event:MouseEvent):Void {
-		var cell = cast(event.target, Cell);
-		if(cell != null)
-			cell.update(cell.column, cell.row, Math.round(Math.random() * 8) + 1);
+		if (this.floatings.length > 0) {
+			return;
+		}
+
     }
 
 	public function resize(newWidth:Int, newHeight:Int):Void {
