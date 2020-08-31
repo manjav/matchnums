@@ -1,10 +1,10 @@
 package com.grantech.matchnums;
 
-import motion.easing.Linear;
-import motion.easing.Bounce;
 import motion.Actuate;
-import openfl.events.MouseEvent;
+import motion.easing.Bounce;
+import motion.easing.Linear;
 import openfl.display.Sprite;
+import openfl.events.MouseEvent;
 
 class Game extends Sprite {
 	private static var NUM_COLUMNS = 5;
@@ -33,17 +33,7 @@ class Game extends Sprite {
 
 	private function clickHandler(event:MouseEvent):Void {
 		if (this.floatings.length > 0) {
-			while (this.floatings.length > 0) {
-				var f = this.floatings.pop();
-				if (this.cells[f.column] == null)
-					this.cells[f.column] = new Array<Cell>();
-
-				var target = this.cells[f.column].length;
-				Actuate.stop(f);
-				Actuate.tween(f, 0.5, {y: CELL_SIZE * (NUM_ROWS - target)}).ease(Bounce.easeOut);
-				f.row = target;
-				this.cells[f.column].push(f);
-			}
+			this.finalizeFloatings();
 			return;
 		}
 
@@ -52,8 +42,22 @@ class Game extends Sprite {
 		cell.x = column * CELL_SIZE;
 		this.floatings.push(cell);
 		var distance = CELL_SIZE * (NUM_ROWS - cells.length);
-		Actuate.tween(cell, distance * 0.005, {y: distance}).ease(Linear.easeNone);
+		Actuate.tween(cell, distance * 0.005, {y: distance}).ease(Linear.easeNone).onComplete(finalizeFloatings);
 		this.addChild(cell);
+	}
+
+	private function finalizeFloatings():Void {
+		while (this.floatings.length > 0) {
+			var f = this.floatings.pop();
+			if (this.cells[f.column] == null)
+				this.cells[f.column] = new Array<Cell>();
+
+			var target = this.cells[f.column].length;
+			Actuate.stop(f);
+			Actuate.tween(f, 0.5, {y: CELL_SIZE * (NUM_ROWS - target)}).ease(Bounce.easeOut);
+			f.row = target;
+			this.cells[f.column].push(f);
+		}
 	}
 
 	public function resize(newWidth:Int, newHeight:Int):Void {
