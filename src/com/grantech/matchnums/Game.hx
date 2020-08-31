@@ -6,6 +6,7 @@ import openfl.display.Sprite;
 class Game extends Sprite {
 	private static var NUM_COLUMNS = 5;
 	private static var NUM_ROWS = 7;
+	private static var CELL_SIZE = 176;
 
 	public var currentScale:Float = 1;
 	public var tiles:Array<Array<Cell>>;
@@ -15,7 +16,7 @@ class Game extends Sprite {
 
 		var background = new Sprite();
 		background.graphics.beginFill(0xFFFFFF, 0.4);
-		background.graphics.drawRect(0, 0, 176 * NUM_COLUMNS, 176 * NUM_ROWS);
+		background.graphics.drawRect(0, 0, CELL_SIZE * NUM_COLUMNS, CELL_SIZE * NUM_ROWS);
 		// background.filters = [new BlurFilter(10, 10)];
 		this.addChild(background);
 

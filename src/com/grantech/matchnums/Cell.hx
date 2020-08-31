@@ -25,7 +25,7 @@ class Cell extends Sprite {
 		this.background = new Bitmap(Assets.getBitmapData("images/tile.png"));
 		this.background.smoothing = true;
 		this.addChild(this.background);
-		
+
 		this.textDisplay = new TextField();
 		this.textDisplay.autoSize = CENTER;
 		this.textDisplay.mouseEnabled = false;
@@ -49,7 +49,7 @@ class Cell extends Sprite {
 		this.textDisplay.text = Math.pow(2, value) + "";
 		this.textDisplay.x = (this.width - this.textDisplay.width) * 0.5;
 		this.textDisplay.y = (this.height - this.textDisplay.height) * 0.5;
-		
+
 		return this;
 	}
 
