@@ -13,6 +13,7 @@ class Game extends Sprite {
 
 	public var currentScale:Float = 1;
 
+	private var lastColumn:Int;
 	private var cells:Array<Array<Cell>>;
 	private var floatings:Array<Cell>;
 
@@ -31,6 +32,7 @@ class Game extends Sprite {
 			this.cells[i] = new Array<Cell>();
 
 		this.addEventListener(MouseEvent.CLICK, this.clickHandler);
+		this.lastColumn = Math.floor(Math.random() * NUM_COLUMNS);
 	}
 
 	private function clickHandler(event:MouseEvent):Void {
@@ -38,13 +40,11 @@ class Game extends Sprite {
 			this.finalizeFloatings();
 			return;
 		}
-
-		var column = Math.floor(this.mouseX / CELL_SIZE);
-		var cell = Cell.instantiate(column, -1, Math.ceil(Math.random() * 8));
-		cell.x = column * CELL_SIZE;
+		var cell = Cell.instantiate(this.lastColumn, -1, Math.ceil(Math.random() * 8));
+		cell.x = this.lastColumn * CELL_SIZE;
 		this.floatings.push(cell);
-		var distance = CELL_SIZE * (NUM_ROWS - this.cells[column].length);
-		Actuate.tween(cell, distance * 0.005, {y: distance}).ease(Linear.easeNone).onComplete(finalizeFloatings);
+		var distance = CELL_SIZE * (NUM_ROWS - this.cells[this.lastColumn].length);
+		Actuate.tween(cell, distance * 0.005, {y: distance}).ease(Linear.easeNone).onComplete(fallAll);
 		this.addChild(cell);
 	}
 
@@ -52,8 +52,7 @@ class Game extends Sprite {
 		var fallTime = 0.5;
 		while (this.floatings.length > 0) {
 			var f = this.floatings.pop();
-
-			var target = this.cells[f.column].length;
+			var target = this.cells[this.lastColumn].length;
 			Actuate.stop(f);
 			Actuate.tween(f, fallTime, {y: CELL_SIZE * (NUM_ROWS - target)}).delay(fallDelay).ease(Bounce.easeOut);
 			f.row = target;
