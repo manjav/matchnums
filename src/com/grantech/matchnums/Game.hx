@@ -1,5 +1,6 @@
 package com.grantech.matchnums;
 
+import haxe.Timer;
 import motion.Actuate;
 import motion.easing.Bounce;
 import motion.easing.Linear;
@@ -33,13 +34,10 @@ class Game extends Sprite {
 
 		this.addEventListener(MouseEvent.CLICK, this.clickHandler);
 		this.lastColumn = Math.floor(Math.random() * NUM_COLUMNS);
+		this.spawn();
 	}
 
-	private function clickHandler(event:MouseEvent):Void {
-		if (this.floatings.length > 0) {
-			this.finalizeFloatings();
-			return;
-		}
+	private function spawn():Void {
 		var cell = Cell.instantiate(this.lastColumn, -1, Math.ceil(Math.random() * 8));
 		cell.x = this.lastColumn * CELL_SIZE;
 		this.floatings.push(cell);
@@ -48,6 +46,11 @@ class Game extends Sprite {
 		this.addChild(cell);
 	}
 
+	private function clickHandler(event:MouseEvent):Void {
+		this.fallAll();
+	}
+
+	private function fallAll():Void {
 		var fallDelay = 0.2;
 		var fallTime = 0.5;
 		while (this.floatings.length > 0) {
@@ -64,9 +67,10 @@ class Game extends Sprite {
 
 		// Check all matchs after falling animation
 		Timer.delay(chechMatchs, Math.round((fallDelay + fallTime + 0.01) * 1000));
-		}
+	}
 
 	private function chechMatchs():Void {
+		this.spawn();
 	}
 
 	public function resize(newWidth:Int, newHeight:Int):Void {
