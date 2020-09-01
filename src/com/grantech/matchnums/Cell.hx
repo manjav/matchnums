@@ -2,8 +2,10 @@ package com.grantech.matchnums;
 
 import openfl.Assets;
 import openfl.display.Bitmap;
+import openfl.display.PixelSnapping;
 import openfl.display.Sprite;
 import openfl.geom.ColorTransform;
+import openfl.text.AntiAliasType;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
 
@@ -23,10 +25,11 @@ class Cell extends Sprite {
 		super();
 
 		this.background = new Bitmap(Assets.getBitmapData("images/tile.png"));
-		this.background.smoothing = true;
+		this.background.pixelSnapping = PixelSnapping.NEVER;
 		this.addChild(this.background);
 
 		this.textDisplay = new TextField();
+		this.textDisplay.antiAliasType = AntiAliasType.NORMAL;
 		this.textDisplay.autoSize = CENTER;
 		this.textDisplay.mouseEnabled = false;
 		this.textDisplay.selectable = false;
