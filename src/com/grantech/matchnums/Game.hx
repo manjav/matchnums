@@ -14,6 +14,7 @@ class Game extends Sprite {
 
 	public var currentScale:Float = 1;
 
+	private var timer:Timer;
 	private var lastColumn:Int;
 	private var cells:Array<Array<Cell>>;
 	private var floatings:Array<Cell>;
@@ -66,10 +67,11 @@ class Game extends Sprite {
 		}
 
 		// Check all matchs after falling animation
-		Timer.delay(chechMatchs, Math.round((fallDelay + fallTime + 0.01) * 1000));
+		timer = Timer.delay(chechMatchs, Math.round((fallDelay + fallTime + 0.01) * 1000));
 	}
 
 	private function chechMatchs():Void {
+		timer.stop();
 		this.spawn();
 	}
 
