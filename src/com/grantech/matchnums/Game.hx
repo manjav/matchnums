@@ -48,16 +48,22 @@ class Game extends Sprite {
 		this.addChild(cell);
 	}
 
-	private function finalizeFloatings():Void {
+		var fallDelay = 0.2;
+		var fallTime = 0.5;
 		while (this.floatings.length > 0) {
 			var f = this.floatings.pop();
 
 			var target = this.cells[f.column].length;
 			Actuate.stop(f);
-			Actuate.tween(f, 0.5, {y: CELL_SIZE * (NUM_ROWS - target)}).ease(Bounce.easeOut);
+			Actuate.tween(f, fallTime, {y: CELL_SIZE * (NUM_ROWS - target)}).delay(fallDelay).ease(Bounce.easeOut);
 			f.row = target;
-			this.cells[f.column].push(f);
 		}
+
+		// Check all matchs after falling animation
+		Timer.delay(chechMatchs, Math.round((fallDelay + fallTime + 0.01) * 1000));
+		}
+
+	private function chechMatchs():Void {
 	}
 
 	public function resize(newWidth:Int, newHeight:Int):Void {
