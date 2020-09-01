@@ -48,6 +48,7 @@ class Game extends Sprite {
 	}
 
 	private function clickHandler(event:MouseEvent):Void {
+		this.lastColumn = Math.floor(this.mouseX / CELL_SIZE);
 		this.fallAll();
 	}
 
@@ -56,7 +57,6 @@ class Game extends Sprite {
 		var fallTime = 0.5;
 		while (this.floatings.length > 0) {
 			var f = this.floatings.pop();
-			this.lastColumn = Math.floor(this.mouseX / CELL_SIZE);
 			var target = this.cells[this.lastColumn].length;
 			f.column = this.lastColumn;
 			f.x = this.lastColumn * CELL_SIZE;
