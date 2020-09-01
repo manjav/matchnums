@@ -52,10 +52,14 @@ class Game extends Sprite {
 		var fallTime = 0.5;
 		while (this.floatings.length > 0) {
 			var f = this.floatings.pop();
+			this.lastColumn = Math.floor(this.mouseX / CELL_SIZE);
 			var target = this.cells[this.lastColumn].length;
+			f.column = this.lastColumn;
+			f.x = this.lastColumn * CELL_SIZE;
 			Actuate.stop(f);
 			Actuate.tween(f, fallTime, {y: CELL_SIZE * (NUM_ROWS - target)}).delay(fallDelay).ease(Bounce.easeOut);
 			f.row = target;
+			this.cells[this.lastColumn].push(f);
 		}
 
 		// Check all matchs after falling animation
