@@ -41,6 +41,7 @@ class Game extends Sprite {
 	private function spawn():Void {
 		var cell = Cell.instantiate(this.lastColumn, this.heights[this.lastColumn], Math.ceil(Math.random() * 8));
 		cell.x = this.lastColumn * CELL_SIZE;
+		cell.y = 0;
 		this.cells.push(cell);
 		var target = CELL_SIZE * (NUM_ROWS - cell.row);
 		Actuate.tween(cell, target * 0.005, {y: target}).ease(Linear.easeNone).onComplete(fallAll);
