@@ -16,6 +16,7 @@ class Game extends Sprite {
 
 	private var timer:Timer;
 	private var lastColumn:Int;
+	private var cells:Array<Cell>;
 	private var heights:Array<Int>;
 
 	public function new() {
@@ -70,8 +71,8 @@ class Game extends Sprite {
 
 		if (numFallings > 0)
 			this.timer = Timer.delay(this.fell, Math.round((delay + time + 0.01) * 1000));
-		}
-
+	}
+	
 	private function fell():Void {
 		this.timer.stop();
 		
@@ -80,12 +81,17 @@ class Game extends Sprite {
 				continue;
 			++this.heights[c.column];
 			c.state = Fixed;
-	}
-
+		}
+		
 		if (this.isEnd()) {
 			trace("Game Over.");
 			return;
 		}
+		
+		// Check all matchs after falling animation
+		if (this.findMatchs())
+			return;
+
 		this.spawn();
 	}
 
@@ -93,6 +99,10 @@ class Game extends Sprite {
 		for (h in this.heights)
 			if (h > NUM_ROWS)
 				return true;
+		return false;
+	}
+
+	private function findMatchs():Bool {
 		return false;
 	}
 
