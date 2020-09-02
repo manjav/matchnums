@@ -48,6 +48,8 @@ class Game extends Sprite {
 	}
 
 	private function clickHandler(event:MouseEvent):Void {
+		if (timer != null)
+			return;
 		this.lastColumn = Math.floor(this.mouseX / CELL_SIZE);
 		this.fallAll();
 	}
@@ -72,6 +74,7 @@ class Game extends Sprite {
 
 	private function chechMatchs():Void {
 		timer.stop();
+		timer = null;
 		if (isEnd()) {
 			trace("Game Over.");
 			return;
