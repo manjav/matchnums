@@ -72,7 +72,18 @@ class Game extends Sprite {
 
 	private function chechMatchs():Void {
 		timer.stop();
+		if (isEnd()) {
+			trace("Game Over.");
+			return;
+		}
 		this.spawn();
+	}
+
+	private function isEnd():Bool {
+		for (c in this.cells)
+			if (c.length > NUM_ROWS)
+				return true;
+		return false;
 	}
 
 	public function resize(newWidth:Int, newHeight:Int):Void {
