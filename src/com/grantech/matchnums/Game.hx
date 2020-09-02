@@ -62,7 +62,7 @@ class Game extends Sprite {
 				continue;
 			if (changeColumn) {
 				c.column = this.lastColumn;
-			c.row = this.heights[c.column];
+				c.row = this.heights[c.column];
 			}
 			c.x = c.column * CELL_SIZE;
 			Actuate.stop(c);
@@ -74,25 +74,27 @@ class Game extends Sprite {
 		if (numFallings > 0)
 			this.timer = Timer.delay(this.fell, Math.round((delay + time + 0.01) * 1000));
 	}
-	
+
 	private function fell():Void {
 		this.timer.stop();
-		
+
 		for (c in this.cells) {
 			if (c.state != Falling)
 				continue;
 			++this.heights[c.column];
-			c.state = Fixed;
+			c.state = Fell;
 		}
-		
+
 		if (this.isEnd()) {
 			trace("Game Over.");
 			return;
 		}
-		
+
 		// Check all matchs after falling animation
-		if (this.findMatchs())
+		if (this.findMatchs()) {
+			this.fallAll(false);
 			return;
+		}
 
 		this.spawn();
 	}
@@ -105,7 +107,45 @@ class Game extends Sprite {
 	}
 
 	private function findMatchs():Bool {
-		return false;
+		var needsRepeat = false;
+		for (cell in this.cells) {
+			if (cell.state != Fell)
+				continue;
+			cell.state = Fixed;
+
+			// Relaese all cells over matchs
+			var matchs = this.getMatchs(cell);
+			for (m in matchs) {
+				for (c in this.cells) {
+					if (c.column == m.column && c.row > m.row) {
+						c.state = Released;
+						--c.row;
+						needsRepeat = true;
+					}
+				}
+				
+				trace(this.heights[m.column], m);
+				this.heights[m.column] -= 2;
+				this.removeChild(m);
+				Cell.dispose(m);
+			}
+			if (matchs.length > 0)
+				cell.update(cell.column, cell.row, cell.value + matchs.length);
+		}
+		return needsRepeat;
+	}
+
+	private function getMatchs(cell:Cell):Array<Cell> {
+		var matchs = new Array<Cell>();
+		for (c in this.cells) {
+			if (cell.value != c.value)
+				continue;
+			if (cell.column != c.column && cell.row != c.row)
+				continue;
+			if (cell.column == c.column - 1 || cell.column == c.column + 1 || cell.row == c.row + 1)
+				matchs.push(c);
+		}
+		return matchs;
 	}
 
 	public function resize(newWidth:Int, newHeight:Int):Void {
