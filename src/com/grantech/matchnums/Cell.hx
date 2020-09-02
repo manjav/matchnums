@@ -9,6 +9,12 @@ import openfl.text.AntiAliasType;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
 
+enum State {
+	Released;
+	Falling;
+	Fixed;
+}
+
 class Cell extends Sprite {
 	static private final COLORS = [
 		0x000000, 0xFF00FF, 0x67d144, 0x44cac9, 0x3c85d6, 0xe06149, 0xaa00FF, 0x958a81, 0xffab36, 0xffab36, 0xffab36, 0xffab36, 0xffab36
@@ -17,6 +23,7 @@ class Cell extends Sprite {
 	public var column:Int;
 	public var row:Int;
 	public var value:Int;
+	public var state:State;
 
 	private var background:Bitmap;
 	private var textDisplay:TextField;
@@ -44,6 +51,7 @@ class Cell extends Sprite {
 		this.column = column;
 		this.row = row;
 		this.value = value;
+		this.state = Released;
 
 		var color = new ColorTransform();
 		color.color = COLORS[value];
