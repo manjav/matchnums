@@ -17,7 +17,6 @@ class Game extends Sprite {
 	private var timer:Timer;
 	private var lastColumn:Int;
 	private var cells:Array<Cell>;
-	private var heights:Array<Int>;
 
 	public function new() {
 		super();
@@ -29,17 +28,13 @@ class Game extends Sprite {
 		this.addChild(background);
 
 		this.cells = new Array<Cell>();
-		this.heights = new Array<Int>();
-		for (i in 0...NUM_COLUMNS)
-			this.heights[i] = 0;
-
 		this.addEventListener(MouseEvent.CLICK, this.clickHandler);
 		this.lastColumn = Math.floor(Math.random() * NUM_COLUMNS);
 		this.spawn();
 	}
 
 	private function spawn():Void {
-		var cell = Cell.instantiate(this.lastColumn, this.heights[this.lastColumn], Math.ceil(Math.random() * 8));
+		var cell = Cell.instantiate(this.lastColumn, this.getHeight(this.lastColumn), Math.ceil(Math.random() * 8));
 		cell.x = this.lastColumn * CELL_SIZE;
 		cell.y = 0;
 		this.cells.push(cell);
@@ -62,7 +57,7 @@ class Game extends Sprite {
 				continue;
 			if (changeColumn) {
 				c.column = this.lastColumn;
-				c.row = this.heights[c.column];
+				c.row = this.getHeight(c.column);
 			}
 			c.x = c.column * CELL_SIZE;
 			Actuate.stop(c);
@@ -81,11 +76,11 @@ class Game extends Sprite {
 		for (c in this.cells) {
 			if (c.state != Falling)
 				continue;
-			++this.heights[c.column];
 			c.state = Fell;
 		}
 
-		if (this.isEnd()) {
+		// Check end game
+		if (this.getHeight(this.lastColumn) > NUM_ROWS) {
 			trace("Game Over.");
 			return;
 		}
@@ -97,13 +92,6 @@ class Game extends Sprite {
 		}
 
 		this.spawn();
-	}
-
-	private function isEnd():Bool {
-		for (h in this.heights)
-			if (h > NUM_ROWS)
-				return true;
-		return false;
 	}
 
 	private function findMatchs():Bool {
@@ -123,10 +111,8 @@ class Game extends Sprite {
 						needsRepeat = true;
 					}
 				}
-				
-				trace(this.heights[m.column], m);
-				this.heights[m.column] -= 2;
 				this.removeChild(m);
+				this.cells.remove(m);
 				Cell.dispose(m);
 			}
 			if (matchs.length > 0)
@@ -146,6 +132,14 @@ class Game extends Sprite {
 				matchs.push(c);
 		}
 		return matchs;
+	}
+
+	private function getHeight(column:Int):Int {
+		var h = 0;
+		for (c in this.cells)
+			if (c.column == column)
+				++h;
+		return h;
 	}
 
 	public function resize(newWidth:Int, newHeight:Int):Void {
