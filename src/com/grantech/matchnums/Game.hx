@@ -59,10 +59,11 @@ class Game extends Sprite {
 		for (c in this.cells) {
 			if (c.state != Released)
 				continue;
-			if (changeColumn)
+			if (changeColumn) {
 				c.column = this.lastColumn;
 			c.row = this.heights[c.column];
-			c.x = this.lastColumn * CELL_SIZE;
+			}
+			c.x = c.column * CELL_SIZE;
 			Actuate.stop(c);
 			Actuate.tween(c, time, {y: CELL_SIZE * (NUM_ROWS - c.row)}).delay(delay).ease(Bounce.easeOut);
 			c.state = Falling;
