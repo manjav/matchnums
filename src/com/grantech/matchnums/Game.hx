@@ -110,22 +110,22 @@ class Game extends Sprite {
 		var maxWidth = newWidth * 0.90;
 		var maxHeight = newHeight * 0.86;
 
-		currentScale = scaleX = scaleY = 1;
+		this.currentScale = this.scaleX = this.scaleY = 1;
 
-		var currentWidth = width;
-		var currentHeight = height;
+		var currentWidth = this.width;
+		var currentHeight = this.height;
 
 		var maxScaleX = maxWidth / currentWidth;
 		var maxScaleY = maxHeight / currentHeight;
 
 		if (maxScaleX < maxScaleY)
-			currentScale = maxScaleX;
+			this.currentScale = maxScaleX;
 		else
-			currentScale = maxScaleY;
+			this.currentScale = maxScaleY;
 
-		scaleX = currentScale;
-		scaleY = currentScale;
+		this.scaleX = this.currentScale;
+		this.scaleY = this.currentScale;
 
-		x = (newWidth - (currentWidth * currentScale)) * 0.5;
+		this.x = (newWidth - (currentWidth * this.currentScale)) * 0.5;
 	}
 }
