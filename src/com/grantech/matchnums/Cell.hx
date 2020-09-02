@@ -12,6 +12,7 @@ import openfl.text.TextFormat;
 enum State {
 	Released;
 	Falling;
+	Fell;
 	Fixed;
 }
 
@@ -62,6 +63,10 @@ class Cell extends Sprite {
 		this.textDisplay.y = (this.height - this.textDisplay.height) * 0.5;
 
 		return this;
+	}
+
+	override public function toString():String {
+		return "{Cell c: " + column + " r:" + row + "}";
 	}
 
 	static private var pool:Array<Cell> = new Array();
