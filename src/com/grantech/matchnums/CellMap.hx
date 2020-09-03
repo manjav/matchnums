@@ -31,4 +31,21 @@ class CellMap {
 		// trace("  --exists", column, row, column * 100 + row, this.map.exists(column * 100 + row));
 		return this.map.exists(column * 100 + row);
 	}
+
+	public function length(column:Int):Int {
+		var len = 0;
+		for (r in 0...this.height) {
+			if (this.exists(column, r))
+				++len;
+		}
+		return len;
+	}
+
+	public function translate(cell:Cell, column:Int, row:Int):Void {
+		this.remove(cell);
+		cell.column = column;
+		cell.row = row;
+		this.add(cell);
+	}
+
 }

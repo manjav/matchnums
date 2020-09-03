@@ -54,8 +54,9 @@ class Game extends Sprite {
 			if (c.state != Released)
 				continue;
 			if (changeColumn) {
-				c.column = this.lastColumn;
-				c.row = this.cells.length(c.column);
+				var row = this.cells.length(this.lastColumn);
+				if (c != this.cells.get(this.lastColumn, row - 1)) // c.y < row * CELL_SIZE)
+					this.cells.translate(c, this.lastColumn, row);
 			}
 			c.x = c.column * CELL_SIZE;
 			Actuate.stop(c);
