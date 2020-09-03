@@ -48,4 +48,34 @@ class CellMap {
 		this.add(cell);
 	}
 
+	public function getMatchs(c:Cell):Array<Cell> {
+		var matchs = new Array<Cell>();
+		this.addMatch(c.column, c.row - 1, c.value, matchs);
+		this.addMatch(c.column - 1, c.row, c.value, matchs);
+		this.addMatch(c.column + 1, c.row, c.value, matchs);
+		// trace(c, matchs);
+		return matchs;
+	}
+
+	private function addMatch(column:Int, row:Int, value:Int, matchs:Array<Cell>):Void {
+		var cell = this.get(column, row);
+		// trace(column, row, cell);
+		if (cell != null && cell.value == value)
+			matchs.push(cell);
+	}
+
+	public function accumulateColumn(column:Int, row:Int):Bool {
+		var found = false;
+		for (r in row + 1...this.height) {
+			var c = this.get(column, r);
+			if (c != null) {
+				this.remove(c);
+				--c.row;
+				c.state = Released;
+				this.add(c);
+				found = true;
+			}
+		}
+		return found;
+	}
 }

@@ -100,16 +100,11 @@ class Game extends Sprite {
 				continue;
 			cell.state = Fixed;
 
+			var matchs = this.cells.getMatchs(cell);
 			// Relaese all cells over matchs
-			var matchs = this.getMatchs(cell);
 			for (m in matchs) {
-				for (c in this.cells) {
-					if (c.column == m.column && c.row > m.row) {
-						c.state = Released;
-						--c.row;
+				if (this.cells.accumulateColumn(m.column, m.row))
 						needsRepeat = true;
-					}
-				}
 				this.removeChild(m);
 				this.cells.remove(m);
 				Cell.dispose(m);
@@ -118,27 +113,6 @@ class Game extends Sprite {
 				cell.update(cell.column, cell.row, cell.value + matchs.length);
 		}
 		return needsRepeat;
-	}
-
-	private function getMatchs(cell:Cell):Array<Cell> {
-		var matchs = new Array<Cell>();
-		for (c in this.cells) {
-			if (cell.value != c.value)
-				continue;
-			if (cell.column != c.column && cell.row != c.row)
-				continue;
-			if (cell.column == c.column - 1 || cell.column == c.column + 1 || cell.row == c.row + 1)
-				matchs.push(c);
-		}
-		return matchs;
-	}
-
-	private function getHeight(column:Int):Int {
-		var h = 0;
-		for (c in this.cells)
-			if (c.column == column)
-				++h;
-		return h;
 	}
 
 	public function resize(newWidth:Int, newHeight:Int):Void {
