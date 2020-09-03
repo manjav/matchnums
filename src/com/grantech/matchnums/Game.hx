@@ -8,37 +8,35 @@ import openfl.display.Sprite;
 import openfl.events.MouseEvent;
 
 class Game extends Sprite {
-	private static var NUM_COLUMNS = 5;
-	private static var NUM_ROWS = 6;
 	private static var CELL_SIZE = 176;
 
 	public var currentScale:Float = 1;
 
 	private var timer:Timer;
 	private var lastColumn:Int;
-	private var cells:Array<Cell>;
+	private var cells:CellMap;
 
 	public function new() {
 		super();
 
+		this.cells = new CellMap(5, 6);
 		var background = new Sprite();
 		background.graphics.beginFill(0xFFFFFF, 0.4);
-		background.graphics.drawRect(0, 0, CELL_SIZE * NUM_COLUMNS, CELL_SIZE * (NUM_ROWS + 1));
+		background.graphics.drawRect(0, 0, CELL_SIZE * this.cells.width, CELL_SIZE * (this.cells.height + 1));
 		// background.filters = [new BlurFilter(10, 10)];
 		this.addChild(background);
 
-		this.cells = new Array<Cell>();
 		this.addEventListener(MouseEvent.CLICK, this.clickHandler);
-		this.lastColumn = Math.floor(Math.random() * NUM_COLUMNS);
+		this.lastColumn = Math.floor(Math.random() * this.cells.width);
 		this.spawn();
 	}
 
 	private function spawn():Void {
-		var cell = Cell.instantiate(this.lastColumn, this.getHeight(this.lastColumn), Math.ceil(Math.random() * 8));
+		var cell = Cell.instantiate(this.lastColumn, this.cells.length(this.lastColumn), Math.ceil(Math.random() * 8));
 		cell.x = this.lastColumn * CELL_SIZE;
 		cell.y = 0;
-		this.cells.push(cell);
-		var target = CELL_SIZE * (NUM_ROWS - cell.row);
+		this.cells.add(cell);
+		var target = CELL_SIZE * (this.cells.height - cell.row);
 		Actuate.tween(cell, target * 0.005, {y: target}).ease(Linear.easeNone).onComplete(fallAll);
 		this.addChild(cell);
 	}
@@ -52,16 +50,16 @@ class Game extends Sprite {
 		var delay = 0.2;
 		var time = 0.5;
 		var numFallings = 0;
-		for (c in this.cells) {
+		for (c in this.cells.map) {
 			if (c.state != Released)
 				continue;
 			if (changeColumn) {
 				c.column = this.lastColumn;
-				c.row = this.getHeight(c.column);
+				c.row = this.cells.length(c.column);
 			}
 			c.x = c.column * CELL_SIZE;
 			Actuate.stop(c);
-			Actuate.tween(c, time, {y: CELL_SIZE * (NUM_ROWS - c.row)}).delay(delay).ease(Bounce.easeOut);
+			Actuate.tween(c, time, {y: CELL_SIZE * (this.cells.height - c.row)}).delay(delay).ease(Bounce.easeOut);
 			c.state = Falling;
 			++numFallings;
 		}
@@ -73,14 +71,14 @@ class Game extends Sprite {
 	private function fell():Void {
 		this.timer.stop();
 
-		for (c in this.cells) {
+		for (c in this.cells.map) {
 			if (c.state != Falling)
 				continue;
 			c.state = Fell;
 		}
 
 		// Check end game
-		if (this.getHeight(this.lastColumn) > NUM_ROWS) {
+		if (this.cells.length(this.lastColumn) > this.cells.height) {
 			trace("Game Over.");
 			return;
 		}
@@ -96,7 +94,7 @@ class Game extends Sprite {
 
 	private function findMatchs():Bool {
 		var needsRepeat = false;
-		for (cell in this.cells) {
+		for (cell in this.cells.map) {
 			if (cell.state != Fell)
 				continue;
 			cell.state = Fixed;
