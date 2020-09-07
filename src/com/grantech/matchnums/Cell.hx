@@ -4,6 +4,7 @@ import openfl.Assets;
 import openfl.display.Bitmap;
 import openfl.display.PixelSnapping;
 import openfl.display.Sprite;
+import openfl.filters.GlowFilter;
 import openfl.geom.ColorTransform;
 import openfl.text.AntiAliasType;
 import openfl.text.TextField;
@@ -42,7 +43,9 @@ class Cell extends Sprite {
 		this.textDisplay.mouseEnabled = false;
 		this.textDisplay.selectable = false;
 		this.textDisplay.embedFonts = true;
-		this.textDisplay.defaultTextFormat = new TextFormat("Arial Rounded MT Bold", 72, 0xFFFFFF, true);
+		this.textDisplay.defaultTextFormat = new TextFormat("Arial Rounded MT Bold", 72, 0xFFFFFF, true, null, null, null, null, "center");
+		this.textDisplay.filters = [new GlowFilter(0, 0.6, 4, 4)];
+
 		this.addChild(this.textDisplay);
 
 		this.update(column, row, value);
@@ -66,7 +69,7 @@ class Cell extends Sprite {
 	}
 
 	override public function toString():String {
-		return "{Cell c: " + column + " r:" + row + "}";
+		return "{Cell c: " + column + " r:" + row + " v:" + value + "}";
 	}
 
 	static private var pool:Array<Cell> = new Array();
