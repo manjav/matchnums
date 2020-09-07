@@ -33,11 +33,19 @@ class Game extends Sprite {
 	}
 
 	private function spawn():Void {
+		// Check cell leak
 		for (c in this.cells.map)
 			if (c.state == Released)
 				return;
 
-		var cell = Cell.instantiate(this.lastColumn, this.cells.length(this.lastColumn), Math.ceil(Math.random() * maxValue));
+		// Check end game
+		var row = this.cells.length(this.lastColumn);
+		if (row >= this.cells.height) {
+			trace("Game Over.");
+			return;
+		}
+
+		var cell = Cell.instantiate(this.lastColumn, row, Math.ceil(Math.random() * maxValue));
 		cell.x = this.lastColumn * CELL_SIZE;
 		cell.y = 0;
 		this.cells.add(cell);
@@ -76,12 +84,6 @@ class Game extends Sprite {
 
 	private function fell():Void {
 		this.timer.stop();
-
-		// Check end game
-		if (this.cells.length(this.lastColumn) > this.cells.height) {
-			trace("Game Over.");
-			return;
-		}
 
 		for (c in this.cells.map)
 			if (c.state == Falling)
