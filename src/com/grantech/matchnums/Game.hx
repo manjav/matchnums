@@ -32,6 +32,10 @@ class Game extends Sprite {
 	}
 
 	private function spawn():Void {
+		for (c in this.cells.map)
+			if (c.state == Released)
+				return;
+
 		var cell = Cell.instantiate(this.lastColumn, this.cells.length(this.lastColumn), Math.ceil(Math.random() * 8));
 		cell.x = this.lastColumn * CELL_SIZE;
 		cell.y = 0;
