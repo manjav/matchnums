@@ -14,6 +14,7 @@ class Game extends Sprite {
 
 	private var timer:Timer;
 	private var lastColumn:Int;
+	private var maxValue:Int = 3;
 	private var cells:CellMap;
 
 	public function new() {
@@ -36,7 +37,7 @@ class Game extends Sprite {
 			if (c.state == Released)
 				return;
 
-		var cell = Cell.instantiate(this.lastColumn, this.cells.length(this.lastColumn), Math.ceil(Math.random() * 8));
+		var cell = Cell.instantiate(this.lastColumn, this.cells.length(this.lastColumn), Math.ceil(Math.random() * maxValue));
 		cell.x = this.lastColumn * CELL_SIZE;
 		cell.y = 0;
 		this.cells.add(cell);
@@ -62,7 +63,7 @@ class Game extends Sprite {
 				var row = this.cells.length(this.lastColumn);
 				if (c != this.cells.get(this.lastColumn, row - 1)) // c.y < row * CELL_SIZE)
 					this.cells.translate(c, this.lastColumn, row);
-			c.x = c.column * CELL_SIZE;
+				c.x = c.column * CELL_SIZE;
 			}
 			Actuate.stop(c);
 			Actuate.tween(c, time, {y: CELL_SIZE * (this.cells.height - c.row)}).delay(delay).ease(Bounce.easeOut);
@@ -112,6 +113,8 @@ class Game extends Sprite {
 
 			if (matchs.length > 0) {
 				c.update(c.column, c.row, c.value + matchs.length);
+				if (maxValue < c.value - 2)
+					maxValue = c.value - 2;
 				needsRepeat = true;
 			}
 			// trace("match", c, matchs.length, needsRepeat);
