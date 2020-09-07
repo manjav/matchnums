@@ -14,12 +14,20 @@ class CellMap {
 	}
 
 	public function add(cell:Cell):Void {
-		// trace("add", cell.column * 100 + cell.row, cell);
-		this.map.set(cell.column * 100 + cell.row, cell);
+		this.addAt(cell.column, cell.row, cell);
+	}
+
+	public function addAt(column:Int, row:Int, cell:Cell):Void {
+		// trace("add", column * 100 + row, cell);
+		this.map.set(column * 100 + row, cell);
 	}
 
 	public function remove(cell:Cell):Void {
-		this.map.remove(cell.column * 100 + cell.row);
+		this.removeAt(cell.column, cell.row);
+	}
+
+	public function removeAt(column:Int, row:Int):Void {
+		this.map.remove(column * 100 + row);
 	}
 
 	public function get(column:Int, row:Int):Cell {
