@@ -2,7 +2,7 @@ package com.grantech.matchnums;
 
 import haxe.Timer;
 import motion.Actuate;
-import motion.easing.Bounce;
+import motion.easing.Back;
 import motion.easing.Linear;
 import openfl.display.Sprite;
 import openfl.events.MouseEvent;
@@ -61,7 +61,7 @@ class Game extends Sprite {
 
 	private function fallAll(changeColumn:Bool):Void {
 		var delay = 0.1;
-		var time = 0.5;
+		var time = 0.15;
 		var numFallings = 0;
 		for (c in this.cells.map) {
 			if (c.state != Released)
@@ -74,12 +74,22 @@ class Game extends Sprite {
 				c.x = c.column * CELL_SIZE;
 			}
 			Actuate.stop(c);
-			Actuate.tween(c, time, {y: CELL_SIZE * (this.cells.height - c.row)}).delay(delay).ease(Bounce.easeOut);
+			Actuate.tween(c, time, {y: CELL_SIZE * (this.cells.height - c.row)})
+				.delay(delay)
+				.ease(Linear.easeNone)
+				.onComplete(bounceCell, [c]);
 			++numFallings;
 		}
 
 		if (numFallings > 0)
-			this.timer = Timer.delay(this.fell, Math.round((delay + time + 0.01) * 1000));
+			this.timer = Timer.delay(this.fell, Math.round((delay + time + 0.31) * 1000));
+	}
+
+	private function bounceCell(cell:Cell):Void {
+		var y = cell.y;
+		cell.scaleY = 0.9;
+		cell.y += cell.height * 0.1;
+		Actuate.tween(cell, 0.3, {y: y, scaleY: 1}).ease(Back.easeOut);
 	}
 
 	private function fell():Void {
