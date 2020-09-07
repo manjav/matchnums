@@ -47,21 +47,21 @@ class Game extends Sprite {
 	}
 
 	private function fallAll(changeColumn:Bool):Void {
-		var delay = 0.2;
+		var delay = 0.1;
 		var time = 0.5;
 		var numFallings = 0;
 		for (c in this.cells.map) {
 			if (c.state != Released)
 				continue;
+			c.state = Falling;
 			if (changeColumn) {
 				var row = this.cells.length(this.lastColumn);
 				if (c != this.cells.get(this.lastColumn, row - 1)) // c.y < row * CELL_SIZE)
 					this.cells.translate(c, this.lastColumn, row);
-			}
 			c.x = c.column * CELL_SIZE;
+			}
 			Actuate.stop(c);
 			Actuate.tween(c, time, {y: CELL_SIZE * (this.cells.height - c.row)}).delay(delay).ease(Bounce.easeOut);
-			c.state = Falling;
 			++numFallings;
 		}
 
@@ -72,17 +72,15 @@ class Game extends Sprite {
 	private function fell():Void {
 		this.timer.stop();
 
-		for (c in this.cells.map) {
-			if (c.state != Falling)
-				continue;
-			c.state = Fell;
-		}
-
 		// Check end game
 		if (this.cells.length(this.lastColumn) > this.cells.height) {
 			trace("Game Over.");
 			return;
 		}
+
+		for (c in this.cells.map)
+			if (c.state == Falling)
+				c.state = Fell;
 
 		// Check all matchs after falling animation
 		if (this.findMatchs()) {
@@ -95,22 +93,24 @@ class Game extends Sprite {
 
 	private function findMatchs():Bool {
 		var needsRepeat = false;
-		for (cell in this.cells.map) {
-			if (cell.state != Fell)
+		for (c in this.cells.map) {
+			if (c.state != Fell)
 				continue;
-			cell.state = Fixed;
+			c.state = Fixed;
 
-			var matchs = this.cells.getMatchs(cell);
+			var matchs = this.cells.getMatchs(c);
 			// Relaese all cells over matchs
 			for (m in matchs) {
-				if (this.cells.accumulateColumn(m.column, m.row))
-						needsRepeat = true;
+				this.cells.accumulateColumn(m.column, m.row);
 				this.removeChild(m);
-				this.cells.remove(m);
 				Cell.dispose(m);
 			}
-			if (matchs.length > 0)
-				cell.update(cell.column, cell.row, cell.value + matchs.length);
+
+			if (matchs.length > 0) {
+				c.update(c.column, c.row, c.value + matchs.length);
+				needsRepeat = true;
+			}
+			// trace("match", c, matchs.length, needsRepeat);
 		}
 		return needsRepeat;
 	}
