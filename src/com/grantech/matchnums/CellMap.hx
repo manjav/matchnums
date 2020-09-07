@@ -74,6 +74,7 @@ class CellMap {
 
 	public function accumulateColumn(column:Int, row:Int):Bool {
 		var found = false;
+		this.removeAt(column, row);
 		for (r in row + 1...this.height) {
 			var c = this.get(column, r);
 			if (c != null) {
