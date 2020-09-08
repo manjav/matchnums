@@ -32,11 +32,8 @@
 	</assets> -->
 	
 	<!-- <config:android target-sdk-version="28"/> -->
-	<architecture exclude="armv7" if="android" />
-	<section if="release-sign">
-		<certificate path="certs/bbg.keystore" password="123456" alias="boom" alias-password="654321" if="android" />
-		<certificate path="certs/bbg.p12" if="blackberry" />
-	</section>
+	<certificate path="Certs/bbg.keystore" password="123456" alias="boom" alias-password="654321" if="android" unless="debug" />
+	<architecture exclude="arm64" if="android" />
 	<haxeflag name="-dce" value="full" />
 	<define name="release" value="true" />
 </project>
