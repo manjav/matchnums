@@ -38,4 +38,5 @@
 		<certificate path="certs/bbg.p12" if="blackberry" />
 	</section>
 	<haxeflag name="-dce" value="full" />
+	<define name="release" value="true" />
 </project>
