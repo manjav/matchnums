@@ -18,6 +18,7 @@ enum State {
 }
 
 class Cell extends Sprite {
+	static public final SIZE = 176;
 	static private final COLORS = [
 		0x000000, 0xFF00FF, 0x67d144, 0x44cac9, 0x3c85d6, 0xe06149, 0xaa00FF, 0x958a81, 0xffab36, 0xffab36, 0xffab36, 0xffab36, 0xffab36
 	];

@@ -8,8 +8,6 @@ import openfl.display.Sprite;
 import openfl.events.MouseEvent;
 
 class Game extends Sprite {
-	private static var CELL_SIZE = 176;
-
 	public var currentScale:Float = 1;
 
 	private var timer:Timer;
@@ -23,7 +21,7 @@ class Game extends Sprite {
 		this.cells = new CellMap(5, 6);
 		var background = new Sprite();
 		background.graphics.beginFill(0xFFFFFF, 0.4);
-		background.graphics.drawRect(0, 0, CELL_SIZE * this.cells.width, CELL_SIZE * (this.cells.height + 1));
+		background.graphics.drawRect(0, 0, Cell.SIZE * this.cells.width, Cell.SIZE * (this.cells.height + 1));
 		// background.filters = [new BlurFilter(10, 10)];
 		this.addChild(background);
 
@@ -46,16 +44,16 @@ class Game extends Sprite {
 		}
 
 		var cell = Cell.instantiate(this.lastColumn, row, Math.ceil(Math.random() * maxValue));
-		cell.x = this.lastColumn * CELL_SIZE;
+		cell.x = this.lastColumn * Cell.SIZE;
 		cell.y = 0;
 		this.cells.add(cell);
-		var target = CELL_SIZE * (this.cells.height - cell.row);
+		var target = Cell.SIZE * (this.cells.height - cell.row);
 		Actuate.tween(cell, target * 0.005, {y: target}).ease(Linear.easeNone).onComplete(fallAll);
 		this.addChild(cell);
 	}
 
 	private function clickHandler(event:MouseEvent):Void {
-		this.lastColumn = Math.floor(this.mouseX / CELL_SIZE);
+		this.lastColumn = Math.floor(this.mouseX / Cell.SIZE);
 		this.fallAll(true);
 	}
 
@@ -69,12 +67,12 @@ class Game extends Sprite {
 			c.state = Falling;
 			if (changeColumn) {
 				var row = this.cells.length(this.lastColumn);
-				if (c != this.cells.get(this.lastColumn, row - 1)) // c.y < row * CELL_SIZE)
+				if (c != this.cells.get(this.lastColumn, row - 1)) // c.y < row * Cell.SIZE)
 					this.cells.translate(c, this.lastColumn, row);
-				c.x = c.column * CELL_SIZE;
+				c.x = c.column * Cell.SIZE;
 			}
-			Actuate.stop(c);
-			Actuate.tween(c, time, {y: CELL_SIZE * (this.cells.height - c.row)})
+			// Actuate.stop(c);
+			Actuate.tween(c, time, {y: Cell.SIZE * (this.cells.height - c.row)})
 				.delay(delay)
 				.ease(Linear.easeNone)
 				.onComplete(bounceCell, [c]);
