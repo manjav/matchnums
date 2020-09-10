@@ -24,7 +24,7 @@ class Cell extends Sprite {
 
 	public var column:Int;
 	public var row:Int;
-	public var value:Int;
+	public var value:Int = -1;
 	public var state:State;
 
 	private var background:Bitmap;
@@ -52,12 +52,14 @@ class Cell extends Sprite {
 	}
 
 	public function update(column:Int, row:Int, value:Int):Cell {
+		var needUpdateBG = (this.value >= 10 && value < 10) || value >= 10 || this.value == -1;
 		this.column = column;
 		this.row = row;
 		this.value = value;
 		this.state = Released;
 
 		var color = new ColorTransform();
+		if (this.value < 10)
 		color.color = COLORS[value];
 		this.background.transform.colorTransform = color;
 
