@@ -28,28 +28,56 @@ class Cell extends Sprite {
 	public var value:Int = -1;
 	public var state:State;
 
-	private var background:Bitmap;
+	private var background:Shape;
 	private var textDisplay:TextField;
 
 	public function new(column:Int, row:Int, value:Int) {
 		super();
 
-		this.background = new Bitmap(Assets.getBitmapData("images/tile.png"));
-		this.background.pixelSnapping = PixelSnapping.NEVER;
-		this.addChild(this.background);
-
 		this.textDisplay = new TextField();
 		this.textDisplay.antiAliasType = AntiAliasType.NORMAL;
-		this.textDisplay.autoSize = CENTER;
+		this.textDisplay.autoSize = LEFT;
 		this.textDisplay.mouseEnabled = false;
 		this.textDisplay.selectable = false;
 		this.textDisplay.embedFonts = true;
-		this.textDisplay.defaultTextFormat = new TextFormat("Arial Rounded MT Bold", 72, 0xFFFFFF, true, null, null, null, null, "center");
+		this.textDisplay.defaultTextFormat = new TextFormat("Arial Rounded MT Bold", 80, 0xFFFFFF);
 		this.textDisplay.filters = [new GlowFilter(0, 0.6, 4, 4)];
 
 		this.addChild(this.textDisplay);
 
 		this.update(column, row, value);
+	}
+
+	function createBackground():Void {
+		if (this.background == null)
+			this.background = new Shape();
+		else
+			this.background.graphics.clear();
+
+		var sg = new Rectangle(7, 7, 2, 2);
+		var path = "images/" + (this.value < 10 ? "tile" : Std.string(this.value)) + ".png";
+		var bd:BitmapData = Assets.getBitmapData(path);
+		if (bd == null)
+			return;
+		trace(path, bd);
+		var cols:Array<Float> = [sg.left, sg.right, 16];
+		var rows:Array<Float> = [sg.top, sg.bottom, 16];
+		var left:Float = 0;
+		for (i in 0...3) {
+			var top:Float = 0;
+			for (j in 0...3) {
+				// trace(left, top, cols[i] - left, rows[j] - top);
+				this.background.graphics.beginBitmapFill(bd);
+				this.background.graphics.drawRect(left, top, cols[i] - left, rows[j] - top);
+				this.background.graphics.endFill();
+				top = rows[j];
+			}
+			left = cols[i];
+		}
+		this.background.scale9Grid = sg;
+		this.background.width = SIZE;
+		this.background.height = SIZE;
+		this.addChildAt(this.background, 0);
 	}
 
 	public function update(column:Int, row:Int, value:Int):Cell {
@@ -58,6 +86,9 @@ class Cell extends Sprite {
 		this.row = row;
 		this.value = value;
 		this.state = Released;
+
+		if (needUpdateBG)
+			createBackground();
 
 		var color = new ColorTransform();
 		if (this.value < 10)
