@@ -67,7 +67,7 @@ class CellMap {
 
 	private function addMatch(column:Int, row:Int, value:Int, matchs:Array<Cell>):Void {
 		var cell = this.get(column, row);
-		// trace(column, row, cell);
+		// trace("addMatch", column, row, cell);
 		if (cell != null && cell.value == value)
 			matchs.push(cell);
 	}
@@ -78,6 +78,7 @@ class CellMap {
 		for (r in row + 1...this.height) {
 			var c = this.get(column, r);
 			if (c != null) {
+				// trace("acc", c);
 				this.remove(c);
 				--c.row;
 				c.state = Released;
