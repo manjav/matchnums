@@ -23,6 +23,7 @@ class Cell extends Sprite {
 	static private final COLORS = [
 		0x000000, 0xFF00FF, 0x67d144, 0x44cac9, 0x3c85d6, 0xe06149, 0xaa00FF, 0x958a81, 0xffab36, 0xfc5372
 	];
+	static private final TEXT_SCALE = [1, 1, 1, 1, 0.9, 0.9, 0.9, 0.8, 0.8, 0.8, 0.70, 0.70, 0.70];
 
 	public var column:Int;
 	public var row:Int;
@@ -91,10 +92,12 @@ class Cell extends Sprite {
 
 		var color = new ColorTransform();
 		if (this.value < 10)
-		color.color = COLORS[value];
+			color.color = COLORS[value];
 		this.background.transform.colorTransform = color;
 
 		this.textDisplay.text = Math.pow(2, value) + "";
+		this.textDisplay.scaleX = TEXT_SCALE[value];
+		this.textDisplay.scaleY = TEXT_SCALE[value];
 		this.textDisplay.x = (this.width - this.textDisplay.width) * 0.5;
 		this.textDisplay.y = (this.height - this.textDisplay.height) * 0.5;
 
