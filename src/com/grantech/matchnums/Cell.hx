@@ -1,11 +1,12 @@
 package com.grantech.matchnums;
 
 import openfl.Assets;
-import openfl.display.Bitmap;
-import openfl.display.PixelSnapping;
+import openfl.display.BitmapData;
+import openfl.display.Shape;
 import openfl.display.Sprite;
 import openfl.filters.GlowFilter;
 import openfl.geom.ColorTransform;
+import openfl.geom.Rectangle;
 import openfl.text.AntiAliasType;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
@@ -55,11 +56,9 @@ class Cell extends Sprite {
 			this.background.graphics.clear();
 
 		var sg = new Rectangle(7, 7, 2, 2);
-		var path = "images/" + (this.value < 10 ? "tile" : Std.string(this.value)) + ".png";
-		var bd:BitmapData = Assets.getBitmapData(path);
+		var bd:BitmapData = Assets.getBitmapData("images/" + (this.value < 10 ? "tile" : Std.string(this.value)) + ".png");
 		if (bd == null)
 			return;
-		trace(path, bd);
 		var cols:Array<Float> = [sg.left, sg.right, 16];
 		var rows:Array<Float> = [sg.top, sg.bottom, 16];
 		var left:Float = 0;
