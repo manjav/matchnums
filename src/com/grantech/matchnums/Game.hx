@@ -64,13 +64,20 @@ class Game extends Sprite {
 		for (c in this.cells.map) {
 			if (c.state != Released)
 				continue;
-			c.state = Falling;
 			if (changeColumn) {
 				var row = this.cells.length(this.lastColumn);
-				if (c != this.cells.get(this.lastColumn, row - 1)) // c.y < row * Cell.SIZE)
-					this.cells.translate(c, this.lastColumn, row);
+				if (c != this.cells.get(this.lastColumn, row - 1)) {
+					var _y = Cell.SIZE * (this.cells.height - row);
+					if (c.y > _y) {
+						trace(c.y, _y);
+						continue;
+					} else {
+						this.cells.translate(c, this.lastColumn, row);
+					}
+				}
 				c.x = c.column * Cell.SIZE;
 			}
+			c.state = Falling;
 			// Actuate.stop(c);
 			var dy = Cell.SIZE * (this.cells.height - c.row);
 			if (dy - c.y > 0.5)
