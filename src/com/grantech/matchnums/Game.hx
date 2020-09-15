@@ -72,10 +72,9 @@ class Game extends Sprite {
 				c.x = c.column * Cell.SIZE;
 			}
 			// Actuate.stop(c);
-			Actuate.tween(c, time, {y: Cell.SIZE * (this.cells.height - c.row)})
-				.delay(delay)
-				.ease(Linear.easeNone)
-				.onComplete(bounceCell, [c]);
+			var dy = Cell.SIZE * (this.cells.height - c.row);
+			if (dy - c.y > 0.5)
+				Actuate.tween(c, time, {y: dy}).delay(delay).ease(Linear.easeNone).onComplete(bounceCell, [c]);
 			++numFallings;
 		}
 
