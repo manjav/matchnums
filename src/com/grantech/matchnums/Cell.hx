@@ -20,6 +20,7 @@ enum State {
 
 class Cell extends Sprite {
 	static public final SIZE = 176;
+	static public final ROUND = 32;
 	static private final COLORS = [
 		0x000000, 0xFF00FF, 0x67d144, 0x44cac9, 0x3c85d6, 0xe06149, 0xaa00FF, 0x958a81, 0xffab36, 0xfc5372
 	];
@@ -55,28 +56,30 @@ class Cell extends Sprite {
 			this.background = new Shape();
 		else
 			this.background.graphics.clear();
+		this.background.graphics.beginFill(0xFFFFFF);
+		this.background.graphics.drawRoundRect(BORDER, BORDER, SIZE - BORDER * 2, SIZE - BORDER * 2, ROUND, ROUND);
 
-		var sg = new Rectangle(7, 7, 2, 2);
-		var bd:BitmapData = Assets.getBitmapData("images/" + (this.value < 10 ? "tile" : Std.string(this.value)) + ".png");
-		if (bd == null)
-			return;
-		var cols:Array<Float> = [sg.left, sg.right, 16];
-		var rows:Array<Float> = [sg.top, sg.bottom, 16];
-		var left:Float = 0;
-		for (i in 0...3) {
-			var top:Float = 0;
-			for (j in 0...3) {
-				// trace(left, top, cols[i] - left, rows[j] - top);
-				this.background.graphics.beginBitmapFill(bd);
-				this.background.graphics.drawRect(left, top, cols[i] - left, rows[j] - top);
-				this.background.graphics.endFill();
-				top = rows[j];
-			}
-			left = cols[i];
-		}
-		this.background.scale9Grid = sg;
-		this.background.width = SIZE;
-		this.background.height = SIZE;
+		// var sg = new Rectangle(7, 7, 2, 2);
+		// var bd:BitmapData = Assets.getBitmapData("images/" + (this.value < 10 ? "tile" : Std.string(this.value)) + ".png");
+		// if (bd == null)
+		// 	return;
+		// var cols:Array<Float> = [sg.left, sg.right, bd.width];
+		// var rows:Array<Float> = [sg.top, sg.bottom, bd.height];
+		// var left:Float = 0;
+		// for (i in 0...3) {
+		// 	var top:Float = 0;
+		// 	for (j in 0...3) {
+		// 		// trace(left, top, cols[i] - left, rows[j] - top);
+		// 		this.background.graphics.beginBitmapFill(bd);
+		// 		this.background.graphics.drawRect(left, top, cols[i] - left, rows[j] - top);
+		// 		this.background.graphics.endFill();
+		// 		top = rows[j];
+		// 	}
+		// 	left = cols[i];
+		// }
+		// this.background.scale9Grid = sg;
+		// this.background.width = SIZE;
+		// this.background.height = SIZE;
 		this.addChildAt(this.background, 0);
 	}
 

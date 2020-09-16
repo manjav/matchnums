@@ -21,6 +21,10 @@ class Game extends Sprite {
 		this.cells = new CellMap(5, 6);
 		var background = new Sprite();
 		background.graphics.beginFill(0);
+		background.graphics.drawRoundRect(-Cell.BORDER,	-Cell.BORDER, 
+			Cell.SIZE * this.cells.width + Cell.BORDER * 2,
+			Cell.SIZE * (this.cells.height + 1) + Cell.BORDER * 2, 
+			Cell.ROUND * 2, Cell.ROUND * 2);
 		// background.filters = [new BlurFilter(10, 10)];
 		this.addChild(background);
 
