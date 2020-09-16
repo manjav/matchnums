@@ -51,28 +51,6 @@ class Cell extends Sprite {
 			this.background.graphics.clear();
 		this.background.graphics.beginFill(0xFFFFFF);
 		this.background.graphics.drawRoundRect(BORDER, BORDER, SIZE - BORDER * 2, SIZE - BORDER * 2, ROUND, ROUND);
-
-		// var sg = new Rectangle(7, 7, 2, 2);
-		// var bd:BitmapData = Assets.getBitmapData("images/" + (this.value < 10 ? "tile" : Std.string(this.value)) + ".png");
-		// if (bd == null)
-		// 	return;
-		// var cols:Array<Float> = [sg.left, sg.right, bd.width];
-		// var rows:Array<Float> = [sg.top, sg.bottom, bd.height];
-		// var left:Float = 0;
-		// for (i in 0...3) {
-		// 	var top:Float = 0;
-		// 	for (j in 0...3) {
-		// 		// trace(left, top, cols[i] - left, rows[j] - top);
-		// 		this.background.graphics.beginBitmapFill(bd);
-		// 		this.background.graphics.drawRect(left, top, cols[i] - left, rows[j] - top);
-		// 		this.background.graphics.endFill();
-		// 		top = rows[j];
-		// 	}
-		// 	left = cols[i];
-		// }
-		// this.background.scale9Grid = sg;
-		// this.background.width = SIZE;
-		// this.background.height = SIZE;
 		this.addChildAt(this.background, 0);
 	}
 
