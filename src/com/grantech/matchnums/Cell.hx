@@ -65,7 +65,6 @@ class Cell extends Sprite {
 			createBackground();
 
 		var color = new ColorTransform();
-		if (this.value < 10)
 			color.color = COLORS[value];
 		this.background.transform.colorTransform = color;
 
