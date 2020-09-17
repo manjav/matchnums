@@ -31,14 +31,15 @@ class Cell extends Sprite {
 		super();
 
 		this.textDisplay = new TextField();
-		this.textDisplay.antiAliasType = AntiAliasType.NORMAL;
-		this.textDisplay.autoSize = LEFT;
+		this.textDisplay.antiAliasType = AntiAliasType.ADVANCED;
 		this.textDisplay.mouseEnabled = false;
 		this.textDisplay.selectable = false;
 		this.textDisplay.embedFonts = true;
-		this.textDisplay.defaultTextFormat = new TextFormat("Arial Rounded MT Bold", 80, 0xFFFFFF);
+		this.textDisplay.defaultTextFormat = new TextFormat("Arial Rounded MT Bold", 80, 0xFFFFFF, null, null, null, null, null, "center");
 		this.textDisplay.filters = [new GlowFilter(0, 0.6, 4, 4)];
-
+		this.textDisplay.width = SIZE;
+		this.textDisplay.height = SIZE * 0.5;
+		this.textDisplay.y = SIZE * 0.25;
 		this.addChild(this.textDisplay);
 
 		this.update(column, row, value);
@@ -69,10 +70,6 @@ class Cell extends Sprite {
 		this.background.transform.colorTransform = color;
 
 		this.textDisplay.text = Math.pow(2, value) + "";
-		this.textDisplay.scaleX = TEXT_SCALE[value];
-		this.textDisplay.scaleY = TEXT_SCALE[value];
-		this.textDisplay.x = (this.width - this.textDisplay.width) * 0.5;
-		this.textDisplay.y = (this.height - this.textDisplay.height) * 0.5;
 
 		return this;
 	}
