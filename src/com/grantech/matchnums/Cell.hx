@@ -1,11 +1,8 @@
 package com.grantech.matchnums;
 
-import openfl.Assets;
-import openfl.display.BitmapData;
 import openfl.display.Shape;
 import openfl.display.Sprite;
 import openfl.filters.GlowFilter;
-import openfl.geom.ColorTransform;
 import openfl.text.AntiAliasType;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
@@ -37,6 +34,11 @@ class Cell extends Sprite {
 	public function new(column:Int, row:Int, value:Int) {
 		super();
 
+		this.background = new Shape();
+		this.background.graphics.beginFill(0xFFFFFF);
+		this.background.graphics.drawRoundRect(BORDER, BORDER, SIZE - BORDER * 2, SIZE - BORDER * 2, ROUND, ROUND);
+		this.addChild(this.background);
+
 		this.textDisplay = new TextField();
 		this.textDisplay.antiAliasType = AntiAliasType.ADVANCED;
 		this.textDisplay.mouseEnabled = false;
@@ -52,47 +54,12 @@ class Cell extends Sprite {
 		this.update(column, row, value);
 	}
 
-	function createBackground():Void {
-		if (this.background == null)
-			this.background = new Shape();
-		else
-			this.background.graphics.clear();
-		this.background.graphics.beginFill(0xFFFFFF);
-		this.background.graphics.drawRoundRect(BORDER, BORDER, SIZE - BORDER * 2, SIZE - BORDER * 2, ROUND, ROUND);
-
-		// var sg = new Rectangle(7, 7, 2, 2);
-		// var bd:BitmapData = Assets.getBitmapData("images/" + (this.value < 10 ? "tile" : Std.string(this.value)) + ".png");
-		// if (bd == null)
-		// 	return;
-		// var cols:Array<Float> = [sg.left, sg.right, bd.width];
-		// var rows:Array<Float> = [sg.top, sg.bottom, bd.height];
-		// var left:Float = 0;
-		// for (i in 0...3) {
-		// 	var top:Float = 0;
-		// 	for (j in 0...3) {
-		// 		// trace(left, top, cols[i] - left, rows[j] - top);
-		// 		this.background.graphics.beginBitmapFill(bd);
-		// 		this.background.graphics.drawRect(left, top, cols[i] - left, rows[j] - top);
-		// 		this.background.graphics.endFill();
-		// 		top = rows[j];
-		// 	}
-		// 	left = cols[i];
-		// }
-		// this.background.scale9Grid = sg;
-		// this.background.width = SIZE;
-		// this.background.height = SIZE;
-		this.addChildAt(this.background, 0);
-	}
-
 	public function update(column:Int, row:Int, value:Int):Cell {
-		var needUpdateBG = (this.value >= 10 && value < 10) || value >= 10 || this.value == -1;
 		this.column = column;
 		this.row = row;
 		this.value = value;
 		this.state = Released;
 
-		if (needUpdateBG)
-			createBackground();
 
 		var color = new ColorTransform();
 		color.color = COLORS[value];
