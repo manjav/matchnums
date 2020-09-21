@@ -60,10 +60,7 @@ class Cell extends Sprite {
 		this.value = value;
 		this.state = Released;
 
-
-		var color = new ColorTransform();
-		color.color = COLORS[value];
-		this.background.transform.colorTransform = color;
+		this.background.transform.colorTransform.color = COLORS[value];
 
 		this.textDisplay.text = Math.pow(2, value) + "";
 
