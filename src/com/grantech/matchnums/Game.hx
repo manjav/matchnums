@@ -183,5 +183,6 @@ class Game extends Sprite {
 		this.scaleY = this.currentScale;
 
 		this.x = (newWidth - (currentWidth * this.currentScale)) * 0.5;
+		this.y = (newHeight - (currentHeight * this.currentScale)) * 0.5;
 	}
 }
