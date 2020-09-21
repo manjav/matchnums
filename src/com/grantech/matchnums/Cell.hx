@@ -18,7 +18,7 @@ class Cell extends Sprite {
 	static public final SIZE = 176;
 	static public final BORDER = 8;
 	static public final ROUND = 32;
-	static private final COLORS = [
+	static public final COLORS = [
 		0x000000, 0x9600ff, 0xf0145a, 0xffc91b, 0x00c419, 0x009ade, 0xce007b4, 0xff5518, 0x78e0bc, 0x3c14ae, 0xff0024, 0x41046a, 0x41046a, 0x41046a, 0x41046a
 	];
 	static private final TEXT_SCALE = [1, 1, 1, 1, 0.9, 0.9, 0.9, 0.8, 0.8, 0.8, 0.6, 0.6, 0.6];

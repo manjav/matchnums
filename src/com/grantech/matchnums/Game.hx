@@ -1,5 +1,7 @@
 package com.grantech.matchnums;
 
+import motion.easing.Expo;
+import openfl.display.Shape;
 import haxe.Timer;
 import motion.Actuate;
 import motion.easing.Back;
@@ -14,6 +16,7 @@ class Game extends Sprite {
 	private var lastColumn:Int;
 	private var maxValue:Int = 3;
 	private var cells:CellMap;
+	private var fallingEffect:Sprite;
 
 	public function new() {
 		super();
@@ -21,10 +24,11 @@ class Game extends Sprite {
 		this.cells = new CellMap(5, 6);
 		var background = new Sprite();
 		background.graphics.beginFill(0);
-		background.graphics.drawRoundRect(-Cell.BORDER,	-Cell.BORDER, 
-			Cell.SIZE * this.cells.width + Cell.BORDER * 2,
-			Cell.SIZE * (this.cells.height + 1) + Cell.BORDER * 2, 
-			Cell.ROUND * 2, Cell.ROUND * 2);
+		background.graphics.drawRoundRect(-Cell.BORDER,
+			-Cell.BORDER, Cell.SIZE * this.cells.width
+			+ Cell.BORDER * 2,
+			Cell.SIZE * (this.cells.height + 1)
+			+ Cell.BORDER * 2, Cell.ROUND * 2, Cell.ROUND * 2);
 
 		background.graphics.beginFill(0x111111);
 		for (i in 0...2)
@@ -32,7 +36,14 @@ class Game extends Sprite {
 		// background.filters = [new BlurFilter(10, 10)];
 		this.addChild(background);
 
+		this.fallingEffect = new Sprite();
+		this.fallingEffect.graphics.beginFill(0xFFFFFF, 0.8);
+		this.fallingEffect.graphics.drawRoundRect(Cell.BORDER, -Cell.BORDER, Cell.SIZE - Cell.BORDER * 2, background.height, 0, 0);
+		this.fallingEffect.alpha = 0;
+		this.addChild(this.fallingEffect);
+
 		this.addEventListener(MouseEvent.CLICK, this.clickHandler);
+
 		this.lastColumn = Math.floor(Math.random() * this.cells.width);
 		this.spawn();
 	}
@@ -57,6 +68,8 @@ class Game extends Sprite {
 		var target = Cell.SIZE * (this.cells.height - cell.row);
 		Actuate.tween(cell, target * 0.005, {y: target}).ease(Linear.easeNone).onComplete(fallAll);
 		this.addChild(cell);
+
+		this.fallingEffect.transform.colorTransform.color = Cell.COLORS[cell.value];
 	}
 
 	private function clickHandler(event:MouseEvent):Void {
@@ -83,6 +96,10 @@ class Game extends Sprite {
 					}
 				}
 				c.x = c.column * Cell.SIZE;
+
+				this.fallingEffect.x = c.x;
+				this.fallingEffect.alpha = 1;
+				Actuate.tween(this.fallingEffect, 0.5, {alpha: 0.01}).ease(Expo.easeOut);
 			}
 			c.state = Falling;
 			// Actuate.stop(c);
