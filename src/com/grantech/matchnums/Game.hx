@@ -18,6 +18,14 @@ class Game extends Sprite {
 	private var cells:CellMap;
 	private var fallingEffect:Shape;
 
+	public var score(default, set):Int;
+
+	function set_score(score:Int):Int {
+		if (this.score == score)
+			return score;
+		return this.score = score;
+	}
+
 	public function new() {
 		super();
 
@@ -153,6 +161,7 @@ class Game extends Sprite {
 
 			if (matchs.length > 0) {
 				c.update(c.column, c.row, c.value + matchs.length);
+				this.score += Cell.getScore(c.value);
 				if (maxValue < c.value - 2)
 					maxValue = c.value - 2;
 				needsRepeat = true;
