@@ -16,13 +16,13 @@ class Game extends Sprite {
 	private var lastColumn:Int;
 	private var maxValue:Int = 3;
 	private var cells:CellMap;
-	private var fallingEffect:Sprite;
+	private var fallingEffect:Shape;
 
 	public function new() {
 		super();
 
 		this.cells = new CellMap(5, 6);
-		var background = new Sprite();
+		var background = new Shape();
 		background.graphics.beginFill(0);
 		background.graphics.drawRoundRect(-Cell.BORDER,
 			-Cell.BORDER, Cell.SIZE * this.cells.width
@@ -36,7 +36,7 @@ class Game extends Sprite {
 		// background.filters = [new BlurFilter(10, 10)];
 		this.addChild(background);
 
-		this.fallingEffect = new Sprite();
+		this.fallingEffect = new Shape();
 		this.fallingEffect.graphics.beginFill(0xFFFFFF, 0.8);
 		this.fallingEffect.graphics.drawRoundRect(Cell.BORDER, -Cell.BORDER, Cell.SIZE - Cell.BORDER * 2, background.height, 0, 0);
 		this.fallingEffect.alpha = 0;
