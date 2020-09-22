@@ -1,5 +1,7 @@
 package com.grantech.matchnums;
 
+import openfl.filters.GlowFilter;
+import openfl.text.TextField;
 import motion.easing.Expo;
 import openfl.display.Shape;
 import haxe.Timer;
@@ -17,12 +19,15 @@ class Game extends Sprite {
 	private var maxValue:Int = 3;
 	private var cells:CellMap;
 	private var fallingEffect:Shape;
+	private var scoreDisplay:TextField;
 
 	public var score(default, set):Int;
 
 	function set_score(score:Int):Int {
 		if (this.score == score)
 			return score;
+
+		this.scoreDisplay.text = Std.string(score);
 		return this.score = score;
 	}
 
@@ -49,6 +54,13 @@ class Game extends Sprite {
 		this.fallingEffect.graphics.drawRoundRect(Cell.BORDER, -Cell.BORDER, Cell.SIZE - Cell.BORDER * 2, background.height, 0, 0);
 		this.fallingEffect.alpha = 0;
 		this.addChild(this.fallingEffect);
+
+		this.scoreDisplay = Utils.createText(92, 0xededed);
+		this.scoreDisplay.text = "0";
+		this.scoreDisplay.width = 400;
+		this.scoreDisplay.x = (this.width - this.scoreDisplay.width) * 0.5;
+		this.scoreDisplay.y = -120;
+		this.addChild(this.scoreDisplay);
 
 		this.addEventListener(MouseEvent.CLICK, this.clickHandler);
 
