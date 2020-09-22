@@ -1,15 +1,15 @@
 package com.grantech.matchnums;
 
-import openfl.filters.GlowFilter;
-import openfl.text.TextField;
-import motion.easing.Expo;
-import openfl.display.Shape;
+import com.grantech.matchnums.utils.Utils;
 import haxe.Timer;
 import motion.Actuate;
 import motion.easing.Back;
+import motion.easing.Expo;
 import motion.easing.Linear;
+import openfl.display.Shape;
 import openfl.display.Sprite;
 import openfl.events.MouseEvent;
+import openfl.text.TextField;
 
 class Game extends Sprite {
 	public var currentScale:Float = 1;

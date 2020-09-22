@@ -1,11 +1,10 @@
 package com.grantech.matchnums;
 
+import com.grantech.matchnums.utils.Utils;
 import openfl.display.Shape;
 import openfl.display.Sprite;
 import openfl.filters.GlowFilter;
-import openfl.text.AntiAliasType;
 import openfl.text.TextField;
-import openfl.text.TextFormat;
 
 enum State {
 	Released;
@@ -26,6 +25,7 @@ class Cell extends Sprite {
 	static public function getScore(value:Int):Int {
 		return cast(Math.pow(2, value), Int);
 	}
+
 	public var column:Int;
 	public var row:Int;
 	public var value:Int = -1;
