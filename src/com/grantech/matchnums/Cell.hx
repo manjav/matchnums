@@ -23,6 +23,9 @@ class Cell extends Sprite {
 	];
 	static private final TEXT_SCALE = [1, 1, 1, 1, 0.9, 0.9, 0.9, 0.8, 0.8, 0.8, 0.6, 0.6, 0.6];
 
+	static public function getScore(value:Int):Int {
+		return cast(Math.pow(2, value), Int);
+	}
 	public var column:Int;
 	public var row:Int;
 	public var value:Int = -1;
@@ -57,7 +60,7 @@ class Cell extends Sprite {
 
 		this.background.transform.colorTransform.color = COLORS[value];
 
-		this.textDisplay.text = Math.pow(2, value) + "";
+		this.textDisplay.text = Std.string(getScore(value));
 
 		return this;
 	}
