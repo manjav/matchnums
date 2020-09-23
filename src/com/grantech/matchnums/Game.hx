@@ -1,5 +1,6 @@
 package com.grantech.matchnums;
 
+import com.grantech.matchnums.utils.Prefs;
 import com.grantech.matchnums.utils.Utils;
 import haxe.Timer;
 import motion.Actuate;
@@ -26,7 +27,11 @@ class Game extends Sprite {
 	function set_score(score:Int):Int {
 		if (this.score == score)
 			return score;
-
+		trace(Prefs.instance.record, score);
+		if (Prefs.instance.record < score) {
+			Prefs.instance.record = score;
+			Prefs.instance.save();
+		}
 		this.scoreDisplay.text = Std.string(score);
 		return this.score = score;
 	}
