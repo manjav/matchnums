@@ -1,5 +1,6 @@
 package com.grantech.matchnums;
 
+import com.grantech.matchnums.utils.Prefs;
 import openfl.Assets;
 import openfl.display.Bitmap;
 import openfl.display.Sprite;
@@ -15,6 +16,7 @@ class Main extends Sprite {
 
 		this.initialize();
 		this.construct();
+		Prefs.instance.load();
 
 		this.resize(stage.stageWidth, stage.stageHeight);
 		stage.addEventListener(Event.RESIZE, this.stage_resizeHandler);
