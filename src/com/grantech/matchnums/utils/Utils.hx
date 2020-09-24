@@ -14,6 +14,4 @@ class Utils {
 		// textField.filters = [new GlowFilter(0, 0.6, 4, 4)];
 		return textField;
 	}
-
-	static function loadPrefs(name:String) {}
 }
