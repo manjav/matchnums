@@ -27,7 +27,6 @@ class Game extends Sprite {
 	function set_score(score:Int):Int {
 		if (this.score == score)
 			return score;
-		trace(Prefs.instance.record, score);
 		if (Prefs.instance.record < score) {
 			Prefs.instance.record = score;
 			Prefs.instance.save();

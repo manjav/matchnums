@@ -18,7 +18,7 @@ class Prefs {
 
 	public function save():Void {
 		var so = SharedObject.getLocal("prefs");
-		so.data.score = this.record;
+		so.data.record = this.record;
 		so.flush(100000);
 	}
 
