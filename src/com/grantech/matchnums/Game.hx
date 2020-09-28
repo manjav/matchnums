@@ -20,19 +20,19 @@ class Game extends Sprite {
 	private var maxValue:Int = 3;
 	private var cells:CellMap;
 	private var fallingEffect:Shape;
-	private var scoreDisplay:TextField;
+	private var recordNowDisplay:TextField;
 
-	public var score(default, set):Int;
+	public var record(default, set):Int;
 
-	function set_score(score:Int):Int {
-		if (this.score == score)
-			return score;
-		if (Prefs.instance.record < score) {
-			Prefs.instance.record = score;
+	function set_record(record:Int):Int {
+		if (this.record == record)
+			return record;
+
+		var recordText = Std.string(record);
 			Prefs.instance.save();
 		}
-		this.scoreDisplay.text = Std.string(score);
-		return this.score = score;
+		this.recordNowDisplay.text = recordText;
+		return this.record = record;
 	}
 
 	public function new() {
@@ -59,12 +59,12 @@ class Game extends Sprite {
 		this.fallingEffect.alpha = 0;
 		this.addChild(this.fallingEffect);
 
-		this.scoreDisplay = Utils.createText(92, 0xededed);
-		this.scoreDisplay.text = "0";
-		this.scoreDisplay.width = 400;
-		this.scoreDisplay.x = (this.width - this.scoreDisplay.width) * 0.5;
-		this.scoreDisplay.y = -120;
-		this.addChild(this.scoreDisplay);
+		this.recordNowDisplay = Utils.createText(92, 0xededed);
+		this.recordNowDisplay.text = "0";
+		this.recordNowDisplay.width = 400;
+		this.recordNowDisplay.x = (this.width - this.recordNowDisplay.width) * 0.5;
+		this.recordNowDisplay.y = -120;
+		this.addChild(this.recordNowDisplay);
 
 		this.addEventListener(MouseEvent.CLICK, this.clickHandler);
 
