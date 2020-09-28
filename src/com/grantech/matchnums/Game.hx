@@ -1,5 +1,6 @@
 package com.grantech.matchnums;
 
+import openfl.text.TextFieldAutoSize;
 import com.grantech.matchnums.utils.Prefs;
 import com.grantech.matchnums.utils.Utils;
 import haxe.Timer;
@@ -21,6 +22,7 @@ class Game extends Sprite {
 	private var cells:CellMap;
 	private var fallingEffect:Shape;
 	private var recordNowDisplay:TextField;
+	private var recordLastDisplay:TextField;
 
 	public var record(default, set):Int;
 
@@ -29,7 +31,10 @@ class Game extends Sprite {
 			return record;
 
 		var recordText = Std.string(record);
+		if (Prefs.instance.record < record) {
+			Prefs.instance.record = record;
 			Prefs.instance.save();
+			this.recordLastDisplay.text = recordText;
 		}
 		this.recordNowDisplay.text = recordText;
 		return this.record = record;
@@ -65,6 +70,13 @@ class Game extends Sprite {
 		this.recordNowDisplay.x = (this.width - this.recordNowDisplay.width) * 0.5;
 		this.recordNowDisplay.y = -120;
 		this.addChild(this.recordNowDisplay);
+
+		this.recordLastDisplay = Utils.createText(50, 0xcacaca, "left", TextFieldAutoSize.LEFT);
+		this.recordLastDisplay.text = Std.string(Prefs.instance.record);
+		this.recordLastDisplay.width = 300;
+		this.recordLastDisplay.x = 10;
+		this.recordLastDisplay.y = -120;
+		this.addChild(this.recordLastDisplay);
 
 		this.addEventListener(MouseEvent.CLICK, this.clickHandler);
 
@@ -177,7 +189,7 @@ class Game extends Sprite {
 
 			if (matchs.length > 0) {
 				c.update(c.column, c.row, c.value + matchs.length);
-				this.score += Cell.getScore(c.value);
+				this.record += Cell.getScore(c.value);
 				if (maxValue < c.value - 2)
 					maxValue = c.value - 2;
 				needsRepeat = true;
