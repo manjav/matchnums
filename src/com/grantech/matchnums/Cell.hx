@@ -1,5 +1,6 @@
 package com.grantech.matchnums;
 
+import openfl.text.TextFormat;
 import com.grantech.matchnums.utils.Utils;
 import openfl.display.Shape;
 import openfl.display.Sprite;
@@ -33,6 +34,7 @@ class Cell extends Sprite {
 
 	private var background:Shape;
 	private var textDisplay:TextField;
+	private var textFormat:TextFormat;
 
 	public function new(column:Int, row:Int, value:Int) {
 		super();
@@ -48,6 +50,8 @@ class Cell extends Sprite {
 		this.textDisplay.height = SIZE * 0.5;
 		this.textDisplay.y = SIZE * 0.25;
 		this.addChild(this.textDisplay);
+
+		this.textFormat = this.textDisplay.getTextFormat();
 
 		this.update(column, row, value);
 	}
