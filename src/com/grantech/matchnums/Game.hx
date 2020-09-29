@@ -1,5 +1,6 @@
 package com.grantech.matchnums;
 
+import openfl.events.Event;
 import openfl.text.TextFieldAutoSize;
 import com.grantech.matchnums.utils.Prefs;
 import com.grantech.matchnums.utils.Utils;
@@ -16,6 +17,7 @@ import openfl.text.TextField;
 class Game extends Sprite {
 	public var currentScale:Float = 1;
 
+	private var isPlaying:Bool = true;
 	private var timer:Timer;
 	private var lastColumn:Int;
 	private var maxValue:Int = 3;
@@ -85,6 +87,14 @@ class Game extends Sprite {
 		this.spawn();
 	}
 
+	public function pause():Void {
+		this.isPlaying = false;
+	}
+
+	public function resume():Void {
+		this.isPlaying = true;
+	}
+
 	private function spawn():Void {
 		// Check cell leak
 		for (c in this.cells.map)
@@ -108,6 +118,8 @@ class Game extends Sprite {
 	}
 
 	private function enterFrameHandler(event:Event):Void {
+		if (!this.isPlaying)
+			return;
 		if (cells.last == null || this.cells.last.state != Released)
 			return;
 
@@ -122,6 +134,8 @@ class Game extends Sprite {
 	}
 
 	private function clickHandler(event:MouseEvent):Void {
+		if (!this.isPlaying)
+			return;
 		this.lastColumn = Math.floor(this.mouseX / Cell.SIZE);
 		this.fallAll(true);
 	}
