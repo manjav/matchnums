@@ -3,6 +3,7 @@ package com.grantech.matchnums;
 import haxe.ds.IntMap;
 
 class CellMap {
+	public var last:Cell;
 	public var width:Int;
 	public var height:Int;
 	public var map:Map<Int, Cell>;
@@ -16,10 +17,11 @@ class CellMap {
 	public function add(cell:Cell):Void {
 		this.addAt(cell.column, cell.row, cell);
 	}
-
+	
 	public function addAt(column:Int, row:Int, cell:Cell):Void {
 		// trace("add", column * 100 + row, cell);
 		this.map.set(column * 100 + row, cell);
+		this.last = cell;
 	}
 
 	public function remove(cell:Cell):Void {
