@@ -78,6 +78,7 @@ class Game extends Sprite {
 		this.recordLastDisplay.y = -120;
 		this.addChild(this.recordLastDisplay);
 
+		this.addEventListener(Event.ENTER_FRAME, this.enterFrameHandler);
 		this.addEventListener(MouseEvent.CLICK, this.clickHandler);
 
 		this.lastColumn = Math.floor(Math.random() * this.cells.width);
@@ -101,11 +102,23 @@ class Game extends Sprite {
 		cell.x = this.lastColumn * Cell.SIZE;
 		cell.y = 0;
 		this.cells.add(cell);
-		var target = Cell.SIZE * (this.cells.height - cell.row);
-		Actuate.tween(cell, target * 0.005, {y: target}).ease(Linear.easeNone).onComplete(fallAll);
 		this.addChild(cell);
 
 		this.fallingEffect.transform.colorTransform.color = Cell.COLORS[cell.value];
+	}
+
+	private function enterFrameHandler(event:Event):Void {
+		if (cells.last == null || this.cells.last.state != Released)
+			return;
+
+		// Check reach to target
+		if (this.cells.last.y < Cell.SIZE * (this.cells.height - cells.last.row)) {
+			this.cells.last.y += Cell.SPEED;
+			return;
+		}
+		
+		// Change cell state 
+		this.fallAll(false);
 	}
 
 	private function clickHandler(event:MouseEvent):Void {
