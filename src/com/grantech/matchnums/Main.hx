@@ -20,6 +20,7 @@ class Main extends Sprite {
 
 		this.resize(stage.stageWidth, stage.stageHeight);
 		stage.addEventListener(Event.RESIZE, this.stage_resizeHandler);
+		stage.addEventListener(Event.DEACTIVATE, this.stage_deactivateeHandler);
 	}
 
 	private function initialize():Void {
@@ -51,5 +52,15 @@ class Main extends Sprite {
 
 	private function stage_resizeHandler(event:Event):Void {
 		this.resize(stage.stageWidth, stage.stageHeight);
+	}
+
+	private function stage_deactivateeHandler(event:Event):Void {
+		stage.removeEventListener(Event.DEACTIVATE, this.stage_deactivateeHandler);
+		stage.addEventListener(Event.ACTIVATE, this.stage_activateeHandler);
+	}
+
+	private function stage_activateeHandler(event:Event):Void {
+		stage.removeEventListener(Event.ACTIVATE, this.stage_activateeHandler);
+		stage.addEventListener(Event.DEACTIVATE, this.stage_deactivateeHandler);
 	}
 }
