@@ -30,13 +30,20 @@ class Score extends TextField {
 		dispose(this);
 	}
 
+	static private var pool:Array<Score> = new Array();
+	static private var i:Int = 0;
+
 	static public function dispose(score:Score):Void {
 		if (score.parent != null)
 			score.parent.removeChild(score);
+		pool[i++] = score;
 	}
 
 	static public function instantiate(text:String, x:Float, y:Float, parent:DisplayObjectContainer):Score {
 		if (i > 0) {
+			i--;
+			return pool[i].popup(text, x, y, parent);
+		}
 		return new Score(text, x, y, parent);
 	}
 }
