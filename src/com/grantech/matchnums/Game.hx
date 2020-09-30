@@ -1,7 +1,5 @@
 package com.grantech.matchnums;
 
-import openfl.events.Event;
-import openfl.text.TextFieldAutoSize;
 import com.grantech.matchnums.utils.Prefs;
 import com.grantech.matchnums.utils.Utils;
 import haxe.Timer;
@@ -11,8 +9,10 @@ import motion.easing.Expo;
 import motion.easing.Linear;
 import openfl.display.Shape;
 import openfl.display.Sprite;
+import openfl.events.Event;
 import openfl.events.MouseEvent;
 import openfl.text.TextField;
+import openfl.text.TextFieldAutoSize;
 
 class Game extends Sprite {
 	public var currentScale:Float = 1;
@@ -128,8 +128,8 @@ class Game extends Sprite {
 			this.cells.last.y += Cell.SPEED;
 			return;
 		}
-		
-		// Change cell state 
+
+		// Change cell state
 		this.fallAll(false);
 	}
 
@@ -216,7 +216,9 @@ class Game extends Sprite {
 
 			if (matchs.length > 0) {
 				c.update(c.column, c.row, c.value + matchs.length);
-				this.record += Cell.getScore(c.value);
+				var score = Cell.getScore(c.value);
+				this.record += score;
+				Score.instantiate("+" + score, c.x + c.width * 0.45, c.y, this);
 				if (maxValue < c.value - 2)
 					maxValue = c.value - 2;
 				needsRepeat = true;
