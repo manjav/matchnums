@@ -22,6 +22,7 @@ class Game extends Sprite {
 	private var lastColumn:Int;
 	private var maxValue:Int = 3;
 	private var cells:CellMap;
+	private var endLine:Shape;
 	private var fallingEffect:Shape;
 	private var recordNowDisplay:TextField;
 	private var recordLastDisplay:TextField;
@@ -54,11 +55,17 @@ class Game extends Sprite {
 			Cell.SIZE * (this.cells.height + 1)
 			+ Cell.BORDER * 2, Cell.ROUND * 2, Cell.ROUND * 2);
 
+		// background.filters = [new BlurFilter(10, 10)];
 		background.graphics.beginFill(0x111111);
 		for (i in 0...2)
 			background.graphics.drawRect(Cell.SIZE * (i * 2 + 1), -Cell.BORDER, Cell.SIZE, Cell.SIZE * (this.cells.height + 1) + Cell.BORDER * 2);
-		// background.filters = [new BlurFilter(10, 10)];
 		this.addChild(background);
+
+		this.endLine = new Shape();
+		this.endLine.graphics.beginFill(0xFFFFFF);
+		this.endLine.graphics.drawRoundRect(-Cell.BORDER, Cell.SIZE - 2, background.width, 4, 0, 0);
+		this.endLine.transform.colorTransform.color = 0x444444;
+		this.addChild(this.endLine);
 
 		this.fallingEffect = new Shape();
 		this.fallingEffect.graphics.beginFill(0xFFFFFF, 0.8);
@@ -104,6 +111,7 @@ class Game extends Sprite {
 		// Check end game
 		var row = this.cells.length(this.lastColumn);
 		if (row >= this.cells.height) {
+			this.endLine.transform.colorTransform.color = 0xFF0000;
 			trace("Game Over.");
 			return;
 		}
@@ -219,8 +227,11 @@ class Game extends Sprite {
 				var score = Cell.getScore(c.value);
 				this.record += score;
 				Score.instantiate("+" + score, c.x + c.width * 0.45, c.y, this);
-				if (maxValue < c.value - 2)
-					maxValue = c.value - 2;
+
+				var distance = Math.ceil(1.5 * Math.sqrt(maxValue));
+				trace(maxValue, c.value - distance);
+				if (maxValue < c.value - distance)
+					maxValue = c.value - distance;
 				needsRepeat = true;
 			}
 			// trace("match", c, matchs.length, needsRepeat);
