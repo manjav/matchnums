@@ -112,6 +112,7 @@ class Game extends Sprite {
 		var row = this.cells.length(this.lastColumn);
 		if (row >= this.cells.height) {
 			this.endLine.transform.colorTransform.color = 0xFF0000;
+			this.showEndLine(0.01);
 			trace("Game Over.");
 			return;
 		}
@@ -123,6 +124,10 @@ class Game extends Sprite {
 		this.addChild(cell);
 
 		this.fallingEffect.transform.colorTransform.color = Cell.COLORS[cell.value];
+	}
+
+	private function showEndLine(alpha:Float):Void {
+		Actuate.tween(this.endLine, 0.5, {alpha: alpha}).onComplete(showEndLine, [alpha == 1 ? 0.01 : 1]);
 	}
 
 	private function enterFrameHandler(event:Event):Void {
