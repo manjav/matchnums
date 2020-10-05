@@ -14,6 +14,7 @@
 		
 	<icon path="Assets/images/icon.svg" />
 	<assets path="Assets/images" rename="images" include="*" exclude="icon.svg" />
+	<assets path="Assets/sounds" rename="sounds" include="*" />
 	<assets path="Assets/fonts" rename="fonts" include="*.ttf" />
 	
 	<!-- <set name="use-mp3" if="web" unless="emscripten" />
