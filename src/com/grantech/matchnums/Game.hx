@@ -6,7 +6,6 @@ import haxe.Timer;
 import motion.Actuate;
 import motion.easing.Back;
 import motion.easing.Expo;
-import motion.easing.Linear;
 import openfl.Assets;
 import openfl.display.Shape;
 import openfl.display.Sprite;
@@ -161,7 +160,9 @@ class Game extends Sprite {
 	}
 
 	private function fallAll(changeColumn:Bool):Void {
-		var delay = 0.1;
+		if (this.timer != null)
+			this.timer.stop();
+		var delay = 0.01;
 		var time = 0.15;
 		var numFallings = 0;
 		for (c in this.cells.map) {
@@ -213,7 +214,9 @@ class Game extends Sprite {
 
 		// Check all matchs after falling animation
 		if (this.findMatchs()) {
-			this.fallAll(false);
+			this.timer = Timer.delay(function() {
+				this.fallAll(false);
+			}, 200);
 			return;
 		}
 
@@ -231,7 +234,7 @@ class Game extends Sprite {
 			// Relaese all cells over matchs
 			for (m in matchs) {
 				this.cells.accumulateColumn(m.column, m.row);
-				Cell.dispose(m);
+				Actuate.tween(m, 0.1, {x: c.x, y: c.y}).ease(Expo.easeOut).onComplete(Cell.dispose, [m]);
 			}
 
 			if (matchs.length > 0) {
