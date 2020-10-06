@@ -7,10 +7,12 @@ import motion.Actuate;
 import motion.easing.Back;
 import motion.easing.Expo;
 import motion.easing.Linear;
+import openfl.Assets;
 import openfl.display.Shape;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.events.MouseEvent;
+import openfl.media.Sound;
 import openfl.text.TextField;
 import openfl.text.TextFieldAutoSize;
 
@@ -18,6 +20,7 @@ class Game extends Sprite {
 	public var currentScale:Float = 1;
 
 	private var isPlaying:Bool = true;
+	private var fallSFX:Sound;
 	private var timer:Timer;
 	private var lastColumn:Int;
 	private var maxValue:Int = 3;
@@ -92,6 +95,8 @@ class Game extends Sprite {
 
 		this.lastColumn = Math.floor(Math.random() * this.cells.width);
 		this.spawn();
+
+		this.fallSFX = Assets.getSound("sounds/fall.ogg");
 	}
 
 	public function pause():Void {
@@ -176,6 +181,7 @@ class Game extends Sprite {
 				this.fallingEffect.x = c.x;
 				this.fallingEffect.alpha = 1;
 				Actuate.tween(this.fallingEffect, 0.5, {alpha: 0.01}).ease(Expo.easeOut);
+				this.fallSFX.play();
 			}
 			c.state = Falling;
 			// Actuate.stop(c);
