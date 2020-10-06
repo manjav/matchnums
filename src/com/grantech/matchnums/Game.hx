@@ -231,7 +231,6 @@ class Game extends Sprite {
 			// Relaese all cells over matchs
 			for (m in matchs) {
 				this.cells.accumulateColumn(m.column, m.row);
-				this.removeChild(m);
 				Cell.dispose(m);
 			}
 

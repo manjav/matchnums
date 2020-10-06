@@ -82,6 +82,8 @@ class Cell extends Sprite {
 
 	static public function dispose(cell:Cell):Void {
 		pool[i++] = cell;
+		if (cell.parent != null)
+			cell.parent.removeChild(cell);
 	}
 
 	static public function instantiate(column:Int, row:Int, value:Int):Cell {
