@@ -124,7 +124,7 @@ class Game extends Sprite {
 			return;
 		}
 
-		var cell = Cell.instantiate(this.lastColumn, row, Math.ceil(Math.random() * maxValue));
+		var cell = Cell.instantiate(this.lastColumn, row, Math.ceil(Math.random() * this.maxValue));
 		cell.x = this.lastColumn * Cell.SIZE;
 		cell.y = 0;
 		this.cells.add(cell);
@@ -242,10 +242,12 @@ class Game extends Sprite {
 				Score.instantiate("+" + score, c.x + c.width * 0.45, c.y, this);
 				this.mergeSFX.play();
 
-				var distance = Math.ceil(1.5 * Math.sqrt(maxValue));
-				trace(maxValue, c.value - distance);
-				if (maxValue < c.value - distance)
-					maxValue = c.value - distance;
+				// More change for spawm new cells
+				if (this.maxValue < 5) {
+					var distance = Math.ceil(1.5 * Math.sqrt(this.maxValue));
+					if (this.maxValue < c.value - distance)
+						this.maxValue = c.value - distance;
+				}
 				needsRepeat = true;
 			}
 			// trace("match", c, matchs.length, needsRepeat);
