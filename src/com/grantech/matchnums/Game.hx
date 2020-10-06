@@ -21,6 +21,7 @@ class Game extends Sprite {
 
 	private var isPlaying:Bool = true;
 	private var fallSFX:Sound;
+	private var mergeSFX:Sound;
 	private var timer:Timer;
 	private var lastColumn:Int;
 	private var maxValue:Int = 3;
@@ -97,6 +98,7 @@ class Game extends Sprite {
 		this.spawn();
 
 		this.fallSFX = Assets.getSound("sounds/fall.ogg");
+		this.mergeSFX = Assets.getSound("sounds/merge.ogg");
 	}
 
 	public function pause():Void {
@@ -238,6 +240,7 @@ class Game extends Sprite {
 				var score = Cell.getScore(c.value);
 				this.record += score;
 				Score.instantiate("+" + score, c.x + c.width * 0.45, c.y, this);
+				this.mergeSFX.play();
 
 				var distance = Math.ceil(1.5 * Math.sqrt(maxValue));
 				trace(maxValue, c.value - distance);
