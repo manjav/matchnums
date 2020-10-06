@@ -183,13 +183,13 @@ class Game extends Sprite {
 				this.fallingEffect.x = c.x;
 				this.fallingEffect.alpha = 1;
 				Actuate.tween(this.fallingEffect, 0.5, {alpha: 0.01}).ease(Expo.easeOut);
-				this.fallSFX.play();
 			}
 			c.state = Falling;
 			// Actuate.stop(c);
 			var dy = Cell.SIZE * (this.cells.height - c.row);
 			if (dy - c.y > 0.5)
 				Actuate.tween(c, time, {y: dy}).delay(delay).ease(Linear.easeNone).onComplete(bounceCell, [c]);
+			this.fallSFX.play();
 			++numFallings;
 		}
 
