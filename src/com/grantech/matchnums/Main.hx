@@ -16,7 +16,6 @@ class Main extends Sprite {
 
 		this.initialize();
 		this.construct();
-		trace(Prefs.instance.record);
 
 		this.resize(stage.stageWidth, stage.stageHeight);
 		stage.addEventListener(Event.RESIZE, this.stage_resizeHandler);
@@ -55,7 +54,7 @@ class Main extends Sprite {
 	}
 
 	private function stage_deactivateeHandler(event:Event):Void {
-		this.game.pause();
+		// this.game.pause();
 		stage.removeEventListener(Event.DEACTIVATE, this.stage_deactivateeHandler);
 		stage.addEventListener(Event.ACTIVATE, this.stage_activateeHandler);
 	}
