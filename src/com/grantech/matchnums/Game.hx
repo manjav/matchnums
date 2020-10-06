@@ -15,10 +15,16 @@ import openfl.media.Sound;
 import openfl.text.TextField;
 import openfl.text.TextFieldAutoSize;
 
+enum GameState {
+	Play;
+	Pause;
+	WaitForMerge;
+}
+
 class Game extends Sprite {
 	public var currentScale:Float = 1;
 
-	private var isPlaying:Bool = true;
+	private var state:GameState;
 	private var fallSFX:Sound;
 	private var mergeSFX:Sound;
 	private var timer:Timer;
@@ -49,6 +55,7 @@ class Game extends Sprite {
 	public function new() {
 		super();
 
+		this.state = Play;
 		this.cells = new CellMap(5, 6);
 		var background = new Shape();
 		background.graphics.beginFill(0);
@@ -101,11 +108,11 @@ class Game extends Sprite {
 	}
 
 	public function pause():Void {
-		this.isPlaying = false;
+		this.state = Pause;
 	}
 
 	public function resume():Void {
-		this.isPlaying = true;
+		this.state = Play;
 	}
 
 	private function spawn():Void {
@@ -137,7 +144,7 @@ class Game extends Sprite {
 	}
 
 	private function enterFrameHandler(event:Event):Void {
-		if (!this.isPlaying)
+		if (this.state != Play)
 			return;
 		if (cells.last == null || this.cells.last.state != Released)
 			return;
@@ -153,7 +160,7 @@ class Game extends Sprite {
 	}
 
 	private function clickHandler(event:MouseEvent):Void {
-		if (!this.isPlaying)
+		if (this.state != Play)
 			return;
 		this.lastColumn = Math.floor(this.mouseX / Cell.SIZE);
 		this.fallAll(true);
