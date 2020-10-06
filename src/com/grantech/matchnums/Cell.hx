@@ -7,7 +7,7 @@ import openfl.display.Sprite;
 import openfl.filters.GlowFilter;
 import openfl.text.TextField;
 
-enum State {
+enum CellState {
 	Released;
 	Falling;
 	Fell;
@@ -31,7 +31,7 @@ class Cell extends Sprite {
 	public var column:Int;
 	public var row:Int;
 	public var value:Int = -1;
-	public var state:State;
+	public var state:CellState;
 
 	private var textSize:Int = 80;
 	private var background:Shape;
