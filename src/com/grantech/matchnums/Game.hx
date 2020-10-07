@@ -167,8 +167,6 @@ class Game extends Sprite {
 	}
 
 	private function fallAll(changeColumn:Bool):Void {
-		if (this.timer != null)
-			this.timer.stop();
 		var delay = 0.01;
 		var time = 0.15;
 		var numFallings = 0;
@@ -203,7 +201,7 @@ class Game extends Sprite {
 
 		if (numFallings > 0)
 			this.timer = Timer.delay(this.fell, Math.round((delay + time + 0.31) * 1000));
-	}
+		}
 
 	private function bounceCell(cell:Cell):Void {
 		var y = cell.y;
@@ -221,7 +219,9 @@ class Game extends Sprite {
 
 		// Check all matchs after falling animation
 		if (this.findMatchs()) {
+			this.state = WaitForMerge;
 			this.timer = Timer.delay(function() {
+				this.state = Play;
 				this.fallAll(false);
 			}, 200);
 			return;
