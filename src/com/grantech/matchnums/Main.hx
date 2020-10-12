@@ -53,12 +53,12 @@ class Main extends Sprite {
 	}
 
 	private function stage_deactivateHandler(event:Event):Void {
+		this.game.pause();
 		stage.removeEventListener(Event.DEACTIVATE, this.stage_deactivateHandler);
 		stage.addEventListener(Event.ACTIVATE, this.stage_activateHandler);
 	}
 
 	private function stage_activateHandler(event:Event):Void {
-		// this.game.resume();
 		stage.removeEventListener(Event.ACTIVATE, this.stage_activateHandler);
 		stage.addEventListener(Event.DEACTIVATE, this.stage_deactivateHandler);
 	}
