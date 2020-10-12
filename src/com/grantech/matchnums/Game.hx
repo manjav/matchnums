@@ -100,6 +100,7 @@ class Game extends Sprite {
 
 		this.pauseOverlay = new Sprite();
 		this.pauseOverlay.buttonMode = true;
+		this.pauseOverlay.addEventListener(MouseEvent.CLICK, this.pauseOverlay_clickHandler);
 
 		this.addEventListener(Event.ENTER_FRAME, this.enterFrameHandler);
 		this.addEventListener(MouseEvent.CLICK, this.clickHandler);
@@ -121,6 +122,7 @@ class Game extends Sprite {
 
 	public function resume():Void {
 		this.state = Play;
+		this.parent.removeChild(this.pauseOverlay);
 	}
 
 	private function spawn():Void {
@@ -172,6 +174,10 @@ class Game extends Sprite {
 			return;
 		this.lastColumn = Math.floor(this.mouseX / Cell.SIZE);
 		this.fallAll(true);
+	}
+
+	private function pauseOverlay_clickHandler(event:MouseEvent):Void {
+		this.resume();
 	}
 
 	private function fallAll(changeColumn:Bool):Void {
