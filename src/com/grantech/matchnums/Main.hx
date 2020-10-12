@@ -23,10 +23,7 @@ class Main extends Sprite {
 	}
 
 	private function initialize():Void {
-		// this.background = new Bitmap(Assets.getBitmapData("images/background_tile.png"));
 		Prefs.instance.load();
-		this.footer = new Bitmap(Assets.getBitmapData("images/center_bottom.png"));
-		this.game = new Game();
 	}
 
 	private function construct():Void {
@@ -62,7 +59,7 @@ class Main extends Sprite {
 
 	private function stage_activateHandler(event:Event):Void {
 		// this.game.resume();
-		stage.removeEventListener(Event.ACTIVATE, this.stage_activateHandler);
-		stage.addEventListener(Event.DEACTIVATE, this.stage_deactivateHandler);
+		stage.removeEventListener(Event.ACTIVATE, this.stage_activateeHandler);
+		stage.addEventListener(Event.DEACTIVATE, this.stage_deactivateeHandler);
 	}
 }
