@@ -19,7 +19,7 @@ class Main extends Sprite {
 
 		this.resize(stage.stageWidth, stage.stageHeight);
 		stage.addEventListener(Event.RESIZE, this.stage_resizeHandler);
-		stage.addEventListener(Event.DEACTIVATE, this.stage_deactivateeHandler);
+		stage.addEventListener(Event.DEACTIVATE, this.stage_deactivateHandler);
 	}
 
 	private function initialize():Void {
@@ -55,15 +55,14 @@ class Main extends Sprite {
 		this.resize(stage.stageWidth, stage.stageHeight);
 	}
 
-	private function stage_deactivateeHandler(event:Event):Void {
-		// this.game.pause();
-		stage.removeEventListener(Event.DEACTIVATE, this.stage_deactivateeHandler);
-		stage.addEventListener(Event.ACTIVATE, this.stage_activateeHandler);
+	private function stage_deactivateHandler(event:Event):Void {
+		stage.removeEventListener(Event.DEACTIVATE, this.stage_deactivateHandler);
+		stage.addEventListener(Event.ACTIVATE, this.stage_activateHandler);
 	}
 
-	private function stage_activateeHandler(event:Event):Void {
+	private function stage_activateHandler(event:Event):Void {
 		// this.game.resume();
-		stage.removeEventListener(Event.ACTIVATE, this.stage_activateeHandler);
-		stage.addEventListener(Event.DEACTIVATE, this.stage_deactivateeHandler);
+		stage.removeEventListener(Event.ACTIVATE, this.stage_activateHandler);
+		stage.addEventListener(Event.DEACTIVATE, this.stage_deactivateHandler);
 	}
 }
