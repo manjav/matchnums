@@ -30,11 +30,13 @@ class Main extends Sprite {
 	}
 
 	private function construct():Void {
-		this.footer.smoothing = true;
-
+		// this.background = new Bitmap(Assets.getBitmapData("images/background_tile.png"));
 		// this.addChild(this.background);
-		this.addChild(this.footer);
+		this.game = new Game();
 		this.addChild(this.game);
+		this.footer = new Bitmap(Assets.getBitmapData("images/center_bottom.png"));
+		this.footer.smoothing = true;
+		this.addChild(this.footer);
 	}
 
 	private function resize(newWidth:Int, newHeight:Int):Void {
