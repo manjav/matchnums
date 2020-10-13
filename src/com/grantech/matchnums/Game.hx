@@ -34,6 +34,7 @@ class Game extends Sprite {
 	private var endLine:Shape;
 	private var fallingEffect:Shape;
 	private var pauseOverlay:Sprite;
+	private var pauseLabel:TextField;
 	private var recordNowDisplay:TextField;
 	private var recordLastDisplay:TextField;
 
@@ -101,6 +102,7 @@ class Game extends Sprite {
 		this.pauseOverlay = new Sprite();
 		this.pauseOverlay.buttonMode = true;
 		this.pauseOverlay.addEventListener(MouseEvent.CLICK, this.pauseOverlay_clickHandler);
+		this.pauseOverlay.alpha = 0;
 
 		this.pauseLabel = Utils.createText(50, 0xFFFFFF);
 		this.pauseLabel.mouseEnabled = false;
@@ -120,6 +122,7 @@ class Game extends Sprite {
 
 	public function pause():Void {
 		this.state = Pause;
+		this.pauseOverlay.alpha = 1;
 		this.pauseOverlay.graphics.clear();
 		this.pauseOverlay.graphics.beginFill(0x000000, 0.5);
 		this.pauseOverlay.graphics.drawRect(0, 0, stage.stageWidth, stage.stageHeight);
@@ -130,7 +133,7 @@ class Game extends Sprite {
 
 	public function resume():Void {
 		this.state = Play;
-		this.parent.removeChild(this.pauseOverlay);
+		Actuate.tween(this.pauseOverlay, 0.2, {alpha: 0.1}).onComplete(this.parent.removeChild, [this.pauseOverlay]);
 	}
 
 	private function spawn():Void {
@@ -223,7 +226,7 @@ class Game extends Sprite {
 
 		if (numFallings > 0)
 			this.timer = Timer.delay(this.fell, Math.round((delay + time + 0.31) * 1000));
-		}
+	}
 
 	private function bounceCell(cell:Cell):Void {
 		var y = cell.y;
