@@ -17,6 +17,7 @@ enum CellState {
 class Cell extends Sprite {
 	static public final SPEED = 0.8;
 	static public final SIZE = 176;
+	static public final RADIUS = SIZE * 0.5;
 	static public final BORDER = 8;
 	static public final ROUND = 32;
 	static public final COLORS = [
