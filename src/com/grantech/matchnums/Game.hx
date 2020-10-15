@@ -262,7 +262,12 @@ class Game extends Sprite {
 
 			if (matchs.length > 0) {
 				c.update(c.column, c.row, c.value + matchs.length);
-				mergeComplete(c);
+				c.scaleX = c.scaleY = 0.2;
+				Actuate.tween(c, 0.3,
+					{
+						scaleX: 1,
+						scaleY: 1
+					}).ease(Back.easeOut).onComplete(mergeComplete, [c]);
 				needsRepeat = true;
 			}
 			// trace("match", c, matchs.length, needsRepeat);
