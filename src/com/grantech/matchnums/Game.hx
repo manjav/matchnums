@@ -81,7 +81,7 @@ class Game extends Sprite {
 
 		this.fallingEffect = new Shape();
 		this.fallingEffect.graphics.beginFill(0xFFFFFF, 0.8);
-		this.fallingEffect.graphics.drawRoundRect(Cell.BORDER, -Cell.BORDER, Cell.SIZE - Cell.BORDER * 2, background.height, 0, 0);
+		this.fallingEffect.graphics.drawRoundRect(Cell.BORDER - Cell.RADIUS, -Cell.BORDER, Cell.SIZE - Cell.BORDER * 2, background.height, 0, 0);
 		this.fallingEffect.alpha = 0;
 		this.addChild(this.fallingEffect);
 
@@ -152,8 +152,8 @@ class Game extends Sprite {
 		}
 
 		var cell = Cell.instantiate(this.lastColumn, row, Math.ceil(Math.random() * this.maxValue));
-		cell.x = this.lastColumn * Cell.SIZE;
-		cell.y = 0;
+		cell.x = this.lastColumn * Cell.SIZE + Cell.RADIUS;
+		cell.y = -Cell.RADIUS;
 		this.cells.add(cell);
 		this.addChild(cell);
 
@@ -209,7 +209,7 @@ class Game extends Sprite {
 						this.cells.translate(c, this.lastColumn, row);
 					}
 				}
-				c.x = c.column * Cell.SIZE;
+				c.x = c.column * Cell.SIZE + Cell.RADIUS;
 
 				this.fallingEffect.x = c.x;
 				this.fallingEffect.alpha = 1;
@@ -217,7 +217,7 @@ class Game extends Sprite {
 			}
 			c.state = Falling;
 			// Actuate.stop(c);
-			var dy = Cell.SIZE * (this.cells.height - c.row);
+			var dy = Cell.SIZE * (this.cells.height - c.row) + Cell.RADIUS;
 			if (dy - c.y > 0.5)
 				Actuate.tween(c, time, {y: dy}).delay(delay).ease(Expo.easeOut).onComplete(bounceCell, [c]);
 			this.fallSFX.play();

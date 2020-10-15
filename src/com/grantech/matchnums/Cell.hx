@@ -44,14 +44,15 @@ class Cell extends Sprite {
 
 		this.background = new Shape();
 		this.background.graphics.beginFill(0xFFFFFF);
-		this.background.graphics.drawRoundRect(BORDER, BORDER, SIZE - BORDER * 2, SIZE - BORDER * 2, ROUND, ROUND);
+		this.background.graphics.drawRoundRect(BORDER - RADIUS, BORDER - RADIUS, SIZE - BORDER * 2, SIZE - BORDER * 2, ROUND, ROUND);
 		this.addChild(this.background);
 
 		this.textDisplay = Utils.createText(80);
 		this.textDisplay.filters = [new GlowFilter(0, 0.6, 4, 4)];
 		this.textDisplay.width = SIZE;
-		this.textDisplay.height = SIZE * 0.5;
-		this.textDisplay.y = SIZE * 0.25;
+		this.textDisplay.height = RADIUS;
+		this.textDisplay.x = -RADIUS;
+		this.textDisplay.y = -RADIUS * 0.5;
 		this.addChild(this.textDisplay);
 
 		this.textFormat = this.textDisplay.getTextFormat();
