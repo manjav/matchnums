@@ -171,7 +171,7 @@ class Game extends Sprite {
 			return;
 
 		// Check reach to target
-		if (this.cells.last.y < Cell.SIZE * (this.cells.height - cells.last.row)) {
+		if (this.cells.last.y < this.cells.target) {
 			this.cells.last.y += Cell.SPEED;
 			return;
 		}

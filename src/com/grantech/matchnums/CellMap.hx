@@ -6,6 +6,7 @@ class CellMap {
 	public var last:Cell;
 	public var width:Int;
 	public var height:Int;
+	public var target:Float;
 	public var map:Map<Int, Cell>;
 
 	public function new(width:Int, height:Int) {
@@ -22,6 +23,7 @@ class CellMap {
 		// trace("add", column * 100 + row, cell);
 		this.map.set(column * 100 + row, cell);
 		this.last = cell;
+		this.target = Cell.SIZE * (this.height - this.last.row) + Cell.RADIUS;
 	}
 
 	public function remove(cell:Cell):Void {
