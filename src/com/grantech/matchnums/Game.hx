@@ -243,15 +243,7 @@ class Game extends Sprite {
 				c.state = Fell;
 
 		// Check all matchs after falling animation
-		if (this.findMatchs()) {
-			this.state = WaitForMerge;
-			this.timer = Timer.delay(function() {
-				this.state = Play;
-				this.fallAll(false);
-			}, 200);
-			return;
-		}
-
+		if (!this.findMatchs())
 		this.spawn();
 	}
 
@@ -271,23 +263,29 @@ class Game extends Sprite {
 
 			if (matchs.length > 0) {
 				c.update(c.column, c.row, c.value + matchs.length);
-				var score = Cell.getScore(c.value);
-				this.record += score;
-
-		Score.instantiate("+" + score, c.x , c.y, this);
-				this.mergeSFX.play();
-
-				// More change for spawm new cells
-				if (this.maxValue < 5) {
-					var distance = Math.ceil(1.5 * Math.sqrt(this.maxValue));
-					if (this.maxValue < c.value - distance)
-						this.maxValue = c.value - distance;
-				}
+				mergeComplete(c);
 				needsRepeat = true;
 			}
 			// trace("match", c, matchs.length, needsRepeat);
 		}
 		return needsRepeat;
+	}
+
+	private function mergeComplete(cell:Cell):Void {
+
+		var score = Cell.getScore(cell.value);
+				this.record += score;
+
+		Score.instantiate("+" + score, cell.x, cell.y, this);
+				this.mergeSFX.play();
+
+				// More change for spawm new cells
+				if (this.maxValue < 5) {
+					var distance = Math.ceil(1.5 * Math.sqrt(this.maxValue));
+			if (this.maxValue < cell.value - distance)
+				this.maxValue = cell.value - distance;
+		}
+		this.fallAll(false);
 	}
 
 	public function resize(newWidth:Int, newHeight:Int):Void {
