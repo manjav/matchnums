@@ -243,7 +243,7 @@ class Game extends Sprite {
 
 		// Check all matchs after falling animation
 		if (!this.findMatchs())
-		this.spawn();
+			this.spawn();
 	}
 
 	private function findMatchs():Bool {
@@ -267,7 +267,7 @@ class Game extends Sprite {
 					{
 						scaleX: 1,
 						scaleY: 1
-					}).ease(Back.easeOut).onComplete(mergeComplete, [c]);
+					}).ease(Back.easeOut).onComplete(onMergeComplete, [c]);
 				needsRepeat = true;
 			}
 			// trace("match", c, matchs.length, needsRepeat);
@@ -275,17 +275,17 @@ class Game extends Sprite {
 		return needsRepeat;
 	}
 
-	private function mergeComplete(cell:Cell):Void {
+	private function onMergeComplete(cell:Cell):Void {
 
 		var score = Cell.getScore(cell.value);
-				this.record += score;
+		this.record += score;
 
 		Score.instantiate("+" + score, cell.x, cell.y, this);
-				this.mergeSFX.play();
+		this.mergeSFX.play();
 
-				// More change for spawm new cells
-				if (this.maxValue < 5) {
-					var distance = Math.ceil(1.5 * Math.sqrt(this.maxValue));
+		// More change for spawm new cells
+		if (this.maxValue < 5) {
+			var distance = Math.ceil(1.5 * Math.sqrt(this.maxValue));
 			if (this.maxValue < cell.value - distance)
 				this.maxValue = cell.value - distance;
 		}
