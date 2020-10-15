@@ -1,5 +1,6 @@
 package com.grantech.matchnums.utils;
 
+import openfl.text.GridFitType;
 import openfl.text.TextField;
 import openfl.text.TextFieldAutoSize;
 import openfl.text.TextFormat;
@@ -16,6 +17,7 @@ class Utils {
 			autoSize:TextFieldAutoSize = TextFieldAutoSize.CENTER):Void {
 		// textField.antiAliasType = AntiAliasType.ADVANCED;
 		textField.autoSize = autoSize;
+		textField.gridFitType = GridFitType.NONE;
 		textField.mouseEnabled = false;
 		textField.selectable = false;
 		textField.embedFonts = true;
