@@ -1,11 +1,11 @@
 package com.grantech.matchnums;
 
-import openfl.text.TextFormat;
 import com.grantech.matchnums.utils.Utils;
 import openfl.display.Shape;
 import openfl.display.Sprite;
 import openfl.filters.GlowFilter;
 import openfl.text.TextField;
+import openfl.text.TextFormat;
 
 enum CellState {
 	Released;
