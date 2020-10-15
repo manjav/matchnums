@@ -18,7 +18,6 @@ import openfl.text.TextFieldAutoSize;
 enum GameState {
 	Play;
 	Pause;
-	WaitForMerge;
 }
 
 class Game extends Sprite {
@@ -286,12 +285,6 @@ class Game extends Sprite {
 				this.maxValue = cell.value - distance;
 		}
 		this.fallAll(false);
-
-		this.state = WaitForMerge;
-		this.timer = Timer.delay(function() {
-			this.state = Play;
-			this.fallAll(false);
-		}, 200);
 	}
 
 	public function resize(newWidth:Int, newHeight:Int):Void {
