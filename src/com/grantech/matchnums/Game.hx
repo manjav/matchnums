@@ -273,7 +273,8 @@ class Game extends Sprite {
 				c.update(c.column, c.row, c.value + matchs.length);
 				var score = Cell.getScore(c.value);
 				this.record += score;
-				Score.instantiate("+" + score, c.x + c.width * 0.45, c.y, this);
+
+		Score.instantiate("+" + score, c.x , c.y, this);
 				this.mergeSFX.play();
 
 				// More change for spawm new cells
