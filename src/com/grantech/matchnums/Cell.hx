@@ -57,10 +57,10 @@ class Cell extends Sprite {
 
 		this.textFormat = this.textDisplay.getTextFormat();
 
-		this.update(column, row, value);
+		this.init(column, row, value);
 	}
 
-	public function update(column:Int, row:Int, value:Int):Cell {
+	public function init(column:Int, row:Int, value:Int):Cell {
 		this.column = column;
 		this.row = row;
 		this.value = value;
@@ -91,7 +91,7 @@ class Cell extends Sprite {
 	static public function instantiate(column:Int, row:Int, value:Int):Cell {
 		if (i > 0) {
 			i--;
-			return pool[i].update(column, row, value);
+			return pool[i].init(column, row, value);
 		}
 		return new Cell(column, row, value);
 	}
