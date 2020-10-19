@@ -8,6 +8,7 @@ import openfl.text.TextField;
 import openfl.text.TextFormat;
 
 enum CellState {
+	Init;
 	Released;
 	Falling;
 	Fell;
@@ -64,7 +65,7 @@ class Cell extends Sprite {
 		this.column = column;
 		this.row = row;
 		this.value = value;
-		this.state = Released;
+		this.state = Init;
 
 		this.background.transform.colorTransform.color = COLORS[value];
 
@@ -72,7 +73,12 @@ class Cell extends Sprite {
 		this.textDisplay.text = Std.string(getScore(value));
 		this.textDisplay.setTextFormat(this.textFormat);
 
+		this.onInit();
 		return this;
+	}
+
+	private function onInit():Void {
+		this.state = Released;
 	}
 
 	override public function toString():String {
