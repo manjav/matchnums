@@ -1,5 +1,6 @@
 package com.grantech.matchnums;
 
+import com.grantech.matchnums.animations.IAnimationFactory;
 import com.grantech.matchnums.utils.Utils;
 import openfl.display.Shape;
 import openfl.display.Sprite;
@@ -35,13 +36,14 @@ class Cell extends Sprite {
 	public var row:Int;
 	public var value:Int = -1;
 	public var state:CellState;
+	public var initEffectFactory:IAnimationFactory;
 
 	private var textSize:Int = 80;
 	private var background:Shape;
 	private var textDisplay:TextField;
 	private var textFormat:TextFormat;
 
-	public function new(column:Int, row:Int, value:Int) {
+	public function new(column:Int, row:Int, value:Int, ?initEffectFactory:IAnimationFactory) {
 		super();
 
 		this.background = new Shape();
@@ -58,6 +60,7 @@ class Cell extends Sprite {
 		this.addChild(this.textDisplay);
 
 		this.textFormat = this.textDisplay.getTextFormat();
+		this.initEffectFactory = initEffectFactory;
 
 		this.init(column, row, value);
 	}
@@ -75,6 +78,8 @@ class Cell extends Sprite {
 		this.textDisplay.setTextFormat(this.textFormat);
 
 		this.onInit();
+		if (this.initEffectFactory != null)
+			this.initEffectFactory.call([this, this.onInit]);
 		return this;
 	}
 
@@ -97,11 +102,11 @@ class Cell extends Sprite {
 			cell.parent.removeChild(cell);
 	}
 
-	static public function instantiate(column:Int, row:Int, value:Int):Cell {
+	static public function instantiate(column:Int, row:Int, value:Int, initEffectFactory:IAnimationFactory):Cell {
 		if (i > 0) {
 			i--;
 			return pool[i].init(column, row, value);
 		}
-		return new Cell(column, row, value);
+		return new Cell(column, row, value, initEffectFactory);
 	}
 }
