@@ -3,6 +3,7 @@ package com.grantech.matchnums;
 import com.grantech.matchnums.utils.Utils;
 import openfl.display.Shape;
 import openfl.display.Sprite;
+import openfl.events.Event;
 import openfl.filters.GlowFilter;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
@@ -79,6 +80,8 @@ class Cell extends Sprite {
 
 	private function onInit():Void {
 		this.state = Released;
+		if (this.hasEventListener(Event.INIT))
+			this.dispatchEvent(new Event(Event.INIT));
 	}
 
 	override public function toString():String {
