@@ -77,8 +77,9 @@ class Cell extends Sprite {
 		this.textDisplay.text = Std.string(getScore(value));
 		this.textDisplay.setTextFormat(this.textFormat);
 
-		this.onInit();
-		if (this.initAnimationFactory != null)
+		if (this.initAnimationFactory == null)
+			this.onInit();
+		else
 			this.initAnimationFactory.call([this, this.onInit]);
 		return this;
 	}
