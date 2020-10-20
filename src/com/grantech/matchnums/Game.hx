@@ -265,11 +265,6 @@ class Game extends Sprite {
 
 			if (matchs.length > 0) {
 				c.init(c.column, c.row, c.value + matchs.length);
-				c.scaleX = c.scaleY = 0.2;
-				Actuate.tween(c, 0.3, {
-					scaleX: 1,
-					scaleY: 1
-				}).ease(Back.easeOut).onComplete(onMergeComplete, [c]);
 				needsRepeat = true;
 			}
 			// trace("match", c, matchs.length, needsRepeat);
