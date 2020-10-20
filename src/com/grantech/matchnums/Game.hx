@@ -264,6 +264,7 @@ class Game extends Sprite {
 			}
 
 			if (matchs.length > 0) {
+				c.addEventListener(Event.INIT, this.cell_initHandler);
 				c.init(c.column, c.row, c.value + matchs.length);
 				needsRepeat = true;
 			}
@@ -272,7 +273,10 @@ class Game extends Sprite {
 		return needsRepeat;
 	}
 
-	private function onMergeComplete(cell:Cell):Void {
+	private function cell_initHandler(event:Event):Void {
+		var cell = cast(event.currentTarget, Cell);
+		cell.removeEventListener(Event.INIT, this.cell_initHandler);
+
 		var score = Cell.getScore(cell.value);
 		this.record += score;
 
