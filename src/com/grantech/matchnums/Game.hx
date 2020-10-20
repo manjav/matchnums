@@ -26,7 +26,6 @@ class Game extends Sprite {
 
 	private var state:GameState;
 	private var fallSFX:Sound;
-	private var mergeSFX:Sound;
 	private var timer:Timer;
 	private var lastColumn:Int;
 	private var maxValue:Int = 3;
@@ -119,7 +118,6 @@ class Game extends Sprite {
 		this.spawn();
 
 		this.fallSFX = Assets.getSound("sounds/fall.ogg");
-		this.mergeSFX = Assets.getSound("sounds/merge.ogg");
 	}
 
 	public function pause():Void {
@@ -281,7 +279,6 @@ class Game extends Sprite {
 		this.record += score;
 
 		Score.instantiate("+" + score, cell.x, cell.y, this);
-		this.mergeSFX.play();
 
 		// More change for spawm new cells
 		if (this.maxValue < 5) {

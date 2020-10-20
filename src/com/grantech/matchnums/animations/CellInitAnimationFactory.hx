@@ -2,8 +2,15 @@ package com.grantech.matchnums.animations;
 
 import motion.Actuate;
 import motion.easing.Back;
+import openfl.Assets;
+import openfl.media.Sound;
+
 class CellInitAnimationFactory implements IAnimationFactory {
-	public function new() {}
+	private var mergeSFX:Sound;
+
+	public function new() {
+		this.mergeSFX = Assets.getSound("sounds/merge.ogg");
+	}
 
 	public function call(?parameters:Array<Dynamic>):Void {
 		var cell = cast(parameters[0], Cell);
@@ -18,5 +25,7 @@ class CellInitAnimationFactory implements IAnimationFactory {
 		if (handler != null)
 			ease.onComplete(handler);
 
+		if (mergeSFX != null)
+			this.mergeSFX.play();
 	}
 }
