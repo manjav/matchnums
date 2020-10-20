@@ -1,5 +1,6 @@
 package com.grantech.matchnums;
 
+import com.grantech.matchnums.animations.CellInitAnimationFactory;
 import com.grantech.matchnums.utils.Prefs;
 import com.grantech.matchnums.utils.Utils;
 import haxe.Timer;
@@ -36,6 +37,7 @@ class Game extends Sprite {
 	private var pauseLabel:TextField;
 	private var recordNowDisplay:TextField;
 	private var recordLastDisplay:TextField;
+	private var cellInitAnimationFactory:CellInitAnimationFactory;
 
 	public var record(default, set):Int;
 
@@ -113,6 +115,7 @@ class Game extends Sprite {
 		this.addEventListener(MouseEvent.CLICK, this.clickHandler);
 
 		this.lastColumn = Math.floor(Math.random() * this.cells.width);
+		this.cellInitAnimationFactory = new CellInitAnimationFactory();
 		this.spawn();
 
 		this.fallSFX = Assets.getSound("sounds/fall.ogg");
@@ -150,7 +153,7 @@ class Game extends Sprite {
 			return;
 		}
 
-		var cell = Cell.instantiate(this.lastColumn, row, Math.ceil(Math.random() * this.maxValue));
+		var cell = Cell.instantiate(this.lastColumn, row, Math.ceil(Math.random() * this.maxValue), this.cellInitAnimationFactory);
 		cell.x = this.lastColumn * Cell.SIZE + Cell.RADIUS;
 		cell.y = Cell.RADIUS;
 		this.cells.add(cell);
