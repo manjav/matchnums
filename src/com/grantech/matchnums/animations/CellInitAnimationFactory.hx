@@ -6,10 +6,10 @@ import openfl.Assets;
 import openfl.media.Sound;
 
 class CellInitAnimationFactory implements IAnimationFactory {
-	private var mergeSFX:Sound;
+	private var sound:Sound;
 
 	public function new() {
-		this.mergeSFX = Assets.getSound("sounds/merge.ogg");
+		this.sound = Assets.getSound("sounds/merge.ogg");
 	}
 
 	public function call(?parameters:Array<Dynamic>):Void {
@@ -25,7 +25,7 @@ class CellInitAnimationFactory implements IAnimationFactory {
 		if (handler != null)
 			ease.onComplete(handler);
 
-		if (mergeSFX != null)
-			this.mergeSFX.play();
+		if (this.sound != null)
+			this.sound.play();
 	}
 }
