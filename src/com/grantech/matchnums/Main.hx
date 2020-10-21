@@ -49,12 +49,14 @@ class Main extends Application {
 	}
 
 	private function stage_deactivateHandler(event:Event):Void {
+		stage.frameRate = 0;
 		this.game.pause();
 		stage.removeEventListener(Event.DEACTIVATE, this.stage_deactivateHandler);
 		stage.addEventListener(Event.ACTIVATE, this.stage_activateHandler);
 	}
 
 	private function stage_activateHandler(event:Event):Void {
+		stage.frameRate = 40;
 		stage.removeEventListener(Event.ACTIVATE, this.stage_activateHandler);
 		stage.addEventListener(Event.DEACTIVATE, this.stage_deactivateHandler);
 	}
