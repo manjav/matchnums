@@ -1,12 +1,12 @@
 package com.grantech.matchnums;
 
 import com.grantech.matchnums.utils.Prefs;
+import feathers.controls.Application;
 import openfl.Assets;
 import openfl.display.Bitmap;
-import openfl.display.Sprite;
 import openfl.events.Event;
 
-class Main extends Sprite {
+class Main extends Application {
 	// private var background:Bitmap;
 	private var footer:Bitmap;
 	private var game:Game;
@@ -14,16 +14,12 @@ class Main extends Sprite {
 	public function new() {
 		super();
 
-		this.initialize();
+		Prefs.instance.load();
 		this.construct();
 
 		this.resize(stage.stageWidth, stage.stageHeight);
 		stage.addEventListener(Event.RESIZE, this.stage_resizeHandler);
 		stage.addEventListener(Event.DEACTIVATE, this.stage_deactivateHandler);
-	}
-
-	private function initialize():Void {
-		Prefs.instance.load();
 	}
 
 	private function construct():Void {
