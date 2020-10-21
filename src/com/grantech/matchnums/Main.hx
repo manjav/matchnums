@@ -16,6 +16,7 @@ class Main extends Application {
 		
 		super();
 
+		this.backgroundSkin = null;
 
 		// this.background = new Bitmap(Assets.getBitmapData("images/background_tile.png"));
 		// this.addChild(this.background);
