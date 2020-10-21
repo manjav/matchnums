@@ -12,24 +12,24 @@ class Main extends Application {
 	private var game:Game;
 
 	public function new() {
+		Prefs.instance.load();
+		
 		super();
 
-		Prefs.instance.load();
-		this.construct();
+
+		// this.background = new Bitmap(Assets.getBitmapData("images/background_tile.png"));
+		// this.addChild(this.background);
+		
+		this.game = new Game();
+		this.addChild(this.game);
+
+		this.footer = new Bitmap(Assets.getBitmapData("images/center_bottom.png"));
+		this.footer.smoothing = true;
+		this.addChild(this.footer);
 
 		this.resize(stage.stageWidth, stage.stageHeight);
 		stage.addEventListener(Event.RESIZE, this.stage_resizeHandler);
 		stage.addEventListener(Event.DEACTIVATE, this.stage_deactivateHandler);
-	}
-
-	private function construct():Void {
-		// this.background = new Bitmap(Assets.getBitmapData("images/background_tile.png"));
-		// this.addChild(this.background);
-		this.game = new Game();
-		this.addChild(this.game);
-		this.footer = new Bitmap(Assets.getBitmapData("images/center_bottom.png"));
-		this.footer.smoothing = true;
-		this.addChild(this.footer);
 	}
 
 	private function resize(newWidth:Int, newHeight:Int):Void {
