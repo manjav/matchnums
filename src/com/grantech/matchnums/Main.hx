@@ -2,6 +2,9 @@ package com.grantech.matchnums;
 
 import com.grantech.matchnums.utils.Prefs;
 import feathers.controls.Application;
+import feathers.controls.Label;
+import feathers.layout.VerticalLayout;
+import feathers.style.Theme;
 import openfl.Assets;
 import openfl.display.Bitmap;
 import openfl.events.Event;
@@ -15,11 +18,17 @@ class Main extends Application {
 		Prefs.instance.load();
 		super();
 		
+		Theme.setTheme(new OutlineTheme());
 		#if hl
 		stage.addChild(new openfl.display.FPS(50, 10, 0xFFFFFF));
 		#end
 
 		this.backgroundSkin = null;
+		this.layout = new VerticalLayout();
+
+		var description = new Label();
+		description.text = "The buttons are styled by the custom theme, but everything else uses the default theme.";
+		this.addChild(description);
 
 		// this.background = new Bitmap(Assets.getBitmapData("images/background_tile.png"));
 		// this.addChild(this.background);
