@@ -13,14 +13,17 @@ class Main extends Application {
 
 	public function new() {
 		Prefs.instance.load();
-		
 		super();
+		
+		#if hl
+		stage.addChild(new openfl.display.FPS(50, 10, 0xFFFFFF));
+		#end
 
 		this.backgroundSkin = null;
 
 		// this.background = new Bitmap(Assets.getBitmapData("images/background_tile.png"));
 		// this.addChild(this.background);
-		
+
 		this.game = new Game();
 		this.addChild(this.game);
 
