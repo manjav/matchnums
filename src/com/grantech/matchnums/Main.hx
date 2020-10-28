@@ -11,6 +11,7 @@ import openfl.events.Event;
 
 class Main extends Application {
 	// private var background:Bitmap;
+	private var defaultFPS:Float;
 	private var footer:Bitmap;
 	private var game:Game;
 
@@ -19,6 +20,7 @@ class Main extends Application {
 		super();
 		
 		Theme.setTheme(new OutlineTheme());
+		this.defaultFPS = stage.frameRate;
 		#if hl
 		stage.addChild(new openfl.display.FPS(50, 10, 0xFFFFFF));
 		#end
@@ -72,14 +74,14 @@ class Main extends Application {
 	}
 
 	private function stage_deactivateHandler(event:Event):Void {
-		stage.frameRate = 0;
+		stage.frameRate = 1;
 		this.game.pause();
 		stage.removeEventListener(Event.DEACTIVATE, this.stage_deactivateHandler);
 		stage.addEventListener(Event.ACTIVATE, this.stage_activateHandler);
 	}
 
 	private function stage_activateHandler(event:Event):Void {
-		stage.frameRate = 40;
+		stage.frameRate = this.defaultFPS;
 		stage.removeEventListener(Event.ACTIVATE, this.stage_activateHandler);
 		stage.addEventListener(Event.DEACTIVATE, this.stage_deactivateHandler);
 	}
