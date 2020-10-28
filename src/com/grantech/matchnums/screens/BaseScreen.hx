@@ -2,7 +2,10 @@ package com.grantech.matchnums.screens;
 
 import feathers.controls.LayoutGroup;
 import feathers.layout.AnchorLayoutData;
+import motion.Actuate;
 import openfl.display.DisplayObjectContainer;
+import openfl.events.Event;
+
 enum ScreenType {
 	Pause;
 	Ads;
@@ -21,4 +24,9 @@ class BaseScreen extends LayoutGroup {
 		return screen;
 	}
 
+	public function close():Void {
+		Actuate.tween(this, 0.2, {alpha: 0.1}).onComplete(this.parent.removeChild, [this]);
+		if (this.hasEventListener(Event.CLOSE))
+			this.dispatchEvent(new Event(Event.CLOSE));
+	}
 }
