@@ -28,20 +28,6 @@ class Main extends Application {
 		this.backgroundSkin = null;
 		this.layout = new VerticalLayout();
 
-		var description = new Label();
-		description.text = "The buttons are styled by the custom theme, but everything else uses the default theme.";
-		this.addChild(description);
-
-		var themedButton = new Button();
-		themedButton.text = "Themed Button";
-		this.addChild(themedButton);
-
-		var fancyButton = new Button();
-		// a custom theme may provide custom variants
-		fancyButton.variant = OutlineTheme.VARIANT_FANCY_BUTTON;
-		fancyButton.text = "Fancy Themed Button";
-		this.addChild(fancyButton);
-
 		// this.background = new Bitmap(Assets.getBitmapData("images/background_tile.png"));
 		// this.addChild(this.background);
 
