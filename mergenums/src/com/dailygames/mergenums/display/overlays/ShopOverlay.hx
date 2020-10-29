@@ -5,6 +5,8 @@ import com.dailygames.mergenums.themes.OutlineTheme;
 import com.dailygames.mergenums.utils.Prefs.*;
 import com.dailygames.mergenums.utils.Prefs;
 import com.dailygames.mergenums.utils.Utils;
+import extension.iap.IAP;
+import extension.iap.IAPEvent;
 import feathers.controls.Button;
 import feathers.controls.ListView;
 import feathers.data.ArrayCollection;
@@ -26,6 +28,7 @@ class ShopOverlay extends BaseOverlay {
 	override private function initialize():Void {
 		super.initialize();
 
+		IAP.instance.initialize("MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAg9aRTVrhDhV2Uv1K0X++jku5ajqAYdEegvUIT664mAAJE/SumeKneaz69GI1chtRoi+u7B7FqJd3X4t3FHo8s41AgvHlDs4XviMCXxkZew69lUMlte84OdS0AmN8RN0R7Z9wkIHsT9oM0eIT7pgOesFnkyVwuOQmoPNz0xSRcCjr3rTnfojQ+CbSSqWUwYngroVR6bCwrg6B09GHIrvu7D5gZEGvbRG31m4MKN/kUY87kWyri0Hr5yMcpbveUj6e0rcR9EJDkKiQqVvJ2OeaIfW/ijUmiJ387F+I5/qI6n7rHoF5HpFpm7D3x4HJJNTakWACu9OUBVGGFlmEJgQDGQIDAQAB");
 		this.layout = new AnchorLayout();
 
 		var config = Json.parse(Assets.getText("texts/configs.json"));
@@ -66,13 +69,26 @@ class ShopOverlay extends BaseOverlay {
 	private function listView_changeHandler(event:Event):Void {
 		this.listView.removeEventListener(Event.CHANGE, this.listView_changeHandler);
 		var text:String = this.listView.selectedItem.text;
-		this.listView.selectedIndex = -1;
 		if (text == "Ads Free") {
 			trace("Show Ad.");
 		} else {
-			Prefs.instance.increase(Prefs.COIN, Std.parseFloat(text));
+			IAP.instance.addEventListener(IAPEvent.PURCHASE_SUCCESS, IAP_purchaseSuccessHandler);
+			IAP.instance.purchase("item_" + this.listView.selectedIndex);
 		}
+		this.listView.selectedIndex = -1;
 		this.listView.addEventListener(Event.CHANGE, this.listView_changeHandler);
+	}
+
+	private function IAP_purchaseSuccessHandler(event:IAPEvent):Void {
+		IAP.instance.removeEventListener(IAPEvent.PURCHASE_SUCCESS, IAP_purchaseSuccessHandler);
+		IAP.instance.addEventListener(IAPEvent.PURCHASE_CONSUME_SUCCESS, IAP_consumeSuccessHandler);
+		IAP.instance.consume(event.purchase);
+	}
+
+	private function IAP_consumeSuccessHandler(event:IAPEvent):Void {
+		trace(event);
+		IAP.instance.removeEventListener(IAPEvent.PURCHASE_CONSUME_SUCCESS, IAP_consumeSuccessHandler);
+		Prefs.instance.increase(Prefs.COIN, 100);//Std.parseFloat(text));
 	}
 
 	private function closeButton_clickHandler(event:MouseEvent):Void {
