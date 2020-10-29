@@ -29,7 +29,6 @@ class PuaseScreen extends BaseScreen {
 	}
 
 	private function this_clickHandler(event:MouseEvent):Void {
-		this.removeEventListener(MouseEvent.CLICK, this_clickHandler);
 		this.close();
 	}
 }
