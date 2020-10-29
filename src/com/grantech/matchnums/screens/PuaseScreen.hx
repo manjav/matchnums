@@ -1,5 +1,7 @@
 package com.grantech.matchnums.screens;
 
+import com.grantech.matchnums.themes.OutlineTheme;
+import feathers.controls.Label;
 import feathers.layout.AnchorLayout;
 import feathers.layout.AnchorLayoutData;
 import feathers.skins.RectangleSkin;
@@ -16,6 +18,12 @@ class PuaseScreen extends BaseScreen {
 		this.backgroundSkin = skin;
 
 		this.layout = new AnchorLayout();
+
+		this.labelDisplay = new Label();
+		this.labelDisplay.variant = OutlineTheme.VARIANT_WHITE_LARG;
+		this.labelDisplay.layoutData = AnchorLayoutData.center();
+		this.labelDisplay.text = "Tap to Start";
+		this.addChild(this.labelDisplay);
 
 		this.addEventListener(MouseEvent.CLICK, this_clickHandler);
 	}
