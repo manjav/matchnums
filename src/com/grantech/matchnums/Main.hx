@@ -1,9 +1,10 @@
 package com.grantech.matchnums;
 
+import com.grantech.matchnums.screens.BaseScreen;
+import com.grantech.matchnums.themes.OutlineTheme;
 import com.grantech.matchnums.utils.Prefs;
 import feathers.controls.Application;
-import feathers.controls.Label;
-import feathers.layout.VerticalLayout;
+import feathers.layout.AnchorLayout;
 import feathers.style.Theme;
 import openfl.Assets;
 import openfl.display.Bitmap;
@@ -18,7 +19,7 @@ class Main extends Application {
 	public function new() {
 		Prefs.instance.load();
 		super();
-		
+
 		Theme.setTheme(new OutlineTheme());
 		this.defaultFPS = stage.frameRate;
 		#if hl
@@ -26,7 +27,7 @@ class Main extends Application {
 		#end
 
 		this.backgroundSkin = null;
-		this.layout = new VerticalLayout();
+		this.layout = new AnchorLayout();
 
 		// this.background = new Bitmap(Assets.getBitmapData("images/background_tile.png"));
 		// this.addChild(this.background);
@@ -60,15 +61,22 @@ class Main extends Application {
 	}
 
 	private function stage_deactivateHandler(event:Event):Void {
-		stage.frameRate = 1;
 		this.game.pause();
+		var screen = BaseScreen.create(Pause, this);
+		screen.addEventListener(Event.CLOSE, this.screen_closeHandler);
 		stage.removeEventListener(Event.DEACTIVATE, this.stage_deactivateHandler);
 		stage.addEventListener(Event.ACTIVATE, this.stage_activateHandler);
+		stage.frameRate = 1;
 	}
 
 	private function stage_activateHandler(event:Event):Void {
 		stage.frameRate = this.defaultFPS;
 		stage.removeEventListener(Event.ACTIVATE, this.stage_activateHandler);
 		stage.addEventListener(Event.DEACTIVATE, this.stage_deactivateHandler);
+	}
+
+	private function screen_closeHandler(event:Event):Void {
+		cast(event.currentTarget, BaseScreen).removeEventListener(Event.CLOSE, this.screen_closeHandler);
+		this.game.resume();
 	}
 }
