@@ -11,6 +11,9 @@ class OutlineTheme extends ClassVariantTheme {
 	static public final FONT_SIZE = 14;
 	static public final FONT_COLOR = 0x444444;
 	static public final FONT_NAME = "Arial Rounded MT Bold";
+
+	public static final VARIANT_WHITE_LARG:String = "variantWhiteLarg";
+
 	public static final VARIANT_FANCY_BUTTON:String = "custom-fancy-button";
 
 	public function new() {
@@ -18,6 +21,7 @@ class OutlineTheme extends ClassVariantTheme {
 
 		// to provide default styles, pass null for the variant
 		this.styleProvider.setStyleFunction(Label, null, setLabelStyles);
+		this.styleProvider.setStyleFunction(Label, VARIANT_WHITE_LARG, setLabelWhiteLargStyles);
 		this.styleProvider.setStyleFunction(Button, null, setButtonStyles);
 
 		// custom themes may provide their own unique variants
@@ -30,6 +34,12 @@ class OutlineTheme extends ClassVariantTheme {
 			label.textFormat = this.getTextFormat();
 		// if (label.disabledTextFormat == null)
 		// 	label.disabledTextFormat = this.getDisabledTextFormat();
+	}
+
+	private function setLabelWhiteLargStyles(label:Label):Void {
+		label.embedFonts = true;
+		if (label.textFormat == null)
+			label.textFormat = this.getTextFormat(FONT_SIZE * 3, 0xFFFFFF);
 	}
 
 	private function setButtonStyles(button:Button):Void {
