@@ -1,9 +1,7 @@
 package com.dailygames.mergenums.display.overlays;
 
-import com.dailygames.mergenums.utils.Prefs;
-import feathers.style.Theme;
-import openfl.text.TextFormat;
 import com.dailygames.mergenums.themes.OutlineTheme;
+import com.dailygames.mergenums.utils.Prefs;
 import feathers.controls.AssetLoader;
 import feathers.controls.Button;
 import feathers.controls.Label;
@@ -12,6 +10,7 @@ import feathers.layout.AnchorLayout;
 import feathers.layout.AnchorLayoutData;
 import feathers.layout.VerticalLayout;
 import feathers.skins.RectangleSkin;
+import feathers.style.Theme;
 import openfl.Assets;
 import openfl.display.Bitmap;
 import openfl.events.MouseEvent;

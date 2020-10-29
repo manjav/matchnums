@@ -25,6 +25,8 @@ enum GameState {
 class Game extends Sprite {
 	public var currentScale:Float = 1;
 	public var state:GameState;
+	public var hasBoostBig:Bool;
+	public var hasBoostNext:Bool;
 
 	private var timer:Timer;
 	private var columnChanged:Bool;
@@ -206,16 +208,19 @@ class Game extends Sprite {
 		}
 
 		if (numFallings > 0) {
-			Actuate.tween(this.nextCell, 0.5, {x: this.lastColumn * Cell.SIZE + Cell.RADIUS}).ease(Expo.easeOut);
+			Actuate.tween(this.nextCell, 0.3, {x: this.lastColumn * Cell.SIZE + Cell.RADIUS}).ease(Expo.easeOut);
 			this.timer = Timer.delay(this.fell, Math.round((delay + time + 0.31) * 1000));
 		}
 	}
 
 	private function bounceCell(cell:Cell):Void {
+		// var x = cell.x;
 		var y = cell.y;
-		cell.scaleY = 0.9;
-		cell.y += cell.height * 0.1;
-		Actuate.tween(cell, 0.3, {y: y, scaleY: 1}).ease(Back.easeOut);
+		cell.scaleX = 0.8;
+		cell.scaleY = 0.8;
+		// cell.x += cell.width * 0.1;
+		cell.y += cell.height * 0.2;
+		Actuate.tween(cell, 0.3, {y: y, scaleX: 1, scaleY: 1}).ease(Back.easeOut);
 	}
 
 	private function fell():Void {
@@ -293,8 +298,9 @@ class Game extends Sprite {
 			for (j in lineNumber...CellMap.NUM_ROWS)
 				this.removeCell(i, j, false);
 
-		if(!reviveMode)
-			
+		if (!reviveMode)
+			this.nextCell.alpha = 0;
+
 		this.timer = Timer.delay(reviveMode ? this.spawn : this.init, 1500);
 	}
 

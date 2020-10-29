@@ -61,25 +61,8 @@ class GameOverPopup extends ConfirmPopup implements IGamePlayPopup {
 		this.titleDisplay.textFormat = textFormat;
 	}
 
-	// override private function refreshBackgroundLayout():Void {
-	// 	super.refreshBackgroundLayout();
-	// 	if (this.cellDisplay != null) {
-	// 		this.cellDisplay.x = this.actualWidth * 0.5;
-	// 		this.cellDisplay.y = this.actualHeight * 0.4;
-	// 	}
-	// }
-
 	private function resetButton_clickHandler(event:MouseEvent):Void {
 		this.dispatchEvent(new Event(Event.SELECT));
 		this.close();
-	}
-
-	private function reviveByAdsButton_clickHandler(event:MouseEvent):Void {
-		this.close();
-	}
-
-	override private function closeButton_clickHandler(event:MouseEvent):Void {
-		this.closeButton_clickHandler(event);
-		GameEvent.dispatch(this, GameEvent.REVIVE_CANCEL);
 	}
 }
