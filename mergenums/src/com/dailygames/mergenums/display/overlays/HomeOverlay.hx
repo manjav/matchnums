@@ -89,6 +89,11 @@ class HomeOverlay extends BaseOverlay {
 		addButton("dynamites", AnchorLayoutData.middleRight(0, header.height), false);
 		addButton("pause", AnchorLayoutData.middleLeft(), false);
 
+		this.start();
+	}
+
+	private function start():Void {
+		BaseOverlay.closeAll();
 		var starter = this.addOverlay(StartingOffer, false, false);
 		starter.addEventListener(Event.CLOSE, this.starterCloseHandler);
 	}
