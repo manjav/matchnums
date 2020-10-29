@@ -25,8 +25,9 @@ class OutlineTheme extends ClassVariantTheme {
 	}
 
 	private function setLabelStyles(label:Label):Void {
+		label.embedFonts = true;
 		if (label.textFormat == null)
-			label.textFormat = this.getTextFormat(0);
+			label.textFormat = this.getTextFormat();
 		// if (label.disabledTextFormat == null)
 		// 	label.disabledTextFormat = this.getDisabledTextFormat();
 	}
