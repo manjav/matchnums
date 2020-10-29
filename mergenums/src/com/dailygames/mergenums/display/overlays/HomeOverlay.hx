@@ -203,7 +203,7 @@ class HomeOverlay extends BaseOverlay {
 	private function gameoverPopup_selectHandler(event:Event):Void {
 		var popup = cast(event.target, ConfirmPopup);
 		popup.removeEventListener(Event.SELECT, this.gameoverPopup_selectHandler);
-		this.reset();
+		this.start();
 	}
 
 	private function pauseOverlay_eventsHandler(event:Event):Void {
@@ -212,7 +212,7 @@ class HomeOverlay extends BaseOverlay {
 		overlay.removeEventListener(Event.CANCEL, this.pauseOverlay_eventsHandler);
 		switch (event.type) {
 			case Event.CLEAR:
-				this.reset();
+				this.start();
 			case Event.CANCEL:
 				this.resume();
 		}
