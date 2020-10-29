@@ -62,7 +62,7 @@ class Main extends Application {
 
 	private function stage_deactivateHandler(event:Event):Void {
 		this.game.pause();
-		var screen = BaseScreen.create(Pause, this);
+		var screen = BaseScreen.create(Pause, this, true);
 		screen.addEventListener(Event.CLOSE, this.screen_closeHandler);
 		stage.removeEventListener(Event.DEACTIVATE, this.stage_deactivateHandler);
 		stage.addEventListener(Event.ACTIVATE, this.stage_activateHandler);

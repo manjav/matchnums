@@ -12,13 +12,23 @@ enum ScreenType {
 }
 
 class BaseScreen extends LayoutGroup {
-	static public function create(screenType:ScreenType, ?parent:DisplayObjectContainer):BaseScreen {
-		var screen = switch (screenType) {
-			case Pause:
-				new PuaseScreen();
-			default: null;
+	static final screens:Map<ScreenType, BaseScreen> = new Map();
+
+	static public function create(screenType:ScreenType, ?parent:DisplayObjectContainer, ?save:Bool):BaseScreen {
+		var screen:BaseScreen;
+		if (save && screens.exists(screenType)) {
+			screen = screens.get(screenType);
+		} else {
+			screen = switch (screenType) {
+				case Pause:
+					new PuaseScreen();
+				default: null;
+			}
+			screen.layoutData = new AnchorLayoutData(0, 0, 0, 0);
 		}
-		screen.layoutData = new AnchorLayoutData(0, 0, 0, 0);
+		screen.alpha = 1;
+		if (save)
+			screens.set(screenType, screen);
 		if (parent != null)
 			parent.addChild(screen);
 		return screen;
