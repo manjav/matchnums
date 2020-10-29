@@ -1,5 +1,6 @@
 package com.dailygames.mergenums.display.overlays;
 
+import com.dailygames.mergenums.Game.GameState;
 import com.dailygames.mergenums.display.Indicator;
 import com.dailygames.mergenums.display.overlays.BaseOverlay.ScreenType;
 import com.dailygames.mergenums.display.popups.*;
@@ -93,8 +94,11 @@ class HomeOverlay extends BaseOverlay {
 	}
 
 	private function starterCloseHandler(event:Event):Void {
-		cast(event.target, BaseOverlay).removeEventListener(Event.CLOSE, this.starterCloseHandler);
-		this.game.init();
+		var starter = cast(event.target, StartingOfferOverlay);
+		starter.removeEventListener(Event.CLOSE, this.starterCloseHandler);
+		this.game.hasBoostBig = starter.hasBoostBig;
+		this.game.hasBoostNext = starter.hasBoostNext;
+		this.game.reset();
 	}
 
 	private function addOverlay(type:ScreenType, save:Bool = true, showPauseOverlay:Bool = true):BaseOverlay {

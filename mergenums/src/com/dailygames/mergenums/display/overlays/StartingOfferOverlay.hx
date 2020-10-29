@@ -17,6 +17,8 @@ import openfl.display.Bitmap;
 import openfl.events.MouseEvent;
 
 class StartingOfferOverlay extends BaseOverlay {
+	public var hasBoostBig:Bool;
+	public var hasBoostNext:Bool;
 	private var boostBig:LayoutGroup;
 	private var boostNext:LayoutGroup;
 
@@ -112,9 +114,11 @@ class StartingOfferOverlay extends BaseOverlay {
 		if (boostMode == "boost-big") {
 			this.boostBig.mouseEnabled = false;
 			this.boostBig.alpha = 0.5;
+			this.hasBoostBig = true;
 		} else if (boostMode == "boost-next") {
 			this.boostNext.mouseEnabled = false;
 			this.boostNext.alpha = 0.5;
+			this.hasBoostNext = true;
 		}
 	}
 }
