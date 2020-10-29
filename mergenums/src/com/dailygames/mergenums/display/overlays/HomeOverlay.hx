@@ -103,6 +103,8 @@ class HomeOverlay extends BaseOverlay {
 	}
 
 	public function pause(showPauseOverlay:Bool = true):Void {
+		if (this.game.state != GameState.Play)
+			return;
 		this.game.state = Pause;
 		if (!showPauseOverlay)
 			return;
