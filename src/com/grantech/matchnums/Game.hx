@@ -32,8 +32,6 @@ class Game extends Sprite {
 	private var cells:CellMap;
 	private var endLine:Shape;
 	private var fallingEffect:Shape;
-	private var pauseOverlay:Sprite;
-	private var pauseLabel:TextField;
 	private var recordNowDisplay:TextField;
 	private var recordLastDisplay:TextField;
 	private var cellInitAnimationFactory:CellInitAnimationFactory;
@@ -99,17 +97,6 @@ class Game extends Sprite {
 		this.recordLastDisplay.y = -120;
 		this.addChild(this.recordLastDisplay);
 
-		this.pauseOverlay = new Sprite();
-		this.pauseOverlay.buttonMode = true;
-		this.pauseOverlay.addEventListener(MouseEvent.CLICK, this.pauseOverlay_clickHandler);
-		this.pauseOverlay.alpha = 0;
-
-		this.pauseLabel = Utils.createText(50, 0xFFFFFF);
-		this.pauseLabel.mouseEnabled = false;
-		this.pauseLabel.text = "Tap to continue";
-		this.pauseLabel.width = 400;
-		this.pauseOverlay.addChild(this.pauseLabel);
-
 		this.addEventListener(Event.ENTER_FRAME, this.enterFrameHandler);
 		this.addEventListener(MouseEvent.CLICK, this.clickHandler);
 
@@ -122,18 +109,10 @@ class Game extends Sprite {
 
 	public function pause():Void {
 		this.state = Pause;
-		this.pauseOverlay.alpha = 1;
-		this.pauseOverlay.graphics.clear();
-		this.pauseOverlay.graphics.beginFill(0x000000, 0.5);
-		this.pauseOverlay.graphics.drawRect(0, 0, stage.stageWidth, stage.stageHeight);
-		this.pauseLabel.x = (this.stage.stageWidth - this.pauseLabel.width) * 0.5;
-		this.pauseLabel.y = (this.stage.stageHeight - this.pauseLabel.height) * 0.5;
-		this.parent.addChild(this.pauseOverlay);
 	}
 
 	public function resume():Void {
 		this.state = Play;
-		Actuate.tween(this.pauseOverlay, 0.2, {alpha: 0.1}).onComplete(this.parent.removeChild, [this.pauseOverlay]);
 	}
 
 	private function spawn():Void {
