@@ -14,6 +14,8 @@
 	<haxelib name="openfl" />
 	<haxelib name="actuate" />
 	<haxelib name="feathersui" />
+	<haxelib name="extension-iap" /> 
+	<haxelib name="extension-natives" /> 
 		
 	<icon path="Assets/images/icon.svg" />
 	<assets path="Assets/images" rename="images" include="*" exclude="icon.svg" />
