@@ -166,10 +166,6 @@ class Game extends Sprite {
 		this.fallAll(true);
 	}
 
-	private function pauseOverlay_clickHandler(event:MouseEvent):Void {
-		this.resume();
-	}
-
 	private function fallAll(changeColumn:Bool):Void {
 		var delay = 0.01;
 		var time = 0.15;
