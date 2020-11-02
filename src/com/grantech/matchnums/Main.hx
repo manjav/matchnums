@@ -11,7 +11,6 @@ import openfl.display.Bitmap;
 import openfl.events.Event;
 
 class Main extends Application {
-	// private var background:Bitmap;
 	private var defaultFPS:Float;
 	private var footer:Bitmap;
 	private var game:Game;
@@ -29,9 +28,6 @@ class Main extends Application {
 		this.backgroundSkin = null;
 		this.layout = new AnchorLayout();
 
-		// this.background = new Bitmap(Assets.getBitmapData("images/background_tile.png"));
-		// this.addChild(this.background);
-
 		this.game = new Game();
 		this.addChild(this.game);
 
@@ -45,9 +41,6 @@ class Main extends Application {
 	}
 
 	private function resize(newWidth:Int, newHeight:Int):Void {
-		// this.background.width = newWidth;
-		// this.background.height = newHeight;
-
 		this.game.resize(newWidth, newHeight);
 
 		this.footer.scaleX = this.game.currentScale;
