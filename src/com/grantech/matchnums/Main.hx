@@ -1,16 +1,18 @@
 package com.grantech.matchnums;
 
 import com.grantech.matchnums.screens.BaseScreen;
+import com.grantech.matchnums.screens.HomeScreen;
 import com.grantech.matchnums.themes.OutlineTheme;
 import com.grantech.matchnums.utils.Prefs;
 import feathers.controls.Application;
 import feathers.layout.AnchorLayout;
+import feathers.layout.AnchorLayoutData;
 import feathers.style.Theme;
 import openfl.events.Event;
 
 class Main extends Application {
 	private var defaultFPS:Float;
-	private var game:Game;
+	private var home:HomeScreen;
 
 	public function new() {
 		Prefs.instance.load();
@@ -25,8 +27,9 @@ class Main extends Application {
 		this.backgroundSkin = null;
 		this.layout = new AnchorLayout();
 
-		this.game = new Game();
-		this.addChild(this.game);
+		this.home = new HomeScreen();
+		this.home.layoutData = AnchorLayoutData.fill();
+		this.addChild(this.home);
 
 		this.resize(stage.stageWidth, stage.stageHeight);
 		stage.addEventListener(Event.RESIZE, this.stage_resizeHandler);
@@ -34,7 +37,6 @@ class Main extends Application {
 	}
 
 	private function resize(newWidth:Int, newHeight:Int):Void {
-		this.game.resize(newWidth, newHeight);
 	}
 
 	private function stage_resizeHandler(event:Event):Void {
@@ -42,7 +44,7 @@ class Main extends Application {
 	}
 
 	private function stage_deactivateHandler(event:Event):Void {
-		this.game.pause();
+		this.home.pause();
 		var screen = BaseScreen.create(Pause, this, true);
 		screen.addEventListener(Event.CLOSE, this.screen_closeHandler);
 		stage.removeEventListener(Event.DEACTIVATE, this.stage_deactivateHandler);
@@ -58,6 +60,6 @@ class Main extends Application {
 
 	private function screen_closeHandler(event:Event):Void {
 		cast(event.currentTarget, BaseScreen).removeEventListener(Event.CLOSE, this.screen_closeHandler);
-		this.game.resume();
+		this.home.resume();
 	}
 }
