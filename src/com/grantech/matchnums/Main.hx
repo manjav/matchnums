@@ -6,13 +6,10 @@ import com.grantech.matchnums.utils.Prefs;
 import feathers.controls.Application;
 import feathers.layout.AnchorLayout;
 import feathers.style.Theme;
-import openfl.Assets;
-import openfl.display.Bitmap;
 import openfl.events.Event;
 
 class Main extends Application {
 	private var defaultFPS:Float;
-	private var footer:Bitmap;
 	private var game:Game;
 
 	public function new() {
@@ -31,10 +28,6 @@ class Main extends Application {
 		this.game = new Game();
 		this.addChild(this.game);
 
-		this.footer = new Bitmap(Assets.getBitmapData("images/center_bottom.png"));
-		this.footer.smoothing = true;
-		this.addChild(this.footer);
-
 		this.resize(stage.stageWidth, stage.stageHeight);
 		stage.addEventListener(Event.RESIZE, this.stage_resizeHandler);
 		stage.addEventListener(Event.DEACTIVATE, this.stage_deactivateHandler);
@@ -42,11 +35,6 @@ class Main extends Application {
 
 	private function resize(newWidth:Int, newHeight:Int):Void {
 		this.game.resize(newWidth, newHeight);
-
-		this.footer.scaleX = this.game.currentScale;
-		this.footer.scaleY = this.game.currentScale;
-		this.footer.x = (newWidth - this.footer.width) * 0.5;
-		this.footer.y = newHeight - this.footer.height;
 	}
 
 	private function stage_resizeHandler(event:Event):Void {
