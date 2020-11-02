@@ -23,8 +23,8 @@ enum GameState {
 
 class Game extends Sprite {
 	public var currentScale:Float = 1;
+	public var state:GameState;
 
-	private var state:GameState;
 	private var fallSFX:Sound;
 	private var timer:Timer;
 	private var lastColumn:Int;
@@ -105,14 +105,6 @@ class Game extends Sprite {
 		this.spawn();
 
 		this.fallSFX = Assets.getSound("sounds/fall.ogg");
-	}
-
-	public function pause():Void {
-		this.state = Pause;
-	}
-
-	public function resume():Void {
-		this.state = Play;
 	}
 
 	private function spawn():Void {

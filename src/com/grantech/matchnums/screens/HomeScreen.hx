@@ -16,8 +16,10 @@ class HomeScreen extends BaseScreen {
 	}
 
 	public function pause():Void {
+		this.game.state = Pause;
 	}
 
 	public function resume():Void {
+		this.game.state = Play;
 	}
 }
