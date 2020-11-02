@@ -274,7 +274,7 @@ class Game extends Sprite {
 
 		this.currentScale = this.scaleX = this.scaleY = 1;
 
-		var currentWidth = this.width;
+		var currentWidth = this.width - Cell.BORDER * 2;
 		var currentHeight = this.height;
 
 		var maxScaleX = maxWidth / currentWidth;
