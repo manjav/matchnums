@@ -222,7 +222,7 @@ class Game extends Sprite {
 		Score.instantiate("+" + score, cell.x, cell.y, this);
 
 		// More change for spawm new cells
-		if (this.maxValue < 5) {
+		if (this.maxValue < 6) {
 			var distance = Math.ceil(1.5 * Math.sqrt(this.maxValue));
 			if (this.maxValue < cell.value - distance)
 				this.maxValue = cell.value - distance;
