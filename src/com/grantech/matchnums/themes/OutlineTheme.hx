@@ -8,8 +8,8 @@ import feathers.themes.ClassVariantTheme;
 import openfl.text.TextFormat;
 
 class OutlineTheme extends ClassVariantTheme {
-	static public final FONT_SIZE = 14;
-	static public final FONT_COLOR = 0x444444;
+	static public final FONT_SIZE = 24;
+	static public final FONT_COLOR = 0xEDEDED;
 	static public final FONT_NAME = "Arial Rounded MT Bold";
 
 	public static final VARIANT_WHITE_LARG:String = "variantWhiteLarg";
@@ -82,6 +82,6 @@ class OutlineTheme extends ClassVariantTheme {
 	}
 
 	private function getTextFormat(size:Null<Int> = null, color:Null<UInt> = null, bold:Null<Bool> = null):TextFormat {
-		return new TextFormat(FONT_NAME, size == null ? FONT_SIZE : size, color == null ? FONT_SIZE : color, bold);
+		return new TextFormat(FONT_NAME, size == null ? FONT_SIZE : size, color == null ? FONT_COLOR : color, bold);
 	}
 }
