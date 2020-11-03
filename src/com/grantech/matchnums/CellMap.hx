@@ -3,15 +3,14 @@ package com.grantech.matchnums;
 import haxe.ds.IntMap;
 
 class CellMap {
+	static public final NUM_COLUMNS = 5;
+	static public final NUM_ROWS = 6;
+
 	public var last:Cell;
-	public var width:Int;
-	public var height:Int;
 	public var target:Float;
 	public var map:Map<Int, Cell>;
 
-	public function new(width:Int, height:Int) {
-		this.width = width;
-		this.height = height;
+	public function new() {
 		this.map = new IntMap<Cell>();
 	}
 
@@ -23,7 +22,7 @@ class CellMap {
 		// trace("add", column * 100 + row, cell);
 		this.map.set(column * 100 + row, cell);
 		this.last = cell;
-		this.target = Cell.SIZE * (this.height - this.last.row) + Cell.RADIUS;
+		this.target = Cell.SIZE * (NUM_ROWS - this.last.row) + Cell.RADIUS;
 	}
 
 	public function remove(cell:Cell):Void {
@@ -46,7 +45,7 @@ class CellMap {
 
 	public function length(column:Int):Int {
 		var len = 0;
-		for (r in 0...this.height) {
+		for (r in 0...NUM_ROWS) {
 			if (this.exists(column, r))
 				++len;
 		}
@@ -79,7 +78,7 @@ class CellMap {
 	public function accumulateColumn(column:Int, row:Int):Bool {
 		var found = false;
 		this.removeAt(column, row);
-		for (r in row + 1...this.height) {
+		for (r in row + 1...NUM_ROWS) {
 			var c = this.get(column, r);
 			if (c != null) {
 				// trace("acc", c);

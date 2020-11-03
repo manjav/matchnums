@@ -56,19 +56,19 @@ class Game extends Sprite {
 		super();
 
 		this.state = Play;
-		this.cells = new CellMap(5, 6);
+		this.cells = new CellMap();
 		var background = new Shape();
 		background.graphics.beginFill(0);
 		background.graphics.drawRoundRect(-Cell.BORDER,
-			-Cell.BORDER, Cell.SIZE * this.cells.width
+			-Cell.BORDER, Cell.SIZE * CellMap.NUM_COLUMNS
 			+ Cell.BORDER * 2,
-			Cell.SIZE * (this.cells.height + 1)
+			Cell.SIZE * (CellMap.NUM_ROWS + 1)
 			+ Cell.BORDER * 2, Cell.ROUND * 2, Cell.ROUND * 2);
 
 		// background.filters = [new BlurFilter(10, 10)];
 		background.graphics.beginFill(0x111111);
 		for (i in 0...2)
-			background.graphics.drawRect(Cell.SIZE * (i * 2 + 1), -Cell.BORDER, Cell.SIZE, Cell.SIZE * (this.cells.height + 1) + Cell.BORDER * 2);
+			background.graphics.drawRect(Cell.SIZE * (i * 2 + 1), -Cell.BORDER, Cell.SIZE, Cell.SIZE * (CellMap.NUM_ROWS + 1) + Cell.BORDER * 2);
 		this.addChild(background);
 
 		this.endLine = new Shape();
@@ -100,7 +100,7 @@ class Game extends Sprite {
 		this.addEventListener(Event.ENTER_FRAME, this.enterFrameHandler);
 		this.addEventListener(MouseEvent.CLICK, this.clickHandler);
 
-		this.lastColumn = Math.floor(Math.random() * this.cells.width);
+		this.lastColumn = Math.floor(Math.random() * CellMap.NUM_COLUMNS);
 		this.cellInitAnimationFactory = new CellInitAnimationFactory();
 		this.spawn();
 
@@ -115,7 +115,7 @@ class Game extends Sprite {
 
 		// Check end game
 		var row = this.cells.length(this.lastColumn);
-		if (row >= this.cells.height) {
+		if (row >= CellMap.NUM_ROWS) {
 			this.endLine.transform.colorTransform.color = 0xFF0000;
 			this.showEndLine(0.01);
 			trace("Game Over.");
@@ -168,7 +168,7 @@ class Game extends Sprite {
 			if (changeColumn) {
 				var row = this.cells.length(this.lastColumn);
 				if (c != this.cells.get(this.lastColumn, row - 1)) {
-					var _y = Cell.SIZE * (this.cells.height - row);
+					var _y = Cell.SIZE * (CellMap.NUM_ROWS - row);
 					if (c.y > _y) {
 						trace(c.y, _y);
 						continue;
@@ -184,7 +184,7 @@ class Game extends Sprite {
 			}
 			c.state = Falling;
 			// Actuate.stop(c);
-			var dy = Cell.SIZE * (this.cells.height - c.row) + Cell.RADIUS;
+			var dy = Cell.SIZE * (CellMap.NUM_ROWS - c.row) + Cell.RADIUS;
 			if (dy - c.y > 0.5)
 				Actuate.tween(c, time, {y: dy}).delay(delay).ease(Expo.easeOut).onComplete(bounceCell, [c]);
 			this.fallSFX.play();
