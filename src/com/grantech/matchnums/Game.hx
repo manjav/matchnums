@@ -255,28 +255,4 @@ class Game extends Sprite {
 		}
 		this.fallAll(false);
 	}
-
-	public function resize(newWidth:Int, newHeight:Int):Void {
-		var maxWidth = newWidth * 0.90;
-		var maxHeight = newHeight * 0.86;
-
-		this.currentScale = this.scaleX = this.scaleY = 1;
-
-		var currentWidth = this.width - Cell.BORDER * 2;
-		var currentHeight = this.height;
-
-		var maxScaleX = maxWidth / currentWidth;
-		var maxScaleY = maxHeight / currentHeight;
-
-		if (maxScaleX < maxScaleY)
-			this.currentScale = maxScaleX;
-		else
-			this.currentScale = maxScaleY;
-
-		this.scaleX = this.currentScale;
-		this.scaleY = this.currentScale;
-
-		this.x = (newWidth - (currentWidth * this.currentScale)) * 0.5;
-		this.y = (newHeight - (currentHeight * this.currentScale)) * 0.5;
-	}
 }

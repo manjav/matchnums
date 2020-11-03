@@ -31,16 +31,7 @@ class Main extends Application {
 		this.home.layoutData = AnchorLayoutData.fill();
 		this.addChild(this.home);
 
-		this.resize(stage.stageWidth, stage.stageHeight);
-		stage.addEventListener(Event.RESIZE, this.stage_resizeHandler);
 		stage.addEventListener(Event.DEACTIVATE, this.stage_deactivateHandler);
-	}
-
-	private function resize(newWidth:Int, newHeight:Int):Void {
-	}
-
-	private function stage_resizeHandler(event:Event):Void {
-		this.resize(stage.stageWidth, stage.stageHeight);
 	}
 
 	private function stage_deactivateHandler(event:Event):Void {
