@@ -1,8 +1,7 @@
 package com.grantech.matchnums;
 
 import com.grantech.matchnums.animations.CellInitAnimationFactory;
-import com.grantech.matchnums.utils.Prefs;
-import com.grantech.matchnums.utils.Utils;
+import com.grantech.matchnums.events.GameEvent;
 import haxe.Timer;
 import motion.Actuate;
 import motion.easing.Back;
@@ -13,8 +12,6 @@ import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.events.MouseEvent;
 import openfl.media.Sound;
-import openfl.text.TextField;
-import openfl.text.TextFieldAutoSize;
 
 enum GameState {
 	Play;
@@ -32,8 +29,6 @@ class Game extends Sprite {
 	private var cells:CellMap;
 	private var endLine:Shape;
 	private var fallingEffect:Shape;
-	private var recordNowDisplay:TextField;
-	private var recordLastDisplay:TextField;
 	private var cellInitAnimationFactory:CellInitAnimationFactory;
 
 	public var record(default, set):Int;
@@ -41,14 +36,7 @@ class Game extends Sprite {
 	function set_record(record:Int):Int {
 		if (this.record == record)
 			return record;
-
-		var recordText = Std.string(record);
-		if (Prefs.instance.record < record) {
-			Prefs.instance.record = record;
-			Prefs.instance.save();
-			this.recordLastDisplay.text = recordText;
-		}
-		this.recordNowDisplay.text = recordText;
+		GameEvent.dispatch(this, GameEvent.RECORD_CHANGE, record);
 		return this.record = record;
 	}
 
@@ -82,20 +70,6 @@ class Game extends Sprite {
 		this.fallingEffect.graphics.drawRoundRect(Cell.BORDER - Cell.RADIUS, -Cell.BORDER, Cell.SIZE - Cell.BORDER * 2, background.height, 0, 0);
 		this.fallingEffect.alpha = 0;
 		this.addChild(this.fallingEffect);
-
-		this.recordNowDisplay = Utils.createText(92, 0xededed);
-		this.recordNowDisplay.text = "0";
-		this.recordNowDisplay.width = 400;
-		this.recordNowDisplay.x = (this.width - this.recordNowDisplay.width) * 0.5;
-		this.recordNowDisplay.y = -120;
-		this.addChild(this.recordNowDisplay);
-
-		this.recordLastDisplay = Utils.createText(50, 0xcacaca, "left", TextFieldAutoSize.LEFT);
-		this.recordLastDisplay.text = Std.string(Prefs.instance.record);
-		this.recordLastDisplay.width = 300;
-		this.recordLastDisplay.x = 10;
-		this.recordLastDisplay.y = -120;
-		this.addChild(this.recordLastDisplay);
 
 		this.addEventListener(Event.ENTER_FRAME, this.enterFrameHandler);
 		this.addEventListener(MouseEvent.CLICK, this.clickHandler);
