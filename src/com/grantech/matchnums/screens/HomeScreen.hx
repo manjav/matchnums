@@ -7,7 +7,7 @@ import feathers.layout.AnchorLayout;
 import feathers.layout.AnchorLayoutData;
 import openfl.events.Event;
 
-class HomeScreen extends BaseScreen {
+class HomeScreen extends BaseOverlay {
 	private var game:Game;
 	private var recordDisplay:Label;
 	private var recordBestDisplay:Label;

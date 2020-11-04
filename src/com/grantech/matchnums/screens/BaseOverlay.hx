@@ -11,11 +11,11 @@ enum ScreenType {
 	Ads;
 }
 
-class BaseScreen extends LayoutGroup {
-	static final screens:Map<ScreenType, BaseScreen> = new Map();
+class BaseOverlay extends LayoutGroup {
+	static final screens:Map<ScreenType, BaseOverlay> = new Map();
 
-	static public function create(screenType:ScreenType, ?parent:DisplayObjectContainer, ?save:Bool):BaseScreen {
-		var screen:BaseScreen;
+	static public function create(screenType:ScreenType, ?parent:DisplayObjectContainer, ?save:Bool):BaseOverlay {
+		var screen:BaseOverlay;
 		if (save && screens.exists(screenType)) {
 			screen = screens.get(screenType);
 		} else {

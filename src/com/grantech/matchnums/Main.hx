@@ -1,6 +1,6 @@
 package com.grantech.matchnums;
 
-import com.grantech.matchnums.screens.BaseScreen;
+import com.grantech.matchnums.screens.BaseOverlay;
 import com.grantech.matchnums.screens.HomeScreen;
 import com.grantech.matchnums.themes.OutlineTheme;
 import com.grantech.matchnums.utils.Prefs;
@@ -36,7 +36,7 @@ class Main extends Application {
 
 	private function stage_deactivateHandler(event:Event):Void {
 		this.home.pause();
-		var screen = BaseScreen.create(Pause, this, true);
+		var screen = BaseOverlay.create(Pause, this, true);
 		screen.addEventListener(Event.CLOSE, this.screen_closeHandler);
 		stage.removeEventListener(Event.DEACTIVATE, this.stage_deactivateHandler);
 		stage.addEventListener(Event.ACTIVATE, this.stage_activateHandler);
@@ -50,7 +50,7 @@ class Main extends Application {
 	}
 
 	private function screen_closeHandler(event:Event):Void {
-		cast(event.currentTarget, BaseScreen).removeEventListener(Event.CLOSE, this.screen_closeHandler);
+		cast(event.currentTarget, BaseOverlay).removeEventListener(Event.CLOSE, this.screen_closeHandler);
 		this.home.resume();
 	}
 }
