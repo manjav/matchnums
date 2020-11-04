@@ -7,7 +7,7 @@ import feathers.layout.AnchorLayoutData;
 import feathers.skins.RectangleSkin;
 import openfl.events.MouseEvent;
 
-class PuaseScreen extends BaseOverlay {
+class PauseOverlay extends BaseOverlay {
 	private var labelDisplay:Label;
 
 	override private function initialize():Void {

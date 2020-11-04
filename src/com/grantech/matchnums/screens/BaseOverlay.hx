@@ -21,7 +21,7 @@ class BaseOverlay extends LayoutGroup {
 		} else {
 			screen = switch (screenType) {
 				case Pause:
-					new PuaseScreen();
+					new PauseOverlay();
 				default: null;
 			}
 			screen.layoutData = new AnchorLayoutData(0, 0, 0, 0);
