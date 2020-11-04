@@ -2,6 +2,7 @@ package com.grantech.matchnums.screens;
 
 import feathers.controls.LayoutGroup;
 import feathers.layout.AnchorLayoutData;
+import feathers.skins.RectangleSkin;
 import motion.Actuate;
 import openfl.display.DisplayObjectContainer;
 import openfl.events.Event;
@@ -32,6 +33,19 @@ class BaseOverlay extends LayoutGroup {
 		if (parent != null)
 			parent.addChild(screen);
 		return screen;
+	}
+
+	private var overlay:RectangleSkin;
+
+	override private function initialize():Void {
+		super.initialize();
+		this.overlayFactory();
+	}
+
+	private function overlayFactory():Void {
+		this.overlay = new RectangleSkin();
+		this.overlay.fill = SolidColor(0x000000, 0.6);
+		this.backgroundSkin = this.overlay;
 	}
 
 	public function close():Void {

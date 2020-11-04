@@ -4,7 +4,6 @@ import com.grantech.matchnums.themes.OutlineTheme;
 import feathers.controls.Label;
 import feathers.layout.AnchorLayout;
 import feathers.layout.AnchorLayoutData;
-import feathers.skins.RectangleSkin;
 import openfl.events.MouseEvent;
 
 class PauseOverlay extends BaseOverlay {
@@ -12,10 +11,6 @@ class PauseOverlay extends BaseOverlay {
 
 	override private function initialize():Void {
 		super.initialize();
-
-		var skin = new RectangleSkin();
-		skin.fill = SolidColor(0x000000, 0.6);
-		this.backgroundSkin = skin;
 
 		this.layout = new AnchorLayout();
 
