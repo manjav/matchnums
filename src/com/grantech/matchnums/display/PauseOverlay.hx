@@ -1,4 +1,4 @@
-package com.grantech.matchnums.screens;
+package com.grantech.matchnums.display;
 
 import com.grantech.matchnums.themes.OutlineTheme;
 import feathers.controls.Label;

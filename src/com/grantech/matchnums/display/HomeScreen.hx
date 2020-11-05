@@ -1,4 +1,4 @@
-package com.grantech.matchnums.screens;
+package com.grantech.matchnums.display;
 
 import com.grantech.matchnums.events.GameEvent;
 import com.grantech.matchnums.utils.Prefs;

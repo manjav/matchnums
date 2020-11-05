@@ -1,4 +1,4 @@
-package com.grantech.matchnums.screens;
+package com.grantech.matchnums.display;
 
 import feathers.controls.LayoutGroup;
 import feathers.layout.AnchorLayoutData;
@@ -13,12 +13,12 @@ enum ScreenType {
 }
 
 class BaseOverlay extends LayoutGroup {
-	static final screens:Map<ScreenType, BaseOverlay> = new Map();
+	static final saves:Map<ScreenType, BaseOverlay> = new Map();
 
 	static public function create(screenType:ScreenType, ?parent:DisplayObjectContainer, ?save:Bool):BaseOverlay {
 		var screen:BaseOverlay;
-		if (save && screens.exists(screenType)) {
-			screen = screens.get(screenType);
+		if (save && saves.exists(screenType)) {
+			screen = saves.get(screenType);
 		} else {
 			screen = switch (screenType) {
 				case Pause:
@@ -29,7 +29,7 @@ class BaseOverlay extends LayoutGroup {
 		}
 		screen.alpha = 1;
 		if (save)
-			screens.set(screenType, screen);
+			saves.set(screenType, screen);
 		if (parent != null)
 			parent.addChild(screen);
 		return screen;

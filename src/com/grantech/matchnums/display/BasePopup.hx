@@ -1,4 +1,4 @@
-package com.grantech.matchnums.screens;
+package com.grantech.matchnums.display;
 
 import feathers.controls.LayoutGroup;
 import feathers.layout.AnchorLayout;
