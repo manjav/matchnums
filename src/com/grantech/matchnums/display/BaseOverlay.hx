@@ -6,6 +6,7 @@ import feathers.skins.RectangleSkin;
 import motion.Actuate;
 import openfl.display.DisplayObjectContainer;
 import openfl.events.Event;
+import com.grantech.matchnums.display.popups.ConfirmPopup;
 
 enum ScreenType {
 	Pause;
@@ -22,7 +23,7 @@ class BaseOverlay extends LayoutGroup {
 		} else {
 			screen = switch (type) {
 				case Pause:
-					new PauseOverlay();
+					new ConfirmPopup();
 				default: null;
 			}
 			screen.layoutData = new AnchorLayoutData(0, 0, 0, 0);
@@ -35,6 +36,7 @@ class BaseOverlay extends LayoutGroup {
 		return screen;
 	}
 
+	private var padding = 16;
 	private var overlay:RectangleSkin;
 
 	override private function initialize():Void {
@@ -49,7 +51,7 @@ class BaseOverlay extends LayoutGroup {
 	}
 
 	public function close():Void {
-		Actuate.tween(this, 0.2, {alpha: 0.1}).onComplete(this.parent.removeChild, [this]);
+		Actuate.tween(this, 0.2, {alpha: 0.01}).onComplete(this.parent.removeChild, [this]);
 		if (this.hasEventListener(Event.CLOSE))
 			this.dispatchEvent(new Event(Event.CLOSE));
 	}
