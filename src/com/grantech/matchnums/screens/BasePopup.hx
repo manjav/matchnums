@@ -21,6 +21,11 @@ class BasePopup extends BaseOverlay {
 		this.content.layoutData = AnchorLayoutData.center();
 		this.addChild(this.content);
 
+		this.contentBackgroundFactory();
+	}
+	
+	private function contentBackgroundFactory():Void {
+
 		var skin = new RectangleSkin();
 		skin.cornerRadius = 6;
 		skin.fill = SolidColor(0x000000);
