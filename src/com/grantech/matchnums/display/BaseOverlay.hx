@@ -15,12 +15,12 @@ enum ScreenType {
 class BaseOverlay extends LayoutGroup {
 	static final saves:Map<ScreenType, BaseOverlay> = new Map();
 
-	static public function create(screenType:ScreenType, ?parent:DisplayObjectContainer, ?save:Bool):BaseOverlay {
+	static public function create(type:ScreenType, ?parent:DisplayObjectContainer, ?save:Bool):BaseOverlay {
 		var screen:BaseOverlay;
-		if (save && saves.exists(screenType)) {
-			screen = saves.get(screenType);
+		if (save && saves.exists(type)) {
+			screen = saves.get(type);
 		} else {
-			screen = switch (screenType) {
+			screen = switch (type) {
 				case Pause:
 					new PauseOverlay();
 				default: null;
@@ -29,7 +29,7 @@ class BaseOverlay extends LayoutGroup {
 		}
 		screen.alpha = 1;
 		if (save)
-			saves.set(screenType, screen);
+			saves.set(type, screen);
 		if (parent != null)
 			parent.addChild(screen);
 		return screen;
