@@ -43,24 +43,25 @@ class OutlineTheme extends ClassVariantTheme {
 	}
 
 	private function setButtonStyles(button:Button):Void {
-		var backgroundSkin = new RectangleSkin();
-		backgroundSkin.border = SolidColor(1.0, 0xff0000);
-		backgroundSkin.setBorderForState(DOWN, SolidColor(1.0, 0xcc0000));
-		backgroundSkin.fill = SolidColor(0xffffff);
-		backgroundSkin.setFillForState(DOWN, SolidColor(0xffeeee));
-		backgroundSkin.cornerRadius = 10.0;
-		button.backgroundSkin = backgroundSkin;
+		var skin = new RectangleSkin();
+		skin.fill = SolidColor(FILL_COLOR, 0);
+		skin.setFillForState(DOWN, SolidColor(FILL_COLOR, 0.5));
+		skin.border = SolidColor(2.0, BORDER_COLOR);
+		skin.setBorderForState(DOWN, SolidColor(3.0, BORDER_COLOR));
+		skin.cornerRadius = 5.0;
+		button.backgroundSkin = skin;
+		button.minWidth = button.minHeight = 40;
 
-		var format = this.getTextFormat(0xff0000);
+		var format = this.getTextFormat();
 		button.textFormat = format;
 
-		var downFormat = this.getTextFormat(0xcc0000);
+		var downFormat = this.getTextFormat();
 		button.setTextFormatForState(DOWN, downFormat);
 
-		button.paddingTop = 10.0;
-		button.paddingBottom = 10.0;
-		button.paddingLeft = 20.0;
-		button.paddingRight = 20.0;
+		button.paddingTop = 0.0;
+		button.paddingBottom = 0.0;
+		button.paddingLeft = 0.0;
+		button.paddingRight = 0.0;
 	}
 
 	private function setFancyButtonStyles(button:Button):Void {
