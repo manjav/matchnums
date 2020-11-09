@@ -21,7 +21,7 @@ class BasePopup extends BaseOverlay {
 		if (this.hasCloseButton == value)
 			return value;
 		this.hasCloseButton = value;
-		this.closeButtonFactory();
+		this.setInvalid(InvalidationFlag.CUSTOM("closeButton"));
 		return value;
 	}
 
@@ -51,7 +51,7 @@ class BasePopup extends BaseOverlay {
 
 	private function closeButtonFactory():Void {
 		if (!this.hasCloseButton) {
-			if (this.closeButton.parent != null)
+			if (this.closeButton != null && this.closeButton.parent != null)
 				this.closeButton.parent.removeChild(this.closeButton);
 			return;
 		}
@@ -68,4 +68,11 @@ class BasePopup extends BaseOverlay {
 	private function closeButton_clickHandler(event:MouseEvent):Void {
 		this.close();
 	}
+
+	override public function validateNow():Void {
+		if (this.isInvalid(InvalidationFlag.CUSTOM("closeButton")))
+			this.closeButtonFactory();
+		super.validateNow();
+	}
+
 }
