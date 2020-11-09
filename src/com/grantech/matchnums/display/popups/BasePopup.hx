@@ -2,7 +2,6 @@ package com.grantech.matchnums.display.popups;
 
 import com.grantech.matchnums.themes.OutlineTheme;
 import feathers.controls.Button;
-import openfl.events.MouseEvent;
 import feathers.controls.LayoutGroup;
 import feathers.layout.AnchorLayout;
 import feathers.layout.AnchorLayoutData;
@@ -15,6 +14,16 @@ class BasePopup extends BaseOverlay {
 
 	private var closeButton:Button;
 	private var content:LayoutGroup;
+
+	public var hasCloseButton(default, set):Bool;
+
+	public function set_hasCloseButton(value:Bool):Bool {
+		if (this.hasCloseButton == value)
+			return value;
+		this.hasCloseButton = value;
+		this.closeButtonFactory();
+		return value;
+	}
 
 	override private function initialize():Void {
 		super.initialize();
@@ -29,12 +38,7 @@ class BasePopup extends BaseOverlay {
 		this.addChild(this.content);
 
 		this.contentBackgroundFactory();
-
-		this.closeButton = new Button();
-		this.closeButton.variant = OutlineTheme.VARIANT_CLOSE_BUTTON;
-		this.closeButton.layoutData = AnchorLayoutData.topRight(this.padding, this.padding);
-		this.closeButton.addEventListener(MouseEvent.CLICK, this.closeButton_clickHandler);
-		this.content.addChild(this.closeButton);
+		this.closeButtonFactory();
 	}
 
 	private function contentBackgroundFactory():Void {
@@ -43,6 +47,22 @@ class BasePopup extends BaseOverlay {
 		skin.fill = SolidColor(0x000000);
 		skin.border = SolidColor(2.0, 0xFFFFFF);
 		this.content.backgroundSkin = skin;
+	}
+
+	private function closeButtonFactory():Void {
+		if (!this.hasCloseButton) {
+			if (this.closeButton.parent != null)
+				this.closeButton.parent.removeChild(this.closeButton);
+			return;
+		}
+
+		if (this.closeButton == null) {
+			this.closeButton = new Button();
+			this.closeButton.variant = OutlineTheme.VARIANT_CLOSE_BUTTON;
+			this.closeButton.layoutData = AnchorLayoutData.topRight(this.padding, this.padding);
+			this.closeButton.addEventListener(MouseEvent.CLICK, this.closeButton_clickHandler);
+		}
+		this.content.addChild(this.closeButton);
 	}
 
 	private function closeButton_clickHandler(event:MouseEvent):Void {
