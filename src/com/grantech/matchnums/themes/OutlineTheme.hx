@@ -12,9 +12,15 @@ class OutlineTheme extends ClassVariantTheme {
 	static public final FONT_COLOR = 0xEDEDED;
 	static public final FONT_NAME = "Arial Rounded MT Bold";
 
-	public static final VARIANT_WHITE_LARG:String = "variantWhiteLarg";
+	static public final FILL_COLOR = 0x002435;
+	static public final BORDER_COLOR = 0xEDEDED;
 
-	public static final VARIANT_FANCY_BUTTON:String = "custom-fancy-button";
+
+	public static final VARIANT_WHITE_LARG:String = "variantWhiteLarg";
+	public static final VARIANT_RECORDS:String = "variantRecords";
+
+	public static final VARIANT_CLOSE_BUTTON:String = "variantClosebutton";
+	
 
 	public function new() {
 		super();
@@ -25,7 +31,7 @@ class OutlineTheme extends ClassVariantTheme {
 		this.styleProvider.setStyleFunction(Button, null, setButtonStyles);
 
 		// custom themes may provide their own unique variants
-		this.styleProvider.setStyleFunction(Button, VARIANT_FANCY_BUTTON, setFancyButtonStyles);
+		this.styleProvider.setStyleFunction(Button, VARIANT_CLOSE_BUTTON, setCloseButtonStyles);
 	}
 
 	private function setLabelStyles(label:Label):Void {
@@ -64,22 +70,10 @@ class OutlineTheme extends ClassVariantTheme {
 		button.paddingRight = 0.0;
 	}
 
-	private function setFancyButtonStyles(button:Button):Void {
-		var backgroundSkin = new RectangleSkin();
-		backgroundSkin.cornerRadius = 10.0;
-		backgroundSkin.border = Gradient(2, LINEAR, [0xff9999, 0xcc0000], [1.0, 1.0], [0, 255], 90 * Math.PI / 180);
-		backgroundSkin.setBorderForState(DOWN, Gradient(2, LINEAR, [0xff0000, 0xcc0000], [1.0, 1.0], [0, 255], 90 * Math.PI / 180));
-		backgroundSkin.fill = Gradient(LINEAR, [0xff9999, 0xff0000], [1.0, 1.0], [0, 255], 90 * Math.PI / 180);
-		backgroundSkin.setFillForState(DOWN, Gradient(LINEAR, [0xff9999, 0xff0000], [1.0, 1.0], [0, 255], 270 * Math.PI / 180));
-		button.backgroundSkin = backgroundSkin;
-
-		var format = new TextFormat(FONT_NAME, 20, 0xffeeee, true, true);
-		button.textFormat = format;
-
-		button.paddingTop = 10.0;
-		button.paddingBottom = 10.0;
-		button.paddingLeft = 20.0;
-		button.paddingRight = 20.0;
+	private function setCloseButtonStyles(button:Button):Void {
+		this.setButtonStyles(button);
+		button.text = "x";
+		button.paddingBottom = 4.0;
 	}
 
 	private function getTextFormat(size:Null<Int> = null, color:Null<UInt> = null, bold:Null<Bool> = null):TextFormat {
