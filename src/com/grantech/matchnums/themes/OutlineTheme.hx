@@ -15,23 +15,19 @@ class OutlineTheme extends ClassVariantTheme {
 	static public final FILL_COLOR = 0x002435;
 	static public final BORDER_COLOR = 0xEDEDED;
 
-
-	public static final VARIANT_WHITE_LARG:String = "variantWhiteLarg";
-	public static final VARIANT_RECORDS:String = "variantRecords";
-
-	public static final VARIANT_CLOSE_BUTTON:String = "variantClosebutton";
-	
+	public static final VARIANT_LABEL_MEDIUM:String = "variantLabelMedium";
+	public static final VARIANT_LABEL_LARG:String = "variantLabelLarg";
+	public static final VARIANT_BUTTON_CLOSE:String = "variantClosebutton";
 
 	public function new() {
 		super();
 
-		// to provide default styles, pass null for the variant
 		this.styleProvider.setStyleFunction(Label, null, setLabelStyles);
-		this.styleProvider.setStyleFunction(Label, VARIANT_WHITE_LARG, setLabelWhiteLargStyles);
-		this.styleProvider.setStyleFunction(Button, null, setButtonStyles);
-
-		// custom themes may provide their own unique variants
-		this.styleProvider.setStyleFunction(Button, VARIANT_CLOSE_BUTTON, setCloseButtonStyles);
+		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_LARG, this.setLabelMediumStyles);
+		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_LARG, this.setLabelWhiteLargStyles);
+		
+		this.styleProvider.setStyleFunction(Button, null, this.setButtonStyles);
+		this.styleProvider.setStyleFunction(Button, VARIANT_BUTTON_CLOSE, this.setCloseButtonStyles);
 	}
 
 	private function setLabelStyles(label:Label):Void {
@@ -40,6 +36,12 @@ class OutlineTheme extends ClassVariantTheme {
 			label.textFormat = this.getTextFormat();
 		// if (label.disabledTextFormat == null)
 		// 	label.disabledTextFormat = this.getDisabledTextFormat();
+	}
+
+	private function setLabelMediumStyles(label:Label):Void {
+		label.embedFonts = true;
+		if (label.textFormat == null)
+			label.textFormat = this.getTextFormat(FONT_SIZE * 2, 0xFFFFFF);
 	}
 
 	private function setLabelWhiteLargStyles(label:Label):Void {
