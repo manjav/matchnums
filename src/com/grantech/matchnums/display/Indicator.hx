@@ -15,6 +15,10 @@ class Indicator extends Button {
 		return value;
 	}
 
+	public dynamic function format(value:Float):String {
+		return Std.string(value);
+	}
+
 	override private function initialize():Void {
 		this.variant = OutlineTheme.VARIANT_BUTTON_INDICATOR;
 		super.initialize();
