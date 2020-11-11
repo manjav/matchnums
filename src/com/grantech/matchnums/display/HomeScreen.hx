@@ -58,7 +58,7 @@ class HomeScreen extends BaseOverlay {
 
 	private function game_recordChangeHandler(event:GameEvent):Void {
 		var record = cast(event.data, Int);
-		var recordText = Std.string(record);
+		var recordText = Utils.toCurrency(record);
 		if (Prefs.instance.record < record) {
 			Prefs.instance.record = record;
 			Prefs.instance.save();
