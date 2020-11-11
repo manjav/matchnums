@@ -219,7 +219,7 @@ class Game extends Sprite {
 		var score = Cell.getScore(cell.value);
 		this.record += score;
 
-		Score.instantiate("+" + score, cell.x, cell.y, this);
+		Score.instantiate("+" + score, cell.x - 4, cell.y - Cell.RADIUS, this);
 
 		// More change for spawm new cells
 		if (this.maxValue < 6) {
