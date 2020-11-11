@@ -15,6 +15,7 @@ class HomeScreen extends BaseOverlay {
 	private var game:Game;
 	private var recordDisplay:Label;
 	private var recordBestDisplay:Indicator;
+	private var coinsIndicator:Indicator;
 
 	override private function initialize():Void {
 		super.initialize();
@@ -35,10 +36,19 @@ class HomeScreen extends BaseOverlay {
 		this.recordBestDisplay.icon = new Bitmap(Assets.getBitmapData("images/tile.png"));
 		this.recordBestDisplay.value = Prefs.instance.record;
 		this.recordBestDisplay.layoutData = AnchorLayoutData.topRight(Cell.BORDER);
-		this.recordBestDisplay.formatter = function(value:Float):String {
+		this.recordBestDisplay.format = function(value:Float):String {
 			return " " + Utils.toCurrency(value);
 		}
 		this.addChild(this.recordBestDisplay);
+
+		this.coinsIndicator = new Indicator();
+		this.coinsIndicator.icon = new Bitmap(Assets.getBitmapData("images/tile.png"));
+		this.coinsIndicator.format = function(value:Float):String {
+			return " " + Utils.toCurrency(value) + " +";
+		}
+		this.coinsIndicator.value = 1200;
+		this.coinsIndicator.layoutData = AnchorLayoutData.topLeft(Cell.BORDER, Cell.BORDER);
+		this.addChild(this.coinsIndicator);
 	}
 
 	override private function layoutGroup_stage_resizeHandler(event:Event):Void {
