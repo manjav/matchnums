@@ -1,5 +1,6 @@
 package com.grantech.matchnums.display.popups;
 
+import com.grantech.matchnums.display.overlays.BaseOverlay;
 import com.grantech.matchnums.themes.OutlineTheme;
 import feathers.controls.Button;
 import feathers.controls.LayoutGroup;
@@ -74,5 +75,4 @@ class BasePopup extends BaseOverlay {
 			this.closeButtonFactory();
 		super.validateNow();
 	}
-
 }

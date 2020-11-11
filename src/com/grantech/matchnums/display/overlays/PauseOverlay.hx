@@ -1,4 +1,4 @@
-package com.grantech.matchnums.display;
+package com.grantech.matchnums.display.overlays;
 
 import com.grantech.matchnums.themes.OutlineTheme;
 import feathers.controls.Label;
@@ -15,7 +15,7 @@ class PauseOverlay extends BaseOverlay {
 		this.layout = new AnchorLayout();
 
 		this.labelDisplay = new Label();
-		this.labelDisplay.variant = OutlineTheme.VARIANT_WHITE_LARG;
+		this.labelDisplay.variant = OutlineTheme.VARIANT_LABEL_LARG;
 		this.labelDisplay.layoutData = AnchorLayoutData.center();
 		this.labelDisplay.text = "Tap to Start";
 		this.addChild(this.labelDisplay);

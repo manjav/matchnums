@@ -1,7 +1,7 @@
 package com.grantech.matchnums;
 
-import com.grantech.matchnums.display.BaseOverlay;
-import com.grantech.matchnums.display.screens.HomeScreen;
+import com.grantech.matchnums.display.overlays.BaseOverlay;
+import com.grantech.matchnums.display.overlays.HomeOverlay;
 import com.grantech.matchnums.themes.OutlineTheme;
 import com.grantech.matchnums.utils.Prefs;
 import feathers.controls.Application;
@@ -12,7 +12,7 @@ import openfl.events.Event;
 
 class Main extends Application {
 	private var defaultFPS:Float;
-	private var home:HomeScreen;
+	private var home:HomeOverlay;
 
 	public function new() {
 		Prefs.instance.load();
@@ -27,7 +27,7 @@ class Main extends Application {
 		this.backgroundSkin = null;
 		this.layout = new AnchorLayout();
 
-		this.home = new HomeScreen();
+		this.home = new HomeOverlay();
 		this.home.layoutData = AnchorLayoutData.fill();
 		this.addChild(this.home);
 

@@ -1,12 +1,12 @@
-package com.grantech.matchnums.display;
+package com.grantech.matchnums.display.overlays;
 
+import com.grantech.matchnums.display.popups.ConfirmPopup;
 import feathers.controls.LayoutGroup;
 import feathers.layout.AnchorLayoutData;
 import feathers.skins.RectangleSkin;
 import motion.Actuate;
 import openfl.display.DisplayObjectContainer;
 import openfl.events.Event;
-import com.grantech.matchnums.display.popups.ConfirmPopup;
 
 enum ScreenType {
 	Pause;

@@ -1,4 +1,4 @@
-package com.grantech.matchnums.display.screens;
+package com.grantech.matchnums.display.overlays;
 
 import com.grantech.matchnums.display.Indicator;
 import com.grantech.matchnums.events.GameEvent;
@@ -11,7 +11,7 @@ import openfl.Assets;
 import openfl.display.Bitmap;
 import openfl.events.Event;
 
-class HomeScreen extends BaseOverlay {
+class HomeOverlay extends BaseOverlay {
 	private var game:Game;
 	private var recordDisplay:Label;
 	private var recordBestDisplay:Indicator;
