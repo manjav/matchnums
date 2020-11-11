@@ -1,16 +1,20 @@
 package com.grantech.matchnums.display;
 
+import com.grantech.matchnums.display.Indicator;
 import com.grantech.matchnums.events.GameEvent;
 import com.grantech.matchnums.utils.Prefs;
+import com.grantech.matchnums.utils.Utils;
 import feathers.controls.Label;
 import feathers.layout.AnchorLayout;
 import feathers.layout.AnchorLayoutData;
+import openfl.Assets;
+import openfl.display.Bitmap;
 import openfl.events.Event;
 
 class HomeScreen extends BaseOverlay {
 	private var game:Game;
 	private var recordDisplay:Label;
-	private var recordBestDisplay:Label;
+	private var recordBestDisplay:Indicator;
 
 	override private function initialize():Void {
 		super.initialize();
@@ -27,9 +31,13 @@ class HomeScreen extends BaseOverlay {
 		this.recordDisplay.layoutData = AnchorLayoutData.topCenter(Cell.BORDER);
 		this.addChild(this.recordDisplay);
 
-		this.recordBestDisplay = new Label();
-		this.recordBestDisplay.text = Std.string(Prefs.instance.record);
-		this.recordBestDisplay.layoutData = AnchorLayoutData.topRight(Cell.BORDER, Cell.BORDER);
+		this.recordBestDisplay = new Indicator();
+		this.recordBestDisplay.icon = new Bitmap(Assets.getBitmapData("images/tile.png"));
+		this.recordBestDisplay.value = Prefs.instance.record;
+		this.recordBestDisplay.layoutData = AnchorLayoutData.topRight(Cell.BORDER);
+		this.recordBestDisplay.formatter = function(value:Float):String {
+			return " " + Utils.toCurrency(value);
+		}
 		this.addChild(this.recordBestDisplay);
 	}
 
@@ -62,7 +70,7 @@ class HomeScreen extends BaseOverlay {
 		if (Prefs.instance.record < record) {
 			Prefs.instance.record = record;
 			Prefs.instance.save();
-			this.recordBestDisplay.text = recordText;
+			this.recordBestDisplay.value = record;
 		}
 		this.recordDisplay.text = recordText;
 	}
