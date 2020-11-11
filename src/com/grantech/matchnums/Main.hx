@@ -1,7 +1,7 @@
 package com.grantech.matchnums;
 
 import com.grantech.matchnums.display.BaseOverlay;
-import com.grantech.matchnums.display.HomeScreen;
+import com.grantech.matchnums.display.screens.HomeScreen;
 import com.grantech.matchnums.themes.OutlineTheme;
 import com.grantech.matchnums.utils.Prefs;
 import feathers.controls.Application;
