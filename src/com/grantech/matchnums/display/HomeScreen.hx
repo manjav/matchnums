@@ -34,11 +34,11 @@ class HomeScreen extends BaseOverlay {
 
 		this.recordBestDisplay = new Indicator();
 		this.recordBestDisplay.icon = new Bitmap(Assets.getBitmapData("images/tile.png"));
-		this.recordBestDisplay.value = Prefs.instance.record;
 		this.recordBestDisplay.layoutData = AnchorLayoutData.topRight(Cell.BORDER);
 		this.recordBestDisplay.format = function(value:Float):String {
 			return " " + Utils.toCurrency(value);
 		}
+		this.recordBestDisplay.value = Prefs.instance.record;
 		this.addChild(this.recordBestDisplay);
 
 		this.coinsIndicator = new Indicator();
