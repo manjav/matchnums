@@ -18,6 +18,7 @@ class OutlineTheme extends ClassVariantTheme {
 	public static final VARIANT_LABEL_MEDIUM:String = "variantLabelMedium";
 	public static final VARIANT_LABEL_LARG:String = "variantLabelLarg";
 	public static final VARIANT_BUTTON_CLOSE:String = "variantButtonClose";
+	public static final VARIANT_BUTTON_INDICATOR:String = "variantButtonIndicator";
 
 	public function new() {
 		super();
@@ -25,9 +26,10 @@ class OutlineTheme extends ClassVariantTheme {
 		this.styleProvider.setStyleFunction(Label, null, setLabelStyles);
 		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_LARG, this.setLabelMediumStyles);
 		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_LARG, this.setLabelWhiteLargStyles);
-		
+
 		this.styleProvider.setStyleFunction(Button, null, this.setButtonStyles);
 		this.styleProvider.setStyleFunction(Button, VARIANT_BUTTON_CLOSE, this.setButtonCloseStyles);
+		this.styleProvider.setStyleFunction(Button, VARIANT_BUTTON_INDICATOR, this.setButtonIndicatorStyles);
 	}
 
 	private function setLabelStyles(label:Label):Void {
@@ -76,6 +78,21 @@ class OutlineTheme extends ClassVariantTheme {
 		this.setButtonStyles(button);
 		button.text = "x";
 		button.paddingBottom = 4.0;
+	}
+
+	private function setButtonIndicatorStyles(button:Button):Void {
+		var skin = new RectangleSkin();
+		skin.fill = SolidColor(FILL_COLOR, 0);
+		button.backgroundSkin = skin;
+
+		button.textFormat = this.getTextFormat(Math.round(FONT_SIZE * 0.8));
+
+		button.paddingTop = 0.0;
+		button.paddingBottom = 0.0;
+		button.paddingLeft = 0.0;
+		button.paddingRight = 0.0;
+		button.minWidth = 100;
+		button.minHeight = 40;
 	}
 
 	private function getTextFormat(size:Null<Int> = null, color:Null<UInt> = null, bold:Null<Bool> = null):TextFormat {
