@@ -24,4 +24,14 @@ class Utils {
 		textField.defaultTextFormat = new TextFormat("Arial Rounded MT Bold", size, color, null, null, null, null, null, align);
 		// textField.filters = [new GlowFilter(0, 0.6, 4, 4)];
 	}
+
+	static public function toCurrency(value:Dynamic):String {
+		var src = Std.string(value);
+		var formatted = "";
+		var len = src.length;
+		while (len > 3)
+			formatted = "," + src.substr(len -= 3, 3) + formatted;
+		formatted = src.substr(0, len) + formatted;
+		return formatted;
+	}
 }
