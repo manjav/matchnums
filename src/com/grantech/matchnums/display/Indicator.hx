@@ -2,7 +2,6 @@ package com.grantech.matchnums.display;
 
 import com.grantech.matchnums.themes.OutlineTheme;
 import feathers.controls.Button;
-import feathers.core.InvalidationFlag;
 
 class Indicator extends Button {
 	public var value(default, set):Float;
