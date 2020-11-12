@@ -42,4 +42,11 @@ class ShopOverlay extends BaseOverlay {
 	private function closeButton_clickHandler(event:MouseEvent):Void {
 		this.close();
 	}
+
+	override private function overlayFactory():Void {
+		this.overlay = new RectangleSkin();
+		this.overlay.fill = SolidColor(0x000000, 0.9);
+		this.backgroundSkin = this.overlay;
+	}
+
 }
