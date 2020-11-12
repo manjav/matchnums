@@ -10,7 +10,7 @@ import openfl.events.Event;
 
 enum ScreenType {
 	Pause;
-	Ads;
+	Shop;
 }
 
 class BaseOverlay extends LayoutGroup {
@@ -23,7 +23,9 @@ class BaseOverlay extends LayoutGroup {
 		} else {
 			screen = switch (type) {
 				case Pause:
-					new ConfirmPopup();
+					new PauseOverlay();
+				case Shop:
+					new ShopOverlay();
 				default: null;
 			}
 			screen.layoutData = new AnchorLayoutData(0, 0, 0, 0);

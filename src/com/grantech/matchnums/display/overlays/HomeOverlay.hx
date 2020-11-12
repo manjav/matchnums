@@ -85,6 +85,18 @@ class HomeOverlay extends BaseOverlay {
 		this.recordDisplay.text = recordText;
 	}
 
+
+	private function addOverlay(type:ScreenType):Void {
+		this.pause();
+		var screen = BaseOverlay.create(type, this, true);
+		screen.addEventListener(Event.CLOSE, screen_closeHandler);
+	}
+
+	private function screen_closeHandler(event:Event):Void {
+		cast(event.currentTarget, BaseOverlay).removeEventListener(Event.CLOSE, this.screen_closeHandler);
+		this.resume();
+	}
+
 	public function pause():Void {
 		this.game.state = Pause;
 	}
