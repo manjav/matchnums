@@ -21,13 +21,19 @@ class ShopOverlay extends BaseOverlay {
 			items[i] = {text: "List Item " + (i + 1)};
 		}
 
+		var listLayout = new VerticalLayout();
+		listLayout.horizontalAlign = JUSTIFY;
+		listLayout.gap = padding;
+
 		this.listView = new ListView();
-		this.listView.dataProvider = new ArrayCollection(items);
+		this.listView.layout = listLayout;
+		this.listView.backgroundSkin = null;
+		this.listView.layoutData = new AnchorLayoutData(100, padding, padding, padding);
+		this.listView.itemRendererRecycler = DisplayObjectRecycler.withClass(ShopItemRenderer);
 		this.listView.itemToText = (item:Dynamic) -> {
 			return item.text;
 		};
-		this.listView.layoutData = AnchorLayoutData.fill();
-		this.listView.backgroundSkin = null;
+		this.listView.dataProvider = new ArrayCollection(items);
 		// this.listView.addEventListener(Event.CHANGE, listView_changeHandler);
 		// this.listView.addEventListener(ListViewEvent.ITEM_TRIGGER, listView_itemTriggerHandler);
 		this.addChild(this.listView);
