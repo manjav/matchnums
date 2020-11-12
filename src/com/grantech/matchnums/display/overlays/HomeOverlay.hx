@@ -1,10 +1,12 @@
 package com.grantech.matchnums.display.overlays;
 
+import com.grantech.matchnums.display.overlays.BaseOverlay.ScreenType;
 import com.grantech.matchnums.display.Indicator;
 import com.grantech.matchnums.events.GameEvent;
 import com.grantech.matchnums.utils.Prefs;
 import com.grantech.matchnums.utils.Utils;
 import feathers.controls.Label;
+import feathers.events.TriggerEvent;
 import feathers.layout.AnchorLayout;
 import feathers.layout.AnchorLayoutData;
 import openfl.Assets;
@@ -48,6 +50,7 @@ class HomeOverlay extends BaseOverlay {
 		}
 		this.coinsIndicator.value = 1200;
 		this.coinsIndicator.layoutData = AnchorLayoutData.topLeft(Cell.BORDER, Cell.BORDER);
+		this.coinsIndicator.addEventListener(TriggerEvent.TRIGGER, this.coinsIndicator_triggerHandler);
 		this.addChild(this.coinsIndicator);
 	}
 
@@ -85,6 +88,9 @@ class HomeOverlay extends BaseOverlay {
 		this.recordDisplay.text = recordText;
 	}
 
+	private function coinsIndicator_triggerHandler(event:TriggerEvent):Void {
+		this.addOverlay(Shop);
+	}
 
 	private function addOverlay(type:ScreenType):Void {
 		this.pause();
