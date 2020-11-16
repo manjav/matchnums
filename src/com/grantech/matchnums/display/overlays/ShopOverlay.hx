@@ -1,15 +1,23 @@
 package com.grantech.matchnums.display.overlays;
 
+import com.grantech.matchnums.display.items.ShopItemRenderer;
 import com.grantech.matchnums.themes.OutlineTheme;
+import com.grantech.matchnums.utils.Utils;
 import feathers.controls.Button;
 import feathers.controls.ListView;
 import feathers.data.ArrayCollection;
 import feathers.layout.AnchorLayout;
 import feathers.layout.AnchorLayoutData;
+import feathers.layout.VerticalLayout;
+import feathers.skins.RectangleSkin;
+import feathers.utils.DisplayObjectRecycler;
+import openfl.Assets;
+import openfl.display.Bitmap;
 import openfl.events.MouseEvent;
 
 class ShopOverlay extends BaseOverlay {
 	private var listView:ListView;
+	private var coinsIndicator:Indicator;
 
 	override private function initialize():Void {
 		super.initialize();
@@ -37,6 +45,15 @@ class ShopOverlay extends BaseOverlay {
 		// this.listView.addEventListener(Event.CHANGE, listView_changeHandler);
 		// this.listView.addEventListener(ListViewEvent.ITEM_TRIGGER, listView_itemTriggerHandler);
 		this.addChild(this.listView);
+
+		this.coinsIndicator = new Indicator();
+		this.coinsIndicator.icon = new Bitmap(Assets.getBitmapData("images/tile.png"));
+		this.coinsIndicator.format = function(value:Float):String {
+			return " " + Utils.toCurrency(value) + " +";
+		}
+		this.coinsIndicator.value = 1200;
+		this.coinsIndicator.layoutData = AnchorLayoutData.topLeft(Cell.BORDER, Cell.BORDER);
+		this.addChild(this.coinsIndicator);
 
 		var closeButton = new Button();
 		closeButton.variant = OutlineTheme.VARIANT_BUTTON_CLOSE;
