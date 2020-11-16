@@ -3,6 +3,7 @@ package com.grantech.matchnums.themes;
 import feathers.controls.Button;
 import feathers.controls.ButtonState;
 import feathers.controls.Label;
+import feathers.controls.dataRenderers.ItemRenderer;
 import feathers.skins.RectangleSkin;
 import feathers.themes.ClassVariantTheme;
 import openfl.text.TextFormat;
@@ -12,6 +13,7 @@ class OutlineTheme extends ClassVariantTheme {
 	static public final FONT_COLOR = 0xEDEDED;
 	static public final FONT_NAME = "Arial Rounded MT Bold";
 
+	static public final DEFAULT_PADDING = 8.0;
 	static public final FILL_COLOR = 0x002435;
 	static public final BORDER_COLOR = 0xEDEDED;
 
@@ -30,6 +32,8 @@ class OutlineTheme extends ClassVariantTheme {
 		this.styleProvider.setStyleFunction(Button, null, this.setButtonStyles);
 		this.styleProvider.setStyleFunction(Button, VARIANT_BUTTON_CLOSE, this.setButtonCloseStyles);
 		this.styleProvider.setStyleFunction(Button, VARIANT_BUTTON_INDICATOR, this.setButtonIndicatorStyles);
+		
+		this.styleProvider.setStyleFunction(ItemRenderer, null, this.setItemRendererStyles);
 	}
 
 	private function setLabelStyles(label:Label):Void {
@@ -84,6 +88,27 @@ class OutlineTheme extends ClassVariantTheme {
 		button.paddingRight = 0.0;
 		button.minWidth = 100;
 		button.minHeight = 40;
+	}
+	
+	private function setItemRendererStyles(itemRenderer:ItemRenderer):Void {
+		itemRenderer.backgroundSkin = this.getButtonSkin();
+		if (itemRenderer.textFormat == null)
+			itemRenderer.textFormat = this.getTextFormat();
+
+		if (itemRenderer.disabledTextFormat == null)
+			itemRenderer.disabledTextFormat = itemRenderer.textFormat;
+
+		if (itemRenderer.selectedTextFormat == null)
+			itemRenderer.selectedTextFormat = itemRenderer.textFormat;
+
+		if (itemRenderer.getTextFormatForState(ToggleButtonState.DOWN(false)) == null)
+			itemRenderer.setTextFormatForState(ToggleButtonState.DOWN(false), itemRenderer.textFormat);
+
+		itemRenderer.horizontalAlign = LEFT;
+		itemRenderer.paddingTop = 0.0;
+		itemRenderer.paddingBottom = 0.0;
+		itemRenderer.paddingLeft = DEFAULT_PADDING;
+		itemRenderer.paddingRight = DEFAULT_PADDING;
 	}
 
 	public function getButtonSkin():RectangleSkin {
