@@ -35,7 +35,7 @@ class HomeOverlay extends BaseOverlay {
 		this.addChild(this.recordDisplay);
 
 		this.recordBestDisplay = new Indicator();
-		this.recordBestDisplay.icon = new Bitmap(Assets.getBitmapData("images/tile.png"));
+		this.recordBestDisplay.icon = new Bitmap(Assets.getBitmapData("images/medal.png"));
 		this.recordBestDisplay.layoutData = AnchorLayoutData.topRight(Cell.BORDER);
 		this.recordBestDisplay.format = function(value:Float):String {
 			return " " + Utils.toCurrency(value);
@@ -44,7 +44,7 @@ class HomeOverlay extends BaseOverlay {
 		this.addChild(this.recordBestDisplay);
 
 		this.coinsIndicator = new Indicator();
-		this.coinsIndicator.icon = new Bitmap(Assets.getBitmapData("images/tile.png"));
+		this.coinsIndicator.icon = new Bitmap(Assets.getBitmapData("images/coin.png"));
 		this.coinsIndicator.format = function(value:Float):String {
 			return " " + Utils.toCurrency(value) + " +";
 		}
