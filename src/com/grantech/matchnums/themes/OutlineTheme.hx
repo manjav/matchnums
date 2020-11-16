@@ -53,20 +53,11 @@ class OutlineTheme extends ClassVariantTheme {
 	}
 
 	private function setButtonStyles(button:Button):Void {
-		var skin = new RectangleSkin();
-		skin.fill = SolidColor(FILL_COLOR, 0);
-		skin.setFillForState(DOWN, SolidColor(FILL_COLOR, 0.5));
-		skin.border = SolidColor(2.0, BORDER_COLOR);
-		skin.setBorderForState(DOWN, SolidColor(3.0, BORDER_COLOR));
-		skin.cornerRadius = 5.0;
-		button.backgroundSkin = skin;
+		button.backgroundSkin = this.getButtonSkin();
 		button.minWidth = button.minHeight = 40;
 
-		var format = this.getTextFormat();
-		button.textFormat = format;
-
-		var downFormat = this.getTextFormat();
-		button.setTextFormatForState(DOWN, downFormat);
+		button.textFormat = this.getTextFormat();
+		button.setTextFormatForState(DOWN, button.textFormat);
 
 		button.paddingTop = 0.0;
 		button.paddingBottom = 0.0;
@@ -95,7 +86,16 @@ class OutlineTheme extends ClassVariantTheme {
 		button.minHeight = 40;
 	}
 
-	private function getTextFormat(size:Null<Int> = null, color:Null<UInt> = null, bold:Null<Bool> = null):TextFormat {
+	public function getButtonSkin():RectangleSkin {
+		var skin = new RectangleSkin();
+		skin.fill = SolidColor(FILL_COLOR, 0);
+		skin.setFillForState(DOWN, SolidColor(FILL_COLOR, 0.5));
+		skin.border = SolidColor(2.0, BORDER_COLOR);
+		skin.setBorderForState(DOWN, SolidColor(3.0, BORDER_COLOR));
+		skin.cornerRadius = 5.0;
+		return skin;
+	}
+	public function getTextFormat(size:Null<Int> = null, color:Null<UInt> = null, bold:Null<Bool> = null):TextFormat {
 		return new TextFormat(FONT_NAME, size == null ? FONT_SIZE : size, color == null ? FONT_COLOR : color, bold);
 	}
 }
