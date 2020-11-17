@@ -28,7 +28,7 @@ class ShopItemRenderer extends ItemRenderer {
 	override private function update():Void {
 		if (this.isInvalid(DATA)) {
 			if (this.icon == null)
-				this.icon = new Bitmap(Assets.getBitmapData("images/coin.png"));
+				this.icon = getIcon();
 			this.buttonDisplay.text = this.data.value;
 		}
 
@@ -48,5 +48,13 @@ class ShopItemRenderer extends ItemRenderer {
 		this.buttonDisplay.x = this.actualWidth - this.paddingRight - this.buttonDisplay.width;
 		this.buttonDisplay.y = (this.actualHeight - this.buttonDisplay.height) * 0.5;
 		super.layoutContent();
+	}
+
+	private function getIcon():Bitmap {
+		var path = "images/coin.png";
+		trace(this.data.text == "Ads Free", this.data.text);
+		if (this.data.text == "Ads Free")
+			path = "images/no_ads.png";
+		return new Bitmap(Assets.getBitmapData(path));
 	}
 }
