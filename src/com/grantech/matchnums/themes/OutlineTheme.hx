@@ -107,8 +107,9 @@ class OutlineTheme extends ClassVariantTheme {
 		itemRenderer.horizontalAlign = LEFT;
 		itemRenderer.paddingTop = 0.0;
 		itemRenderer.paddingBottom = 0.0;
-		itemRenderer.paddingLeft = DEFAULT_PADDING;
-		itemRenderer.paddingRight = DEFAULT_PADDING;
+		itemRenderer.paddingLeft = DEFAULT_PADDING * 2;
+		itemRenderer.paddingRight = DEFAULT_PADDING * 2;
+		itemRenderer.gap = DEFAULT_PADDING;
 	}
 
 	public function getButtonSkin():RectangleSkin {
