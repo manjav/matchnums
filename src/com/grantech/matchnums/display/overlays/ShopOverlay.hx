@@ -11,6 +11,7 @@ import feathers.layout.AnchorLayoutData;
 import feathers.layout.VerticalLayout;
 import feathers.skins.RectangleSkin;
 import feathers.utils.DisplayObjectRecycler;
+import haxe.Json;
 import openfl.Assets;
 import openfl.display.Bitmap;
 import openfl.events.MouseEvent;
@@ -24,11 +25,7 @@ class ShopOverlay extends BaseOverlay {
 
 		this.layout = new AnchorLayout();
 
-		var items = [];
-		for (i in 0...8) {
-			items[i] = {text: "List Item " + (i + 1)};
-		}
-
+		var config = Json.parse(Assets.getText("texts/configs.json"));
 		var listLayout = new VerticalLayout();
 		listLayout.horizontalAlign = JUSTIFY;
 		listLayout.gap = padding;
@@ -41,7 +38,7 @@ class ShopOverlay extends BaseOverlay {
 		this.listView.itemToText = (item:Dynamic) -> {
 			return item.text;
 		};
-		this.listView.dataProvider = new ArrayCollection(items);
+		this.listView.dataProvider = new ArrayCollection(config.shop.items);
 		// this.listView.addEventListener(Event.CHANGE, listView_changeHandler);
 		// this.listView.addEventListener(ListViewEvent.ITEM_TRIGGER, listView_itemTriggerHandler);
 		this.addChild(this.listView);
@@ -71,5 +68,4 @@ class ShopOverlay extends BaseOverlay {
 		this.overlay.fill = SolidColor(0x000000, 0.9);
 		this.backgroundSkin = this.overlay;
 	}
-
 }
