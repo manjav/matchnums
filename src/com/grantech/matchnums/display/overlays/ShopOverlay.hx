@@ -28,12 +28,13 @@ class ShopOverlay extends BaseOverlay {
 		var config = Json.parse(Assets.getText("texts/configs.json"));
 		var listLayout = new VerticalLayout();
 		listLayout.horizontalAlign = JUSTIFY;
+		listLayout.verticalAlign = MIDDLE;
 		listLayout.gap = padding;
 
 		this.listView = new ListView();
 		this.listView.layout = listLayout;
 		this.listView.backgroundSkin = null;
-		this.listView.layoutData = new AnchorLayoutData(100, padding, padding, padding);
+		this.listView.layoutData = AnchorLayoutData.fill(padding);
 		this.listView.itemRendererRecycler = DisplayObjectRecycler.withClass(ShopItemRenderer);
 		this.listView.itemToText = (item:Dynamic) -> {
 			return item.text;
