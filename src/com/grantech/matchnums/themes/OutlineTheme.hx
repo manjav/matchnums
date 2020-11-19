@@ -26,7 +26,7 @@ class OutlineTheme extends ClassVariantTheme {
 		super();
 
 		this.styleProvider.setStyleFunction(Label, null, setLabelStyles);
-		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_LARG, this.setLabelMediumStyles);
+		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_MEDIUM, this.setLabelMediumStyles);
 		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_LARG, this.setLabelWhiteLargStyles);
 
 		this.styleProvider.setStyleFunction(Button, null, this.setButtonStyles);
