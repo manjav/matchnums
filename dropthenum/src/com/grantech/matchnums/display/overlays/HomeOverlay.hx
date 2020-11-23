@@ -1,8 +1,8 @@
 package com.grantech.matchnums.display.overlays;
 
-import com.grantech.matchnums.display.overlays.BaseOverlay.ScreenType;
 import com.grantech.matchnums.display.Indicator;
 import com.grantech.matchnums.display.overlays.BaseOverlay.ScreenType;
+import com.grantech.matchnums.display.popups.BigValuePopup;
 import com.grantech.matchnums.events.GameEvent;
 import com.grantech.matchnums.utils.Prefs;
 import com.grantech.matchnums.utils.Utils;
@@ -27,7 +27,8 @@ class HomeOverlay extends BaseOverlay {
 		this.layout = new AnchorLayout();
 
 		this.game = new Game();
-		this.game.addEventListener(GameEvent.RECORD_CHANGE, this.game_recordChangeHandler);
+		this.game.addEventListener(GameEvent.BIG_VALUE, this.game_eventsChangeHandler);
+		this.game.addEventListener(GameEvent.RECORD_CHANGE, this.game_eventsChangeHandler);
 		this.addChild(this.game);
 
 		this.recordDisplay = new Label();
@@ -55,15 +56,20 @@ class HomeOverlay extends BaseOverlay {
 		this.addChild(this.coinsIndicator);
 	}
 
-	private function game_recordChangeHandler(event:GameEvent):Void {
-		var record = cast(event.data, Int);
-		var recordText = Utils.toCurrency(record);
-		if (Prefs.instance.record < record) {
-			Prefs.instance.record = record;
-			Prefs.instance.save();
-			this.recordBestDisplay.value = record;
+	private function game_eventsChangeHandler(event:GameEvent):Void {
+		if (event.type == GameEvent.RECORD_CHANGE) {
+			var record = cast(event.data, Int);
+			var recordText = Utils.toCurrency(record);
+			if (Prefs.instance.record < record) {
+				Prefs.instance.record = record;
+				Prefs.instance.save();
+				this.recordBestDisplay.value = record;
+			}
+			this.recordDisplay.text = recordText;
+		} else if (event.type == GameEvent.BIG_VALUE) {
+			var popup = cast(this.addOverlay(BigValue), BigValuePopup);
+			popup.value = cast(event.data, Int);
 		}
-		this.recordDisplay.text = recordText;
 	}
 
 	private function coinsIndicator_triggerHandler(event:TriggerEvent):Void {

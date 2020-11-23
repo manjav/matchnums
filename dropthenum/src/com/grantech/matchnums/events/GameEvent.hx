@@ -5,9 +5,9 @@ import openfl.events.Event;
 import openfl.events.IEventDispatcher;
 
 class GameEvent extends Event {
+	static private var _pool = new ObjectPool<GameEvent>(() -> return new GameEvent(null, null, false, false));
 
-    static private var _pool = new ObjectPool<GameEvent>(() -> return new GameEvent(null, null, false, false));
-    
+	static public final BIG_VALUE:String = "bigValue";
 	static public final RECORD_CHANGE:String = "recordChange";
 
 	/**

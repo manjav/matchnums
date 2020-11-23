@@ -1,6 +1,6 @@
 package com.grantech.matchnums.display.overlays;
 
-import com.grantech.matchnums.display.popups.ConfirmPopup;
+import com.grantech.matchnums.display.popups.BigValuePopup;
 import feathers.controls.LayoutGroup;
 import feathers.layout.AnchorLayoutData;
 import feathers.skins.RectangleSkin;
@@ -11,6 +11,7 @@ import openfl.events.Event;
 enum ScreenType {
 	Pause;
 	Shop;
+	BigValue;
 }
 
 class BaseOverlay extends LayoutGroup {
@@ -26,9 +27,11 @@ class BaseOverlay extends LayoutGroup {
 					new PauseOverlay();
 				case Shop:
 					new ShopOverlay();
+				case BigValue:
+					new BigValuePopup();
 				default: null;
 			}
-			screen.layoutData = new AnchorLayoutData(0, 0, 0, 0);
+			screen.layoutData = AnchorLayoutData.fill();
 		}
 		screen.alpha = 1;
 		if (save)

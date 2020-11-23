@@ -25,6 +25,7 @@ class Game extends Sprite {
 	private var fallSFX:Sound;
 	private var timer:Timer;
 	private var lastColumn:Int;
+	private var valueRecord:Int = 3;
 	private var maxValue:Int = 3;
 	private var cells:CellMap;
 	private var endLine:Shape;
@@ -221,8 +222,12 @@ class Game extends Sprite {
 
 		Score.instantiate("+" + score, cell.x - 4, cell.y - Cell.RADIUS, this);
 
+		// Show big number popup
+		if (cell.value > this.valueRecord)
+			GameEvent.dispatch(this, GameEvent.BIG_VALUE, this.valueRecord = cell.value);
+
 		// More change for spawm new cells
-		if (this.maxValue < 6) {
+		if (this.maxValue < 7) {
 			var distance = Math.ceil(1.5 * Math.sqrt(this.maxValue));
 			if (this.maxValue < cell.value - distance)
 				this.maxValue = cell.value - distance;
