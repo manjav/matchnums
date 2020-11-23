@@ -52,7 +52,6 @@ class ShopItemRenderer extends ItemRenderer {
 
 	private function getIcon():Bitmap {
 		var path = "images/coin.png";
-		trace(this.data.text == "Ads Free", this.data.text);
 		if (this.data.text == "Ads Free")
 			path = "images/no_ads.png";
 		return new Bitmap(Assets.getBitmapData(path));
