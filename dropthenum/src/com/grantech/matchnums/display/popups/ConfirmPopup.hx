@@ -4,11 +4,11 @@ import com.grantech.matchnums.themes.OutlineTheme;
 import feathers.controls.Label;
 import feathers.layout.AnchorLayoutData;
 
-
 class ConfirmPopup extends BasePopup {
-
 	private var titleDisplay:Label;
+
 	public var title(default, set):String;
+
 	public function set_title(value:String):String {
 		if (this.title == value)
 			return value;
@@ -36,9 +36,10 @@ class ConfirmPopup extends BasePopup {
 			this.titleDisplay.layoutData = AnchorLayoutData.topCenter(this.padding);
 		}
 		this.titleDisplay.text = this.title;
-		this.content.addChild(this.titleDisplay);
+		if (this.titleDisplay.parent == null)
+			this.content.addChild(this.titleDisplay);
 	}
-	
+
 	override public function validateNow():Void {
 		if (this.isInvalid(InvalidationFlag.CUSTOM("title")))
 			this.titleFactory();
