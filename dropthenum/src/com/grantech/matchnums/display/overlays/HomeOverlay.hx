@@ -2,6 +2,7 @@ package com.grantech.matchnums.display.overlays;
 
 import com.grantech.matchnums.display.overlays.BaseOverlay.ScreenType;
 import com.grantech.matchnums.display.Indicator;
+import com.grantech.matchnums.display.overlays.BaseOverlay.ScreenType;
 import com.grantech.matchnums.events.GameEvent;
 import com.grantech.matchnums.utils.Prefs;
 import com.grantech.matchnums.utils.Utils;
@@ -69,10 +70,9 @@ class HomeOverlay extends BaseOverlay {
 		this.addOverlay(Shop);
 	}
 
-	private function addOverlay(type:ScreenType):Void {
+	private function addOverlay(type:ScreenType):BaseOverlay {
 		this.pause();
-		var screen = BaseOverlay.create(type, this, true);
-		screen.addEventListener(Event.CLOSE, screen_closeHandler);
+		return BaseOverlay.create(type, this, true);
 	}
 
 	private function screen_closeHandler(event:Event):Void {
@@ -81,6 +81,8 @@ class HomeOverlay extends BaseOverlay {
 	}
 
 	public function pause():Void {
+		var screen = BaseOverlay.create(Pause, this, true);
+		screen.addEventListener(Event.CLOSE, screen_closeHandler);
 		this.game.state = Pause;
 	}
 
