@@ -6,7 +6,8 @@
 	
 	<window width="480" height="920" background="#444444"/>
 	<window width="0" height="0" if="html5" />
-	<window fps="40" />
+	<window fps="40"/><!-- fullscreen="false" antialiasing="4" vsync="true" /> -->
+	<window orientation="portrait" />
 
 	<source path="src" />
 	
