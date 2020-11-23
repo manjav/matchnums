@@ -13,12 +13,12 @@ class BigValuePopup extends ConfirmPopup {
 		if (this.value == value)
 			return value;
 		this.value = value;
-		this.title = Std.string(value);
+		this.title = Cell.getScore(value) + " created again!\nDouble It?";
 		return value;
 	}
 
 	override private function initialize():Void {
-        this.contentHeight = 540;
+		this.contentHeight = 480;
         super.initialize();
 	}
 
@@ -28,6 +28,12 @@ class BigValuePopup extends ConfirmPopup {
 			this.addChild(this.cellDisplay);
 		}
 		super.validateNow();
+	}
+
+	override private function titleFactory():Void {
+		super.titleFactory();
+		this.titleDisplay.variant = null;
+		this.titleDisplay.layoutData = AnchorLayoutData.center(0, padding * 2);
 	}
 
 	override private function refreshBackgroundLayout():Void {
