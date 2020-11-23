@@ -54,29 +54,6 @@ class HomeOverlay extends BaseOverlay {
 		this.addChild(this.coinsIndicator);
 	}
 
-	override private function layoutGroup_stage_resizeHandler(event:Event):Void {
-		super.layoutGroup_stage_resizeHandler(event);
-
-		var maxWidth = stage.stageWidth * 0.90;
-		var maxHeight = stage.stageHeight * 0.86;
-
-		var currentWidth = CellMap.NUM_COLUMNS * Cell.SIZE;
-		var currentHeight = (CellMap.NUM_ROWS + 1) * Cell.SIZE;
-
-		var maxScaleX = maxWidth / currentWidth;
-		var maxScaleY = maxHeight / currentHeight;
-
-		var gameScale = 1.0;
-		if (maxScaleX < maxScaleY)
-			gameScale = maxScaleX;
-		else
-			gameScale = maxScaleY;
-
-		this.game.scaleY = this.game.scaleX = gameScale;
-		this.game.x = (stage.stageWidth - (currentWidth * gameScale)) * 0.5;
-		this.game.y = (stage.stageHeight - (currentHeight * gameScale)) * 0.5;
-	}
-
 	private function game_recordChangeHandler(event:GameEvent):Void {
 		var record = cast(event.data, Int);
 		var recordText = Utils.toCurrency(record);
@@ -109,5 +86,27 @@ class HomeOverlay extends BaseOverlay {
 
 	public function resume():Void {
 		this.game.state = Play;
+	}
+
+	override private function refreshBackgroundLayout():Void {
+		var maxWidth = this.actualWidth * 0.90;
+		var maxHeight = this.actualHeight * 0.86;
+
+		var currentWidth = CellMap.NUM_COLUMNS * Cell.SIZE;
+		var currentHeight = (CellMap.NUM_ROWS + 1) * Cell.SIZE;
+
+		var maxScaleX = maxWidth / currentWidth;
+		var maxScaleY = maxHeight / currentHeight;
+
+		var gameScale = 1.0;
+		if (maxScaleX < maxScaleY)
+			gameScale = maxScaleX;
+		else
+			gameScale = maxScaleY;
+
+		this.game.scaleY = this.game.scaleX = gameScale;
+		this.game.x = (this.actualWidth - (currentWidth * gameScale)) * 0.5;
+		this.game.y = (this.actualHeight - (currentHeight * gameScale)) * 0.5;
+		super.refreshBackgroundLayout();
 	}
 }
