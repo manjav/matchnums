@@ -19,6 +19,7 @@ class OutlineTheme extends ClassVariantTheme {
 
 	public static final VARIANT_LABEL_MEDIUM:String = "variantLabelMedium";
 	public static final VARIANT_LABEL_LARG:String = "variantLabelLarg";
+	public static final VARIANT_BUTTON_LINK:String = "variantButtonLink";
 	public static final VARIANT_BUTTON_CLOSE:String = "variantButtonClose";
 	public static final VARIANT_BUTTON_INDICATOR:String = "variantButtonIndicator";
 
@@ -30,9 +31,10 @@ class OutlineTheme extends ClassVariantTheme {
 		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_LARG, this.setLabelWhiteLargStyles);
 
 		this.styleProvider.setStyleFunction(Button, null, this.setButtonStyles);
+		this.styleProvider.setStyleFunction(Button, VARIANT_BUTTON_LINK, this.setButtonLinkStyles);
 		this.styleProvider.setStyleFunction(Button, VARIANT_BUTTON_CLOSE, this.setButtonCloseStyles);
 		this.styleProvider.setStyleFunction(Button, VARIANT_BUTTON_INDICATOR, this.setButtonIndicatorStyles);
-		
+
 		this.styleProvider.setStyleFunction(ItemRenderer, null, this.setItemRendererStyles);
 	}
 
@@ -69,6 +71,12 @@ class OutlineTheme extends ClassVariantTheme {
 		button.paddingRight = 0.0;
 	}
 
+	private function setButtonLinkStyles(button:Button):Void {
+		button.backgroundSkin = null;
+		button.textFormat = this.getTextFormat(Math.round(FONT_SIZE * 0.7));
+		button.setTextFormatForState(DOWN, button.textFormat);
+	}
+
 	private function setButtonCloseStyles(button:Button):Void {
 		this.setButtonStyles(button);
 		button.text = "x";
@@ -89,7 +97,7 @@ class OutlineTheme extends ClassVariantTheme {
 		button.minWidth = 100;
 		button.minHeight = 40;
 	}
-	
+
 	private function setItemRendererStyles(itemRenderer:ItemRenderer):Void {
 		itemRenderer.backgroundSkin = this.getButtonSkin();
 		if (itemRenderer.textFormat == null)
