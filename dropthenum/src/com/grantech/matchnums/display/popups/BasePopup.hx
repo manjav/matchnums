@@ -50,7 +50,7 @@ class BasePopup extends BaseOverlay {
 		this.content.backgroundSkin = skin;
 	}
 
-	private function closeButtonFactory():Void {
+	public dynamic function closeButtonFactory():Void {
 		if (!this.hasCloseButton) {
 			if (this.closeButton != null && this.closeButton.parent != null)
 				this.closeButton.parent.removeChild(this.closeButton);
