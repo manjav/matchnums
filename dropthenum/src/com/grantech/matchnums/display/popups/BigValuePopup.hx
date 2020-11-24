@@ -15,13 +15,23 @@ class BigValuePopup extends ConfirmPopup {
 	private var skipButton:Button;
 	private var cellInitAnimationFactory:CellInitAnimationFactory;
 
+	public var prize(default, default):Int;
+	public var isFirst(default, default):Bool;
 	public var value(default, set):Int;
 
 	public function set_value(value:Int):Int {
 		if (this.value == value)
 			return value;
 		this.value = value;
-		this.title = Cell.getScore(value) + " created again!\nDouble It?";
+		this.prize = 10 * value;
+
+		var _title:String;
+		if (this.isFirst)
+			_title = "First " + Cell.getScore(value) + " Created!";
+		else
+			_title = " Created again!";
+		this.title = _title + "\nDouble It?";
+
 		return value;
 	}
 
