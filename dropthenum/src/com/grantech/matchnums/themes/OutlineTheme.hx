@@ -129,7 +129,8 @@ class OutlineTheme extends ClassVariantTheme {
 		skin.cornerRadius = 5.0;
 		return skin;
 	}
+
 	public function getTextFormat(size:UInt = 0, color:UInt = 0, bold:Bool = false):TextFormat {
-		return new TextFormat(FONT_NAME, size == 0 ? FONT_SIZE : size, color == 0 ? FONT_COLOR: color, bold);
+		return new TextFormat(FONT_NAME, size == 0 ? FONT_SIZE : size, color == 0 ? FONT_COLOR : color, bold);
 	}
 }
