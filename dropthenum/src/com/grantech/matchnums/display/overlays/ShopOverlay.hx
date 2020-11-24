@@ -46,8 +46,7 @@ class ShopOverlay extends BaseOverlay {
 
 		// var coinsIcon = new Bitmap(Assets.getBitmapData("images/coin.png"));
 		this.coinsIndicator = new Indicator();
-		this.coinsIndicator.icon = new Bitmap(Assets.getBitmapData("images/coin.png"));
-		this.coinsIndicator.icon.width = this.coinsIndicator.icon.height = 24;
+		this.coinsIndicator.icon = new Bitmap(Assets.getBitmapData("images/coin-small.png"));
 		this.coinsIndicator.format = function(value:Float):String {
 			return " " + Utils.toCurrency(value) + " +";
 		}

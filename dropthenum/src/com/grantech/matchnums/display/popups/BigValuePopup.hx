@@ -30,8 +30,7 @@ class BigValuePopup extends ConfirmPopup {
 		super.initialize();
 
 		this.adsButton = new Button();
-		this.adsButton.text = "100";
-		this.adsButton.icon = new Bitmap(Assets.getBitmapData("images/coin.png"));
+		this.adsButton.icon = new Bitmap(Assets.getBitmapData("images/coin-small.png"));
 		this.adsButton.layoutData = AnchorLayoutData.bottomCenter(this.padding * 5, 0);
 		this.adsButton.addEventListener(MouseEvent.CLICK, this.adsButton_clickHandler);
 		this.content.addChild(this.adsButton);

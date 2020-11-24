@@ -46,7 +46,7 @@ class HomeOverlay extends BaseOverlay {
 		this.addChild(this.recordBestDisplay);
 
 		this.coinsIndicator = new Indicator();
-		this.coinsIndicator.icon = new Bitmap(Assets.getBitmapData("images/coin.png"));
+		this.coinsIndicator.icon = new Bitmap(Assets.getBitmapData("images/coin-small.png"));
 		this.coinsIndicator.format = function(value:Float):String {
 			return " " + Utils.toCurrency(value) + " +";
 		}
