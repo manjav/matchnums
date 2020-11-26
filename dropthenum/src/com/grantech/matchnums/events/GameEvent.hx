@@ -10,6 +10,8 @@ class GameEvent extends Event {
 	static public final GAME_OVER:String = "gameOver";
 	static public final BIG_VALUE:String = "bigValue";
 	static public final RECORD_CHANGE:String = "recordChange";
+	static public final REVIVE_BY_COIN:String = "reviveByCoin";
+	static public final REVIVE_BY_ADS:String = "reviveByAds";
 
 	/**
 		Dispatches a pooled event with the specified properties.
@@ -19,6 +21,8 @@ class GameEvent extends Event {
 		@since 1.0.0
 	**/
 	static public function dispatch(dispatcher:IEventDispatcher, type:String, data:Dynamic = null, bubbles:Bool = false, cancelable:Bool = false):Bool {
+		if(!dispatcher.hasEventListener(type))
+			return false;
 		#if flash
 		var event = new GameEvent(type, data, bubbles, cancelable);
 		return dispatcher.dispatchEvent(event);
