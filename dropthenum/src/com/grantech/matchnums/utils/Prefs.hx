@@ -2,10 +2,18 @@ package com.grantech.matchnums.utils;
 
 import openfl.net.SharedObject;
 
-class Prefs {
-	public static final instance:Prefs = new Prefs();
+class Prefs extends EventDispatcher {
+	static public final instance:Prefs = new Prefs();
 
-	public var record:Int = 0;
+	public var record(default, set):Int = 0;
+
+	public function set_record(value:Int):Int {
+		if (this.record == value)
+			return value;
+		this.record = value;
+		this.save();
+		return value;
+	}
 
 	public function new() {}
 
