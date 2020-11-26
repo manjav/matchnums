@@ -55,7 +55,7 @@ class OutlineTheme extends ClassVariantTheme {
 	private function setLabelWhiteLargStyles(label:Label):Void {
 		label.embedFonts = true;
 		if (label.textFormat == null)
-			label.textFormat = this.getTextFormat(FONT_SIZE * 3, 0xFFFFFF);
+			label.textFormat = this.getTextFormat(FONT_SIZE * 2, 0xFFFFFF);
 	}
 
 	private function setButtonStyles(button:Button):Void {
