@@ -5,8 +5,20 @@ import openfl.events.EventDispatcher;
 import openfl.net.SharedObject;
 
 class Prefs extends EventDispatcher {
+	static public final COIN:String = "coin";
 	static public final RECORD:String = "record";
 	static public final instance:Prefs = new Prefs();
+
+	public var coin(default, set):Int = 200;
+
+	public function set_coin(value:Int):Int {
+		if (this.coin == value)
+			return value;
+		this.coin = value;
+		GameEvent.dispatch(this, COIN, value);
+		this.save();
+		return value;
+	}
 
 	public var record(default, set):Int = 0;
 
@@ -25,13 +37,15 @@ class Prefs extends EventDispatcher {
 
 	public function load():Void {
 		var so:SharedObject = SharedObject.getLocal("prefs");
-		if (so.data.record == null)
+		if (so.data.coin == null)
 			return;
+		this.coin = so.data.coin;
 		this.record = so.data.record;
 	}
 
 	public function save():Void {
 		var so = SharedObject.getLocal("prefs");
+		so.data.coin = this.coin;
 		so.data.record = this.record;
 		so.flush(100000);
 	}
