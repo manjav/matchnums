@@ -6,6 +6,7 @@ import openfl.net.SharedObject;
 
 class Prefs extends EventDispatcher {
 	static public final COIN:String = "coin";
+	static public final SCORES:String = "scores";
 	static public final RECORD:String = "record";
 	static public final instance:Prefs = new Prefs();
 
@@ -18,6 +19,7 @@ class Prefs extends EventDispatcher {
 		GameEvent.dispatch(this, COIN, value);
 		this.map.set(type, value);
 		GameEvent.dispatch(this, type, value);
+		if (save && type != SCORES)
 		this.save();
 		return value;
 	}
@@ -33,6 +35,7 @@ class Prefs extends EventDispatcher {
 	public function load():Void {
 		var so:SharedObject = SharedObject.getLocal("prefs");
 		this.map = new Map();
+		this.set(SCORES, 0.0);
 		if (so.data.coin == null) {
 			this.set(COIN, 500.0);
 			this.set(RECORD, 0.0);

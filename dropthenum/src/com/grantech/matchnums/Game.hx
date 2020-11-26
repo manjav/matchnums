@@ -38,13 +38,15 @@ class Game extends Sprite {
 	function set_record(record:Int):Int {
 		if (this.record == record)
 			return record;
-		GameEvent.dispatch(this, GameEvent.RECORD_CHANGE, record);
+		Prefs.instance.set(SCORES, record);
+		Prefs.instance.set(RECORD, record);
 		return this.record = record;
 	}
 
 	public function new() {
 		super();
 
+		Prefs.instance.set(SCORES, 0);
 		this.state = Play;
 		this.cells = new CellMap();
 		var background = new Shape();
