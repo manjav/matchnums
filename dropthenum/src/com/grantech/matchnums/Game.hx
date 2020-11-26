@@ -24,6 +24,7 @@ class Game extends Sprite {
 
 	private var fallSFX:Sound;
 	private var timer:Timer;
+	private var numRevives:Int;
 	private var lastColumn:Int;
 	private var valueRecord:Int = 3;
 	private var maxValue:Int = 3;
@@ -93,7 +94,7 @@ class Game extends Sprite {
 		if (row >= CellMap.NUM_ROWS) {
 			this.endLine.transform.colorTransform.color = 0xFF0000;
 			this.showEndLine(0.01);
-			trace("Game Over.");
+			GameEvent.dispatch(this, GameEvent.GAME_OVER, this.numRevives);
 			return;
 		}
 
@@ -211,6 +212,12 @@ class Game extends Sprite {
 			// trace("match", c, matchs.length, needsRepeat);
 		}
 		return needsRepeat;
+	}
+
+	private function revive():Void {
+		this.numRevives++;
+
+
 	}
 
 	private function cell_initHandler(event:Event):Void {
