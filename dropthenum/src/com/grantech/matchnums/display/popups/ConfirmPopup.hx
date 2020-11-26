@@ -20,7 +20,7 @@ class ConfirmPopup extends BasePopup {
 	override private function initialize():Void {
 		super.initialize();
 		this.hasCloseButton = true;
-		this.title = "Test Title";
+		// this.title = "Test Title";
 	}
 
 	private function titleFactory():Void {
