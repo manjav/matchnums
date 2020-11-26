@@ -9,26 +9,21 @@ class Prefs extends EventDispatcher {
 	static public final RECORD:String = "record";
 	static public final instance:Prefs = new Prefs();
 
-	public var coin(default, set):Int = 200;
+	private var map:Map<String, Float>;
 
-	public function set_coin(value:Int):Int {
-		if (this.coin == value)
+	public function set(type:String, value:Float, save:Bool = true):Float {
+		if (this.get(type) == value)
 			return value;
 		this.coin = value;
 		GameEvent.dispatch(this, COIN, value);
+		this.map.set(type, value);
+		GameEvent.dispatch(this, type, value);
 		this.save();
 		return value;
 	}
 
-	public var record(default, set):Int = 0;
-
-	public function set_record(value:Int):Int {
-		if (this.record == value)
-			return value;
-		this.record = value;
-		GameEvent.dispatch(this, RECORD, value);
-		this.save();
-		return value;
+	public function get(type:String):Float {
+		return this.map.get(type);
 	}
 
 	public function new() {
@@ -37,16 +32,20 @@ class Prefs extends EventDispatcher {
 
 	public function load():Void {
 		var so:SharedObject = SharedObject.getLocal("prefs");
-		if (so.data.coin == null)
+		this.map = new Map();
+		if (so.data.coin == null) {
+			this.set(COIN, 500.0);
+			this.set(RECORD, 0.0);
 			return;
-		this.coin = so.data.coin;
-		this.record = so.data.record;
+		}
+		this.set(COIN, cast(so.data.coin, Float), false);
+		this.set(RECORD, cast(so.data.record, Float), false);
 	}
 
 	public function save():Void {
 		var so = SharedObject.getLocal("prefs");
-		so.data.coin = this.coin;
-		so.data.record = this.record;
+		so.data.coin = this.get(COIN);
+		so.data.record = this.get(RECORD);
 		so.flush(100000);
 	}
 
