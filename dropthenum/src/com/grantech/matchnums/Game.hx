@@ -214,10 +214,18 @@ class Game extends Sprite {
 		return needsRepeat;
 	}
 
-	private function revive():Void {
+	public function revive():Void {
 		this.numRevives++;
-
-
+		for (i in 0...CellMap.NUM_COLUMNS) {
+			for (j in CellMap.NUM_ROWS - 3...CellMap.NUM_ROWS) {
+				var cell = this.cells.get(i, j);
+				if (cell == null)
+					continue;
+				Cell.dispose(cell);
+				this.cells.remove(cell);
+			}
+		}
+		this.spawn();
 	}
 
 	private function cell_initHandler(event:Event):Void {

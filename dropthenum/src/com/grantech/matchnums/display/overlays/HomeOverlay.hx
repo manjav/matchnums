@@ -73,12 +73,21 @@ class HomeOverlay extends BaseOverlay {
 			popup.value = cast(event.data, Int);
 		} else if (event.type == GameEvent.GAME_OVER) {
 			var popup = cast(this.addOverlay(GameOver), GameOverPopup);
+			popup.addEventListener(GameEvent.REVIVE_BY_COIN, this.gameOverPopup_reviveHandler);
+			popup.addEventListener(GameEvent.REVIVE_BY_ADS, this.gameOverPopup_reviveHandler);
 			popup.value = cast(event.data, Int);
 		}
 	}
 
 	private function coinsIndicator_triggerHandler(event:TriggerEvent):Void {
 		this.addOverlay(Shop);
+	}
+
+	private function gameOverPopup_reviveHandler(event:GameEvent):Void {
+		var popup = cast(event.target, GameOverPopup);
+		popup.removeEventListener(GameEvent.REVIVE_BY_COIN, this.gameOverPopup_reviveHandler);
+		popup.removeEventListener(GameEvent.REVIVE_BY_ADS, this.gameOverPopup_reviveHandler);
+		this.game.revive();
 	}
 
 	private function addOverlay(type:ScreenType):BaseOverlay {
