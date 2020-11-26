@@ -1,8 +1,11 @@
 package com.grantech.matchnums.utils;
 
+import com.grantech.matchnums.events.GameEvent;
+import openfl.events.EventDispatcher;
 import openfl.net.SharedObject;
 
 class Prefs extends EventDispatcher {
+	static public final RECORD:String = "record";
 	static public final instance:Prefs = new Prefs();
 
 	public var record(default, set):Int = 0;
@@ -11,11 +14,14 @@ class Prefs extends EventDispatcher {
 		if (this.record == value)
 			return value;
 		this.record = value;
+		GameEvent.dispatch(this, RECORD, value);
 		this.save();
 		return value;
 	}
 
-	public function new() {}
+	public function new() {
+		super();
+	}
 
 	public function load():Void {
 		var so:SharedObject = SharedObject.getLocal("prefs");
