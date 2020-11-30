@@ -5,9 +5,8 @@ import com.grantech.matchnums.display.overlays.BaseOverlay.ScreenType;
 import com.grantech.matchnums.display.popups.BigValuePopup;
 import com.grantech.matchnums.display.popups.GameOverPopup;
 import com.grantech.matchnums.events.GameEvent;
-import com.grantech.matchnums.utils.Prefs;
+import com.grantech.matchnums.utils.Prefs.*;
 import com.grantech.matchnums.utils.Utils;
-import feathers.controls.Label;
 import feathers.events.TriggerEvent;
 import feathers.layout.AnchorLayout;
 import feathers.layout.AnchorLayoutData;
@@ -17,8 +16,8 @@ import openfl.events.Event;
 
 class HomeOverlay extends BaseOverlay {
 	private var game:Game;
-	private var recordDisplay:Label;
-	private var recordBestDisplay:Indicator;
+	private var scoresIndicator:Indicator;
+	private var recordIndicator:Indicator;
 	private var coinsIndicator:Indicator;
 
 	override private function initialize():Void {
@@ -33,26 +32,26 @@ class HomeOverlay extends BaseOverlay {
 		this.game.addEventListener(GameEvent.RECORD_CHANGE, this.game_eventsChangeHandler);
 		this.addChild(this.game);
 
-		this.recordDisplay = new Label();
-		this.recordDisplay.text = "0";
-		this.recordDisplay.layoutData = AnchorLayoutData.topCenter(Cell.BORDER);
-		this.addChild(this.recordDisplay);
+		this.scoresIndicator = new Indicator();
+		this.scoresIndicator.layoutData = AnchorLayoutData.topCenter(Cell.BORDER);
+		this.scoresIndicator.type = SCORES;
+		this.addChild(this.scoresIndicator);
 
-		this.recordBestDisplay = new Indicator();
-		this.recordBestDisplay.icon = new Bitmap(Assets.getBitmapData("images/medal.png"));
-		this.recordBestDisplay.layoutData = AnchorLayoutData.topRight(Cell.BORDER);
-		this.recordBestDisplay.format = function(value:Float):String {
+		this.recordIndicator = new Indicator();
+		this.recordIndicator.icon = new Bitmap(Assets.getBitmapData("images/medal.png"));
+		this.recordIndicator.layoutData = AnchorLayoutData.topRight(Cell.BORDER);
+		this.recordIndicator.format = function(value:Float):String {
 			return " " + Utils.toCurrency(value);
 		}
-		this.recordBestDisplay.value = Prefs.instance.record;
-		this.addChild(this.recordBestDisplay);
+		this.recordIndicator.type = RECORD;
+		this.addChild(this.recordIndicator);
 
 		this.coinsIndicator = new Indicator();
 		this.coinsIndicator.icon = new Bitmap(Assets.getBitmapData("images/coin-small.png"));
 		this.coinsIndicator.format = function(value:Float):String {
 			return " " + Utils.toCurrency(value) + " +";
 		}
-		this.coinsIndicator.value = 1200;
+		this.coinsIndicator.type = COIN;
 		this.coinsIndicator.layoutData = AnchorLayoutData.topLeft(Cell.BORDER, Cell.BORDER);
 		this.coinsIndicator.addEventListener(TriggerEvent.TRIGGER, this.coinsIndicator_triggerHandler);
 		this.addChild(this.coinsIndicator);
