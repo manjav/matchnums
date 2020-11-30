@@ -2,16 +2,18 @@ package com.grantech.matchnums;
 
 import com.grantech.matchnums.animations.CellInitAnimationFactory;
 import com.grantech.matchnums.events.GameEvent;
+import com.grantech.matchnums.utils.Prefs.*;
+import com.grantech.matchnums.utils.Prefs;
 import haxe.Timer;
 import motion.Actuate;
 import motion.easing.Back;
 import motion.easing.Expo;
-import openfl.Assets;
 import openfl.display.Shape;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.events.MouseEvent;
 import openfl.media.Sound;
+import openfl.utils.Assets;
 
 enum GameState {
 	Play;
@@ -33,14 +35,14 @@ class Game extends Sprite {
 	private var fallingEffect:Shape;
 	private var cellInitAnimationFactory:CellInitAnimationFactory;
 
-	public var record(default, set):Int;
+	public var scores(default, set):Int;
 
-	function set_record(record:Int):Int {
-		if (this.record == record)
-			return record;
-		Prefs.instance.set(SCORES, record);
-		Prefs.instance.set(RECORD, record);
-		return this.record = record;
+	function set_scores(scores:Int):Int {
+		if (this.scores == scores)
+			return scores;
+		Prefs.instance.set(SCORES, scores);
+		Prefs.instance.set(RECORD, scores);
+		return this.scores = scores;
 	}
 
 	public function new() {
@@ -235,7 +237,7 @@ class Game extends Sprite {
 		cell.removeEventListener(Event.INIT, this.cell_initHandler);
 
 		var score = Cell.getScore(cell.value);
-		this.record += score;
+		this.scores += score;
 
 		Score.instantiate("+" + score, cell.x - 4, cell.y - Cell.RADIUS, this);
 
