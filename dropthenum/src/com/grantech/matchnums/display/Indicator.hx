@@ -11,6 +11,8 @@ class Indicator extends Button {
 	public function set_type(_type:String):String {
 		if (this.type == _type)
 			return _type;
+		if (this.type != null)
+			Prefs.instance.removeEventListener(this.type, this.prefs_changeHandler);
 		this.type = _type;
 		this.text = this.format(Prefs.instance.get(_type));
 		Prefs.instance.addEventListener(_type, this.prefs_changeHandler);
