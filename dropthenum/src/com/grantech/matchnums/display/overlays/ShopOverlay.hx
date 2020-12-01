@@ -15,6 +15,7 @@ import feathers.utils.DisplayObjectRecycler;
 import haxe.Json;
 import openfl.Assets;
 import openfl.display.Bitmap;
+import openfl.events.Event;
 import openfl.events.MouseEvent;
 
 class ShopOverlay extends BaseOverlay {
@@ -41,8 +42,8 @@ class ShopOverlay extends BaseOverlay {
 			return item.text;
 		};
 		this.listView.dataProvider = new ArrayCollection(config.shop.items);
-		// this.listView.addEventListener(Event.CHANGE, listView_changeHandler);
-		// this.listView.addEventListener(ListViewEvent.ITEM_TRIGGER, listView_itemTriggerHandler);
+		this.listView.addEventListener(Event.CHANGE, this.listView_changeHandler);
+		// this.listView.addEventListener(ListViewEvent.ITEM_TRIGGER, this.listView_itemTriggerHandler);
 		this.addChild(this.listView);
 
 		this.coinsIndicator = new Indicator();
@@ -59,6 +60,11 @@ class ShopOverlay extends BaseOverlay {
 		closeButton.layoutData = AnchorLayoutData.topRight(this.padding, this.padding);
 		closeButton.addEventListener(MouseEvent.CLICK, closeButton_clickHandler);
 		this.addChild(closeButton);
+	}
+
+	private function listView_changeHandler(event:Event):Void {
+		this.listView.removeEventListener(Event.CHANGE, this.listView_changeHandler);
+		this.listView.addEventListener(Event.CHANGE, this.listView_changeHandler);
 	}
 
 	private function closeButton_clickHandler(event:MouseEvent):Void {
