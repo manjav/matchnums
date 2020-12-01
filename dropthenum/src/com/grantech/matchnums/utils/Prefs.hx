@@ -17,6 +17,10 @@ class Prefs extends EventDispatcher {
 			return value;
 		if (type == RECORD && this.get(RECORD) > value)
 			return value;
+		if (value < 0) {
+			GameEvent.dispatch(this, type, value);
+			return value;
+		}
 		this.map.set(type, value);
 		GameEvent.dispatch(this, type, value);
 		if (save && type != SCORES)
