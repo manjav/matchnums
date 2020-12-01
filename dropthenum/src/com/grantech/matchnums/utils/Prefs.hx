@@ -15,8 +15,8 @@ class Prefs extends EventDispatcher {
 	public function set(type:String, value:Float, save:Bool = true):Float {
 		if (this.get(type) == value)
 			return value;
-		this.coin = value;
-		GameEvent.dispatch(this, COIN, value);
+		if (type == RECORD && this.get(RECORD) > value)
+			return value;
 		this.map.set(type, value);
 		GameEvent.dispatch(this, type, value);
 		if (save && type != SCORES)
