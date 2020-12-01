@@ -1,5 +1,6 @@
 package com.grantech.matchnums.display.overlays;
 
+import com.grantech.matchnums.utils.Prefs.*;
 import com.grantech.matchnums.display.items.ShopItemRenderer;
 import com.grantech.matchnums.themes.OutlineTheme;
 import com.grantech.matchnums.utils.Utils;
@@ -44,13 +45,12 @@ class ShopOverlay extends BaseOverlay {
 		// this.listView.addEventListener(ListViewEvent.ITEM_TRIGGER, listView_itemTriggerHandler);
 		this.addChild(this.listView);
 
-		// var coinsIcon = new Bitmap(Assets.getBitmapData("images/coin.png"));
 		this.coinsIndicator = new Indicator();
 		this.coinsIndicator.icon = new Bitmap(Assets.getBitmapData("images/coin-small.png"));
 		this.coinsIndicator.format = function(value:Float):String {
 			return " " + Utils.toCurrency(value) + " +";
 		}
-		this.coinsIndicator.value = 1200;
+		this.coinsIndicator.type = COIN;
 		this.coinsIndicator.layoutData = AnchorLayoutData.topLeft(Cell.BORDER, Cell.BORDER);
 		this.addChild(this.coinsIndicator);
 
