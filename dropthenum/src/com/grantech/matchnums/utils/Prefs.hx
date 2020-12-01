@@ -20,7 +20,7 @@ class Prefs extends EventDispatcher {
 		this.map.set(type, value);
 		GameEvent.dispatch(this, type, value);
 		if (save && type != SCORES)
-		this.save();
+			this.save();
 		return value;
 	}
 
@@ -45,14 +45,14 @@ class Prefs extends EventDispatcher {
 		this.set(RECORD, cast(so.data.record, Float), false);
 	}
 
-	public function save():Void {
+	private function save():Void {
 		var so = SharedObject.getLocal("prefs");
 		so.data.coin = this.get(COIN);
 		so.data.record = this.get(RECORD);
 		so.flush(100000);
 	}
 
-	public function clear():Void {
+	private function clear():Void {
 		var so = SharedObject.getLocal("prefs");
 		so.clear();
 	}
