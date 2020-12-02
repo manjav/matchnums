@@ -1,6 +1,7 @@
 package com.grantech.matchnums.display.popups;
 
 import com.grantech.matchnums.events.GameEvent;
+import com.grantech.matchnums.utils.Prefs;
 import feathers.controls.Button;
 import feathers.layout.AnchorLayoutData;
 import openfl.Assets;
@@ -73,7 +74,10 @@ class GameOverPopup extends ConfirmPopup {
 	// }
 
 	private function reviveByCoinButton_clickHandler(event:MouseEvent):Void {
-		GameEvent.dispatch(this, GameEvent.REVIVE_BY_COIN);
+		var newValue = Prefs.instance.get(Prefs.COIN) - cost;
+		Prefs.instance.set(Prefs.COIN, newValue);
+		if (newValue >= 0)
+			GameEvent.dispatch(this, GameEvent.REVIVE_BY_COIN);
 		this.close();
 	}
 

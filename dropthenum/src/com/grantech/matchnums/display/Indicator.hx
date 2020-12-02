@@ -4,6 +4,7 @@ import com.grantech.matchnums.events.GameEvent;
 import com.grantech.matchnums.themes.OutlineTheme;
 import com.grantech.matchnums.utils.Prefs;
 import feathers.controls.Button;
+import feathers.events.TriggerEvent;
 
 class Indicator extends Button {
 	public var type(default, set):String;
@@ -28,7 +29,14 @@ class Indicator extends Button {
 		super.initialize();
 	}
 
+	@:access(feathers.events.TriggerEvent)
 	private function prefs_changeHandler(event:GameEvent):Void {
-		this.text = this.format(event.data);
+		var newValue = cast(event.data, Float);
+		if(this.type == Prefs.COIN && newValue < 0){
+			this.dispatchEvent(new TriggerEvent(TriggerEvent.TRIGGER));
+			return;
+		}
+		this.text = this.format(newValue);
+
 	}
 }
