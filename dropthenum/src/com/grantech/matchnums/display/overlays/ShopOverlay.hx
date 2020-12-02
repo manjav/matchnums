@@ -1,8 +1,9 @@
 package com.grantech.matchnums.display.overlays;
 
-import com.grantech.matchnums.utils.Prefs.*;
 import com.grantech.matchnums.display.items.ShopItemRenderer;
 import com.grantech.matchnums.themes.OutlineTheme;
+import com.grantech.matchnums.utils.Prefs.*;
+import com.grantech.matchnums.utils.Prefs;
 import com.grantech.matchnums.utils.Utils;
 import feathers.controls.Button;
 import feathers.controls.ListView;
@@ -64,6 +65,13 @@ class ShopOverlay extends BaseOverlay {
 
 	private function listView_changeHandler(event:Event):Void {
 		this.listView.removeEventListener(Event.CHANGE, this.listView_changeHandler);
+		var text:String = this.listView.selectedItem.text;
+		this.listView.selectedIndex = -1;
+		if (text == "Ads Free") {
+			trace("Show Ad.");
+		} else {
+			Prefs.instance.set(COIN, Prefs.instance.get(COIN) + Std.parseFloat(text));
+		}
 		this.listView.addEventListener(Event.CHANGE, this.listView_changeHandler);
 	}
 
