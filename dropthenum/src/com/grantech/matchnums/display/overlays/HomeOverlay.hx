@@ -36,7 +36,7 @@ class HomeOverlay extends BaseOverlay {
 		this.addChild(this.scoresIndicator);
 
 		this.recordIndicator = new Indicator();
-		this.recordIndicator.icon = new Bitmap(Assets.getBitmapData("images/medal.png"));
+		this.recordIndicator.icon = new Bitmap(Assets.getBitmapData("images/medal-small.png"));
 		this.recordIndicator.layoutData = AnchorLayoutData.topRight(Cell.BORDER);
 		this.recordIndicator.format = function(value:Float):String {
 			return " " + Utils.toCurrency(value);
