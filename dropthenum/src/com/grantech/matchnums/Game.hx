@@ -26,6 +26,7 @@ class Game extends Sprite {
 
 	private var fallSFX:Sound;
 	private var timer:Timer;
+	private var haveRecord:Bool;
 	private var numRevives:Int;
 	private var lastColumn:Int;
 	private var valueRecord:Int = 3;
@@ -41,7 +42,12 @@ class Game extends Sprite {
 		if (this.scores == scores)
 			return scores;
 		Prefs.instance.set(SCORES, scores);
+		if (Prefs.instance.get(RECORD) < scores) {
 		Prefs.instance.set(RECORD, scores);
+			if (scores > 10 && !haveRecord){
+				haveRecord = true;
+			}
+		}
 		return this.scores = scores;
 	}
 
