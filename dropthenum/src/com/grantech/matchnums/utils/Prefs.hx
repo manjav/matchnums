@@ -26,6 +26,10 @@ class Prefs extends EventDispatcher {
 		return value;
 	}
 
+	public function increase(type:String, value:Float, save:Bool = true):Float {
+		return this.set(type, this.get(type) + value, save);
+	}
+
 	public function get(type:String):Float {
 		return this.map.get(type);
 	}

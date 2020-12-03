@@ -70,7 +70,7 @@ class ShopOverlay extends BaseOverlay {
 		if (text == "Ads Free") {
 			trace("Show Ad.");
 		} else {
-			Prefs.instance.set(COIN, Prefs.instance.get(COIN) + Std.parseFloat(text));
+			Prefs.instance.increase(Prefs.COIN, Std.parseFloat(text));
 		}
 		this.listView.addEventListener(Event.CHANGE, this.listView_changeHandler);
 	}
