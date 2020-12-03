@@ -27,6 +27,7 @@ class HomeOverlay extends BaseOverlay {
 		this.layout = new AnchorLayout();
 
 		this.game = new Game();
+		this.game.addEventListener(GameEvent.BIG_VALUE, this.game_eventsChangeHandler);
 		this.game.addEventListener(GameEvent.GAME_OVER, this.game_eventsChangeHandler);
 		this.addChild(this.game);
 
@@ -56,15 +57,16 @@ class HomeOverlay extends BaseOverlay {
 	}
 
 	private function game_eventsChangeHandler(event:GameEvent):Void {
+		var popup:BaseOverlay = null;
+		trace(event);
 		if (event.type == GameEvent.BIG_VALUE) {
-			var popup = cast(this.addOverlay(BigValue), BigValuePopup);
-			popup.value = cast(event.data, Int);
+			popup = this.addOverlay(BigValue, false);
 		} else if (event.type == GameEvent.GAME_OVER) {
-			var popup = cast(this.addOverlay(GameOver), GameOverPopup);
+			popup = this.addOverlay(GameOver);
 			popup.addEventListener(GameEvent.REVIVE_BY_COIN, this.gameOverPopup_reviveHandler);
 			popup.addEventListener(GameEvent.REVIVE_BY_ADS, this.gameOverPopup_reviveHandler);
-			popup.value = cast(event.data, Int);
 		}
+		cast(popup, IGamePlayPopup).value = cast(event.data, Int);
 	}
 
 	private function coinsIndicator_triggerHandler(event:TriggerEvent):Void {
@@ -78,9 +80,9 @@ class HomeOverlay extends BaseOverlay {
 		this.game.revive();
 	}
 
-	private function addOverlay(type:ScreenType):BaseOverlay {
+	private function addOverlay(type:ScreenType, save:Bool = true):BaseOverlay {
 		this.pause();
-		return BaseOverlay.create(type, this, true);
+		return BaseOverlay.create(type, this, save);
 	}
 
 	private function screen_closeHandler(event:Event):Void {
