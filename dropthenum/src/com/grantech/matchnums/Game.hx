@@ -29,7 +29,7 @@ class Game extends Sprite {
 	private var haveRecord:Bool;
 	private var numRevives:Int;
 	private var lastColumn:Int;
-	private var valueRecord:Int = 3;
+	private var valueRecord:Int = 8;
 	private var maxValue:Int = 3;
 	private var cells:CellMap;
 	private var endLine:Shape;
