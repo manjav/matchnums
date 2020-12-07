@@ -2,8 +2,8 @@ package com.grantech.matchnums.display.overlays;
 
 import com.grantech.matchnums.display.Indicator;
 import com.grantech.matchnums.display.overlays.BaseOverlay.ScreenType;
-import com.grantech.matchnums.display.popups.BigValuePopup;
 import com.grantech.matchnums.display.popups.GameOverPopup;
+import com.grantech.matchnums.display.popups.IGamePlayPopup;
 import com.grantech.matchnums.events.GameEvent;
 import com.grantech.matchnums.utils.Prefs.*;
 import com.grantech.matchnums.utils.Utils;
@@ -63,6 +63,7 @@ class HomeOverlay extends BaseOverlay {
 		if (event.type == GameEvent.BIG_VALUE) {
 			popup = this.addOverlay(BigValue, false);
 		} else if (event.type == GameEvent.NEW_RECORD) {
+			popup = this.addOverlay(NewRecord, false);
 		} else if (event.type == GameEvent.GAME_OVER) {
 			popup = this.addOverlay(GameOver);
 			popup.addEventListener(GameEvent.REVIVE_BY_COIN, this.gameOverPopup_reviveHandler);

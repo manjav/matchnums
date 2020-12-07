@@ -2,6 +2,7 @@ package com.grantech.matchnums.display.overlays;
 
 import com.grantech.matchnums.display.popups.BigValuePopup;
 import com.grantech.matchnums.display.popups.GameOverPopup;
+import com.grantech.matchnums.display.popups.NewRecordPopup;
 import feathers.controls.LayoutGroup;
 import feathers.layout.AnchorLayoutData;
 import feathers.skins.RectangleSkin;
@@ -13,6 +14,7 @@ enum ScreenType {
 	Pause;
 	Shop;
 	BigValue;
+	NewRecord;
 	GameOver;
 }
 
@@ -31,6 +33,8 @@ class BaseOverlay extends LayoutGroup {
 					new ShopOverlay();
 				case BigValue:
 					new BigValuePopup();
+				case NewRecord:
+					new NewRecordPopup();
 				case GameOver:
 					new GameOverPopup();
 				default: null;
