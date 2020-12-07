@@ -28,6 +28,7 @@ class HomeOverlay extends BaseOverlay {
 
 		this.game = new Game();
 		this.game.addEventListener(GameEvent.BIG_VALUE, this.game_eventsChangeHandler);
+		this.game.addEventListener(GameEvent.NEW_RECORD, this.game_eventsChangeHandler);
 		this.game.addEventListener(GameEvent.GAME_OVER, this.game_eventsChangeHandler);
 		this.addChild(this.game);
 
@@ -61,6 +62,7 @@ class HomeOverlay extends BaseOverlay {
 		trace(event);
 		if (event.type == GameEvent.BIG_VALUE) {
 			popup = this.addOverlay(BigValue, false);
+		} else if (event.type == GameEvent.NEW_RECORD) {
 		} else if (event.type == GameEvent.GAME_OVER) {
 			popup = this.addOverlay(GameOver);
 			popup.addEventListener(GameEvent.REVIVE_BY_COIN, this.gameOverPopup_reviveHandler);

@@ -8,7 +8,7 @@ import openfl.Assets;
 import openfl.display.Bitmap;
 import openfl.events.MouseEvent;
 
-class GameOverPopup extends ConfirmPopup {
+class GameOverPopup extends ConfirmPopup implements IGamePlayPopup {
 	private var reviveByCoinButton:Button;
 	private var reviveByAdsButton:Button;
 

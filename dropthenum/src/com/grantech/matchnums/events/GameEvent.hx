@@ -9,6 +9,7 @@ class GameEvent extends Event {
 
 	static public final GAME_OVER:String = "gameOver";
 	static public final BIG_VALUE:String = "bigValue";
+	static public final NEW_RECORD:String = "newRecord";
 	static public final REVIVE_BY_COIN:String = "reviveByCoin";
 	static public final REVIVE_BY_ADS:String = "reviveByAds";
 
