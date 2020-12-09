@@ -44,7 +44,7 @@ class Game extends Sprite {
 		Prefs.instance.set(SCORES, scores);
 		if (Prefs.instance.get(RECORD) < scores) {
 			Prefs.instance.set(RECORD, scores);
-			if (scores > 1000 && !haveRecord){
+			if (scores > 1000 && !haveRecord) {
 				GameEvent.dispatch(this, GameEvent.NEW_RECORD, scores);
 				haveRecord = true;
 			}
@@ -104,22 +104,23 @@ class Game extends Sprite {
 		var row = this.cells.length(this.lastColumn);
 		if (row >= CellMap.NUM_ROWS) {
 			this.endLine.transform.colorTransform.color = 0xFF0000;
-			this.showEndLine(0.01);
-			GameEvent.dispatch(this, GameEvent.GAME_OVER, this.numRevives);
+			Actuate.tween(this.endLine, 1.0, {alpha: 0.2}).repeat(1).onComplete(gameOver);
 			return;
 		}
-
+		
 		var cell = Cell.instantiate(this.lastColumn, row, Math.ceil(Math.random() * this.maxValue), this.cellInitAnimationFactory);
 		cell.x = this.lastColumn * Cell.SIZE + Cell.RADIUS;
 		cell.y = Cell.RADIUS;
 		this.cells.add(cell);
 		this.addChild(cell);
-
+		
 		this.fallingEffect.transform.colorTransform.color = Cell.COLORS[cell.value];
 	}
 
-	private function showEndLine(alpha:Float):Void {
-		Actuate.tween(this.endLine, 0.5, {alpha: alpha}).onComplete(showEndLine, [alpha == 1 ? 0.01 : 1]);
+	private function gameOver():Void {
+		this.endLine.alpha = 1;
+		this.endLine.transform.colorTransform.color = 0xFFFFFF;
+		GameEvent.dispatch(this, GameEvent.GAME_OVER, this.numRevives);
 	}
 
 	private function enterFrameHandler(event:Event):Void {
