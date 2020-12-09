@@ -2,7 +2,7 @@ package com.grantech.matchnums.display.overlays;
 
 import com.grantech.matchnums.display.Indicator;
 import com.grantech.matchnums.display.overlays.BaseOverlay.ScreenType;
-import com.grantech.matchnums.display.popups.GameOverPopup;
+import com.grantech.matchnums.display.popups.BasePopup;
 import com.grantech.matchnums.display.popups.IGamePlayPopup;
 import com.grantech.matchnums.events.GameEvent;
 import com.grantech.matchnums.utils.Prefs.*;
@@ -54,6 +54,8 @@ class HomeOverlay extends BaseOverlay {
 		this.coinsIndicator.layoutData = AnchorLayoutData.topLeft(Cell.BORDER, Cell.BORDER);
 		this.coinsIndicator.addEventListener(TriggerEvent.TRIGGER, this.coinsIndicator_triggerHandler);
 		this.addChild(this.coinsIndicator);
+
+		BasePopup.CONTENT_HEIGHT = BasePopup.CONTENT_WIDTH = Math.round((stage.stageWidth * Main.SCALE_FACTOR) * 0.92);
 	}
 
 	private function game_eventsChangeHandler(event:GameEvent):Void {

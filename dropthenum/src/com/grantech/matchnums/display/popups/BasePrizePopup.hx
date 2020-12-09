@@ -25,7 +25,6 @@ class BasePrizePopup extends ConfirmPopup implements IGamePlayPopup {
 	}
 
 	override private function initialize():Void {
-		this.contentHeight = 480;
 		super.initialize();
 		this.hasCloseButton = false;
 
