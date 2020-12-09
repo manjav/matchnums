@@ -58,7 +58,6 @@ class HomeOverlay extends BaseOverlay {
 
 	private function game_eventsChangeHandler(event:GameEvent):Void {
 		var popup:BaseOverlay = null;
-		trace(event);
 		if (event.type == GameEvent.BIG_VALUE) {
 			popup = this.addOverlay(BigValue, false);
 		} else if (event.type == GameEvent.NEW_RECORD) {
