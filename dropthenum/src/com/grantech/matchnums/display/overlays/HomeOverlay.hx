@@ -23,7 +23,6 @@ class HomeOverlay extends BaseOverlay {
 	override private function initialize():Void {
 		super.initialize();
 
-		this.autoSizeMode = STAGE;
 		this.layout = new AnchorLayout();
 
 		this.game = new Game();
