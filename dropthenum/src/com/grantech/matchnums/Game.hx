@@ -44,7 +44,7 @@ class Game extends Sprite {
 		Prefs.instance.set(SCORES, scores);
 		if (Prefs.instance.get(RECORD) < scores) {
 			Prefs.instance.set(RECORD, scores);
-			if (scores > 10 && !haveRecord){
+			if (scores > 1000 && !haveRecord){
 				GameEvent.dispatch(this, GameEvent.NEW_RECORD, scores);
 				haveRecord = true;
 			}
