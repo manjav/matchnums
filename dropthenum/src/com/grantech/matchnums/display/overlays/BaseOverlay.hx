@@ -1,7 +1,7 @@
 package com.grantech.matchnums.display.overlays;
 
 import com.grantech.matchnums.display.popups.BigValuePopup;
-import com.grantech.matchnums.display.popups.GameOverPopup;
+import com.grantech.matchnums.display.popups.RevivePopup;
 import com.grantech.matchnums.display.popups.NewRecordPopup;
 import feathers.controls.LayoutGroup;
 import feathers.layout.AnchorLayoutData;
@@ -36,7 +36,7 @@ class BaseOverlay extends LayoutGroup {
 				case NewRecord:
 					new NewRecordPopup();
 				case GameOver:
-					new GameOverPopup();
+					new RevivePopup();
 				default: null;
 			}
 			screen.layoutData = AnchorLayoutData.fill();

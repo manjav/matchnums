@@ -75,7 +75,7 @@ class HomeOverlay extends BaseOverlay {
 	}
 
 	private function gameOverPopup_reviveHandler(event:GameEvent):Void {
-		var popup = cast(event.target, GameOverPopup);
+		var popup = cast(event.target, RevivePopup);
 		popup.removeEventListener(GameEvent.REVIVE_BY_COIN, this.gameOverPopup_reviveHandler);
 		popup.removeEventListener(GameEvent.REVIVE_BY_ADS, this.gameOverPopup_reviveHandler);
 		this.game.revive();

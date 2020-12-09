@@ -8,7 +8,7 @@ import openfl.Assets;
 import openfl.display.Bitmap;
 import openfl.events.MouseEvent;
 
-class GameOverPopup extends ConfirmPopup implements IGamePlayPopup {
+class RevivePopup extends ConfirmPopup implements IGamePlayPopup {
 	private var reviveByCoinButton:Button;
 	private var reviveByAdsButton:Button;
 
@@ -26,7 +26,6 @@ class GameOverPopup extends ConfirmPopup implements IGamePlayPopup {
 	}
 
 	override private function initialize():Void {
-		this.contentHeight = 400;
 		super.initialize();
 		this.title = "Game Over";
 
