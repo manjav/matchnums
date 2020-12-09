@@ -15,6 +15,7 @@ enum ScreenType {
 	Shop;
 	BigValue;
 	NewRecord;
+	Revive;
 	GameOver;
 }
 
@@ -35,7 +36,7 @@ class BaseOverlay extends LayoutGroup {
 					new BigValuePopup();
 				case NewRecord:
 					new NewRecordPopup();
-				case GameOver:
+				case Revive:
 					new RevivePopup();
 				default: null;
 			}
