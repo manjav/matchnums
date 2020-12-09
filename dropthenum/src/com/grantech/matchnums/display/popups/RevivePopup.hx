@@ -83,4 +83,9 @@ class RevivePopup extends ConfirmPopup implements IGamePlayPopup {
 	private function reviveByAdsButton_clickHandler(event:MouseEvent):Void {
 		this.close();
 	}
+
+	override private function closeButton_clickHandler(event:MouseEvent):Void {
+		this.closeButton_clickHandler(event);
+		GameEvent.dispatch(this, GameEvent.REVIVE_CANCEL);
+	}
 }

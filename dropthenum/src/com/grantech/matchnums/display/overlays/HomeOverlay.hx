@@ -68,6 +68,9 @@ class HomeOverlay extends BaseOverlay {
 			popup = this.addOverlay(GameOver);
 			popup.addEventListener(GameEvent.REVIVE_BY_COIN, this.gameOverPopup_reviveHandler);
 			popup.addEventListener(GameEvent.REVIVE_BY_ADS, this.gameOverPopup_reviveHandler);
+			popup.addEventListener(GameEvent.REVIVE_BY_COIN, this.revivePopup_reviveHandler);
+			popup.addEventListener(GameEvent.REVIVE_BY_ADS, this.revivePopup_reviveHandler);
+			popup.addEventListener(GameEvent.REVIVE_CANCEL, this.revivePopup_reviveHandler);
 		}
 		cast(popup, IGamePlayPopup).value = cast(event.data, Int);
 	}
@@ -76,10 +79,14 @@ class HomeOverlay extends BaseOverlay {
 		this.addOverlay(Shop);
 	}
 
-	private function gameOverPopup_reviveHandler(event:GameEvent):Void {
+	private function revivePopup_reviveHandler(event:GameEvent):Void {
 		var popup = cast(event.target, RevivePopup);
-		popup.removeEventListener(GameEvent.REVIVE_BY_COIN, this.gameOverPopup_reviveHandler);
-		popup.removeEventListener(GameEvent.REVIVE_BY_ADS, this.gameOverPopup_reviveHandler);
+		popup.removeEventListener(GameEvent.REVIVE_BY_COIN, this.revivePopup_reviveHandler);
+		popup.removeEventListener(GameEvent.REVIVE_BY_ADS, this.revivePopup_reviveHandler);
+		popup.removeEventListener(GameEvent.REVIVE_CANCEL, this.revivePopup_reviveHandler);
+		if (event.type == GameEvent.REVIVE_CANCEL)
+			this.addOverlay(GameOver);
+		else
 		this.game.revive();
 	}
 
