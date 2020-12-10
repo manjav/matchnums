@@ -4,6 +4,7 @@ import com.grantech.matchnums.display.Indicator;
 import com.grantech.matchnums.display.overlays.BaseOverlay.ScreenType;
 import com.grantech.matchnums.display.popups.BasePopup;
 import com.grantech.matchnums.display.popups.IGamePlayPopup;
+import com.grantech.matchnums.display.popups.RevivePopup;
 import com.grantech.matchnums.events.GameEvent;
 import com.grantech.matchnums.utils.Prefs.*;
 import com.grantech.matchnums.utils.Utils;
@@ -65,9 +66,7 @@ class HomeOverlay extends BaseOverlay {
 		} else if (event.type == GameEvent.NEW_RECORD) {
 			popup = this.addOverlay(NewRecord, false);
 		} else if (event.type == GameEvent.GAME_OVER) {
-			popup = this.addOverlay(GameOver);
-			popup.addEventListener(GameEvent.REVIVE_BY_COIN, this.gameOverPopup_reviveHandler);
-			popup.addEventListener(GameEvent.REVIVE_BY_ADS, this.gameOverPopup_reviveHandler);
+			popup = this.addOverlay(Revive);
 			popup.addEventListener(GameEvent.REVIVE_BY_COIN, this.revivePopup_reviveHandler);
 			popup.addEventListener(GameEvent.REVIVE_BY_ADS, this.revivePopup_reviveHandler);
 			popup.addEventListener(GameEvent.REVIVE_CANCEL, this.revivePopup_reviveHandler);
@@ -76,7 +75,7 @@ class HomeOverlay extends BaseOverlay {
 	}
 
 	private function coinsIndicator_triggerHandler(event:TriggerEvent):Void {
-		this.addOverlay(Shop);
+		this.addOverlay(Revive);
 	}
 
 	private function revivePopup_reviveHandler(event:GameEvent):Void {
@@ -87,7 +86,7 @@ class HomeOverlay extends BaseOverlay {
 		if (event.type == GameEvent.REVIVE_CANCEL)
 			this.addOverlay(GameOver);
 		else
-		this.game.revive();
+			this.game.revive();
 	}
 
 	private function addOverlay(type:ScreenType, save:Bool = true):BaseOverlay {
