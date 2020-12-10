@@ -1,5 +1,6 @@
 package com.grantech.matchnums.display.overlays;
 
+import com.grantech.matchnums.themes.OutlineTheme;
 import com.grantech.matchnums.display.popups.BigValuePopup;
 import com.grantech.matchnums.display.popups.RevivePopup;
 import com.grantech.matchnums.display.popups.NewRecordPopup;
@@ -50,7 +51,7 @@ class BaseOverlay extends LayoutGroup {
 		return screen;
 	}
 
-	private var padding = 16;
+	private var padding = OutlineTheme.PADDING;
 	private var overlay:RectangleSkin;
 
 	override private function initialize():Void {
