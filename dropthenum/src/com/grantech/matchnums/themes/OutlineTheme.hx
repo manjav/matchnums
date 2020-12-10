@@ -1,5 +1,6 @@
 package com.grantech.matchnums.themes;
 
+import openfl.display.Stage;
 import feathers.controls.Button;
 import feathers.controls.ButtonState;
 import feathers.controls.Label;
@@ -17,15 +18,20 @@ class OutlineTheme extends ClassVariantTheme {
 	static public final FILL_COLOR = 0x002435;
 	static public final BORDER_COLOR = 0xEDEDED;
 
+	static public var SCALE_FACTOR:Float;
+
 	public static final VARIANT_LABEL_MEDIUM:String = "variantLabelMedium";
 	public static final VARIANT_LABEL_LARG:String = "variantLabelLarg";
 	public static final VARIANT_BUTTON_LINK:String = "variantButtonLink";
 	public static final VARIANT_BUTTON_CLOSE:String = "variantButtonClose";
 	public static final VARIANT_BUTTON_INDICATOR:String = "variantButtonIndicator";
 
-	public function new() {
+
+
+	public function new(stage:Stage, scaleFactor:Float) {
 		super();
 
+		SCALE_FACTOR = scaleFactor;
 		this.styleProvider.setStyleFunction(Label, null, setLabelStyles);
 		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_MEDIUM, this.setLabelMediumStyles);
 		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_LARG, this.setLabelWhiteLargStyles);
