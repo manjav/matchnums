@@ -56,7 +56,6 @@ class HomeOverlay extends BaseOverlay {
 		this.coinsIndicator.addEventListener(TriggerEvent.TRIGGER, this.coinsIndicator_triggerHandler);
 		this.addChild(this.coinsIndicator);
 
-		BasePopup.CONTENT_HEIGHT = BasePopup.CONTENT_WIDTH = Math.round((stage.stageWidth * Main.SCALE_FACTOR) * 0.92);
 	}
 
 	private function game_eventsChangeHandler(event:GameEvent):Void {

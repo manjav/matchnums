@@ -10,8 +10,6 @@ import feathers.skins.RectangleSkin;
 import openfl.events.MouseEvent;
 
 class BasePopup extends BaseOverlay {
-	static public var CONTENT_WIDTH = 400.0;
-	static public var CONTENT_HEIGHT = 400.0;
 
 	private var closeButton:Button;
 	private var content:LayoutGroup;
@@ -32,8 +30,8 @@ class BasePopup extends BaseOverlay {
 		this.layout = new AnchorLayout();
 
 		this.content = new LayoutGroup();
-		this.content.width = CONTENT_WIDTH;
-		this.content.height = CONTENT_HEIGHT;
+		this.content.width = OutlineTheme.POPUP_SIZE;
+		this.content.height = OutlineTheme.POPUP_SIZE;
 		this.content.layout = new AnchorLayout();
 		this.content.layoutData = AnchorLayoutData.center();
 		this.addChild(this.content);

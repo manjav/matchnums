@@ -18,6 +18,7 @@ class OutlineTheme extends ClassVariantTheme {
 	static public final FILL_COLOR = 0x002435;
 	static public final BORDER_COLOR = 0xEDEDED;
 
+	static public var POPUP_SIZE:Int;
 	static public var SCALE_FACTOR:Float;
 
 	public static final VARIANT_LABEL_MEDIUM:String = "variantLabelMedium";
@@ -32,6 +33,8 @@ class OutlineTheme extends ClassVariantTheme {
 		super();
 
 		SCALE_FACTOR = scaleFactor;
+		POPUP_SIZE = Math.round((stage.stageWidth * SCALE_FACTOR) * 0.9);
+
 		this.styleProvider.setStyleFunction(Label, null, setLabelStyles);
 		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_MEDIUM, this.setLabelMediumStyles);
 		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_LARG, this.setLabelWhiteLargStyles);
