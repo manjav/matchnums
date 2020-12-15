@@ -37,6 +37,7 @@ class Cell extends Sprite {
 	public var value:Int = -1;
 	public var state:CellState;
 	public var initAnimationFactory:IAnimationFactory;
+	public var disposeAnimationFactory:IAnimationFactory;
 
 	private var textSize:Int = 80;
 	private var background:Shape;
@@ -102,6 +103,12 @@ class Cell extends Sprite {
 
 	static private var pool:Array<Cell> = new Array();
 	static private var i:Int = 0;
+
+	static public function dispose(cell:Cell, disposeAnimationFactory:IAnimationFactory = null):Void {
+		if (disposeAnimationFactory != null) {
+			disposeAnimationFactory.call([cell, cell.onDispose]);
+			return;
+		}
 
 		if (cell.hasEventListener(Event.CLEAR))
 			cell.dispatchEvent(new Event(Event.CLEAR));

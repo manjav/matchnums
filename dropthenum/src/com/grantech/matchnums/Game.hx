@@ -1,5 +1,6 @@
 package com.grantech.matchnums;
 
+import com.grantech.matchnums.animations.CellDisposeAnimationFactory;
 import com.grantech.matchnums.animations.CellInitAnimationFactory;
 import com.grantech.matchnums.events.GameEvent;
 import com.grantech.matchnums.utils.Prefs.*;
@@ -35,6 +36,7 @@ class Game extends Sprite {
 	private var endLine:Shape;
 	private var fallingEffect:Shape;
 	private var cellInitAnimationFactory:CellInitAnimationFactory;
+	private var cellDisposeAnimationFactory:CellDisposeAnimationFactory;
 
 	public var scores(default, set):Int;
 
@@ -89,6 +91,7 @@ class Game extends Sprite {
 
 		this.lastColumn = Math.floor(Math.random() * CellMap.NUM_COLUMNS);
 		this.cellInitAnimationFactory = new CellInitAnimationFactory();
+		this.cellDisposeAnimationFactory = new CellDisposeAnimationFactory();
 		this.spawn();
 
 		this.fallSFX = Assets.getSound("sounds/fall.ogg");
