@@ -74,7 +74,7 @@ class HomeOverlay extends BaseOverlay {
 	}
 
 	private function coinsIndicator_triggerHandler(event:TriggerEvent):Void {
-		this.addOverlay(Revive);
+		this.addOverlay(Shop);
 	}
 
 	private function revivePopup_reviveHandler(event:GameEvent):Void {
