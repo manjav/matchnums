@@ -18,10 +18,9 @@ class CellDisposeAnimationFactory implements IAnimationFactory {
 
 		cell.scaleX = cell.scaleY = 1;
 		var ease = Actuate.tween(cell, 0.3, {
-			delay: Math.random(),
 			scaleX: 0.1,
 			scaleY: 0.1
-		}).ease(Back.easeIn);
+		}).delay(Math.random()).ease(Back.easeIn);
 
 		if (handler != null)
 			ease.onComplete(handler);
