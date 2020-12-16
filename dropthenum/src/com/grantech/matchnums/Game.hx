@@ -110,13 +110,13 @@ class Game extends Sprite {
 			Actuate.tween(this.endLine, 1.0, {alpha: 0.2}).repeat(1).onComplete(gameOver);
 			return;
 		}
-		
+
 		var cell = Cell.instantiate(this.lastColumn, row, Math.ceil(Math.random() * this.maxValue), this.cellInitAnimationFactory);
 		cell.x = this.lastColumn * Cell.SIZE + Cell.RADIUS;
 		cell.y = Cell.RADIUS;
 		this.cells.add(cell);
 		this.addChild(cell);
-		
+
 		this.fallingEffect.transform.colorTransform.color = Cell.COLORS[cell.value];
 	}
 
@@ -229,20 +229,6 @@ class Game extends Sprite {
 		return needsRepeat;
 	}
 
-	public function revive():Void {
-		this.numRevives++;
-		for (i in 0...CellMap.NUM_COLUMNS) {
-			for (j in CellMap.NUM_ROWS - 3...CellMap.NUM_ROWS) {
-				var cell = this.cells.get(i, j);
-				if (cell == null)
-					continue;
-				Cell.dispose(cell);
-				this.cells.remove(cell);
-			}
-		}
-		this.spawn();
-	}
-
 	private function cell_initHandler(event:Event):Void {
 		var cell = cast(event.currentTarget, Cell);
 		cell.removeEventListener(Event.INIT, this.cell_initHandler);
@@ -263,5 +249,26 @@ class Game extends Sprite {
 				this.maxValue = cell.value - distance;
 		}
 		this.fallAll(false);
+	}
+
+	
+	public function revive():Void {
+		this.numRevives++;
+		for (i in 0...CellMap.NUM_COLUMNS) {
+			for (j in CellMap.NUM_ROWS - 3...CellMap.NUM_ROWS) {
+				var cell = this.cells.get(i, j);
+				if (cell == null)
+					continue;
+				cell.addEventListener(Event.CLEAR, this.cell_clearHandlre);
+				Cell.dispose(cell, cellDisposeAnimationFactory);
+			}
+		}
+		this.timer = Timer.delay(this.spawn, 1500);
+	}
+
+	private function cell_clearHandlre(event:Event):Void {
+		var cell = cast(event.currentTarget, Cell);
+		cell.removeEventListener(Event.CLEAR, this.cell_clearHandlre);
+		this.cells.remove(cell);
 	}
 }
