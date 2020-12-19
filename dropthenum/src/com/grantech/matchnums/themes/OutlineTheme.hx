@@ -6,6 +6,7 @@ import feathers.controls.Label;
 import feathers.controls.dataRenderers.ItemRenderer;
 import feathers.skins.RectangleSkin;
 import feathers.themes.ClassVariantTheme;
+import openfl.display.Stage;
 import openfl.text.TextFormat;
 
 class OutlineTheme extends ClassVariantTheme {
@@ -13,9 +14,12 @@ class OutlineTheme extends ClassVariantTheme {
 	static public final FONT_COLOR = 0xEDEDED;
 	static public final FONT_NAME = "Arial Rounded MT Bold";
 
-	static public final DEFAULT_PADDING = 8.0;
 	static public final FILL_COLOR = 0x002435;
 	static public final BORDER_COLOR = 0xEDEDED;
+
+	static public var PADDING:Int;
+	static public var POPUP_SIZE:Int;
+	static public var SCALE_FACTOR:Float;
 
 	public static final VARIANT_LABEL_MEDIUM:String = "variantLabelMedium";
 	public static final VARIANT_LABEL_LARG:String = "variantLabelLarg";
@@ -23,8 +27,12 @@ class OutlineTheme extends ClassVariantTheme {
 	public static final VARIANT_BUTTON_CLOSE:String = "variantButtonClose";
 	public static final VARIANT_BUTTON_INDICATOR:String = "variantButtonIndicator";
 
-	public function new() {
+	public function new(stage:Stage, scaleFactor:Float) {
 		super();
+
+		SCALE_FACTOR = scaleFactor;
+		PADDING = Math.round((stage.stageWidth * SCALE_FACTOR) * 0.05);
+		POPUP_SIZE = Math.round((stage.stageWidth * SCALE_FACTOR) * 0.9);
 
 		this.styleProvider.setStyleFunction(Label, null, setLabelStyles);
 		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_MEDIUM, this.setLabelMediumStyles);
@@ -115,9 +123,9 @@ class OutlineTheme extends ClassVariantTheme {
 		itemRenderer.horizontalAlign = LEFT;
 		itemRenderer.paddingTop = 0.0;
 		itemRenderer.paddingBottom = 0.0;
-		itemRenderer.paddingLeft = DEFAULT_PADDING * 2;
-		itemRenderer.paddingRight = DEFAULT_PADDING * 2;
-		itemRenderer.gap = DEFAULT_PADDING;
+		itemRenderer.paddingLeft = PADDING * 2;
+		itemRenderer.paddingRight = PADDING * 2;
+		itemRenderer.gap = PADDING;
 	}
 
 	public function getButtonSkin():RectangleSkin {

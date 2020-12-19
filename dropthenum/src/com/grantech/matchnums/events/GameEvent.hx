@@ -12,6 +12,7 @@ class GameEvent extends Event {
 	static public final NEW_RECORD:String = "newRecord";
 	static public final REVIVE_BY_COIN:String = "reviveByCoin";
 	static public final REVIVE_BY_ADS:String = "reviveByAds";
+	static public final REVIVE_CANCEL:String = "reviveCancel";
 
 	/**
 		Dispatches a pooled event with the specified properties.

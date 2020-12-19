@@ -25,22 +25,21 @@ class BasePrizePopup extends ConfirmPopup implements IGamePlayPopup {
 	}
 
 	override private function initialize():Void {
-		this.contentHeight = 480;
 		super.initialize();
 		this.hasCloseButton = false;
 
 		this.adsButton = new Button();
-		this.adsButton.width = 160;
-		this.adsButton.height = 40;
+		this.adsButton.width = this.padding * 8;
+		this.adsButton.height = this.padding * 2.5;
 		this.adsButton.icon = new Bitmap(Assets.getBitmapData("images/coin-small.png"));
-		this.adsButton.layoutData = AnchorLayoutData.bottomCenter(this.padding * 5, 0);
+		this.adsButton.layoutData = AnchorLayoutData.bottomCenter(this.padding * 3, 0);
 		this.adsButton.addEventListener(MouseEvent.CLICK, this.adsButton_clickHandler);
 		this.content.addChild(this.adsButton);
 
 		this.skipButton = new Button();
 		this.skipButton.text = "No Thanks";
 		this.skipButton.variant = OutlineTheme.VARIANT_BUTTON_LINK;
-		this.skipButton.layoutData = AnchorLayoutData.bottomCenter(this.padding * 2, 0);
+		this.skipButton.layoutData = AnchorLayoutData.bottomCenter(this.padding, 0);
 		this.skipButton.addEventListener(MouseEvent.CLICK, this.skipButton_clickHandler);
 		this.content.addChild(this.skipButton);
 	}
@@ -55,7 +54,7 @@ class BasePrizePopup extends ConfirmPopup implements IGamePlayPopup {
 	override private function titleFactory():Void {
 		super.titleFactory();
 		this.titleDisplay.variant = null;
-		this.titleDisplay.layoutData = AnchorLayoutData.center(0, padding * 3);
+		this.titleDisplay.layoutData = AnchorLayoutData.center(0, this.padding);
 		var textFormat = this.titleDisplay.textFormat;
 		textFormat.align = CENTER;
 		this.titleDisplay.textFormat = textFormat;

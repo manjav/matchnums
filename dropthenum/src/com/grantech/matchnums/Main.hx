@@ -10,14 +10,15 @@ import feathers.style.Theme;
 import openfl.events.Event;
 
 class Main extends Application {
+
 	private var defaultFPS:Float;
 	private var home:HomeOverlay;
 
 	public function new() {
 		Prefs.instance.load();
 		super();
-
-		Theme.setTheme(new OutlineTheme());
+		
+		Theme.setTheme(new OutlineTheme(stage, 1 / this.getScaleFactor()));
 		this.defaultFPS = stage.frameRate;
 		#if hl
 		stage.addChild(new openfl.display.FPS(50, 10, 0xFFFFFF));

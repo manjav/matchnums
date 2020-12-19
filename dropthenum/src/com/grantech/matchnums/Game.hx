@@ -1,5 +1,6 @@
 package com.grantech.matchnums;
 
+import com.grantech.matchnums.animations.CellDisposeAnimationFactory;
 import com.grantech.matchnums.animations.CellInitAnimationFactory;
 import com.grantech.matchnums.events.GameEvent;
 import com.grantech.matchnums.utils.Prefs.*;
@@ -35,6 +36,7 @@ class Game extends Sprite {
 	private var endLine:Shape;
 	private var fallingEffect:Shape;
 	private var cellInitAnimationFactory:CellInitAnimationFactory;
+	private var cellDisposeAnimationFactory:CellDisposeAnimationFactory;
 
 	public var scores(default, set):Int;
 
@@ -44,7 +46,7 @@ class Game extends Sprite {
 		Prefs.instance.set(SCORES, scores);
 		if (Prefs.instance.get(RECORD) < scores) {
 			Prefs.instance.set(RECORD, scores);
-			if (scores > 10 && !haveRecord){
+			if (scores > 1000 && !haveRecord) {
 				GameEvent.dispatch(this, GameEvent.NEW_RECORD, scores);
 				haveRecord = true;
 			}
@@ -89,6 +91,7 @@ class Game extends Sprite {
 
 		this.lastColumn = Math.floor(Math.random() * CellMap.NUM_COLUMNS);
 		this.cellInitAnimationFactory = new CellInitAnimationFactory();
+		this.cellDisposeAnimationFactory = new CellDisposeAnimationFactory();
 		this.spawn();
 
 		this.fallSFX = Assets.getSound("sounds/fall.ogg");
@@ -104,8 +107,7 @@ class Game extends Sprite {
 		var row = this.cells.length(this.lastColumn);
 		if (row >= CellMap.NUM_ROWS) {
 			this.endLine.transform.colorTransform.color = 0xFF0000;
-			this.showEndLine(0.01);
-			GameEvent.dispatch(this, GameEvent.GAME_OVER, this.numRevives);
+			Actuate.tween(this.endLine, 1.0, {alpha: 0.2}).repeat(1).onComplete(gameOver);
 			return;
 		}
 
@@ -118,8 +120,10 @@ class Game extends Sprite {
 		this.fallingEffect.transform.colorTransform.color = Cell.COLORS[cell.value];
 	}
 
-	private function showEndLine(alpha:Float):Void {
-		Actuate.tween(this.endLine, 0.5, {alpha: alpha}).onComplete(showEndLine, [alpha == 1 ? 0.01 : 1]);
+	private function gameOver():Void {
+		this.endLine.alpha = 1;
+		this.endLine.transform.colorTransform.color = 0xFFFFFF;
+		GameEvent.dispatch(this, GameEvent.GAME_OVER, this.numRevives);
 	}
 
 	private function enterFrameHandler(event:Event):Void {
@@ -225,20 +229,6 @@ class Game extends Sprite {
 		return needsRepeat;
 	}
 
-	public function revive():Void {
-		this.numRevives++;
-		for (i in 0...CellMap.NUM_COLUMNS) {
-			for (j in CellMap.NUM_ROWS - 3...CellMap.NUM_ROWS) {
-				var cell = this.cells.get(i, j);
-				if (cell == null)
-					continue;
-				Cell.dispose(cell);
-				this.cells.remove(cell);
-			}
-		}
-		this.spawn();
-	}
-
 	private function cell_initHandler(event:Event):Void {
 		var cell = cast(event.currentTarget, Cell);
 		cell.removeEventListener(Event.INIT, this.cell_initHandler);
@@ -259,5 +249,26 @@ class Game extends Sprite {
 				this.maxValue = cell.value - distance;
 		}
 		this.fallAll(false);
+	}
+
+	
+	public function revive():Void {
+		this.numRevives++;
+		for (i in 0...CellMap.NUM_COLUMNS) {
+			for (j in CellMap.NUM_ROWS - 3...CellMap.NUM_ROWS) {
+				var cell = this.cells.get(i, j);
+				if (cell == null)
+					continue;
+				cell.addEventListener(Event.CLEAR, this.cell_clearHandlre);
+				Cell.dispose(cell, cellDisposeAnimationFactory);
+			}
+		}
+		this.timer = Timer.delay(this.spawn, 1500);
+	}
+
+	private function cell_clearHandlre(event:Event):Void {
+		var cell = cast(event.currentTarget, Cell);
+		cell.removeEventListener(Event.CLEAR, this.cell_clearHandlre);
+		this.cells.remove(cell);
 	}
 }

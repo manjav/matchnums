@@ -1,7 +1,8 @@
 package com.grantech.matchnums.display.overlays;
 
+import com.grantech.matchnums.themes.OutlineTheme;
 import com.grantech.matchnums.display.popups.BigValuePopup;
-import com.grantech.matchnums.display.popups.GameOverPopup;
+import com.grantech.matchnums.display.popups.RevivePopup;
 import com.grantech.matchnums.display.popups.NewRecordPopup;
 import feathers.controls.LayoutGroup;
 import feathers.layout.AnchorLayoutData;
@@ -15,6 +16,7 @@ enum ScreenType {
 	Shop;
 	BigValue;
 	NewRecord;
+	Revive;
 	GameOver;
 }
 
@@ -35,8 +37,8 @@ class BaseOverlay extends LayoutGroup {
 					new BigValuePopup();
 				case NewRecord:
 					new NewRecordPopup();
-				case GameOver:
-					new GameOverPopup();
+				case Revive:
+					new RevivePopup();
 				default: null;
 			}
 			screen.layoutData = AnchorLayoutData.fill();
@@ -49,7 +51,7 @@ class BaseOverlay extends LayoutGroup {
 		return screen;
 	}
 
-	private var padding = 16;
+	private var padding = OutlineTheme.PADDING;
 	private var overlay:RectangleSkin;
 
 	override private function initialize():Void {

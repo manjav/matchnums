@@ -1,6 +1,7 @@
 package com.grantech.matchnums.display.popups;
 
 import com.grantech.matchnums.events.GameEvent;
+import com.grantech.matchnums.themes.OutlineTheme;
 import com.grantech.matchnums.utils.Prefs;
 import feathers.controls.Button;
 import feathers.layout.AnchorLayoutData;
@@ -8,7 +9,7 @@ import openfl.Assets;
 import openfl.display.Bitmap;
 import openfl.events.MouseEvent;
 
-class GameOverPopup extends ConfirmPopup implements IGamePlayPopup {
+class RevivePopup extends ConfirmPopup implements IGamePlayPopup {
 	private var reviveByCoinButton:Button;
 	private var reviveByAdsButton:Button;
 
@@ -26,24 +27,23 @@ class GameOverPopup extends ConfirmPopup implements IGamePlayPopup {
 	}
 
 	override private function initialize():Void {
-		this.contentHeight = 400;
 		super.initialize();
 		this.title = "Game Over";
 
 		this.reviveByCoinButton = new Button();
-		this.reviveByCoinButton.width = 160;
-		this.reviveByCoinButton.height = 60;
+		this.reviveByCoinButton.width = OutlineTheme.PADDING * 7;
+		this.reviveByCoinButton.height = OutlineTheme.PADDING * 3;
 		this.reviveByCoinButton.icon = new Bitmap(Assets.getBitmapData("images/coin.png"));
-		this.reviveByCoinButton.layoutData = AnchorLayoutData.bottomCenter(this.padding * 2, 90);
+		this.reviveByCoinButton.layoutData = AnchorLayoutData.bottomRight(this.padding, this.padding);
 		this.reviveByCoinButton.addEventListener(MouseEvent.CLICK, this.reviveByCoinButton_clickHandler);
 		this.content.addChild(this.reviveByCoinButton);
 
 		this.reviveByAdsButton = new Button();
-		this.reviveByAdsButton.width = 160;
-		this.reviveByAdsButton.height = 60;
+		this.reviveByAdsButton.width = OutlineTheme.PADDING * 7;
+		this.reviveByAdsButton.height = OutlineTheme.PADDING * 3;
 		this.reviveByAdsButton.text = " Free ";
 		this.reviveByAdsButton.icon = new Bitmap(Assets.getBitmapData("images/video.png"));
-		this.reviveByAdsButton.layoutData = AnchorLayoutData.bottomCenter(this.padding * 2, -90);
+		this.reviveByAdsButton.layoutData = AnchorLayoutData.bottomLeft(this.padding, this.padding);
 		this.reviveByAdsButton.addEventListener(MouseEvent.CLICK, this.reviveByAdsButton_clickHandler);
 		this.content.addChild(this.reviveByAdsButton);
 	}
@@ -51,7 +51,6 @@ class GameOverPopup extends ConfirmPopup implements IGamePlayPopup {
 	override public function validateNow():Void {
 		if (this.isInvalid(InvalidationFlag.CUSTOM("value"))) {
 			this.reviveByCoinButton.text = " " + this.cost + " ";
-			// this.reviveByAdsButton.text = " " + this.cost + " ";
 		}
 		super.validateNow();
 	}
@@ -83,5 +82,10 @@ class GameOverPopup extends ConfirmPopup implements IGamePlayPopup {
 
 	private function reviveByAdsButton_clickHandler(event:MouseEvent):Void {
 		this.close();
+	}
+
+	override private function closeButton_clickHandler(event:MouseEvent):Void {
+		this.closeButton_clickHandler(event);
+		GameEvent.dispatch(this, GameEvent.REVIVE_CANCEL);
 	}
 }

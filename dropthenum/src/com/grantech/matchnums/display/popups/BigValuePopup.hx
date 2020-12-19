@@ -38,8 +38,8 @@ class BigValuePopup extends BasePrizePopup {
 		super.refreshBackgroundLayout();
 
 		if (this.cellDisplay != null) {
-			this.cellDisplay.x = this.actualWidth * 0.5;
-			this.cellDisplay.y = this.actualHeight * 0.4;
+			this.cellDisplay.x = this.actualWidth * 0.50;
+			this.cellDisplay.y = this.actualHeight * 0.38;
 		}
 	}
 
