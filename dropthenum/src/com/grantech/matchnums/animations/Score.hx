@@ -1,4 +1,4 @@
-package com.grantech.matchnums;
+package com.grantech.matchnums.animations;
 
 import com.grantech.matchnums.utils.Utils;
 import motion.Actuate;
