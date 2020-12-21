@@ -30,6 +30,7 @@ class Game extends Sprite {
 	private var timer:Timer;
 	private var haveRecord:Bool;
 	private var numRevives:Int;
+	private var numRewardCells:Int;
 	private var lastColumn:Int;
 	private var valueRecord:Int = 8;
 	private var cells:CellMap;
@@ -110,8 +111,10 @@ class Game extends Sprite {
 			Actuate.tween(this.endLine, 1.0, {alpha: 0.2}).repeat(1).onComplete(gameOver);
 			return;
 		}
-
-		var cell = Cell.instantiate(this.lastColumn, row, 0, this.cellInitAnimationFactory);
+		var reward = numRewardCells > 0 || Math.random() > 0.05 ? 0 : Math.round(Math.random() * Cell.SPAWN_MAX * 10);
+		if (reward > 0)
+			numRewardCells++;
+		var cell = Cell.instantiate(this.lastColumn, row, 0, reward, this.cellInitAnimationFactory);
 		cell.x = this.lastColumn * Cell.SIZE + Cell.RADIUS;
 		cell.y = Cell.RADIUS;
 		this.cells.add(cell);
@@ -216,6 +219,8 @@ class Game extends Sprite {
 			// Relaese all cells over matchs
 			for (m in matchs) {
 				this.cells.accumulateColumn(m.column, m.row);
+				if (m.reward > 0)
+					this.numRewardCells--;
 				Actuate.tween(m, 0.1, {x: c.x, y: c.y}).ease(Expo.easeOut).onComplete(Cell.dispose, [m]);
 			}
 
@@ -251,7 +256,7 @@ class Game extends Sprite {
 		this.fallAll(false);
 	}
 
-	
+
 	public function revive():Void {
 		this.numRevives++;
 		for (i in 0...CellMap.NUM_COLUMNS) {

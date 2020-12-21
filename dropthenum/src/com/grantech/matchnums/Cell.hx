@@ -1,5 +1,8 @@
 package com.grantech.matchnums;
 
+import com.grantech.matchnums.animations.Reward;
+import openfl.Assets;
+import openfl.display.Bitmap;
 import com.grantech.matchnums.animations.IAnimationFactory;
 import com.grantech.matchnums.utils.Utils;
 import openfl.display.Shape;
@@ -35,6 +38,7 @@ class Cell extends Sprite {
 
 	public var column:Int;
 	public var row:Int;
+	public var reward:Int;
 	public var value:Int = -1;
 	public var state:CellState;
 	public var initAnimationFactory:IAnimationFactory;
@@ -42,10 +46,11 @@ class Cell extends Sprite {
 
 	private var textSize:Int = 80;
 	private var background:Shape;
+	private var rewardDisplay:Reward;
 	private var textDisplay:TextField;
 	private var textFormat:TextFormat;
 
-	public function new(column:Int, row:Int, value:Int, ?initAnimationFactory:IAnimationFactory) {
+	public function new(column:Int, row:Int, value:Int, reward:Int = 0, ?initAnimationFactory:IAnimationFactory) {
 		super();
 
 		this.background = new Shape();
@@ -64,15 +69,16 @@ class Cell extends Sprite {
 		this.textFormat = this.textDisplay.getTextFormat();
 		this.initAnimationFactory = initAnimationFactory;
 
-		this.init(column, row, value);
+		this.init(column, row, value, reward);
 	}
 
-	public function init(column:Int, row:Int, value:Int):Cell {
+	public function init(column:Int, row:Int, value:Int, reward:Int = 0):Cell {
 		if (value == 0)
 			value = Math.ceil(Math.random() * SPAWN_MAX);
 		this.column = column;
 		this.row = row;
 		this.value = value;
+		this.reward = reward;
 		this.state = Init;
 
 		this.background.transform.colorTransform.color = COLORS[value];
@@ -80,6 +86,11 @@ class Cell extends Sprite {
 		this.textFormat.size = Math.round(textSize * TEXT_SCALE[value]);
 		this.textDisplay.text = Std.string(getScore(value));
 		this.textDisplay.setTextFormat(this.textFormat);
+
+		if (this.reward > 0){
+			this.rewardDisplay = Reward.instantiate(RewardType.Coin, RADIUS, -RADIUS + 2, this);
+			this.rewardDisplay.scaleX = this.rewardDisplay.scaleY = 0.5;
+		}
 
 		if (this.initAnimationFactory == null)
 			this.onInit();
@@ -115,16 +126,20 @@ class Cell extends Sprite {
 
 		if (cell.hasEventListener(Event.CLEAR))
 			cell.dispatchEvent(new Event(Event.CLEAR));
-		pool[i++] = cell;
+		if (cell.rewardDisplay != null) {
+			Reward.dispose(cell.rewardDisplay);
+			cell.rewardDisplay = null;
+		}
 		if (cell.parent != null)
 			cell.parent.removeChild(cell);
+		pool[i++] = cell;
 	}
 
-	static public function instantiate(column:Int, row:Int, value:Int, initAnimationFactory:IAnimationFactory):Cell {
+	static public function instantiate(column:Int, row:Int, value:Int, reward:Int = 0, initAnimationFactory:IAnimationFactory):Cell {
 		if (i > 0) {
 			i--;
-			return pool[i].init(column, row, value);
+			return pool[i].init(column, row, value, reward);
 		}
-		return new Cell(column, row, value, initAnimationFactory);
+		return new Cell(column, row, value, reward, initAnimationFactory);
 	}
 }
