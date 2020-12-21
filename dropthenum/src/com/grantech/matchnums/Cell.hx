@@ -27,6 +27,7 @@ class Cell extends Sprite {
 		0x000000, 0x9600ff, 0xf0145a, 0xffc91b, 0x00c419, 0x009ade, 0xce007b4, 0xff5518, 0x78e0bc, 0x3c14ae, 0xff0024, 0x41046a, 0x41046a, 0x41046a, 0x41046a
 	];
 	static private final TEXT_SCALE = [1, 1, 1, 1, 0.9, 0.9, 0.9, 0.8, 0.8, 0.8, 0.6, 0.6, 0.6, 0.5, 0.5, 0.5, 0.5];
+	static public var SPAWN_MAX = 3;
 
 	static public function getScore(value:Int):Int {
 		return cast(Math.pow(2, value), Int);
@@ -67,6 +68,8 @@ class Cell extends Sprite {
 	}
 
 	public function init(column:Int, row:Int, value:Int):Cell {
+		if (value == 0)
+			value = Math.ceil(Math.random() * SPAWN_MAX);
 		this.column = column;
 		this.row = row;
 		this.value = value;

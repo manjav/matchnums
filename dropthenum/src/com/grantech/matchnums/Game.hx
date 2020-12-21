@@ -31,7 +31,6 @@ class Game extends Sprite {
 	private var numRevives:Int;
 	private var lastColumn:Int;
 	private var valueRecord:Int = 8;
-	private var maxValue:Int = 3;
 	private var cells:CellMap;
 	private var endLine:Shape;
 	private var fallingEffect:Shape;
@@ -111,7 +110,7 @@ class Game extends Sprite {
 			return;
 		}
 
-		var cell = Cell.instantiate(this.lastColumn, row, Math.ceil(Math.random() * this.maxValue), this.cellInitAnimationFactory);
+		var cell = Cell.instantiate(this.lastColumn, row, 0, this.cellInitAnimationFactory);
 		cell.x = this.lastColumn * Cell.SIZE + Cell.RADIUS;
 		cell.y = Cell.RADIUS;
 		this.cells.add(cell);
@@ -243,10 +242,10 @@ class Game extends Sprite {
 			GameEvent.dispatch(this, GameEvent.BIG_VALUE, this.valueRecord = cell.value);
 
 		// More change for spawm new cells
-		if (this.maxValue < 7) {
-			var distance = Math.ceil(1.5 * Math.sqrt(this.maxValue));
-			if (this.maxValue < cell.value - distance)
-				this.maxValue = cell.value - distance;
+		if (Cell.SPAWN_MAX < 7) {
+			var distance = Math.ceil(1.5 * Math.sqrt(Cell.SPAWN_MAX));
+			if (Cell.SPAWN_MAX < cell.value - distance)
+				Cell.SPAWN_MAX = cell.value - distance;
 		}
 		this.fallAll(false);
 	}
