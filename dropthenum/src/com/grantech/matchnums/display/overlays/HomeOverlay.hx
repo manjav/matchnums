@@ -8,6 +8,7 @@ import com.grantech.matchnums.display.popups.RevivePopup;
 import com.grantech.matchnums.events.GameEvent;
 import com.grantech.matchnums.utils.Prefs.*;
 import com.grantech.matchnums.utils.Utils;
+import feathers.controls.LayoutGroup;
 import feathers.events.TriggerEvent;
 import feathers.layout.AnchorLayout;
 import feathers.layout.AnchorLayoutData;
@@ -17,6 +18,8 @@ import openfl.events.Event;
 
 class HomeOverlay extends BaseOverlay {
 	private var game:Game;
+	private var header:LayoutGroup;
+	private var footer:LayoutGroup;
 	private var scoresIndicator:Indicator;
 	private var recordIndicator:Indicator;
 	private var coinsIndicator:Indicator;
@@ -56,6 +59,27 @@ class HomeOverlay extends BaseOverlay {
 		this.coinsIndicator.addEventListener(TriggerEvent.TRIGGER, this.coinsIndicator_triggerHandler);
 		this.addChild(this.coinsIndicator);
 
+		// Buttons
+		this.header = new LayoutGroup();
+		this.header.height = 64;
+		this.header.layout = new AnchorLayout();
+		this.addChild(this.header);
+
+		this.footer = new LayoutGroup();
+		this.footer.height = 64;
+		this.footer.layout = new AnchorLayout();
+		this.addChild(this.footer);
+
+		function addButton(name:String, layoutData:AnchorLayoutData, inHeader:Bool):Void {
+			var button = new Button();
+			button.name = name;
+			button.height = button.width = this.header.height - 8;
+			button.layoutData = layoutData;
+			button.icon = new Bitmap(Assets.getBitmapData("images/" + name + ".png"));
+			button.addEventListener(MouseEvent.CLICK, buttons_clickHandler);
+			inHeader ? this.header.addChild(button) : this.footer.addChild(button);
+		}
+		addButton("coin-small", AnchorLayoutData.middleRight(), true);
 	}
 
 	private function game_eventsChangeHandler(event:GameEvent):Void {
@@ -127,6 +151,12 @@ class HomeOverlay extends BaseOverlay {
 		this.game.scaleY = this.game.scaleX = gameScale;
 		this.game.x = (this.actualWidth - (currentWidth * gameScale)) * 0.5;
 		this.game.y = (this.actualHeight - (currentHeight * gameScale)) * 0.5;
+
+		this.footer.x = this.header.x = this.game.x;
+		this.footer.width = this.header.width = this.game.width - 40;
+		this.header.y = this.game.y - this.header.height - 4;
+		this.footer.y = this.game.y + this.game.height;
+
 		super.refreshBackgroundLayout();
 	}
 }
