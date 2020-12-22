@@ -1,9 +1,7 @@
 package com.grantech.matchnums;
 
-import com.grantech.matchnums.animations.Reward;
-import openfl.Assets;
-import openfl.display.Bitmap;
 import com.grantech.matchnums.animations.IAnimationFactory;
+import com.grantech.matchnums.animations.Reward;
 import com.grantech.matchnums.utils.Utils;
 import openfl.display.Shape;
 import openfl.display.Sprite;
@@ -87,8 +85,13 @@ class Cell extends Sprite {
 		this.textDisplay.text = Std.string(getScore(value));
 		this.textDisplay.setTextFormat(this.textFormat);
 
-		if (this.reward > 0){
-			this.rewardDisplay = Reward.instantiate(RewardType.Coin, RADIUS, -RADIUS + 2, this);
+		if (this.rewardDisplay != null) {
+			Reward.dispose(this.rewardDisplay);
+			this.rewardDisplay = null;
+		}
+		
+		if (this.reward > 0) {
+			this.rewardDisplay = Reward.instantiate(RewardType.Coin, RADIUS, -RADIUS, this);
 			this.rewardDisplay.scaleX = this.rewardDisplay.scaleY = 0.5;
 		}
 
