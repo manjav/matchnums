@@ -42,8 +42,7 @@ class Reward extends Sprite {
 		return this;
 	}
 
-	public function popup(type:RewardType, text:String, x:Float, y:Float, parent:DisplayObjectContainer):Reward {
-		this.update(type, x, y, parent);
+	public function popup(text:String):Reward {
 		if (this.textDisplay == null) {
 			this.textDisplay = new TextField();
 			this.textDisplay.x = 4;

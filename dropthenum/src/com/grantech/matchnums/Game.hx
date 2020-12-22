@@ -219,12 +219,12 @@ class Game extends Sprite {
 			// Relaese all cells over matchs
 			for (m in matchs) {
 				this.cells.accumulateColumn(m.column, m.row);
-				if (m.reward > 0)
-					this.numRewardCells--;
+				this.collectReward(m);
 				Actuate.tween(m, 0.1, {x: c.x, y: c.y}).ease(Expo.easeOut).onComplete(Cell.dispose, [m]);
 			}
 
 			if (matchs.length > 0) {
+				this.collectReward(c);
 				c.addEventListener(Event.INIT, this.cell_initHandler);
 				c.init(c.column, c.row, c.value + matchs.length);
 				needsRepeat = true;
@@ -232,6 +232,14 @@ class Game extends Sprite {
 			// trace("match", c, matchs.length, needsRepeat);
 		}
 		return needsRepeat;
+	}
+
+	private function collectReward(cell:Cell):Void {
+		if (cell.reward <= 0)
+			return;
+
+		Reward.instantiate(RewardType.Coin, cell.x - 4, cell.y - Cell.RADIUS, this).popup(" + " + cell.reward);
+		this.numRewardCells--;
 	}
 
 	private function cell_initHandler(event:Event):Void {
@@ -255,7 +263,6 @@ class Game extends Sprite {
 		}
 		this.fallAll(false);
 	}
-
 
 	public function revive():Void {
 		this.numRevives++;
