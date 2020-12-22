@@ -2,12 +2,12 @@ package com.grantech.matchnums.display.overlays;
 
 import com.grantech.matchnums.display.Indicator;
 import com.grantech.matchnums.display.overlays.BaseOverlay.ScreenType;
-import com.grantech.matchnums.display.popups.BasePopup;
 import com.grantech.matchnums.display.popups.IGamePlayPopup;
 import com.grantech.matchnums.display.popups.RevivePopup;
 import com.grantech.matchnums.events.GameEvent;
 import com.grantech.matchnums.utils.Prefs.*;
 import com.grantech.matchnums.utils.Utils;
+import feathers.controls.Button;
 import feathers.controls.LayoutGroup;
 import feathers.events.TriggerEvent;
 import feathers.layout.AnchorLayout;
@@ -15,6 +15,7 @@ import feathers.layout.AnchorLayoutData;
 import openfl.Assets;
 import openfl.display.Bitmap;
 import openfl.events.Event;
+import openfl.events.MouseEvent;
 
 class HomeOverlay extends BaseOverlay {
 	private var game:Game;
@@ -82,6 +83,7 @@ class HomeOverlay extends BaseOverlay {
 		addButton("coin-small", AnchorLayoutData.middleRight(), true);
 		addButton("dynamite", AnchorLayoutData.middleRight(), false);
 		addButton("dynamites", AnchorLayoutData.middleRight(0, header.height), false);
+		addButton("pause", AnchorLayoutData.middleLeft(), false);
 	}
 
 	private function game_eventsChangeHandler(event:GameEvent):Void {
@@ -97,6 +99,18 @@ class HomeOverlay extends BaseOverlay {
 			popup.addEventListener(GameEvent.REVIVE_CANCEL, this.revivePopup_reviveHandler);
 		}
 		cast(popup, IGamePlayPopup).value = cast(event.data, Int);
+	}
+
+	private function buttons_clickHandler(event:MouseEvent):Void {
+		var button = cast(event.target, Button);
+		switch (button.name) {
+			case "pause":
+				this.pause();
+			case "dynamite":
+				this.addOverlay(Shop);
+			case "dynamites":
+				this.addOverlay(Shop);
+		};
 	}
 
 	private function coinsIndicator_triggerHandler(event:TriggerEvent):Void {
