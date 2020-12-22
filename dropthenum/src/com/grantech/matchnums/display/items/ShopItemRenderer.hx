@@ -45,9 +45,16 @@ class ShopItemRenderer extends ItemRenderer {
 	}
 
 	override private function layoutContent():Void {
-		this.buttonDisplay.x = this.actualWidth - this.paddingRight - this.buttonDisplay.width;
-		this.buttonDisplay.y = (this.actualHeight - this.buttonDisplay.height) * 0.5;
 		super.layoutContent();
+		
+		if (this.icon != null) {
+			this.icon.height = this.icon.width = this.actualHeight * 0.5;
+			this.icon.x = this.actualHeight * 0.2;
+		}
+		this.textField.x = this.actualHeight;
+
+		this.buttonDisplay.x = this.actualWidth -this.buttonDisplay.width - this.actualHeight * 0.2;
+		this.buttonDisplay.y = (this.actualHeight - this.buttonDisplay.height) * 0.5;
 	}
 
 	private function getIcon():Bitmap {
