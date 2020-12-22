@@ -80,6 +80,8 @@ class HomeOverlay extends BaseOverlay {
 			inHeader ? this.header.addChild(button) : this.footer.addChild(button);
 		}
 		addButton("coin-small", AnchorLayoutData.middleRight(), true);
+		addButton("dynamite", AnchorLayoutData.middleRight(), false);
+		addButton("dynamites", AnchorLayoutData.middleRight(0, header.height), false);
 	}
 
 	private function game_eventsChangeHandler(event:GameEvent):Void {
