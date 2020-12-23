@@ -86,6 +86,21 @@ class HomeOverlay extends BaseOverlay {
 		addButton("pause", AnchorLayoutData.middleLeft(), false);
 	}
 
+	private function addOverlay(type:ScreenType, save:Bool = true):BaseOverlay {
+		this.pause();
+		return BaseOverlay.create(type, this, save);
+	}
+
+	public function pause():Void {
+		var overlay = BaseOverlay.create(Pause, this, true);
+		overlay.addEventListener(Event.CLEAR, pauseOverlay_eventsHandler);
+		overlay.addEventListener(Event.CANCEL, pauseOverlay_eventsHandler);
+		this.game.state = Pause;
+	}
+
+	public function resume():Void {
+		this.game.state = Play;
+	}
 	private function game_eventsChangeHandler(event:GameEvent):Void {
 		var popup:BaseOverlay = null;
 		if (event.type == GameEvent.BIG_VALUE) {
@@ -110,7 +125,7 @@ class HomeOverlay extends BaseOverlay {
 				this.addOverlay(Shop);
 			case "dynamites":
 				this.addOverlay(Shop);
-		};
+	}
 	}
 
 	private function coinsIndicator_triggerHandler(event:TriggerEvent):Void {
@@ -127,25 +142,10 @@ class HomeOverlay extends BaseOverlay {
 		else
 			this.game.revive();
 	}
-
-	private function addOverlay(type:ScreenType, save:Bool = true):BaseOverlay {
-		this.pause();
-		return BaseOverlay.create(type, this, save);
-	}
-
 	private function screen_closeHandler(event:Event):Void {
 		cast(event.currentTarget, BaseOverlay).removeEventListener(Event.CLOSE, this.screen_closeHandler);
 		this.resume();
 	}
-
-	public function pause():Void {
-		var screen = BaseOverlay.create(Pause, this, true);
-		screen.addEventListener(Event.CLOSE, screen_closeHandler);
-		this.game.state = Pause;
-	}
-
-	public function resume():Void {
-		this.game.state = Play;
 	}
 
 	override private function refreshBackgroundLayout():Void {
