@@ -8,6 +8,8 @@ class Prefs extends EventDispatcher {
 	static public final COIN:String = "coin";
 	static public final SCORES:String = "scores";
 	static public final RECORD:String = "record";
+	static public final MUTE:String = "mute";
+
 	static public final instance:Prefs = new Prefs();
 
 	private var map:Map<String, Float>;
