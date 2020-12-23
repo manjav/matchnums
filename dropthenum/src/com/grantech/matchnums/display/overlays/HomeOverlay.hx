@@ -142,8 +142,15 @@ class HomeOverlay extends BaseOverlay {
 		else
 			this.game.reset(true);
 	}
-	private function screen_closeHandler(event:Event):Void {
-		cast(event.currentTarget, BaseOverlay).removeEventListener(Event.CLOSE, this.screen_closeHandler);
+
+	private function pauseOverlay_eventsHandler(event:Event):Void {
+		var overlay = cast(event.target, PauseOverlay);
+		overlay.removeEventListener(Event.CLEAR, pauseOverlay_eventsHandler);
+		overlay.removeEventListener(Event.CANCEL, this.pauseOverlay_eventsHandler);
+		switch (event.type) {
+			case Event.CLEAR:
+				this.game.reset();
+			case Event.CANCEL:
 		this.resume();
 	}
 	}

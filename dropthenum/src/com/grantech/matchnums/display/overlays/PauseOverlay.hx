@@ -2,6 +2,9 @@ package com.grantech.matchnums.display.overlays;
 
 import com.grantech.matchnums.themes.LineSkin;
 import com.grantech.matchnums.themes.OutlineTheme;
+import com.grantech.matchnums.utils.Prefs.*;
+import com.grantech.matchnums.utils.Prefs;
+import com.grantech.matchnums.utils.Sounds;
 import feathers.controls.Button;
 import feathers.controls.LayoutGroup;
 import feathers.layout.AnchorLayout;
@@ -39,17 +42,42 @@ class PauseOverlay extends BaseOverlay {
 		resumeButton.addEventListener(MouseEvent.CLICK, this.buttons_clickHandler);
 		this.addChild(resumeButton);
 
+		var buttons = new LayoutGroup();
+		buttons.layout = new AnchorLayout();
+		buttons.backgroundSkin = new LineSkin(null, LineStyle.SolidColor(2.0 * OutlineTheme.SCALE_FACTOR, OutlineTheme.BORDER_COLOR, 0.7));
+		buttons.layoutData = new AnchorLayoutData(null, padding, null, padding, null, 200);
+		this.addChild(buttons);
+
+		function addButton(name:String, layoutData:AnchorLayoutData):Void {
+			var button = new Button();
+			button.name = name;
+			button.height = button.width = W;
+			button.layoutData = layoutData;
+			button.icon = new Bitmap(Assets.getBitmapData("images/" + name + ".png"));
+			button.addEventListener(MouseEvent.CLICK, buttons_clickHandler);
+			buttons.addChild(button);
+		}
+		addButton("no-ads", AnchorLayoutData.topRight(C));
+		addButton(Sounds.mute ? "mute" : "unmute", AnchorLayoutData.topRight(C, W + C));
+		addButton("reset", AnchorLayoutData.topLeft(C));
 	}
-		
+
 	private function buttons_clickHandler(event:MouseEvent):Void {
 		var button = cast(event.target, Button);
 		if (button.name == "mute" || button.name == "unmute") {
+			Sounds.mute = !Sounds.mute;
+			button.icon = new Bitmap(Assets.getBitmapData("images/" + (Sounds.mute ? "mute" : "unmute") + ".png"));
+			Prefs.instance.set(MUTE, Sounds.mute ? 1.0 : 0.0);
 			return;
-	}
+		}
 
 		switch (button.name) {
 			case "resume":
 				this.dispatchEvent(new Event(Event.CANCEL));
+			case "reset":
+				this.dispatchEvent(new Event(Event.CLEAR));
+			case "no-ads":
+				this.dispatchEvent(new Event(Event.ACTIVATE));
 		};
 		this.close();
 	}
