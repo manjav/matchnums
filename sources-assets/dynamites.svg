@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="924.86125"
-     inkscape:cy="873.86405"
+     inkscape:zoom="1"
+     inkscape:cx="562.61749"
+     inkscape:cy="610.90102"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -35,7 +35,9 @@
      inkscape:window-height="1017"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1"
+     showguides="true"
+     inkscape:guide-bbox="true" />
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -56,17 +58,27 @@
        inkscape:connector-curvature="0"
        id="path851"
        d="m 170.24622,38.190201 -2.80952,10.363999 -8.30369,-5.306865 1.24868,9.926958 -6.93015,0.1873 6.43067,6.49312 -4.37036,4.86983 7.80422,-0.0624 -0.12487,11.6751 8.42856,-6.80527 4.62009,8.55342 0.12487,-10.30157 9.67724,3.30899 -6.11852,-9.61479 7.67936,-5.05714 -9.4275,-1.43597 2.87196,-8.116391 -7.99152,2.871955 z"
-       style="fill:#ffd600;fill-opacity:0.9372549;stroke:none;stroke-width:0.17481446px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+       style="fill:#ffd600;fill-opacity:0.9372549;stroke:none;stroke-width:0.17481446px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       inkscape:export-filename="C:\Users\ManZen\Desktop\dynamites.png"
+       inkscape:export-xdpi="12.243183"
+       inkscape:export-ydpi="12.243183" />
     <path
-       style="fill:#ffffff;fill-opacity:0.9372549;stroke:none;stroke-width:0.07221625px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="fill:#ffffff;fill-opacity:0.9372549;stroke:#cfd3c9;stroke-width:0.07221625px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 164.84062,52.454933 2.07536,4.26099 -3.47822,1.16125 2.96467,2.72939 -1.66818,2.43768 3.33109,-0.14117 0.21889,3.04884 1.91832,-2.69789 3.09167,3.75683 0.26966,-5.05711 3.43323,1.13555 -2.72431,-3.31989 3.28444,-2.26814 -4.08864,-0.95899 0.55146,-4.24391 -2.72155,2.77826 -1.45874,-3.56742 -1.2133,3.6559 z"
        id="path853"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\ManZen\Desktop\dynamites.png"
+       inkscape:export-xdpi="12.243183"
+       inkscape:export-ydpi="12.243183" />
     <g
        id="g869"
-       transform="matrix(0.6607161,0,0,0.6607161,296.64671,-37.117056)">
+       transform="matrix(0.6607161,0,0,0.6607161,296.64671,-37.117056)"
+       inkscape:export-filename="C:\Users\ManZen\Desktop\dynamites.png"
+       inkscape:export-xdpi="12.243183"
+       inkscape:export-ydpi="12.243183"
+       style="stroke:#cfd3c9;stroke-opacity:1">
       <path
-         style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         style="fill:none;stroke:#cfd3c9;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          d="m -259.80487,92.371154 c 2.77993,-6.938936 13.5093,-15.540695 23.00384,-16.190349 22.81086,-1.560809 33.10937,18.244263 27.49015,36.745365 -5.2336,17.23144 1.23024,29.56673 18.32575,32.18365"
          id="path875"
          inkscape:connector-curvature="0"
@@ -76,50 +88,63 @@
          inkscape:connector-curvature="0"
          id="path865"
          d="m -243.21526,94.676967 c 2.77993,-6.938936 10.66105,-15.063139 20.15559,-15.712793 22.81086,-1.560809 31.83773,16.354083 21.63151,32.776616 -9.76931,15.71953 -6.65248,30.75211 10.44303,33.36903"
-         style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         style="fill:none;stroke:#cfd3c9;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     </g>
     <path
        style="fill:#ffd600;fill-opacity:0.9372549;stroke:none;stroke-width:0.17279515px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 48.93737,36.35321 -2.77707,10.24428 -8.207766,-5.24556 1.234251,9.81229 -6.850094,0.18514 6.356388,6.41811 -4.319876,4.81358 7.714072,-0.0617 -0.123427,11.54024 8.331199,-6.72666 4.566722,8.45462 0.123427,-10.18257 9.565451,3.27076 -6.047836,-9.50373 7.590649,-4.99872 -9.318599,-1.41939 2.838784,-8.02263 -7.899212,2.83878 z"
        id="path842"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\ManZen\Desktop\dynamite.png"
+       inkscape:export-xdpi="12.86502"
+       inkscape:export-ydpi="12.86502" />
     <path
        inkscape:connector-curvature="0"
        id="path844"
        d="m 43.594214,50.45316 2.051384,4.21178 -3.438045,1.14784 2.930427,2.69786 -1.648913,2.40952 3.292616,-0.13954 0.216359,3.01362 1.896156,-2.66672 3.055963,3.71343 0.266546,-4.99869 3.393576,1.12243 -2.692841,-3.28154 3.246496,-2.24194 -4.041404,-0.94791 0.54509,-4.1949 -2.690117,2.74618 -1.441887,-3.52622 -1.199296,3.61367 z"
-       style="fill:#ffffff;fill-opacity:0.9372549;stroke:none;stroke-width:0.07138207px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-    <g
-       id="g849"
-       transform="matrix(0.65308403,0,0,0.65308403,188.31852,-38.084154)">
-      <rect
-         transform="rotate(20.157424)"
-         ry="4.1577382"
-         y="167.39969"
-         x="-207.41013"
-         height="79.670059"
-         width="26.142248"
-         id="rect21"
-         style="fill:#e64a19;fill-opacity:1;stroke-width:0.26458332" />
-      <path
-         sodipodi:nodetypes="cccc"
-         inkscape:connector-curvature="0"
-         id="path27"
-         d="m -243.21526,94.676967 c 2.77993,-6.938936 7.46747,-13.691968 16.94279,-14.578864 22.82587,-1.323279 25.64289,24.718397 8.02437,35.422447 -15.26915,10.45927 -11.94415,26.97235 5.15136,29.58927"
-         style="fill:none;stroke:#000000;stroke-width:4.86499977;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <path
-         sodipodi:nodetypes="csssscc"
-         inkscape:connector-curvature="0"
-         id="rect839"
-         d="m -200.26394,167.39702 14.83832,0.003 c 2.30339,3.9e-4 4.15774,1.85435 4.15774,4.15774 v 71.35458 c 0,2.30339 -1.85435,4.15774 -4.15774,4.15774 l -14.83832,-0.003 z"
-         style="fill:#f4511e;fill-opacity:1;stroke-width:0.26458332"
-         transform="rotate(20.157424)" />
-    </g>
+       style="fill:#ffffff;fill-opacity:0.9372549;stroke:none;stroke-width:0.07138207px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       inkscape:export-filename="C:\Users\ManZen\Desktop\dynamite.png"
+       inkscape:export-xdpi="12.86502"
+       inkscape:export-ydpi="12.86502" />
+    <rect
+       style="fill:#e64a19;fill-opacity:1;stroke-width:0.17279515"
+       id="rect21"
+       width="17.073084"
+       height="52.031242"
+       x="28.203819"
+       y="8.6798906"
+       ry="2.7153525"
+       transform="rotate(20.157424)"
+       inkscape:export-filename="C:\Users\ManZen\Desktop\dynamite.png"
+       inkscape:export-xdpi="12.86502"
+       inkscape:export-ydpi="12.86502" />
+    <path
+       style="fill:none;stroke:#cfd3c9;stroke-width:3.17725372;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 29.478518,23.747861 c 1.815528,-4.531708 4.876885,-8.942005 11.065065,-9.521223 14.907212,-0.864212 16.746962,16.14319 5.240588,23.133834 -9.972038,6.830783 -7.800533,17.615211 3.364271,19.32428"
+       id="path27"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc"
+       inkscape:export-filename="C:\Users\ManZen\Desktop\dynamite.png"
+       inkscape:export-xdpi="12.86502"
+       inkscape:export-ydpi="12.86502" />
+    <path
+       style="fill:#f4511e;fill-opacity:1;stroke-width:0.17279515"
+       d="m 27.867021,19.473934 9.096435,3.341252 c 1.41208,0.518624 2.131709,2.072581 1.613324,3.484749 L 22.518201,70.046158 c -0.518386,1.412168 -2.072582,2.131709 -3.484749,1.613324 L 9.9370167,68.318231 Z"
+       id="rect839"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="csssscc"
+       inkscape:export-filename="C:\Users\ManZen\Desktop\dynamite.png"
+       inkscape:export-xdpi="12.86502"
+       inkscape:export-ydpi="12.86502" />
     <path
        sodipodi:nodetypes="cccc"
        inkscape:connector-curvature="0"
        id="path857"
        d="m 150.52623,27.266115 c 1.84188,-4.337789 4.94767,-8.559361 11.22566,-9.113793 15.12358,-0.827231 16.99003,15.452393 5.31665,22.143892 -10.11677,6.538479 -7.91374,16.861419 3.41311,18.497359"
-       style="fill:none;stroke:#000000;stroke-width:2.57431245;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+       style="fill:none;stroke:#cfd3c9;stroke-width:2.57431245;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       inkscape:export-filename="C:\Users\ManZen\Desktop\dynamites.png"
+       inkscape:export-xdpi="12.243183"
+       inkscape:export-ydpi="12.243183" />
     <rect
        transform="rotate(20.157424)"
        ry="2.7470846"
@@ -128,13 +153,19 @@
        height="52.63929"
        width="17.272604"
        id="rect926"
-       style="fill:#e64a19;fill-opacity:1;stroke-width:0.17481446" />
+       style="fill:#e64a19;fill-opacity:1;stroke-width:0.17481446"
+       inkscape:export-filename="C:\Users\ManZen\Desktop\dynamites.png"
+       inkscape:export-xdpi="12.243183"
+       inkscape:export-ydpi="12.243183" />
     <path
        sodipodi:nodetypes="csssscc"
        inkscape:connector-curvature="0"
        id="path928"
        d="m 122.26466,21.11367 9.20274,3.380297 c 1.42858,0.524685 2.15662,2.096803 1.63218,3.525473 l -16.24625,44.257453 c -0.52444,1.42867 -2.0968,2.15662 -3.52547,1.63218 l -9.20274,-3.3803 z"
-       style="fill:#f4511e;fill-opacity:1;stroke-width:0.17481446" />
+       style="fill:#f4511e;fill-opacity:1;stroke-width:0.17481446"
+       inkscape:export-filename="C:\Users\ManZen\Desktop\dynamites.png"
+       inkscape:export-xdpi="12.243183"
+       inkscape:export-ydpi="12.243183" />
     <rect
        style="fill:#e64a19;fill-opacity:1;stroke-width:0.17481446"
        id="rect922"
@@ -143,13 +174,19 @@
        x="127.93952"
        y="-26.204859"
        ry="2.7470846"
-       transform="rotate(20.157424)" />
+       transform="rotate(20.157424)"
+       inkscape:export-filename="C:\Users\ManZen\Desktop\dynamites.png"
+       inkscape:export-xdpi="12.243183"
+       inkscape:export-ydpi="12.243183" />
     <path
        style="fill:#f4511e;fill-opacity:1;stroke-width:0.17481446"
        d="m 133.56637,21.11367 9.20274,3.380297 c 1.42858,0.524685 2.15662,2.096803 1.63218,3.525473 l -16.24624,44.257453 c -0.52445,1.42867 -2.0968,2.15662 -3.52548,1.63218 l -9.20274,-3.3803 z"
        id="path924"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="csssscc" />
+       sodipodi:nodetypes="csssscc"
+       inkscape:export-filename="C:\Users\ManZen\Desktop\dynamites.png"
+       inkscape:export-xdpi="12.243183"
+       inkscape:export-ydpi="12.243183" />
     <rect
        transform="rotate(20.157424)"
        ry="2.7470846"
@@ -158,12 +195,108 @@
        height="52.63929"
        width="17.272604"
        id="rect855"
-       style="fill:#e64a19;fill-opacity:1;stroke-width:0.17481446" />
+       style="fill:#e64a19;fill-opacity:1;stroke-width:0.17481446"
+       inkscape:export-filename="C:\Users\ManZen\Desktop\dynamites.png"
+       inkscape:export-xdpi="12.243183"
+       inkscape:export-ydpi="12.243183" />
     <path
        sodipodi:nodetypes="csssscc"
        inkscape:connector-curvature="0"
        id="path859"
        d="m 148.92964,21.11367 9.20274,3.380297 c 1.42858,0.524685 2.15662,2.096803 1.63218,3.525473 l -16.24624,44.257453 c -0.52445,1.42867 -2.09681,2.15662 -3.52548,1.63218 l -9.20274,-3.3803 z"
-       style="fill:#f4511e;fill-opacity:1;stroke-width:0.17481446" />
+       style="fill:#f4511e;fill-opacity:1;stroke-width:0.17481446"
+       inkscape:export-filename="C:\Users\ManZen\Desktop\dynamites.png"
+       inkscape:export-xdpi="12.243183"
+       inkscape:export-ydpi="12.243183" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#ededed;fill-opacity:1;stroke:none;stroke-width:0.16000406;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect930"
+       width="13.352517"
+       height="32"
+       x="30.74271"
+       y="95.288689"
+       ry="2.4964561"
+       inkscape:export-filename="C:\Users\ManZen\Desktop\pause.png"
+       inkscape:export-xdpi="25.4"
+       inkscape:export-ydpi="25.4" />
+    <rect
+       ry="2.4964561"
+       y="95.288689"
+       x="12.095234"
+       height="32"
+       width="13.352517"
+       id="rect934"
+       style="opacity:1;vector-effect:none;fill:#ededed;fill-opacity:1;stroke:none;stroke-width:0.16000406;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="C:\Users\ManZen\Desktop\pause.png"
+       inkscape:export-xdpi="25.4"
+       inkscape:export-ydpi="25.4" />
+    <path
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#ededed;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5.12754154;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+       d="m 71.624369,93.339404 c -8.807502,0 -16.002738,7.193456 -16.002738,15.999646 0,8.80619 7.195239,16.00035 16.002738,16.00035 8.682819,0 15.79755,-6.99205 15.997262,-15.62747 h -5.130084 c -0.194516,5.86035 -4.955892,10.50027 -10.867178,10.50027 -6.036165,0 -10.87495,-4.83789 -10.87495,-10.87315 0,-6.03527 4.838783,-10.872446 10.87495,-10.872446 1.920406,0 3.711744,0.49212 5.268764,1.35727 l -3.361346,2.082876 12.425159,6.66429 -0.440417,-14.090926 -3.862536,2.39359 c -2.745661,-2.20853 -6.245061,-3.5343 -10.029624,-3.5343 z"
+       id="path950"
+       inkscape:export-filename="C:\Users\ManZen\Desktop\reset.png"
+       inkscape:export-xdpi="25.4"
+       inkscape:export-ydpi="25.4"
+       inkscape:connector-curvature="0" />
+    <path
+       style="opacity:1;vector-effect:none;fill:#ededed;fill-opacity:1;stroke:none;stroke-width:0.19845749;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 111.85721,93.726752 -6.84352,5.441098 h -3.76562 c -1.7154,0 -3.09582,1.38103 -3.09582,3.09647 v 14.93365 c 0,1.71541 1.38042,3.09647 3.09582,3.09647 h 3.76562 l 6.83941,5.43079 c 1.34395,0.0535 2.88648,-1.31706 2.88648,-2.71442 V 96.450836 c 0,-1.393783 -1.5385,-2.719308 -2.88237,-2.724084 z"
+       id="rect961"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccssssccssc"
+       inkscape:export-filename="C:\Users\ManZen\Desktop\unmute.png"
+       inkscape:export-xdpi="25.4"
+       inkscape:export-ydpi="25.4" />
+    <path
+       inkscape:connector-curvature="0"
+       inkscape:export-ydpi="25.4"
+       inkscape:export-xdpi="25.4"
+       inkscape:export-filename="C:\Users\ManZen\Desktop\unmute.png"
+       id="path972"
+       d="m 120.1384,125.72675 c 9.08216,-4.71712 12.64755,-15.99148 7.92972,-25.07499 -1.50687,-2.90128 -3.6825,-5.239649 -6.24194,-6.92501 l -3.42892,4.84516 c 1.79447,1.15462 3.32253,2.78457 4.383,4.82628 3.23334,6.22533 0.83579,13.80722 -5.3886,17.04007 z"
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#ededed;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5.95897055;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+       sodipodi:nodetypes="csccccc" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#ededed;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3.31098604;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+       d="m 118.10793,117.04825 c 3.991,-3.98383 3.955,-10.56768 -0.08,-14.64301 l -2.32367,2.31947 c 2.76541,2.793 2.78971,7.22058 0.0545,9.95085 z"
+       id="path976"
+       inkscape:export-filename="C:\Users\ManZen\Desktop\unmute.png"
+       inkscape:export-xdpi="25.4"
+       inkscape:export-ydpi="25.4"
+       inkscape:connector-curvature="0" />
+    <rect
+       inkscape:export-ydpi="25.4"
+       inkscape:export-xdpi="25.4"
+       inkscape:export-filename="C:\Users\ManZen\Desktop\mute.png"
+       ry="2.2144532"
+       y="-47.663773"
+       x="191.52039"
+       height="18.261976"
+       width="4.3762355"
+       id="rect991"
+       style="opacity:1;vector-effect:none;fill:#ededed;fill-opacity:1;stroke:none;stroke-width:0.14192981;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       transform="matrix(0.70710083,0.70711273,-0.70710083,0.70711273,0,0)" />
+    <rect
+       transform="matrix(-0.70710083,0.70711273,-0.70710083,-0.70711273,0,0)"
+       style="opacity:1;vector-effect:none;fill:#ededed;fill-opacity:1;stroke:none;stroke-width:0.14192981;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect993"
+       width="4.3762355"
+       height="18.261976"
+       x="-40.720894"
+       y="-202.83948"
+       ry="2.2144532"
+       inkscape:export-filename="C:\Users\ManZen\Desktop\mute.png"
+       inkscape:export-xdpi="25.4"
+       inkscape:export-ydpi="25.4" />
+    <path
+       sodipodi:nodetypes="ccssssccssc"
+       inkscape:connector-curvature="0"
+       id="path4717"
+       d="m 153.01672,93.726752 -6.84352,5.441098 h -3.76562 c -1.7154,0 -3.09582,1.38103 -3.09582,3.09647 v 14.93365 c 0,1.71541 1.38042,3.09647 3.09582,3.09647 h 3.76562 l 6.83941,5.43079 c 1.34395,0.0535 2.88648,-1.31706 2.88648,-2.71442 V 96.450836 c 0,-1.393783 -1.5385,-2.719308 -2.88237,-2.724084 z"
+       style="opacity:1;vector-effect:none;fill:#ededed;fill-opacity:1;stroke:none;stroke-width:0.19845749;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="C:\Users\ManZen\Desktop\mute.png"
+       inkscape:export-xdpi="25.4"
+       inkscape:export-ydpi="25.4" />
   </g>
 </svg>
