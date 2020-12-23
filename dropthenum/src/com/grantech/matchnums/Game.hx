@@ -268,10 +268,11 @@ class Game extends Sprite {
 		this.fallAll(false);
 	}
 
-	public function revive():Void {
-		this.numRevives++;
+	public function reset(reviveMode:Bool = false):Void {
+		this.numRevives = reviveMode ? this.numRevives+1 : 0;
+		var lineNumber = reviveMode ? CellMap.NUM_ROWS - 3 : 0;
 		for (i in 0...CellMap.NUM_COLUMNS) {
-			for (j in CellMap.NUM_ROWS - 3...CellMap.NUM_ROWS) {
+			for (j in lineNumber...CellMap.NUM_ROWS) {
 				var cell = this.cells.get(i, j);
 				if (cell == null)
 					continue;
@@ -279,7 +280,7 @@ class Game extends Sprite {
 				Cell.dispose(cell, cellDisposeAnimationFactory);
 			}
 		}
-		this.timer = Timer.delay(this.spawn, 1500);
+		this.timer = Timer.delay(reviveMode ? this.spawn : this.init, 1500);
 	}
 
 	private function cell_clearHandlre(event:Event):Void {

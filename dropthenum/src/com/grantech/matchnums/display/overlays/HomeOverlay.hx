@@ -140,7 +140,7 @@ class HomeOverlay extends BaseOverlay {
 		if (event.type == GameEvent.REVIVE_CANCEL)
 			this.addOverlay(GameOver);
 		else
-			this.game.revive();
+			this.game.reset(true);
 	}
 	private function screen_closeHandler(event:Event):Void {
 		cast(event.currentTarget, BaseOverlay).removeEventListener(Event.CLOSE, this.screen_closeHandler);
