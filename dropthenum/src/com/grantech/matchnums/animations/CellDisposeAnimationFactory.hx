@@ -1,16 +1,11 @@
 package com.grantech.matchnums.animations;
 
+import com.grantech.matchnums.utils.Sounds;
 import motion.Actuate;
 import motion.easing.Back;
-import openfl.Assets;
-import openfl.media.Sound;
 
 class CellDisposeAnimationFactory implements IAnimationFactory {
-	private var sound:Sound;
-
-	public function new() {
-		this.sound = Assets.getSound("sounds/fall.ogg");
-	}
+	public function new() {}
 
 	public function call(?parameters:Array<Dynamic>):Void {
 		var cell = cast(parameters[0], Cell);
@@ -25,7 +20,6 @@ class CellDisposeAnimationFactory implements IAnimationFactory {
 		if (handler != null)
 			ease.onComplete(handler);
 
-		if (this.sound != null)
-			this.sound.play();
+		Sounds.play("fall");
 	}
 }

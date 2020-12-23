@@ -7,6 +7,7 @@ import com.grantech.matchnums.animations.Score;
 import com.grantech.matchnums.events.GameEvent;
 import com.grantech.matchnums.utils.Prefs.*;
 import com.grantech.matchnums.utils.Prefs;
+import com.grantech.matchnums.utils.Sounds;
 import haxe.Timer;
 import motion.Actuate;
 import motion.easing.Back;
@@ -15,8 +16,6 @@ import openfl.display.Shape;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.events.MouseEvent;
-import openfl.media.Sound;
-import openfl.utils.Assets;
 
 enum GameState {
 	Play;
@@ -27,7 +26,6 @@ class Game extends Sprite {
 	public var currentScale:Float = 1;
 	public var state:GameState;
 
-	private var fallSFX:Sound;
 	private var timer:Timer;
 	private var haveRecord:Bool;
 	private var numRevives:Int;
@@ -95,8 +93,6 @@ class Game extends Sprite {
 		this.cellInitAnimationFactory = new CellInitAnimationFactory();
 		this.cellDisposeAnimationFactory = new CellDisposeAnimationFactory();
 		this.spawn();
-
-		this.fallSFX = Assets.getSound("sounds/fall.ogg");
 	}
 
 	private function spawn():Void {
@@ -182,7 +178,7 @@ class Game extends Sprite {
 			var dy = Cell.SIZE * (CellMap.NUM_ROWS - c.row) + Cell.RADIUS;
 			if (dy - c.y > 0.5)
 				Actuate.tween(c, time, {y: dy}).delay(delay).ease(Expo.easeOut).onComplete(bounceCell, [c]);
-			this.fallSFX.play();
+			Sounds.play("fall");
 			++numFallings;
 		}
 
