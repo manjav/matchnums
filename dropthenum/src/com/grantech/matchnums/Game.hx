@@ -31,7 +31,7 @@ class Game extends Sprite {
 	private var numRevives:Int;
 	private var numRewardCells:Int;
 	private var lastColumn:Int;
-	private var valueRecord:Int = 8;
+	private var valueRecord:Int;
 	private var cells:CellMap;
 	private var endLine:Shape;
 	private var fallingEffect:Shape;
@@ -57,8 +57,6 @@ class Game extends Sprite {
 	public function new() {
 		super();
 
-		Prefs.instance.set(SCORES, 0);
-		this.state = Play;
 		this.cells = new CellMap();
 		var background = new Shape();
 		background.graphics.beginFill(0);
@@ -89,9 +87,18 @@ class Game extends Sprite {
 		this.addEventListener(Event.ENTER_FRAME, this.enterFrameHandler);
 		this.addEventListener(MouseEvent.CLICK, this.clickHandler);
 
-		this.lastColumn = Math.floor(Math.random() * CellMap.NUM_COLUMNS);
 		this.cellInitAnimationFactory = new CellInitAnimationFactory();
 		this.cellDisposeAnimationFactory = new CellDisposeAnimationFactory();
+	}
+
+	private function init():Void {
+		this.haveRecord = false;
+		this.numRevives = 0;
+		this.numRewardCells = 0;
+		this.valueRecord = 8;
+		this.scores = 0;
+		this.lastColumn = Math.floor(Math.random() * CellMap.NUM_COLUMNS);
+		this.state = Play;
 		this.spawn();
 	}
 
