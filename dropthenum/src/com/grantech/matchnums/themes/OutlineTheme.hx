@@ -132,8 +132,8 @@ class OutlineTheme extends ClassVariantTheme {
 		var skin = new RectangleSkin();
 		skin.fill = SolidColor(FILL_COLOR, 0);
 		skin.setFillForState(DOWN, SolidColor(FILL_COLOR, 0.5));
-		skin.border = SolidColor(2.0, BORDER_COLOR);
-		skin.setBorderForState(DOWN, SolidColor(3.0, BORDER_COLOR));
+		skin.border = SolidColor(2.0 * SCALE_FACTOR, BORDER_COLOR);
+		skin.setBorderForState(DOWN, SolidColor(3.0 * SCALE_FACTOR, BORDER_COLOR));
 		skin.cornerRadius = 5.0;
 		return skin;
 	}
