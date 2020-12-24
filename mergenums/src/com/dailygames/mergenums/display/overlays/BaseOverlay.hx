@@ -51,6 +51,12 @@ class BaseOverlay extends LayoutGroup {
 		return screen;
 	}
 
+	static public function closeAll():Void {
+		for (o in saves)
+			if (o.isOpen)
+				o.close();
+	}
+
 	private var padding = OutlineTheme.PADDING;
 	private var overlay:RectangleSkin;
 
