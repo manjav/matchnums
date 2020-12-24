@@ -19,6 +19,7 @@ import openfl.events.MouseEvent;
 
 class HomeOverlay extends BaseOverlay {
 	private var game:Game;
+	private var nextCell:Cell;
 	private var header:LayoutGroup;
 	private var footer:LayoutGroup;
 	private var scoresIndicator:Indicator;
@@ -73,19 +74,26 @@ class HomeOverlay extends BaseOverlay {
 		this.footer.layout = new AnchorLayout();
 		this.addChild(this.footer);
 
-		function addButton(name:String, layoutData:AnchorLayoutData, inHeader:Bool):Void {
+		function addButton(name:String, layoutData:AnchorLayoutData, inHeader:Bool):Button {
 			var button = new Button();
 			button.name = name;
 			button.height = button.width = this.header.height - 8;
 			button.layoutData = layoutData;
+			if (name != "next")
 			button.icon = new Bitmap(Assets.getBitmapData("images/" + name + ".png"));
 			button.addEventListener(MouseEvent.CLICK, buttons_clickHandler);
 			inHeader ? this.header.addChild(button) : this.footer.addChild(button);
+			return button;
 		}
-		addButton("coin-small", AnchorLayoutData.middleRight(), true);
 		addButton("dynamite", AnchorLayoutData.middleRight(), false);
 		addButton("dynamites", AnchorLayoutData.middleRight(0, header.height), false);
 		addButton("pause", AnchorLayoutData.middleLeft(), false);
+
+		this.nextCell = Cell.instantiate(0, 0, this.game.nextValue, 0, null);
+		this.nextCell.scaleX = this.nextCell.scaleY = 0.3;
+		var nextButton = addButton("next", AnchorLayoutData.center(), true);
+		nextButton.icon = this.nextCell;
+		nextButton.paddingLeft = nextButton.paddingTop = this.nextCell.width;
 	}
 
 	private function addOverlay(type:ScreenType, save:Bool = true):BaseOverlay {
@@ -107,6 +115,7 @@ class HomeOverlay extends BaseOverlay {
 		var popup:BaseOverlay = null;
 		switch (event.type) {
 			case GameEvent.SPAWN:
+				this.nextCell.init(0, 0, this.game.nextValue);
 				return;
 			case GameEvent.BIG_VALUE:
 			popup = this.addOverlay(BigValue, false);
