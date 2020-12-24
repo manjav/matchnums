@@ -182,7 +182,7 @@ class HomeOverlay extends BaseOverlay {
 
 		this.game.scaleY = this.game.scaleX = gameScale;
 		this.game.x = (this.actualWidth - (currentWidth * gameScale)) * 0.5;
-		this.game.y = (this.actualHeight - (currentHeight * gameScale)) * 0.5;
+		this.game.y = (this.actualHeight - (currentHeight * gameScale)) * 0.55;
 
 		this.footer.x = this.header.x = this.game.x;
 		this.footer.width = this.header.width = this.game.width - 40;

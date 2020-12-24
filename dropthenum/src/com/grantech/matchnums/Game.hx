@@ -107,6 +107,7 @@ class Game extends Sprite {
 		this.scores = 0;
 		this.lastColumn = Math.floor(Math.random() * CellMap.NUM_COLUMNS);
 		this.state = Play;
+		this.nextCell.x = this.lastColumn * Cell.SIZE + Cell.RADIUS;
 		this.spawn();
 	}
 
@@ -200,9 +201,11 @@ class Game extends Sprite {
 			++numFallings;
 		}
 
-		if (numFallings > 0)
+		if (numFallings > 0) {
+			Actuate.tween(this.nextCell, 0.5, {x: this.lastColumn * Cell.SIZE + Cell.RADIUS}).ease(Expo.easeOut);
 			this.timer = Timer.delay(this.fell, Math.round((delay + time + 0.31) * 1000));
 		}
+	}
 
 	private function bounceCell(cell:Cell):Void {
 		var y = cell.y;
