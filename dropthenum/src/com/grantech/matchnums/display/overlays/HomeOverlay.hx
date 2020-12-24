@@ -31,11 +31,10 @@ class HomeOverlay extends BaseOverlay {
 		this.layout = new AnchorLayout();
 
 		this.game = new Game();
-		this.game.addEventListener(GameEvent.SPAWN, this.game_eventsChangeHandler);
 		this.game.addEventListener(GameEvent.GAME_OVER, this.game_eventsChangeHandler);
 		this.game.addEventListener(GameEvent.BIG_VALUE, this.game_eventsChangeHandler);
 		this.game.addEventListener(GameEvent.NEW_RECORD, this.game_eventsChangeHandler);
-		this.game.addEventListener(GameEvent.GAME_OVER, this.game_eventsChangeHandler);
+		this.game.addEventListener(MouseEvent.CLICK, this.game_clickHandler);
 		this.addChild(this.game);
 
 		this.scoresIndicator = new Indicator();
@@ -112,14 +111,14 @@ class HomeOverlay extends BaseOverlay {
 		var popup:BaseOverlay = null;
 		switch (event.type) {
 			case GameEvent.BIG_VALUE:
-			popup = this.addOverlay(BigValue, false);
+				popup = this.addOverlay(BigValue, false);
 			case GameEvent.NEW_RECORD:
-			popup = this.addOverlay(NewRecord, false);
+				popup = this.addOverlay(NewRecord, false);
 			case GameEvent.GAME_OVER:
-			popup = this.addOverlay(Revive);
-			popup.addEventListener(GameEvent.REVIVE_BY_COIN, this.revivePopup_reviveHandler);
-			popup.addEventListener(GameEvent.REVIVE_BY_ADS, this.revivePopup_reviveHandler);
-			popup.addEventListener(GameEvent.REVIVE_CANCEL, this.revivePopup_reviveHandler);
+				popup = this.addOverlay(Revive);
+				popup.addEventListener(GameEvent.REVIVE_BY_COIN, this.revivePopup_reviveHandler);
+				popup.addEventListener(GameEvent.REVIVE_BY_ADS, this.revivePopup_reviveHandler);
+				popup.addEventListener(GameEvent.REVIVE_CANCEL, this.revivePopup_reviveHandler);
 		}
 		cast(popup, IGamePlayPopup).value = cast(event.data, Int);
 	}
@@ -133,7 +132,7 @@ class HomeOverlay extends BaseOverlay {
 				this.addOverlay(Shop);
 			case "dynamites":
 				this.addOverlay(Shop);
-	}
+		}
 	}
 
 	private function coinsIndicator_triggerHandler(event:TriggerEvent):Void {
@@ -159,8 +158,8 @@ class HomeOverlay extends BaseOverlay {
 			case Event.CLEAR:
 				this.game.reset();
 			case Event.CANCEL:
-		this.resume();
-	}
+				this.resume();
+		}
 	}
 
 	override private function refreshBackgroundLayout():Void {
