@@ -54,9 +54,21 @@ class BaseOverlay extends LayoutGroup {
 	private var padding = OutlineTheme.PADDING;
 	private var overlay:RectangleSkin;
 
+	public var isOpen(default, default):Bool;
+
 	override private function initialize():Void {
 		super.initialize();
 		this.overlayFactory();
+	}
+
+	override private function feathersControl_addedToStageHandler(event:Event):Void {
+		super.feathersControl_addedToStageHandler(event);
+		this.isOpen = true;
+	}
+
+	override private function feathersControl_removedFromStageHandler(event:Event):Void {
+		super.feathersControl_removedFromStageHandler(event);
+		this.isOpen = false;
 	}
 
 	private function overlayFactory():Void {
