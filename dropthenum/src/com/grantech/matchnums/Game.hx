@@ -129,6 +129,7 @@ class Game extends Sprite {
 		this.nextValue = Cell.getNextValue();
 
 		this.fallingEffect.transform.colorTransform.color = Cell.COLORS[cell.value];
+		GameEvent.dispatch(this, GameEvent.SPAWN);
 	}
 
 	private function gameOver():Void {
