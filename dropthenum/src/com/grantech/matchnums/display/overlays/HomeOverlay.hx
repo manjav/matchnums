@@ -79,7 +79,6 @@ class HomeOverlay extends BaseOverlay {
 			button.name = name;
 			button.height = button.width = this.header.height - 8;
 			button.layoutData = layoutData;
-			if (name != "next")
 			button.icon = new Bitmap(Assets.getBitmapData("images/" + name + ".png"));
 			button.addEventListener(MouseEvent.CLICK, buttons_clickHandler);
 			inHeader ? this.header.addChild(button) : this.footer.addChild(button);
@@ -88,12 +87,6 @@ class HomeOverlay extends BaseOverlay {
 		addButton("dynamite", AnchorLayoutData.middleRight(), false);
 		addButton("dynamites", AnchorLayoutData.middleRight(0, header.height), false);
 		addButton("pause", AnchorLayoutData.middleLeft(), false);
-
-		this.nextCell = Cell.instantiate(0, 0, this.game.nextValue, 0, null);
-		this.nextCell.scaleX = this.nextCell.scaleY = 0.3;
-		var nextButton = addButton("next", AnchorLayoutData.center(), true);
-		nextButton.icon = this.nextCell;
-		nextButton.paddingLeft = nextButton.paddingTop = this.nextCell.width;
 	}
 
 	private function addOverlay(type:ScreenType, save:Bool = true):BaseOverlay {
@@ -111,12 +104,14 @@ class HomeOverlay extends BaseOverlay {
 	public function resume():Void {
 		this.game.state = Play;
 	}
+
+	private function game_clickHandler(event:MouseEvent):Void {
+		trace(event.target);
+	}
+
 	private function game_eventsChangeHandler(event:GameEvent):Void {
 		var popup:BaseOverlay = null;
 		switch (event.type) {
-			case GameEvent.SPAWN:
-				this.nextCell.init(0, 0, this.game.nextValue);
-				return;
 			case GameEvent.BIG_VALUE:
 			popup = this.addOverlay(BigValue, false);
 			case GameEvent.NEW_RECORD:

@@ -25,7 +25,6 @@ enum GameState {
 class Game extends Sprite {
 	public var currentScale:Float = 1;
 	public var state:GameState;
-	public var nextValue:Int;
 
 	private var timer:Timer;
 	private var haveRecord:Bool;
@@ -33,6 +32,7 @@ class Game extends Sprite {
 	private var numRewardCells:Int;
 	private var lastColumn:Int;
 	private var valueRecord:Int;
+	private var nextCell:Cell;
 	private var cells:CellMap;
 	private var endLine:Shape;
 	private var fallingEffect:Shape;
@@ -90,6 +90,12 @@ class Game extends Sprite {
 
 		this.cellInitAnimationFactory = new CellInitAnimationFactory();
 		this.cellDisposeAnimationFactory = new CellDisposeAnimationFactory();
+
+		this.nextCell = Cell.instantiate(0, 0, Cell.getNextValue(), 0, this.cellInitAnimationFactory);
+		this.nextCell.y = Cell.RADIUS;
+		this.nextCell.alpha = 0.5;
+		this.addChild(this.nextCell);
+
 		this.init();
 	}
 
@@ -100,7 +106,6 @@ class Game extends Sprite {
 		this.valueRecord = 8;
 		this.scores = 0;
 		this.lastColumn = Math.floor(Math.random() * CellMap.NUM_COLUMNS);
-		this.nextValue = Cell.getNextValue();
 		this.state = Play;
 		this.spawn();
 	}
@@ -118,15 +123,16 @@ class Game extends Sprite {
 			Actuate.tween(this.endLine, 1.0, {alpha: 0.2}).repeat(1).onComplete(gameOver);
 			return;
 		}
-		var reward = numRewardCells > 0 || Math.random() > 0.05 ? 0 : Math.round(this.nextValue * 10);
+		var reward = numRewardCells > 0 || Math.random() > 0.05 ? 0 : Math.round(this.nextCell.value * 10);
 		if (reward > 0)
 			numRewardCells++;
-		var cell = Cell.instantiate(this.lastColumn, row, this.nextValue, reward, this.cellInitAnimationFactory);
+		var cell = Cell.instantiate(this.lastColumn, row, this.nextCell.value, reward, this.cellInitAnimationFactory);
 		cell.x = this.lastColumn * Cell.SIZE + Cell.RADIUS;
 		cell.y = Cell.RADIUS;
 		this.cells.add(cell);
 		this.addChild(cell);
-		this.nextValue = Cell.getNextValue();
+
+		this.nextCell.init(0, 0, Cell.getNextValue());
 
 		this.fallingEffect.transform.colorTransform.color = Cell.COLORS[cell.value];
 		GameEvent.dispatch(this, GameEvent.SPAWN);
@@ -196,7 +202,7 @@ class Game extends Sprite {
 
 		if (numFallings > 0)
 			this.timer = Timer.delay(this.fell, Math.round((delay + time + 0.31) * 1000));
-	}
+		}
 
 	private function bounceCell(cell:Cell):Void {
 		var y = cell.y;
@@ -274,7 +280,7 @@ class Game extends Sprite {
 	}
 
 	public function reset(reviveMode:Bool = false):Void {
-		this.numRevives = reviveMode ? this.numRevives+1 : 0;
+		this.numRevives = reviveMode ? this.numRevives + 1 : 0;
 		var lineNumber = reviveMode ? CellMap.NUM_ROWS - 3 : 0;
 		for (i in 0...CellMap.NUM_COLUMNS) {
 			for (j in lineNumber...CellMap.NUM_ROWS) {
