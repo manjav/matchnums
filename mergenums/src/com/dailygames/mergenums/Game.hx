@@ -27,6 +27,7 @@ class Game extends Sprite {
 	public var state:GameState;
 
 	private var timer:Timer;
+	private var columnChanged:Bool;
 	private var haveRecord:Bool;
 	private var numRevives:Int;
 	private var numRewardCells:Int;
@@ -158,24 +159,26 @@ class Game extends Sprite {
 		}
 
 		// Change cell state
-		this.fallAll(false);
+		this.fallAll();
 	}
 
 	private function clickHandler(event:MouseEvent):Void {
 		if (this.state != Play)
 			return;
 		this.lastColumn = Math.floor(this.mouseX / Cell.SIZE);
-		this.fallAll(true);
+		this.columnChanged = true;
+		this.fallAll();
 	}
 
-	private function fallAll(changeColumn:Bool):Void {
+	private function fallAll():Void {
 		var delay = 0.01;
 		var time = 0.15;
 		var numFallings = 0;
 		for (c in this.cells.map) {
 			if (c.state != Released)
 				continue;
-			if (changeColumn) {
+			if (this.columnChanged) {
+				this.columnChanged = false;
 				var row = this.cells.length(this.lastColumn);
 				if (c != this.cells.get(this.lastColumn, row - 1)) {
 					var _y = Cell.SIZE * (CellMap.NUM_ROWS - row);
@@ -279,7 +282,7 @@ class Game extends Sprite {
 			if (Cell.SPAWN_MAX < cell.value - distance)
 				Cell.SPAWN_MAX = cell.value - distance;
 		}
-		this.fallAll(false);
+		this.fallAll();
 	}
 
 	public function reset(reviveMode:Bool = false):Void {
