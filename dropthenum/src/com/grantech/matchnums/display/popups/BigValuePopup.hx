@@ -28,7 +28,7 @@ class BigValuePopup extends BasePrizePopup {
 	override public function validateNow():Void {
 		if (this.isInvalid(InvalidationFlag.CUSTOM("title"))) {
 			this.adsButton.text = " " + this.prize + " ";
-			this.cellDisplay = Cell.instantiate(1, 1, this.value, this.cellInitAnimationFactory);
+			this.cellDisplay = Cell.instantiate(1, 1, this.value, 0, this.cellInitAnimationFactory);
 			this.addChild(this.cellDisplay);
 		}
 		super.validateNow();

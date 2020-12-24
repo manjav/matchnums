@@ -64,14 +64,13 @@ class PauseOverlay extends BaseOverlay {
 
 	private function buttons_clickHandler(event:MouseEvent):Void {
 		var button = cast(event.target, Button);
-		if (button.name == "mute" || button.name == "unmute") {
-			Sounds.mute = !Sounds.mute;
-			button.icon = new Bitmap(Assets.getBitmapData("images/" + (Sounds.mute ? "mute" : "unmute") + ".png"));
-			Prefs.instance.set(MUTE, Sounds.mute ? 1.0 : 0.0);
-			return;
-		}
-
 		switch (button.name) {
+			case "mute":
+			case "unmute":
+				Sounds.mute = !Sounds.mute;
+				button.icon = new Bitmap(Assets.getBitmapData("images/" + (Sounds.mute ? "mute" : "unmute") + ".png"));
+				Prefs.instance.set(MUTE, Sounds.mute ? 1.0 : 0.0);
+				return;
 			case "resume":
 				this.dispatchEvent(new Event(Event.CANCEL));
 			case "reset":
