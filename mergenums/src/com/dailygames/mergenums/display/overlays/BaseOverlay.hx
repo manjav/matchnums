@@ -1,9 +1,9 @@
-package com.grantech.matchnums.display.overlays;
+package com.dailygames.mergenums.display.overlays;
 
-import com.grantech.matchnums.themes.OutlineTheme;
-import com.grantech.matchnums.display.popups.BigValuePopup;
-import com.grantech.matchnums.display.popups.RevivePopup;
-import com.grantech.matchnums.display.popups.NewRecordPopup;
+import com.dailygames.mergenums.themes.OutlineTheme;
+import com.dailygames.mergenums.display.popups.BigValuePopup;
+import com.dailygames.mergenums.display.popups.RevivePopup;
+import com.dailygames.mergenums.display.popups.NewRecordPopup;
 import feathers.controls.LayoutGroup;
 import feathers.layout.AnchorLayoutData;
 import feathers.skins.RectangleSkin;

@@ -1,4 +1,4 @@
-package com.grantech.matchnums;
+package com.dailygames.mergenums;
 
 import haxe.ds.IntMap;
 

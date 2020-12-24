@@ -1,6 +1,6 @@
-package com.grantech.matchnums.animations;
+package com.dailygames.mergenums.animations;
 
-import com.grantech.matchnums.utils.Sounds;
+import com.dailygames.mergenums.utils.Sounds;
 import motion.Actuate;
 import motion.easing.Back;
 

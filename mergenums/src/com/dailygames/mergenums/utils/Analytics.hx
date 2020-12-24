@@ -1,4 +1,4 @@
-package com.grantech.matchnums.utils;
+package com.dailygames.mergenums.utils;
 
 import net.lion123dev.events.Events.GAPlatform;
 import net.lion123dev.GameAnalytics;

@@ -1,6 +1,6 @@
-package com.grantech.matchnums.display.popups;
+package com.dailygames.mergenums.display.popups;
 
-import com.grantech.matchnums.themes.OutlineTheme;
+import com.dailygames.mergenums.themes.OutlineTheme;
 import feathers.controls.Label;
 import feathers.layout.AnchorLayoutData;
 

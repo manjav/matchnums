@@ -1,6 +1,6 @@
-package com.grantech.matchnums.utils;
+package com.dailygames.mergenums.utils;
 
-import com.grantech.matchnums.events.GameEvent;
+import com.dailygames.mergenums.events.GameEvent;
 import openfl.events.EventDispatcher;
 import openfl.net.SharedObject;
 

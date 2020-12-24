@@ -1,8 +1,8 @@
-package com.grantech.matchnums;
+package com.dailygames.mergenums;
 
-import com.grantech.matchnums.display.overlays.HomeOverlay;
-import com.grantech.matchnums.themes.OutlineTheme;
-import com.grantech.matchnums.utils.Prefs;
+import com.dailygames.mergenums.display.overlays.HomeOverlay;
+import com.dailygames.mergenums.themes.OutlineTheme;
+import com.dailygames.mergenums.utils.Prefs;
 import feathers.controls.Application;
 import feathers.layout.AnchorLayout;
 import feathers.layout.AnchorLayoutData;

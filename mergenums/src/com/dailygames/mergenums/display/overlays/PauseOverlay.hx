@@ -1,10 +1,10 @@
-package com.grantech.matchnums.display.overlays;
+package com.dailygames.mergenums.display.overlays;
 
-import com.grantech.matchnums.themes.LineSkin;
-import com.grantech.matchnums.themes.OutlineTheme;
-import com.grantech.matchnums.utils.Prefs.*;
-import com.grantech.matchnums.utils.Prefs;
-import com.grantech.matchnums.utils.Sounds;
+import com.dailygames.mergenums.themes.LineSkin;
+import com.dailygames.mergenums.themes.OutlineTheme;
+import com.dailygames.mergenums.utils.Prefs.*;
+import com.dailygames.mergenums.utils.Prefs;
+import com.dailygames.mergenums.utils.Sounds;
 import feathers.controls.Button;
 import feathers.controls.LayoutGroup;
 import feathers.layout.AnchorLayout;

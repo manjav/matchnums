@@ -1,6 +1,6 @@
-package com.grantech.matchnums.display.popups;
+package com.dailygames.mergenums.display.popups;
 
-import com.grantech.matchnums.animations.CellInitAnimationFactory;
+import com.dailygames.mergenums.animations.CellInitAnimationFactory;
 import openfl.events.Event;
 
 class BigValuePopup extends BasePrizePopup {

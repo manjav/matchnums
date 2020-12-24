@@ -1,8 +1,8 @@
-package com.grantech.matchnums;
+package com.dailygames.mergenums;
 
-import com.grantech.matchnums.animations.IAnimationFactory;
-import com.grantech.matchnums.animations.Reward;
-import com.grantech.matchnums.utils.Utils;
+import com.dailygames.mergenums.animations.IAnimationFactory;
+import com.dailygames.mergenums.animations.Reward;
+import com.dailygames.mergenums.utils.Utils;
 import openfl.display.Shape;
 import openfl.display.Sprite;
 import openfl.events.Event;

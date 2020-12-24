@@ -1,8 +1,8 @@
-package com.grantech.matchnums.display;
+package com.dailygames.mergenums.display;
 
-import com.grantech.matchnums.events.GameEvent;
-import com.grantech.matchnums.themes.OutlineTheme;
-import com.grantech.matchnums.utils.Prefs;
+import com.dailygames.mergenums.events.GameEvent;
+import com.dailygames.mergenums.themes.OutlineTheme;
+import com.dailygames.mergenums.utils.Prefs;
 import feathers.controls.Button;
 import feathers.events.TriggerEvent;
 

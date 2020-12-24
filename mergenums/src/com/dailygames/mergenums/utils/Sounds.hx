@@ -1,4 +1,4 @@
-package com.grantech.matchnums.utils;
+package com.dailygames.mergenums.utils;
 
 import openfl.Assets;
 import openfl.media.Sound;

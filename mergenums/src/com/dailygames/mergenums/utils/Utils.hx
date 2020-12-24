@@ -1,4 +1,4 @@
-package com.grantech.matchnums.utils;
+package com.dailygames.mergenums.utils;
 
 import openfl.text.GridFitType;
 import openfl.text.TextField;

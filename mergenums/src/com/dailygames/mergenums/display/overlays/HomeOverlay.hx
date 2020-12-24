@@ -1,12 +1,12 @@
-package com.grantech.matchnums.display.overlays;
+package com.dailygames.mergenums.display.overlays;
 
-import com.grantech.matchnums.display.Indicator;
-import com.grantech.matchnums.display.overlays.BaseOverlay.ScreenType;
-import com.grantech.matchnums.display.popups.IGamePlayPopup;
-import com.grantech.matchnums.display.popups.RevivePopup;
-import com.grantech.matchnums.events.GameEvent;
-import com.grantech.matchnums.utils.Prefs.*;
-import com.grantech.matchnums.utils.Utils;
+import com.dailygames.mergenums.display.Indicator;
+import com.dailygames.mergenums.display.overlays.BaseOverlay.ScreenType;
+import com.dailygames.mergenums.display.popups.IGamePlayPopup;
+import com.dailygames.mergenums.display.popups.RevivePopup;
+import com.dailygames.mergenums.events.GameEvent;
+import com.dailygames.mergenums.utils.Prefs.*;
+import com.dailygames.mergenums.utils.Utils;
 import feathers.controls.Button;
 import feathers.controls.LayoutGroup;
 import feathers.events.TriggerEvent;

@@ -1,6 +1,6 @@
-package com.grantech.matchnums.animations;
+package com.dailygames.mergenums.animations;
 
-import com.grantech.matchnums.utils.Utils;
+import com.dailygames.mergenums.utils.Utils;
 import motion.Actuate;
 import motion.easing.Sine;
 import openfl.Assets;

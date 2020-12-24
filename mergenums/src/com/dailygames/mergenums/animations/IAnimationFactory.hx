@@ -1,4 +1,4 @@
-package com.grantech.matchnums.animations;
+package com.dailygames.mergenums.animations;
 
 interface IAnimationFactory {
 	function call(?parameters:Array<Dynamic>):Void;

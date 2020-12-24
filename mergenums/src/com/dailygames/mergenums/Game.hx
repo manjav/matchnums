@@ -1,13 +1,13 @@
-package com.grantech.matchnums;
+package com.dailygames.mergenums;
 
-import com.grantech.matchnums.animations.CellDisposeAnimationFactory;
-import com.grantech.matchnums.animations.CellInitAnimationFactory;
-import com.grantech.matchnums.animations.Reward;
-import com.grantech.matchnums.animations.Score;
-import com.grantech.matchnums.events.GameEvent;
-import com.grantech.matchnums.utils.Prefs.*;
-import com.grantech.matchnums.utils.Prefs;
-import com.grantech.matchnums.utils.Sounds;
+import com.dailygames.mergenums.animations.CellDisposeAnimationFactory;
+import com.dailygames.mergenums.animations.CellInitAnimationFactory;
+import com.dailygames.mergenums.animations.Reward;
+import com.dailygames.mergenums.animations.Score;
+import com.dailygames.mergenums.events.GameEvent;
+import com.dailygames.mergenums.utils.Prefs.*;
+import com.dailygames.mergenums.utils.Prefs;
+import com.dailygames.mergenums.utils.Sounds;
 import haxe.Timer;
 import motion.Actuate;
 import motion.easing.Back;
