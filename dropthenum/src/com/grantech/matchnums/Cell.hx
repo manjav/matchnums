@@ -71,8 +71,6 @@ class Cell extends Sprite {
 	}
 
 	public function init(column:Int, row:Int, value:Int, reward:Int = 0):Cell {
-		if (value == 0)
-			value = Math.ceil(Math.random() * SPAWN_MAX);
 		this.column = column;
 		this.row = row;
 		this.value = value;
@@ -89,7 +87,7 @@ class Cell extends Sprite {
 			Reward.dispose(this.rewardDisplay);
 			this.rewardDisplay = null;
 		}
-		
+
 		if (this.reward > 0) {
 			this.rewardDisplay = Reward.instantiate(RewardType.Coin, RADIUS, -RADIUS, this);
 			this.rewardDisplay.scaleX = this.rewardDisplay.scaleY = 0.5;
@@ -118,6 +116,10 @@ class Cell extends Sprite {
 		return "{Cell c: " + column + " r:" + row + " v:" + value + "}";
 	}
 
+	static public function getNextValue():Int {
+		return Math.ceil(Math.random() * SPAWN_MAX);
+	}
+
 	static private var pool:Array<Cell> = new Array();
 	static private var i:Int = 0;
 
@@ -138,7 +140,7 @@ class Cell extends Sprite {
 		pool[i++] = cell;
 	}
 
-	static public function instantiate(column:Int, row:Int, value:Int, reward:Int = 0, initAnimationFactory:IAnimationFactory):Cell {
+	static public function instantiate(column:Int, row:Int, value:Int, reward:Int, initAnimationFactory:IAnimationFactory):Cell {
 		if (i > 0) {
 			i--;
 			return pool[i].init(column, row, value, reward);

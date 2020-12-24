@@ -25,6 +25,7 @@ enum GameState {
 class Game extends Sprite {
 	public var currentScale:Float = 1;
 	public var state:GameState;
+	public var nextValue:Int;
 
 	private var timer:Timer;
 	private var haveRecord:Bool;
@@ -89,6 +90,7 @@ class Game extends Sprite {
 
 		this.cellInitAnimationFactory = new CellInitAnimationFactory();
 		this.cellDisposeAnimationFactory = new CellDisposeAnimationFactory();
+		this.init();
 	}
 
 	private function init():Void {
@@ -98,6 +100,7 @@ class Game extends Sprite {
 		this.valueRecord = 8;
 		this.scores = 0;
 		this.lastColumn = Math.floor(Math.random() * CellMap.NUM_COLUMNS);
+		this.nextValue = Cell.getNextValue();
 		this.state = Play;
 		this.spawn();
 	}
@@ -115,14 +118,15 @@ class Game extends Sprite {
 			Actuate.tween(this.endLine, 1.0, {alpha: 0.2}).repeat(1).onComplete(gameOver);
 			return;
 		}
-		var reward = numRewardCells > 0 || Math.random() > 0.05 ? 0 : Math.round(Math.random() * Cell.SPAWN_MAX * 10);
+		var reward = numRewardCells > 0 || Math.random() > 0.05 ? 0 : Math.round(this.nextValue * 10);
 		if (reward > 0)
 			numRewardCells++;
-		var cell = Cell.instantiate(this.lastColumn, row, 0, reward, this.cellInitAnimationFactory);
+		var cell = Cell.instantiate(this.lastColumn, row, this.nextValue, reward, this.cellInitAnimationFactory);
 		cell.x = this.lastColumn * Cell.SIZE + Cell.RADIUS;
 		cell.y = Cell.RADIUS;
 		this.cells.add(cell);
 		this.addChild(cell);
+		this.nextValue = Cell.getNextValue();
 
 		this.fallingEffect.transform.colorTransform.color = Cell.COLORS[cell.value];
 	}
