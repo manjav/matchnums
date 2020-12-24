@@ -19,7 +19,6 @@ import openfl.events.MouseEvent;
 
 class HomeOverlay extends BaseOverlay {
 	private var game:Game;
-	private var nextCell:Cell;
 	private var header:LayoutGroup;
 	private var footer:LayoutGroup;
 	private var scoresIndicator:Indicator;
