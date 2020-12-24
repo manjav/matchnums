@@ -288,16 +288,17 @@ class Game extends Sprite {
 	public function reset(reviveMode:Bool = false):Void {
 		this.numRevives = reviveMode ? this.numRevives + 1 : 0;
 		var lineNumber = reviveMode ? CellMap.NUM_ROWS - 3 : 0;
-		for (i in 0...CellMap.NUM_COLUMNS) {
-			for (j in lineNumber...CellMap.NUM_ROWS) {
-				var cell = this.cells.get(i, j);
-				if (cell == null)
-					continue;
-				cell.addEventListener(Event.CLEAR, this.cell_clearHandlre);
-				Cell.dispose(cell, cellDisposeAnimationFactory);
-			}
-		}
+		for (i in 0...CellMap.NUM_COLUMNS)
+			for (j in lineNumber...CellMap.NUM_ROWS)
+				if (this.cells.exists(i, j))
+					this.removeCell(this.cells.get(i, j));
+
 		this.timer = Timer.delay(reviveMode ? this.spawn : this.init, 1500);
+	}
+
+	public function removeCell(cell:Cell):Void {
+		cell.addEventListener(Event.CLEAR, this.cell_clearHandlre);
+		Cell.dispose(cell, cellDisposeAnimationFactory);
 	}
 
 	private function cell_clearHandlre(event:Event):Void {
