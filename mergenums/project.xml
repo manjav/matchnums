@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="Match Nums" package="com.dailygames.mergenums" version="0.0.1" company="GranTech" />
-	<app path="bin" file="MatchNums" main="com.dailygames.mergenums.Main" />
+	<meta title="Drop and Merge Number" package="com.dailygames.mergenums" version="0.1.0" build-number="1001" company="DailyGames" />
+	<app path="bin" file="mergenums" main="com.dailygames.mergenums.Main"/>
 	
 	<window width="480" height="920" background="#444444"/>
 	<window width="0" height="0" if="html5" />
