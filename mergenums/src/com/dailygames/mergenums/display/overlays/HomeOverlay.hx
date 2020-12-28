@@ -21,6 +21,7 @@ class HomeOverlay extends BaseOverlay {
 	private var game:Game;
 	private var header:LayoutGroup;
 	private var footer:LayoutGroup;
+	private var removeCellMode:String;
 	private var scoresIndicator:Indicator;
 	private var recordIndicator:Indicator;
 	private var coinsIndicator:Indicator;
@@ -159,6 +160,7 @@ class HomeOverlay extends BaseOverlay {
 		overlay.removeEventListener(Event.CANCEL, this.pauseOverlay_eventsHandler);
 		switch (event.type) {
 			case Event.CLEAR:
+				this.removeCellMode = null;
 				BaseOverlay.closeAll();
 				this.game.reset();
 			case Event.CANCEL:

@@ -1,12 +1,21 @@
 package com.dailygames.mergenums.display.popups;
 
+import feathers.layout.AnchorLayoutData;
 import openfl.events.Event;
 import openfl.events.MouseEvent;
-import feathers.layout.AnchorLayoutData;
 
 class RemoveCellPopup extends ConfirmPopup {
+	public var mode(default, set):String;
+
+	private function set_mode(value:String) {
+		if (this.mode == value)
+			return value;
+		this.mode = value;
+		this.title = value == "dynamite" ? "Select the Number" : "Select the Color";
+		return value;
+	}
+
 	override private function initialize():Void {
-		this.title = "Select Color";
 		super.initialize();
 	}
 
@@ -14,9 +23,6 @@ class RemoveCellPopup extends ConfirmPopup {
 		super.titleFactory();
 		this.titleDisplay.variant = null;
 		this.titleDisplay.layoutData = AnchorLayoutData.center();
-		// var textFormat = this.titleDisplay.textFormat;
-		// textFormat.align = CENTER;
-		// this.titleDisplay.textFormat = textFormat;
 	}
 
 	override public function closeButtonFactory():Void {
@@ -28,7 +34,7 @@ class RemoveCellPopup extends ConfirmPopup {
 	override private function overlayFactory():Void {}
 
 	override private function closeButton_clickHandler(event:MouseEvent):Void {
-        super.closeButton_clickHandler(event);
-        this.dispatchEvent(new Event(Event.CANCEL));
+		super.closeButton_clickHandler(event);
+		this.dispatchEvent(new Event(Event.CANCEL));
 	}
 }
