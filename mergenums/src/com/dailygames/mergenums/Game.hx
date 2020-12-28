@@ -24,6 +24,7 @@ enum GameState {
 
 class Game extends Sprite {
 	public var currentScale:Float = 1;
+	public var state:GameState;
 
 	private var timer:Timer;
 	private var columnChanged:Bool;
@@ -38,18 +39,6 @@ class Game extends Sprite {
 	private var fallingEffect:Shape;
 	private var cellInitAnimationFactory:CellInitAnimationFactory;
 	private var cellDisposeAnimationFactory:CellDisposeAnimationFactory;
-
-	public var state(default, set):GameState;
-
-	function set_state(value:GameState):GameState {
-		if (this.state == value)
-			return value;
-		this.state = value;
-		for (c in this.cells.map)
-			if (c.state == Init || c.state == Released)
-				c.visible = value == Play;
-		return value;
-	}
 
 	public var scores(default, set):Int;
 

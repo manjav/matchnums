@@ -112,6 +112,8 @@ class HomeOverlay extends BaseOverlay {
 		if (this.removeCellMode == null || !Std.is(event.target, Cell))
 			return;
 		var cell = cast(event.target, Cell);
+		if (cell.state != Fixed)
+			return;
 		if (this.removeCellMode == "dynamite")
 			this.game.removeCell(cell, true);
 		else
@@ -124,7 +126,7 @@ class HomeOverlay extends BaseOverlay {
 		this.resume();
 		this.game.fallAll();
 	}
-	
+
 	private function game_eventsChangeHandler(event:GameEvent):Void {
 		var popup:BaseOverlay = null;
 		switch (event.type) {
