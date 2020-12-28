@@ -13,8 +13,17 @@ import openfl.events.MouseEvent;
 class BasePopup extends BaseOverlay {
 	private var closeButton:Button;
 	private var content:LayoutGroup;
-	
-	public var contentRect:Rectangle;
+
+	public var contentRect(default, set):Rectangle;
+
+	public function set_contentRect(value:Rectangle):Rectangle {
+		if (this.contentRect == value)
+			return value;
+		this.contentRect = value;
+		this.adjustContentLayout();
+		return value;
+	}
+
 	public var hasCloseButton(default, set):Bool;
 
 	public function set_hasCloseButton(value:Bool):Bool {
@@ -32,6 +41,14 @@ class BasePopup extends BaseOverlay {
 
 		this.content = new LayoutGroup();
 		this.content.layout = new AnchorLayout();
+		this.adjustContentLayout();
+		this.addChild(this.content);
+
+		this.contentBackgroundFactory();
+		this.closeButtonFactory();
+	}
+
+	private function adjustContentLayout():Void {
 		if (this.contentRect == null) {
 			this.content.width = OutlineTheme.POPUP_SIZE;
 			this.content.height = OutlineTheme.POPUP_SIZE;
@@ -41,11 +58,8 @@ class BasePopup extends BaseOverlay {
 			this.content.y = this.contentRect.y;
 			this.content.width = contentRect.width;
 			this.content.height = contentRect.height;
+			this.content.layoutData = null;
 		}
-		this.addChild(this.content);
-
-		this.contentBackgroundFactory();
-		this.closeButtonFactory();
 	}
 
 	private function contentBackgroundFactory():Void {

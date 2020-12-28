@@ -131,11 +131,10 @@ class HomeOverlay extends BaseOverlay {
 			case "pause":
 				this.pause();
 			case "dynamite" | "dynamites":
-				this.pause(false);
-				var popup = new RemoveCellPopup();
+				var popup = cast(this.addOverlay(RemoveCell, true, false), RemoveCellPopup);
+				this.removeCellMode = popup.mode = button.name;
 				popup.addEventListener(Event.CANCEL, this.pauseOverlay_eventsHandler);
 				popup.contentRect = new Rectangle(this.footer.x, this.footer.y, this.footer.width, 100);
-				this.addChild(popup);
 		}
 	}
 

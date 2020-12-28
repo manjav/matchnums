@@ -38,6 +38,8 @@ class BaseOverlay extends LayoutGroup {
 					new NewRecordPopup();
 				case Revive:
 					new RevivePopup();
+				case RemoveCell:
+					new RemoveCellPopup();
 				default: null;
 			}
 			screen.layoutData = AnchorLayoutData.fill();
