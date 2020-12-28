@@ -88,8 +88,8 @@ class HomeOverlay extends BaseOverlay {
 		addButton("pause", AnchorLayoutData.middleLeft(), false);
 	}
 
-	private function addOverlay(type:ScreenType, save:Bool = true):BaseOverlay {
-		this.pause();
+	private function addOverlay(type:ScreenType, save:Bool = true, showPauseOverlay:Bool = true):BaseOverlay {
+		this.pause(showPauseOverlay);
 		return BaseOverlay.create(type, this, save);
 	}
 
@@ -103,6 +103,7 @@ class HomeOverlay extends BaseOverlay {
 	}
 
 	public function resume():Void {
+		BaseOverlay.closeAll();
 		this.game.state = Play;
 	}
 
