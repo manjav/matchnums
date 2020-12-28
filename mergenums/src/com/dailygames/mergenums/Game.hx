@@ -24,7 +24,6 @@ enum GameState {
 
 class Game extends Sprite {
 	public var currentScale:Float = 1;
-	public var state:GameState;
 
 	private var timer:Timer;
 	private var columnChanged:Bool;
@@ -40,20 +39,33 @@ class Game extends Sprite {
 	private var cellInitAnimationFactory:CellInitAnimationFactory;
 	private var cellDisposeAnimationFactory:CellDisposeAnimationFactory;
 
+	public var state(default, set):GameState;
+
+	function set_state(value:GameState):GameState {
+		if (this.state == value)
+			return value;
+		this.state = value;
+		for (c in this.cells.map)
+			if (c.state == Init || c.state == Released)
+				c.visible = value == Play;
+		return value;
+	}
+
 	public var scores(default, set):Int;
 
-	function set_scores(scores:Int):Int {
-		if (this.scores == scores)
-			return scores;
-		Prefs.instance.set(SCORES, scores);
-		if (Prefs.instance.get(RECORD) < scores) {
-			Prefs.instance.set(RECORD, scores);
-			if (scores > 1000 && !haveRecord) {
-				GameEvent.dispatch(this, GameEvent.NEW_RECORD, scores);
+	function set_scores(value:Int):Int {
+		if (this.scores == value)
+			return value;
+		Prefs.instance.set(SCORES, value);
+		if (Prefs.instance.get(RECORD) < value) {
+			Prefs.instance.set(RECORD, value);
+			if (value > 1000 && !haveRecord) {
+				GameEvent.dispatch(this, GameEvent.NEW_RECORD, value);
 				haveRecord = true;
 			}
 		}
-		return this.scores = scores;
+		this.scores = value;
+		return value;
 	}
 
 	public function new() {
