@@ -92,11 +92,13 @@ class HomeOverlay extends BaseOverlay {
 		return BaseOverlay.create(type, this, save);
 	}
 
-	public function pause():Void {
+	public function pause(showPauseOverlay:Bool = true):Void {
+		this.game.state = Pause;
+		if (!showPauseOverlay)
+			return;
 		var overlay = BaseOverlay.create(Pause, this, true);
 		overlay.addEventListener(Event.CLEAR, pauseOverlay_eventsHandler);
 		overlay.addEventListener(Event.CANCEL, pauseOverlay_eventsHandler);
-		this.game.state = Pause;
 	}
 
 	public function resume():Void {
