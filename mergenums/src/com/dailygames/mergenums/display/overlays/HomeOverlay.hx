@@ -1,5 +1,6 @@
 package com.dailygames.mergenums.display.overlays;
 
+import haxe.Timer;
 import com.dailygames.mergenums.display.Indicator;
 import com.dailygames.mergenums.display.overlays.BaseOverlay.ScreenType;
 import com.dailygames.mergenums.display.popups.*;
@@ -108,16 +109,29 @@ class HomeOverlay extends BaseOverlay {
 	}
 
 	private function game_clickHandler(event:MouseEvent):Void {
-		trace(event.target);
+		if (this.removeCellMode == null || !Std.is(event.target, Cell))
+			return;
+		var cell = cast(event.target, Cell);
+		if (this.removeCellMode == "dynamite")
+			this.game.removeCell(cell, true);
+		else
+			this.game.removeCellsByValue(cell.value);
+		Timer.delay(resumeAndFall, 1500);
 	}
 
+	@:access(com.dailygames.mergenums.Game)
+	private function resumeAndFall():Void {
+		this.resume();
+		this.game.fallAll();
+	}
+	
 	private function game_eventsChangeHandler(event:GameEvent):Void {
 		var popup:BaseOverlay = null;
 		switch (event.type) {
 			case GameEvent.BIG_VALUE:
-				popup = this.addOverlay(BigValue, false);
+				popup = this.addOverlay(BigValue);
 			case GameEvent.NEW_RECORD:
-				popup = this.addOverlay(NewRecord, false);
+				popup = this.addOverlay(NewRecord);
 			case GameEvent.GAME_OVER:
 				popup = this.addOverlay(Revive);
 				popup.addEventListener(GameEvent.REVIVE_BY_COIN, this.revivePopup_reviveHandler);
