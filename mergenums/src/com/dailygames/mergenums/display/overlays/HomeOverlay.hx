@@ -158,6 +158,7 @@ class HomeOverlay extends BaseOverlay {
 		overlay.removeEventListener(Event.CANCEL, this.pauseOverlay_eventsHandler);
 		switch (event.type) {
 			case Event.CLEAR:
+				BaseOverlay.closeAll();
 				this.game.reset();
 			case Event.CANCEL:
 				this.resume();
