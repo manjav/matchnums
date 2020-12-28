@@ -161,14 +161,23 @@ class HomeOverlay extends BaseOverlay {
 	}
 
 	private function revivePopup_reviveHandler(event:GameEvent):Void {
-		var popup = cast(event.target, RevivePopup);
+		var popup = cast(event.target, ConfirmPopup);
 		popup.removeEventListener(GameEvent.REVIVE_BY_COIN, this.revivePopup_reviveHandler);
 		popup.removeEventListener(GameEvent.REVIVE_BY_ADS, this.revivePopup_reviveHandler);
 		popup.removeEventListener(GameEvent.REVIVE_CANCEL, this.revivePopup_reviveHandler);
-		if (event.type == GameEvent.REVIVE_CANCEL)
-			this.addOverlay(GameOver);
-		else
+		if (event.type == GameEvent.REVIVE_CANCEL) {
+			popup = cast(this.addOverlay(GameOver), GameOverPopup);
+			popup.addEventListener(Event.SELECT, this.gameoverPopup_selectHandler);
+			return;
+		}
+
 			this.game.reset(true);
+	}
+
+	private function gameoverPopup_selectHandler(event:Event):Void {
+		var popup = cast(event.target, ConfirmPopup);
+		popup.removeEventListener(Event.SELECT, this.gameoverPopup_selectHandler);
+		this.reset();
 	}
 
 	private function pauseOverlay_eventsHandler(event:Event):Void {

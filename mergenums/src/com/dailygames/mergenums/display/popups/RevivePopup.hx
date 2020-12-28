@@ -28,7 +28,7 @@ class RevivePopup extends ConfirmPopup implements IGamePlayPopup {
 
 	override private function initialize():Void {
 		super.initialize();
-		this.title = "Game Over";
+		this.title = "Revive your game";
 
 		this.reviveByCoinButton = new Button();
 		this.reviveByCoinButton.width = OutlineTheme.PADDING * 7;
@@ -85,7 +85,7 @@ class RevivePopup extends ConfirmPopup implements IGamePlayPopup {
 	}
 
 	override private function closeButton_clickHandler(event:MouseEvent):Void {
-		this.closeButton_clickHandler(event);
+		super.closeButton_clickHandler(event);
 		GameEvent.dispatch(this, GameEvent.REVIVE_CANCEL);
 	}
 }

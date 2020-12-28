@@ -38,6 +38,8 @@ class BaseOverlay extends LayoutGroup {
 					new NewRecordPopup();
 				case Revive:
 					new RevivePopup();
+				case GameOver:
+					new GameOverPopup();
 				case RemoveCell:
 					new RemoveCellPopup();
 				default: null;
