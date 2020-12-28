@@ -1,5 +1,6 @@
 package com.dailygames.mergenums.display.popups;
 
+import openfl.geom.Rectangle;
 import com.dailygames.mergenums.display.overlays.BaseOverlay;
 import com.dailygames.mergenums.themes.OutlineTheme;
 import feathers.controls.Button;
@@ -10,10 +11,10 @@ import feathers.skins.RectangleSkin;
 import openfl.events.MouseEvent;
 
 class BasePopup extends BaseOverlay {
-
 	private var closeButton:Button;
 	private var content:LayoutGroup;
-
+	
+	public var contentRect:Rectangle;
 	public var hasCloseButton(default, set):Bool;
 
 	public function set_hasCloseButton(value:Bool):Bool {
@@ -30,10 +31,17 @@ class BasePopup extends BaseOverlay {
 		this.layout = new AnchorLayout();
 
 		this.content = new LayoutGroup();
-		this.content.width = OutlineTheme.POPUP_SIZE;
-		this.content.height = OutlineTheme.POPUP_SIZE;
 		this.content.layout = new AnchorLayout();
-		this.content.layoutData = AnchorLayoutData.center();
+		if (this.contentRect == null) {
+			this.content.width = OutlineTheme.POPUP_SIZE;
+			this.content.height = OutlineTheme.POPUP_SIZE;
+			this.content.layoutData = AnchorLayoutData.center();
+		} else {
+			this.content.x = this.contentRect.x;
+			this.content.y = this.contentRect.y;
+			this.content.width = contentRect.width;
+			this.content.height = contentRect.height;
+		}
 		this.addChild(this.content);
 
 		this.contentBackgroundFactory();
