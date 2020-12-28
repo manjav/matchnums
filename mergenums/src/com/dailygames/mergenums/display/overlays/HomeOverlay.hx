@@ -2,8 +2,7 @@ package com.dailygames.mergenums.display.overlays;
 
 import com.dailygames.mergenums.display.Indicator;
 import com.dailygames.mergenums.display.overlays.BaseOverlay.ScreenType;
-import com.dailygames.mergenums.display.popups.IGamePlayPopup;
-import com.dailygames.mergenums.display.popups.RevivePopup;
+import com.dailygames.mergenums.display.popups.*;
 import com.dailygames.mergenums.events.GameEvent;
 import com.dailygames.mergenums.utils.Prefs.*;
 import com.dailygames.mergenums.utils.Utils;
@@ -16,6 +15,7 @@ import openfl.Assets;
 import openfl.display.Bitmap;
 import openfl.events.Event;
 import openfl.events.MouseEvent;
+import openfl.geom.Rectangle;
 
 class HomeOverlay extends BaseOverlay {
 	private var game:Game;
@@ -128,10 +128,12 @@ class HomeOverlay extends BaseOverlay {
 		switch (button.name) {
 			case "pause":
 				this.pause();
-			case "dynamite":
-				this.addOverlay(Shop);
-			case "dynamites":
-				this.addOverlay(Shop);
+			case "dynamite" | "dynamites":
+				this.pause(false);
+				var popup = new RemoveCellPopup();
+				popup.addEventListener(Event.CANCEL, this.pauseOverlay_eventsHandler);
+				popup.contentRect = new Rectangle(this.footer.x, this.footer.y, this.footer.width, 100);
+				this.addChild(popup);
 		}
 	}
 
@@ -151,8 +153,8 @@ class HomeOverlay extends BaseOverlay {
 	}
 
 	private function pauseOverlay_eventsHandler(event:Event):Void {
-		var overlay = cast(event.target, PauseOverlay);
-		overlay.removeEventListener(Event.CLEAR, pauseOverlay_eventsHandler);
+		var overlay = cast(event.target, BaseOverlay);
+		overlay.removeEventListener(Event.CLEAR, this.pauseOverlay_eventsHandler);
 		overlay.removeEventListener(Event.CANCEL, this.pauseOverlay_eventsHandler);
 		switch (event.type) {
 			case Event.CLEAR:

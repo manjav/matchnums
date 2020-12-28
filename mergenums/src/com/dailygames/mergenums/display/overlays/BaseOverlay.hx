@@ -1,9 +1,7 @@
 package com.dailygames.mergenums.display.overlays;
 
 import com.dailygames.mergenums.themes.OutlineTheme;
-import com.dailygames.mergenums.display.popups.BigValuePopup;
-import com.dailygames.mergenums.display.popups.RevivePopup;
-import com.dailygames.mergenums.display.popups.NewRecordPopup;
+import com.dailygames.mergenums.display.popups.*;
 import feathers.controls.LayoutGroup;
 import feathers.layout.AnchorLayoutData;
 import feathers.skins.RectangleSkin;
@@ -18,6 +16,7 @@ enum ScreenType {
 	NewRecord;
 	Revive;
 	GameOver;
+	RemoveCell;
 }
 
 class BaseOverlay extends LayoutGroup {
