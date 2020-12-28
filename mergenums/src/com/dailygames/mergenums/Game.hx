@@ -291,30 +291,29 @@ class Game extends Sprite {
 		var lineNumber = reviveMode ? CellMap.NUM_ROWS - 3 : 0;
 		for (i in 0...CellMap.NUM_COLUMNS)
 			for (j in lineNumber...CellMap.NUM_ROWS)
-				this.removeCell(this.cells.get(i, j), true);
+				this.removeCell(i, j, false);
 
+		if(!reviveMode)
+			
 		this.timer = Timer.delay(reviveMode ? this.spawn : this.init, 1500);
 	}
 
-	public function removeCell(cell:Cell, accumulate:Bool = false):Void {
-		if (!this.cells.exists(cell.column, cell.row))
+	public function removeCell(column:Int, row:Int, accumulate:Bool = false):Void {
+		if (!this.cells.exists(column, row))
 			return;
 		// cell.addEventListener(Event.CLEAR, this.cell_clearHandlre);
+		Cell.dispose(this.cells.get(column, row), cellDisposeAnimationFactory);
 		if (accumulate)
-			this.cells.accumulateColumn(cell.column, cell.row);
+			this.cells.accumulateColumn(column, row);
 		else
-			this.cells.remove(cell);
-		Cell.dispose(cell, cellDisposeAnimationFactory);
+			this.cells.removeAt(column, row);
 	}
 
 	public function removeCellsByValue(value:Int):Void {
-		for (i in 0...CellMap.NUM_COLUMNS) {
-			for (j in 0...CellMap.NUM_ROWS) {
-				var c = this.cells.get(i, j);
-				if (c != null && c.value == value)
-					this.removeCell(c, true);
-			}
-		}
+		for (i in 0...CellMap.NUM_COLUMNS)
+			for (j in 0...CellMap.NUM_ROWS)
+				if (this.cells.exists(i, j) && this.cells.get(i, j).value == value)
+					this.removeCell(i, j, true);
 	}
 
 	private function cell_clearHandlre(event:Event):Void {

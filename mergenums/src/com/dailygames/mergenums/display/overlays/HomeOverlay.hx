@@ -1,6 +1,5 @@
 package com.dailygames.mergenums.display.overlays;
 
-import haxe.Timer;
 import com.dailygames.mergenums.display.Indicator;
 import com.dailygames.mergenums.display.overlays.BaseOverlay.ScreenType;
 import com.dailygames.mergenums.display.popups.*;
@@ -12,6 +11,7 @@ import feathers.controls.LayoutGroup;
 import feathers.events.TriggerEvent;
 import feathers.layout.AnchorLayout;
 import feathers.layout.AnchorLayoutData;
+import haxe.Timer;
 import openfl.Assets;
 import openfl.display.Bitmap;
 import openfl.events.Event;
@@ -108,6 +108,12 @@ class HomeOverlay extends BaseOverlay {
 		this.game.state = Play;
 	}
 
+	public function reset():Void {
+		this.removeCellMode = null;
+		BaseOverlay.closeAll();
+		this.game.reset();
+	}
+
 	private function game_clickHandler(event:MouseEvent):Void {
 		if (this.removeCellMode == null || !Std.is(event.target, Cell))
 			return;
@@ -115,9 +121,10 @@ class HomeOverlay extends BaseOverlay {
 		if (cell.state != Fixed)
 			return;
 		if (this.removeCellMode == "dynamite")
-			this.game.removeCell(cell, true);
+			this.game.removeCell(cell.column, cell.row, true);
 		else
 			this.game.removeCellsByValue(cell.value);
+		this.removeCellMode = null;
 		Timer.delay(resumeAndFall, 1500);
 	}
 
@@ -171,7 +178,7 @@ class HomeOverlay extends BaseOverlay {
 			return;
 		}
 
-			this.game.reset(true);
+		this.game.reset(true);
 	}
 
 	private function gameoverPopup_selectHandler(event:Event):Void {
@@ -186,9 +193,7 @@ class HomeOverlay extends BaseOverlay {
 		overlay.removeEventListener(Event.CANCEL, this.pauseOverlay_eventsHandler);
 		switch (event.type) {
 			case Event.CLEAR:
-				this.removeCellMode = null;
-				BaseOverlay.closeAll();
-				this.game.reset();
+				this.reset();
 			case Event.CANCEL:
 				this.resume();
 		}
