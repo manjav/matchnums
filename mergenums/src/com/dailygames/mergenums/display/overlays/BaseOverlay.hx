@@ -1,7 +1,7 @@
 package com.dailygames.mergenums.display.overlays;
 
-import com.dailygames.mergenums.themes.OutlineTheme;
 import com.dailygames.mergenums.display.popups.*;
+import com.dailygames.mergenums.themes.OutlineTheme;
 import feathers.controls.LayoutGroup;
 import feathers.layout.AnchorLayoutData;
 import feathers.skins.RectangleSkin;
@@ -17,6 +17,7 @@ enum ScreenType {
 	Revive;
 	GameOver;
 	RemoveCell;
+	StartingOffer;
 }
 
 class BaseOverlay extends LayoutGroup {
@@ -42,6 +43,8 @@ class BaseOverlay extends LayoutGroup {
 					new GameOverPopup();
 				case RemoveCell:
 					new RemoveCellPopup();
+				case StartingOffer:
+					new StartingOfferOverlay();
 				default: null;
 			}
 			screen.layoutData = AnchorLayoutData.fill();

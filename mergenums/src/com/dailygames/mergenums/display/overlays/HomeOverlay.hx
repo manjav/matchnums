@@ -87,6 +87,14 @@ class HomeOverlay extends BaseOverlay {
 		addButton("dynamite", AnchorLayoutData.middleRight(), false);
 		addButton("dynamites", AnchorLayoutData.middleRight(0, header.height), false);
 		addButton("pause", AnchorLayoutData.middleLeft(), false);
+
+		var starter = this.addOverlay(StartingOffer, false, false);
+		starter.addEventListener(Event.CLOSE, this.starterCloseHandler);
+	}
+
+	private function starterCloseHandler(event:Event):Void {
+		cast(event.target, BaseOverlay).removeEventListener(Event.CLOSE, this.starterCloseHandler);
+		this.game.init();
 	}
 
 	private function addOverlay(type:ScreenType, save:Bool = true, showPauseOverlay:Bool = true):BaseOverlay {

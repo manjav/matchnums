@@ -95,21 +95,21 @@ class Game extends Sprite {
 
 		this.nextCell = Cell.instantiate(0, 0, Cell.getNextValue(), 0, this.cellInitAnimationFactory);
 		this.nextCell.y = Cell.RADIUS;
-		this.nextCell.alpha = 0.5;
+		this.nextCell.alpha = 0;
 		this.addChild(this.nextCell);
-
-		this.init();
 	}
 
-	private function init():Void {
+	public function init():Void {
 		this.haveRecord = false;
 		this.numRevives = 0;
 		this.numRewardCells = 0;
 		this.valueRecord = 8;
 		this.scores = 0;
 		this.lastColumn = Math.floor(Math.random() * CellMap.NUM_COLUMNS);
-		this.state = Play;
+		this.nextCell.init(0, 0, Cell.getNextValue());
 		this.nextCell.x = this.lastColumn * Cell.SIZE + Cell.RADIUS;
+		this.nextCell.alpha = 0.5;
+		this.state = Play;
 		this.spawn();
 	}
 
