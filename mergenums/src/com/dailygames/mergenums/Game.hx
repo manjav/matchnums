@@ -242,7 +242,7 @@ class Game extends Sprite {
 				continue;
 			c.state = Fixed;
 
-			var matchs = this.cells.getMatchs(c);
+			var matchs = this.cells.getMatchs(c.column, c.row, c.value);
 			// Relaese all cells over matchs
 			for (m in matchs) {
 				this.cells.accumulateColumn(m.column, m.row);

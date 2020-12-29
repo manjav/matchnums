@@ -59,11 +59,11 @@ class CellMap {
 		this.add(cell);
 	}
 
-	public function getMatchs(c:Cell):Array<Cell> {
+	public function getMatchs(column:Int, row:Int, value:Int):Array<Cell> {
 		var matchs = new Array<Cell>();
-		this.addMatch(c.column, c.row - 1, c.value, matchs); // bottom
-		this.addMatch(c.column - 1, c.row, c.value, matchs); // left
-		this.addMatch(c.column + 1, c.row, c.value, matchs); // right
+		this.addMatch(column, row - 1, value, matchs); // bottom
+		this.addMatch(column - 1, row, value, matchs); // left
+		this.addMatch(column + 1, row, value, matchs); // right
 		// trace(c, matchs);
 		return matchs;
 	}
