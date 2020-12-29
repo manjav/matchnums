@@ -242,7 +242,7 @@ class Game extends Sprite {
 				continue;
 			c.state = Fixed;
 
-			var matchs = this.cells.getMatchs(c.column, c.row, c.value);
+			var matchs = this.cells.getMatchs(c);
 			// Relaese all cells over matchs
 			for (m in matchs) {
 				this.cells.accumulateColumn(m.column, m.row);
@@ -282,7 +282,7 @@ class Game extends Sprite {
 		if (cell.value > this.valueRecord)
 			GameEvent.dispatch(this, GameEvent.BIG_VALUE, this.valueRecord = cell.value);
 
-		// More change for spawm new cells
+		// More chance for spawm new cells
 		if (Cell.SPAWN_MAX < 7) {
 			var distance = Math.ceil(1.5 * Math.sqrt(Cell.SPAWN_MAX));
 			if (Cell.SPAWN_MAX < cell.value - distance)
