@@ -111,6 +111,21 @@ class Game extends Sprite {
 		this.nextCell.init(0, 0, Cell.getNextValue());
 		this.nextCell.x = this.lastColumn * Cell.SIZE + Cell.RADIUS;
 		this.nextCell.alpha = 0.5;
+
+		// Add initial cells
+		function addCell(column:Int, value:Int):Void {
+			var row = this.cells.length(column);
+			var value = Cell.getNextValue();
+			var cell = Cell.instantiate(column, row, value, 0, this.cellInitAnimationFactory);
+			cell.x = column * Cell.SIZE + Cell.RADIUS;
+			cell.y = Cell.SIZE * (CellMap.NUM_ROWS - row) + Cell.RADIUS;
+			this.cells.add(cell);
+			this.addChild(cell);
+		}
+		var randomColumns = [for (i in 0...5) Math.floor(Math.random() * CellMap.NUM_COLUMNS)];
+		for (c in randomColumns)
+			addCell(c, Cell.getNextValue());
+
 		this.state = Play;
 		this.spawn();
 	}
@@ -242,7 +257,7 @@ class Game extends Sprite {
 				continue;
 			c.state = Fixed;
 
-			var matchs = this.cells.getMatchs(c);
+			var matchs = this.cells.getMatchs(c.column, c.row, c.value);
 			// Relaese all cells over matchs
 			for (m in matchs) {
 				this.cells.accumulateColumn(m.column, m.row);
