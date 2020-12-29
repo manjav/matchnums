@@ -101,6 +101,7 @@ class Cell extends Sprite {
 	}
 
 	private function onInit():Void {
+		this.alpha = this.scaleX = this.scaleY = 1;
 		this.state = Released;
 		if (this.hasEventListener(Event.INIT))
 			this.dispatchEvent(new Event(Event.INIT));
