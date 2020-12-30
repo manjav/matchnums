@@ -228,11 +228,11 @@ class Game extends Sprite {
 					.delay(delay)
 					.ease(Expo.easeOut)
 					.onComplete(bounceCell, [c]);
-			Sounds.play("fall");
 			++numFallings;
 		}
 
 		if (numFallings > 0) {
+			Sounds.play("fall");
 			Actuate.tween(this.nextCell, 0.3, {x: this.lastColumn * Cell.SIZE + Cell.RADIUS}).ease(Expo.easeOut);
 			this.timer = Timer.delay(this.fell, Math.round((delay + time + 0.31) * 1000));
 		}
