@@ -128,6 +128,7 @@ class Game extends Sprite {
 		for (c in randomColumns)
 			addCell(c, Cell.getNextValue());
 
+		this.timer.stop();
 		this.state = Play;
 		this.spawn();
 	}
@@ -239,13 +240,7 @@ class Game extends Sprite {
 	}
 
 	private function bounceCell(cell:Cell):Void {
-		// var x = cell.x;
-		var y = cell.y;
-		cell.scaleX = 0.8;
-		cell.scaleY = 0.8;
-		// cell.x += cell.width * 0.1;
-		cell.y += cell.height * 0.2;
-		Actuate.tween(cell, 0.3, {y: y, scaleX: 1, scaleY: 1}).ease(Back.easeOut);
+		Actuate.tween(cell, 0.2, {y: Cell.SIZE * (CellMap.NUM_ROWS - cell.row) + Cell.RADIUS, scaleY: 1}).ease(Back.easeOut);
 	}
 
 	private function fell():Void {
