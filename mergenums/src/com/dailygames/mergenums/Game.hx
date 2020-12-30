@@ -218,8 +218,16 @@ class Game extends Sprite {
 			c.state = Falling;
 			// Actuate.stop(c);
 			var dy = Cell.SIZE * (CellMap.NUM_ROWS - c.row) + Cell.RADIUS;
-			if (dy - c.y > 0.5)
-				Actuate.tween(c, time, {y: dy}).delay(delay).ease(Expo.easeOut).onComplete(bounceCell, [c]);
+			if (dy - c.y > Cell.SIZE)
+				Actuate.tween(c, time, {y: dy + Cell.RADIUS * 0.1, scaleY: 0.9})
+					.delay(delay)
+					.ease(Expo.easeOut)
+					.onComplete(bounceCell, [c]);
+			else if (dy - c.y > 0.5)
+				Actuate.tween(c, time, {y: dy + Cell.RADIUS * 0.05, scaleY: 0.95})
+					.delay(delay)
+					.ease(Expo.easeOut)
+					.onComplete(bounceCell, [c]);
 			Sounds.play("fall");
 			++numFallings;
 		}
