@@ -96,8 +96,8 @@ class Game extends Sprite {
 		this.cellDisposeAnimationFactory = new CellDisposeAnimationFactory();
 
 		this.nextCell = new HiddenCell(0, 0, Cell.getNextValue(), 0);
+		this.nextCell.x = 2 * Cell.SIZE + Cell.RADIUS;
 		this.nextCell.y = Cell.RADIUS;
-		this.nextCell.alpha = 0;
 		this.addChild(this.nextCell);
 	}
 
@@ -111,7 +111,6 @@ class Game extends Sprite {
 		this.nextCell.showValue = this.hasBoostNext;
 		this.nextCell.init(0, 0, Cell.getNextValue());
 		this.nextCell.x = this.lastColumn * Cell.SIZE + Cell.RADIUS;
-		this.nextCell.alpha = 0.5;
 
 		// Add initial cells
 		function addCell(column:Int, value:Int):Void {
