@@ -115,7 +115,6 @@ class Game extends Sprite {
 		// Add initial cells
 		function addCell(column:Int, value:Int):Void {
 			var row = this.cells.length(column);
-			var value = Cell.getNextValue();
 			while (this.cells.getMatchs(column, row, value).length > 0)
 				value = Cell.getNextValue();
 			var cell = Cell.instantiate(column, row, value, 0, this.cellInitAnimationFactory);
