@@ -122,6 +122,7 @@ class Game extends Sprite {
 			var cell = Cell.instantiate(column, row, value, 0, this.cellInitAnimationFactory);
 			cell.x = column * Cell.SIZE + Cell.RADIUS;
 			cell.y = Cell.SIZE * (CellMap.NUM_ROWS - row) + Cell.RADIUS;
+			cell.state = Released;
 			this.cells.add(cell);
 			this.addChild(cell);
 		}
