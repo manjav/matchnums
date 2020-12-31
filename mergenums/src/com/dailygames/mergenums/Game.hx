@@ -35,7 +35,7 @@ class Game extends Sprite {
 	private var numRewardCells:Int;
 	private var lastColumn:Int;
 	private var valueRecord:Int;
-	private var nextCell:Cell;
+	private var nextCell:HiddenCell;
 	private var cells:CellMap;
 	private var endLine:Shape;
 	private var fallingEffect:Shape;
@@ -95,7 +95,7 @@ class Game extends Sprite {
 		this.cellInitAnimationFactory = new CellInitAnimationFactory();
 		this.cellDisposeAnimationFactory = new CellDisposeAnimationFactory();
 
-		this.nextCell = Cell.instantiate(0, 0, Cell.getNextValue(), 0, this.cellInitAnimationFactory);
+		this.nextCell = new HiddenCell(0, 0, Cell.getNextValue(), 0);
 		this.nextCell.y = Cell.RADIUS;
 		this.nextCell.alpha = 0;
 		this.addChild(this.nextCell);
@@ -108,6 +108,7 @@ class Game extends Sprite {
 		this.valueRecord = 8;
 		this.scores = 0;
 		this.lastColumn = Math.floor(Math.random() * CellMap.NUM_COLUMNS);
+		this.nextCell.showValue = this.hasBoostNext;
 		this.nextCell.init(0, 0, Cell.getNextValue());
 		this.nextCell.x = this.lastColumn * Cell.SIZE + Cell.RADIUS;
 		this.nextCell.alpha = 0.5;
