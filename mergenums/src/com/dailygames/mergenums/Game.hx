@@ -112,7 +112,7 @@ class Game extends Sprite {
 		this.nextCell.x = this.lastColumn * Cell.SIZE + Cell.RADIUS;
 		this.nextCell.alpha = 0.5;
 
-		// Add initial cells
+		// add initial cells
 		function addCell(column:Int, value:Int):Void {
 			var row = this.cells.length(column);
 			var value = Cell.getNextValue();
@@ -124,10 +124,13 @@ class Game extends Sprite {
 			this.cells.add(cell);
 			this.addChild(cell);
 		}
+		if (hasBoostBig)
+			addCell(this.lastColumn, 9);
 		var randomColumns = [for (i in 0...5) Math.floor(Math.random() * CellMap.NUM_COLUMNS)];
 		for (c in randomColumns)
 			addCell(c, Cell.getNextValue());
 
+		// Actuate.stop();
 		this.timer.stop();
 		this.state = Play;
 		this.spawn();
@@ -217,7 +220,7 @@ class Game extends Sprite {
 				Actuate.tween(this.fallingEffect, 0.5, {alpha: 0.01}).ease(Expo.easeOut);
 			}
 			c.state = Falling;
-			// Actuate.stop(c);
+			Actuate.stop(c);
 			var dy = Cell.SIZE * (CellMap.NUM_ROWS - c.row) + Cell.RADIUS;
 			if (dy - c.y > Cell.SIZE)
 				Actuate.tween(c, time, {y: dy + Cell.RADIUS * 0.1, scaleY: 0.9})
@@ -229,6 +232,7 @@ class Game extends Sprite {
 					.delay(delay)
 					.ease(Expo.easeOut)
 					.onComplete(bounceCell, [c]);
+			trace(Timer.stamp(), dy - c.y);
 			++numFallings;
 		}
 
