@@ -113,7 +113,7 @@ class Game extends Sprite {
 		this.nextCell.x = this.lastColumn * Cell.SIZE + Cell.RADIUS;
 		this.nextCell.alpha = 0.5;
 
-		// add initial cells
+		// Add initial cells
 		function addCell(column:Int, value:Int):Void {
 			var row = this.cells.length(column);
 			var value = Cell.getNextValue();
@@ -125,7 +125,7 @@ class Game extends Sprite {
 			this.cells.add(cell);
 			this.addChild(cell);
 		}
-		if (hasBoostBig)
+		if (this.hasBoostBig)
 			addCell(this.lastColumn, 9);
 		var randomColumns = [for (i in 0...5) Math.floor(Math.random() * CellMap.NUM_COLUMNS)];
 		for (c in randomColumns)
@@ -233,7 +233,6 @@ class Game extends Sprite {
 					.delay(delay)
 					.ease(Expo.easeOut)
 					.onComplete(bounceCell, [c]);
-			trace(Timer.stamp(), dy - c.y);
 			++numFallings;
 		}
 

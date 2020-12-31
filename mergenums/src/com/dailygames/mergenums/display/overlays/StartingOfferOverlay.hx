@@ -109,7 +109,6 @@ class StartingOfferOverlay extends BaseOverlay {
 	}
 
 	private function updateButtons(boostMode:String):Void {
-		trace(boostMode);
 		if (boostMode == "boost-big") {
 			this.boostBig.mouseEnabled = false;
 			this.boostBig.alpha = 0.5;
