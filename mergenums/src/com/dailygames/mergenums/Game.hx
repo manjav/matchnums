@@ -259,9 +259,12 @@ class Game extends Sprite {
 	}
 
 	private function findMatchs():Bool {
-		var needsRepeat = false;
-		for (c in this.cells.map) {
-			if (c.state != Fell)
+		var numMerges = 0;
+		function fundMatch(i:Int):Int {
+			var merges = 0;
+			for (j in 0...CellMap.NUM_ROWS) {
+				var c = this.cells.get(i, j);
+				if (c == null || c.state != Fell)
 				continue;
 			c.state = Fixed;
 
@@ -277,11 +280,27 @@ class Game extends Sprite {
 				this.collectReward(c);
 				c.addEventListener(Event.INIT, this.cell_initHandler);
 				c.init(c.column, c.row, c.value + matchs.length);
-				needsRepeat = true;
+					merges += matchs.length;
 			}
 			// trace("match", c, matchs.length, needsRepeat);
 		}
-		return needsRepeat;
+			return merges;
+		}
+
+		var cp = this.lastColumn;
+		var cm = this.lastColumn - 1;
+		while (cp < CellMap.NUM_COLUMNS || cm > -1) {
+			if (cp < CellMap.NUM_COLUMNS) {
+				numMerges += fundMatch(cp);
+				cp++;
+			}
+			if (cm > -1) {
+				numMerges += fundMatch(cm);
+				cm--;
+			}
+		}
+
+		return numMerges > 0;
 	}
 
 	private function collectReward(cell:Cell):Void {
