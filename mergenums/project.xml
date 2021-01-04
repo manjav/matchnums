@@ -14,6 +14,7 @@
 	<haxelib name="openfl" />
 	<haxelib name="actuate" />
 	<haxelib name="feathersui" />
+	<haxelib name="gameanalytics" /> 
 	<haxelib name="extension-iap" /> 
 	<haxelib name="extension-natives" /> 
 		

@@ -1,13 +1,14 @@
 package com.dailygames.mergenums.utils;
 
-import net.lion123dev.events.Events.GAPlatform;
+import com.gerantech.extension.Device;
+import com.gerantech.extension.NativeTelephony;
 import net.lion123dev.GameAnalytics;
+import net.lion123dev.events.Events.GAPlatform;
 
 class Analytics {
     static var gameAnalytics:GameAnalytics;
     
-    
-    static function init():Void{
+    static public function init():Void{
 
 
         // Instantiate new GameAnalytics object with public and private keys
@@ -25,8 +26,10 @@ class Analytics {
 			trace(error);
 		}
 
+		var device = NativeTelephony.instance.device;
+		trace(device);
 		// IMPORTANT! Platform and os version must follow Game Analytics validation rules (see #1)
-		ga.Init(onSuccess, onFail, GAPlatform.ANDROID, GAPlatform.ANDROID + " 10", "unknown", "manufacturer");
+		ga.Init(onSuccess, onFail, GAPlatform.ANDROID, device.get(DeviceSpec.VERSION_RELEASE), device.get(DeviceSpec.MODEL), device.get(DeviceSpec.MANUFACTURER));
 
 		// If you want a callback every time sending events fail or succeed, just rebind OnSubmitSuccess() and OnSubmitFail(reason:String) dynamic methods
 		function onSubmitFail(reason:String):Void {
