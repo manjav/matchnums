@@ -61,6 +61,7 @@ class CellMap {
 
 	public function getMatchs(column:Int, row:Int, value:Int):Array<Cell> {
 		var matchs = new Array<Cell>();
+		this.addMatch(column, row + 1, value, matchs); // top
 		this.addMatch(column, row - 1, value, matchs); // bottom
 		this.addMatch(column - 1, row, value, matchs); // left
 		this.addMatch(column + 1, row, value, matchs); // right
