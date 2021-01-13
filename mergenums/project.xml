@@ -4,7 +4,7 @@
 	<meta title="Drop and Merge Number" package="com.dailygames.mergenums" version="0.2.1" build-number="2001" company="DailyGames" />
 	<app path="bin" file="mergenums" main="com.dailygames.mergenums.Main"/>
 	
-	<window width="480" height="920" background="#2c3134"/>
+	<window width="540" height="1100" background="#2c3134"/>
 	<window width="0" height="0" if="html5" />
 	<window fps="40"/><!-- fullscreen="false" antialiasing="4" vsync="true" /> -->
 	<window orientation="portrait" />
