@@ -17,7 +17,7 @@
 	<!-- <haxelib name="gameanalytics" />  -->
 	<!-- <haxelib name="extension-natives" />  -->
 	<haxelib name="extension-iap" /> 
-	<haxelib name="extension-natives" /> 
+	<haxelib name="extension-unityads" />
 		
 	<icon path="Assets/images/icon.svg" />
 	<assets path="Assets/images" rename="images" include="*" exclude="icon.svg" />
@@ -40,6 +40,7 @@
 		<music path="theme.ogg" id="soundTheme" />
 	</assets> -->
 	
+	<config:android minimum-sdk-version="19"/>
 	<config:android target-sdk-version="30"/>
 	<certificate path="../../ks.keystore" password="Vahid@4822" alias="mergenums" alias-password="m3r63num5" if="android" unless="debug" />
 	<architecture exclude="arm64" if="android" />
