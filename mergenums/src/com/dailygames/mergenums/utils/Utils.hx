@@ -1,5 +1,6 @@
 package com.dailygames.mergenums.utils;
 
+import com.dailygames.mergenums.themes.OutlineTheme;
 import openfl.text.GridFitType;
 import openfl.text.TextField;
 import openfl.text.TextFieldAutoSize;
@@ -21,7 +22,7 @@ class Utils {
 		textField.mouseEnabled = false;
 		textField.selectable = false;
 		textField.embedFonts = true;
-		textField.defaultTextFormat = new TextFormat("Arial Rounded MT Bold", size, color, null, null, null, null, null, align);
+		textField.defaultTextFormat = new TextFormat(OutlineTheme.FONT_NAME, size, color, null, null, null, null, null, align);
 		// textField.filters = [new GlowFilter(0, 0.6, 4, 4)];
 	}
 

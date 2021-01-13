@@ -12,7 +12,7 @@ import openfl.text.TextFormat;
 class OutlineTheme extends ClassVariantTheme {
 	static public final FONT_SIZE = 24;
 	static public final FONT_COLOR = 0xEDEDED;
-	static public final FONT_NAME = "Arial Rounded MT Bold";
+	static public final FONT_NAME = "Quicksand Bold";
 
 	static public final FILL_COLOR = 0x001122;
 	static public final BORDER_COLOR = 0xEDEDED;
