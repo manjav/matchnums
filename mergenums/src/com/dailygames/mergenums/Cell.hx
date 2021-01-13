@@ -27,7 +27,7 @@ class Cell extends Sprite {
 	static public final COLORS = [
 		0x000000, 0x9600ff, 0xf0145a, 0xffc91b, 0x00c419, 0x009ade, 0xce007b4, 0xff5518, 0x78e0bc, 0x3c14ae, 0xff0024, 0x41046a, 0x41046a, 0x41046a, 0x41046a
 	];
-	static private final TEXT_SCALE = [1, 1, 1, 1, 0.9, 0.9, 0.9, 0.8, 0.8, 0.8, 0.6, 0.6, 0.6, 0.5, 0.5, 0.5, 0.5];
+	static private final TEXT_SCALE = [1, 1, 1, 0.85, 0.75, 0.6];
 	static public var SPAWN_MAX = 3;
 
 	static public function getScore(value:Int):Int {
@@ -59,7 +59,6 @@ class Cell extends Sprite {
 		this.textDisplay.width = SIZE;
 		this.textDisplay.height = RADIUS;
 		this.textDisplay.x = -RADIUS;
-		this.textDisplay.y = -RADIUS * 0.65;
 		this.addChild(this.textDisplay);
 
 		this.textFormat = this.textDisplay.getTextFormat();
@@ -77,9 +76,10 @@ class Cell extends Sprite {
 
 		this.drawBackground(COLORS[value]);
 
-		this.textFormat.size = Math.round(textSize * TEXT_SCALE[value]);
 		this.textDisplay.text = Std.string(getScore(value));
+		this.textFormat.size = Math.round(textSize * TEXT_SCALE[this.textDisplay.text.length]);
 		this.textDisplay.setTextFormat(this.textFormat);
+		this.textDisplay.y = -RADIUS * 0.2 - this.textFormat.size * 0.5;
 
 		if (this.rewardDisplay != null) {
 			Reward.dispose(this.rewardDisplay);
