@@ -190,7 +190,7 @@ class Game extends Sprite {
 	private function clickHandler(event:MouseEvent):Void {
 		if (this.state != Play)
 			return;
-		this.lastColumn = Math.floor(this.mouseX / Cell.SIZE);
+		this.lastColumn = Math.floor(Math.min(4, Math.max(0, this.mouseX / Cell.SIZE)));
 		this.columnChanged = true;
 		this.fallAll();
 	}
