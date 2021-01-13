@@ -31,6 +31,7 @@ class HomeOverlay extends BaseOverlay {
 	override private function initialize():Void {
 		super.initialize();
 
+		this.backgroundSkin = null;
 		this.layout = new AnchorLayout();
 
 		this.game = new Game();

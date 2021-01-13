@@ -64,22 +64,23 @@ class Game extends Sprite {
 
 		this.cells = new CellMap();
 		var background = new Shape();
-		background.graphics.beginFill(0);
+		background.graphics.beginFill(0x23272A);
 		background.graphics.drawRoundRect(-Cell.BORDER,
-			-Cell.BORDER, Cell.SIZE * CellMap.NUM_COLUMNS
+			-Cell.BORDER * 2, Cell.SIZE * CellMap.NUM_COLUMNS
 			+ Cell.BORDER * 2,
 			Cell.SIZE * (CellMap.NUM_ROWS + 1)
-			+ Cell.BORDER * 2, Cell.ROUND * 2, Cell.ROUND * 2);
+			+ Cell.BORDER * 3, Cell.ROUND * 2, Cell.ROUND * 2);
 
 		// background.filters = [new BlurFilter(10, 10)];
-		background.graphics.beginFill(0x111111);
+		background.graphics.beginFill(0x1F2326);
 		for (i in 0...2)
-			background.graphics.drawRect(Cell.SIZE * (i * 2 + 1), -Cell.BORDER, Cell.SIZE, Cell.SIZE * (CellMap.NUM_ROWS + 1) + Cell.BORDER * 2);
+			background.graphics.drawRect(Cell.SIZE * (i * 2 + 1), -Cell.BORDER * 2, Cell.SIZE, Cell.SIZE * (CellMap.NUM_ROWS + 1) + Cell.BORDER * 3);
 		this.addChild(background);
 
 		this.endLine = new Shape();
+		this.endLine.alpha = 0.5;
 		this.endLine.graphics.beginFill(0xFFFFFF);
-		this.endLine.graphics.drawRoundRect(-Cell.BORDER, Cell.SIZE - 2, background.width, 4, 0, 0);
+		this.endLine.graphics.drawRoundRect(Cell.BORDER, Cell.SIZE - 8, background.width -Cell.BORDER * 4 , 14, 14, 14);
 		this.endLine.transform.colorTransform.color = 0x444444;
 		this.addChild(this.endLine);
 
@@ -97,7 +98,7 @@ class Game extends Sprite {
 
 		this.nextCell = new HiddenCell(0, 0, Cell.getNextValue(), 0);
 		this.nextCell.x = 2 * Cell.SIZE + Cell.RADIUS;
-		this.nextCell.y = Cell.RADIUS;
+		this.nextCell.y = Cell.RADIUS - Cell.BORDER;
 		this.addChild(this.nextCell);
 	}
 
