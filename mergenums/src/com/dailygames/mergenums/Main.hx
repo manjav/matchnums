@@ -17,7 +17,7 @@ class Main extends Application {
 	public function new() {
 		Prefs.instance.load();
 		super();
-		
+		com.dailygames.mergenums.utils.Analytics.create();
 		Theme.setTheme(new OutlineTheme(stage, 1 / this.getScaleFactor()));
 		this.defaultFPS = stage.frameRate;
 		#if hl
