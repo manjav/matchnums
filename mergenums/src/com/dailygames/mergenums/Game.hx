@@ -155,7 +155,7 @@ class Game extends Sprite {
 			numRewardCells++;
 		var cell = Cell.instantiate(this.lastColumn, row, this.nextCell.value, reward, this.cellInitAnimationFactory);
 		cell.x = this.lastColumn * Cell.SIZE + Cell.RADIUS;
-		cell.y = Cell.RADIUS;
+		cell.y = this.nextCell.y;
 		this.cells.add(cell);
 		this.addChild(cell);
 
