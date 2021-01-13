@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="Drop and Merge Number" package="com.dailygames.mergenums" version="0.2.1" build-number="2001" company="DailyGames" />
+	<meta title="Drop and Merge Number" package="com.dailygames.mergenums" version="0.3.1" build-number="3001" company="DailyGames" />
 	<app path="bin" file="mergenums" main="com.dailygames.mergenums.Main"/>
 	
 	<window width="540" height="1100" background="#2c3134"/>
