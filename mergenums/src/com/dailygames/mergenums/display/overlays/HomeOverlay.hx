@@ -220,7 +220,7 @@ class HomeOverlay extends BaseOverlay {
 	}
 
 	override private function refreshBackgroundLayout():Void {
-		var maxWidth = this.actualWidth * 0.90;
+		var maxWidth = this.actualWidth * 0.88;
 		var maxHeight = this.actualHeight * 0.86;
 
 		var currentWidth = CellMap.NUM_COLUMNS * Cell.SIZE;
