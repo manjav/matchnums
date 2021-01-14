@@ -30,7 +30,7 @@ class GameOverPopup extends ConfirmPopup implements IGamePlayPopup {
 		this.content.height = OutlineTheme.POPUP_SIZE * 0.5;
 
 		var scoresIndicator = new Indicator();
-		scoresIndicator.icon = new Bitmap(Assets.getBitmapData("images/medal-small.png"));
+		scoresIndicator.icon = "images/medal-small.png";
 		scoresIndicator.layoutData = AnchorLayoutData.center(0, -this.padding);
 		scoresIndicator.type = Prefs.SCORES;
 		this.content.addChild(scoresIndicator);
