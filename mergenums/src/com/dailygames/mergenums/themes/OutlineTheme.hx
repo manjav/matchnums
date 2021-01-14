@@ -127,14 +127,8 @@ class OutlineTheme extends ClassVariantTheme {
 		itemRenderer.gap = PADDING;
 	}
 
-	public function getButtonSkin():RectangleSkin {
-		var skin = new RectangleSkin();
-		skin.fill = SolidColor(FILL_COLOR, 0);
-		skin.setFillForState(DOWN, SolidColor(FILL_COLOR, 0.5));
-		skin.border = SolidColor(2.0 * SCALE_FACTOR, BORDER_COLOR);
-		skin.setBorderForState(DOWN, SolidColor(3.0 * SCALE_FACTOR, BORDER_COLOR));
-		skin.cornerRadius = 5.0;
-		return skin;
+	public function getButtonSkin():DisplayObject {
+		return getScaled9Textures("button-skin", SCALEGRID_BUTTON);
 	}
 
 	public function getTextFormat(size:UInt = 0, color:UInt = 0, bold:Bool = false):TextFormat {
@@ -148,7 +142,7 @@ class OutlineTheme extends ClassVariantTheme {
 	 */
 	static private var scale9Bitmaps:Map<String, Scale9Bitmap> = new Map();
 
-	 static public function getScaled9Textures(id:String, scale9grid:Rectangle):Scale9Bitmap {
+	static public function getScaled9Textures(id:String, scale9grid:Rectangle):Scale9Bitmap {
 		#if !flash
 		if (!scale9Bitmaps.exists(id)) {
 			var bmp = Assets.getBitmapData("images/" + id + ".png");
@@ -160,7 +154,7 @@ class OutlineTheme extends ClassVariantTheme {
 			var destBD = new BitmapData(bitmapWidth, bitmapHeight, true, 0);
 			destBD.draw(bmp, mat);
 
-			 scale9Bitmaps[id] = new Scale9Bitmap(destBD, scale9grid);
+			scale9Bitmaps[id] = new Scale9Bitmap(destBD, scale9grid);
 		}
 		#end
 		return scale9Bitmaps[id];

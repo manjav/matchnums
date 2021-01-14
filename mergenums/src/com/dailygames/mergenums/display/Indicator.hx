@@ -71,7 +71,7 @@ class Indicator extends LayoutGroup {
 		super.initialize();
 
 		this.layout = new AnchorLayout();
-		this.backgroundSkin = OutlineTheme.getScaled9Textures("button-skin", 21, 24, 1, 1);
+		this.backgroundSkin = OutlineTheme.getScaled9Textures("button-skin", OutlineTheme.SCALEGRID_BUTTON);
 
 		this.iconDisplay = new AssetLoader();
 		this.iconDisplay.layoutData = AnchorLayoutData.middleLeft(-5, 10);
