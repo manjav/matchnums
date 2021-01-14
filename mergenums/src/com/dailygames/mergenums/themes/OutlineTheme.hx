@@ -26,6 +26,7 @@ class OutlineTheme extends ClassVariantTheme {
 	static public var POPUP_SIZE:Int;
 	static public var SCALE_FACTOR:Float;
 
+	public static final VARIANT_LABEL_DARK:String = "variantLabelDark";
 	public static final VARIANT_LABEL_MEDIUM:String = "variantLabelMedium";
 	public static final VARIANT_LABEL_LARG:String = "variantLabelLarg";
 	public static final VARIANT_BUTTON_LINK:String = "variantButtonLink";
@@ -38,7 +39,8 @@ class OutlineTheme extends ClassVariantTheme {
 		PADDING = Math.round((stage.stageWidth * SCALE_FACTOR) * 0.05);
 		POPUP_SIZE = Math.round((stage.stageWidth * SCALE_FACTOR) * 0.9);
 
-		this.styleProvider.setStyleFunction(Label, null, setLabelStyles);
+		this.styleProvider.setStyleFunction(Label, null, this.setLabelStyles);
+		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_DARK, this.setLabelDarkStyles);
 		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_MEDIUM, this.setLabelMediumStyles);
 		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_LARG, this.setLabelWhiteLargStyles);
 
@@ -53,6 +55,13 @@ class OutlineTheme extends ClassVariantTheme {
 		label.embedFonts = true;
 		if (label.textFormat == null)
 			label.textFormat = this.getTextFormat();
+		// if (label.disabledTextFormat == null)
+		// 	label.disabledTextFormat = this.getDisabledTextFormat();
+	}
+	private function setLabelDarkStyles(label:Label):Void {
+		label.embedFonts = true;
+		if (label.textFormat == null)
+			label.textFormat = this.getTextFormat(FONT_SIZE, 1);
 		// if (label.disabledTextFormat == null)
 		// 	label.disabledTextFormat = this.getDisabledTextFormat();
 	}
