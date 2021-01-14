@@ -20,6 +20,8 @@
 	<haxelib name="extension-unityads" />
 		
 	<icon path="Assets/images/icon.svg" />
+	<assets id="coin-small" path="assets/images/coin-small.png"/>
+	<assets id="cup" path="assets/images/cup.png"/>
 	<assets path="Assets/images" rename="images" include="*" exclude="icon.svg" />
 	<assets path="Assets/sounds" rename="sounds" include="*" />
 	<assets path="Assets/texts" rename="texts" include="*" />
@@ -42,7 +44,7 @@
 	
 	<config:android minimum-sdk-version="19"/>
 	<config:android target-sdk-version="30"/>
-	<certificate path="../../ks.keystore" password="Vahid@4822" alias="mergenums" alias-password="m3r63num5" if="android" unless="debug" />
+	<certificate path="../../ks.keystore" password="Vahid@4822" alias="mergenums" alias-password="m3r63num5" if="android" /><!--  unless="debug" -->
 	<architecture exclude="arm64" if="android" />
 	<haxeflag name="-dce" value="full" />
 	<define name="release" value="true" />
