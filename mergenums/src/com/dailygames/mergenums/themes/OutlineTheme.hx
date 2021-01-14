@@ -1,5 +1,10 @@
 package com.dailygames.mergenums.themes;
 
+import openfl.geom.Rectangle;
+import openfl.Assets;
+import openfl.display.BitmapData;
+import openfl.geom.Matrix;
+import feathers.display.Scale9Bitmap;
 import feathers.controls.Button;
 import feathers.controls.ButtonState;
 import feathers.controls.Label;
@@ -123,5 +128,30 @@ class OutlineTheme extends ClassVariantTheme {
 
 	public function getTextFormat(size:UInt = 0, color:UInt = 0, bold:Bool = false):TextFormat {
 		return new TextFormat(FONT_NAME, size == 0 ? FONT_SIZE : size, color == 0 ? FONT_COLOR : color, bold);
+	}
+
+	/**
+	 * Returns a scale9Textures from this class based on a string key.
+	 * @param name A key that matches a static constant of Bitmap type.
+	 * @return a starling scale9Textures.
+	 */
+	static private var scale9Bitmaps:Map<String, Scale9Bitmap> = new Map();
+
+	static public function getScaled9Textures(id:String, x:Float = 10, y:Float = 10, width:Float = 10, height:Float = 10):Scale9Bitmap {
+		#if !flash
+		if (!scale9Bitmaps.exists(id)) {
+			var bmp = Assets.getBitmapData("images/" + id + ".png");
+
+			var bitmapWidth = Math.round(bmp.width * SCALE_FACTOR * 0.5) * 2;
+			var bitmapHeight = Math.round(bmp.height * SCALE_FACTOR * 0.5) * 2;
+			var mat = new Matrix();
+			mat.scale(bitmapWidth / bmp.width, bitmapHeight / bmp.height);
+			var destBD = new BitmapData(bitmapWidth, bitmapHeight, true, 0);
+			destBD.draw(bmp, mat);
+
+			scale9Bitmaps[id] = new Scale9Bitmap(destBD, new Rectangle(x, y, width, height));
+		}
+		#end
+		return scale9Bitmaps[id];
 	}
 }
