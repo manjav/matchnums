@@ -1,5 +1,10 @@
 package com.dailygames.mergenums.display.overlays;
 
+import com.dailygames.mergenums.utils.Prefs;
+import feathers.controls.Label;
+import feathers.controls.AssetLoader;
+import com.dailygames.mergenums.themes.OutlineTheme;
+import feathers.display.Scale9Bitmap;
 import com.dailygames.mergenums.Game.GameState;
 import com.dailygames.mergenums.display.Indicator;
 import com.dailygames.mergenums.display.overlays.BaseOverlay.ScreenType;
@@ -40,32 +45,8 @@ class HomeOverlay extends BaseOverlay {
 		this.game.addEventListener(GameEvent.NEW_RECORD, this.game_eventsChangeHandler);
 		this.game.addEventListener(MouseEvent.CLICK, this.game_clickHandler);
 		this.addChild(this.game);
-
-		this.scoresIndicator = new Indicator();
-		this.scoresIndicator.layoutData = AnchorLayoutData.topCenter(Cell.BORDER);
-		this.scoresIndicator.type = SCORES;
-		this.addChild(this.scoresIndicator);
-
-		this.recordIndicator = new Indicator();
-		this.recordIndicator.icon = new Bitmap(Assets.getBitmapData("images/medal-small.png"));
-		this.recordIndicator.layoutData = AnchorLayoutData.topRight(Cell.BORDER);
-		this.recordIndicator.format = function(value:Float):String {
-			return " " + Utils.toCurrency(value);
-		}
-		this.recordIndicator.type = RECORD;
-		this.addChild(this.recordIndicator);
-
-		this.coinsIndicator = new Indicator();
-		this.coinsIndicator.icon = new Bitmap(Assets.getBitmapData("images/coin-small.png"));
-		this.coinsIndicator.format = function(value:Float):String {
-			return " " + Utils.toCurrency(value) + " +";
-		}
-		this.coinsIndicator.type = COIN;
-		this.coinsIndicator.layoutData = AnchorLayoutData.topLeft(Cell.BORDER, Cell.BORDER);
-		this.coinsIndicator.addEventListener(TriggerEvent.TRIGGER, this.coinsIndicator_triggerHandler);
-		this.addChild(this.coinsIndicator);
-
-		// Buttons
+		
+		// header and footert
 		this.header = new LayoutGroup();
 		this.header.height = 64;
 		this.header.layout = new AnchorLayout();
@@ -75,6 +56,47 @@ class HomeOverlay extends BaseOverlay {
 		this.footer.height = 64;
 		this.footer.layout = new AnchorLayout();
 		this.addChild(this.footer);
+
+		var scoreboard = new LayoutGroup();
+		scoreboard.layout = new AnchorLayout();
+		scoreboard.layoutData = AnchorLayoutData.middleRight(0, 20);
+		this.header.addChild(scoreboard);
+
+		var cupIcon = new AssetLoader();
+		cupIcon.source = "cup";
+		cupIcon.height = 64;
+		cupIcon.layoutData = AnchorLayoutData.topRight();
+		scoreboard.addChild(cupIcon);
+
+		var score = new Label();
+		score.variant = OutlineTheme.VARIANT_LABEL_MEDIUM;
+		score.text = "0";
+		score.layoutData = AnchorLayoutData.topRight(-13, 64);
+		scoreboard.addChild(score);
+		Prefs.instance.addEventListener(SCORES, function(event:GameEvent):Void {
+			score.text = Std.string(event.data);
+		});
+
+		var record = new Label();
+		record.text = Std.string(Prefs.instance.get(RECORD));
+		record.layoutData = AnchorLayoutData.topRight(28, 64);
+		scoreboard.addChild(record);
+		Prefs.instance.addEventListener(RECORD, function(event:GameEvent):Void {
+			record.text = Std.string(event.data);
+		});
+
+
+		this.coinsIndicator = new Indicator();
+		this.coinsIndicator.width = 166;
+		this.coinsIndicator.height = 72;
+		this.coinsIndicator.icon = "coin-small";
+		this.coinsIndicator.format = function(value:Float):String {
+			return Utils.toCurrency(value) + " +";
+		}
+		this.coinsIndicator.type = COIN;
+		this.coinsIndicator.layoutData = AnchorLayoutData.middleLeft(0, 20);
+		this.coinsIndicator.addEventListener(TriggerEvent.TRIGGER, this.coinsIndicator_triggerHandler);
+		this.header.addChild(this.coinsIndicator);
 
 		function addButton(name:String, layoutData:AnchorLayoutData, inHeader:Bool):Button {
 			var button = new Button();
@@ -241,7 +263,7 @@ class HomeOverlay extends BaseOverlay {
 
 		this.footer.x = this.header.x = this.game.x;
 		this.footer.width = this.header.width = this.game.width - 40;
-		this.header.y = this.game.y - this.header.height - 4;
+		this.header.y = this.game.y - this.header.height - 25;
 		this.footer.y = this.game.y + this.game.height;
 
 		super.refreshBackgroundLayout();

@@ -1,17 +1,16 @@
 package com.dailygames.mergenums.themes;
 
-import openfl.geom.Rectangle;
-import openfl.Assets;
-import openfl.display.BitmapData;
-import openfl.geom.Matrix;
-import feathers.display.Scale9Bitmap;
 import feathers.controls.Button;
-import feathers.controls.ButtonState;
 import feathers.controls.Label;
 import feathers.controls.dataRenderers.ItemRenderer;
-import feathers.skins.RectangleSkin;
+import feathers.display.Scale9Bitmap;
 import feathers.themes.ClassVariantTheme;
+import openfl.Assets;
+import openfl.display.BitmapData;
+import openfl.display.DisplayObject;
 import openfl.display.Stage;
+import openfl.geom.Matrix;
+import openfl.geom.Rectangle;
 import openfl.text.TextFormat;
 
 class OutlineTheme extends ClassVariantTheme {
@@ -31,6 +30,8 @@ class OutlineTheme extends ClassVariantTheme {
 	public static final VARIANT_LABEL_LARG:String = "variantLabelLarg";
 	public static final VARIANT_BUTTON_LINK:String = "variantButtonLink";
 	public static final VARIANT_BUTTON_CLOSE:String = "variantButtonClose";
+
+	public static final SCALEGRID_BUTTON:Rectangle = new Rectangle(21, 24, 1, 1);
 
 	public function new(stage:Stage, scaleFactor:Float) {
 		super();
@@ -146,7 +147,7 @@ class OutlineTheme extends ClassVariantTheme {
 	 */
 	static private var scale9Bitmaps:Map<String, Scale9Bitmap> = new Map();
 
-	static public function getScaled9Textures(id:String, x:Float = 10, y:Float = 10, width:Float = 10, height:Float = 10):Scale9Bitmap {
+	 static public function getScaled9Textures(id:String, scale9grid:Rectangle):Scale9Bitmap {
 		#if !flash
 		if (!scale9Bitmaps.exists(id)) {
 			var bmp = Assets.getBitmapData("images/" + id + ".png");
@@ -158,7 +159,7 @@ class OutlineTheme extends ClassVariantTheme {
 			var destBD = new BitmapData(bitmapWidth, bitmapHeight, true, 0);
 			destBD.draw(bmp, mat);
 
-			scale9Bitmaps[id] = new Scale9Bitmap(destBD, new Rectangle(x, y, width, height));
+			 scale9Bitmaps[id] = new Scale9Bitmap(destBD, scale9grid);
 		}
 		#end
 		return scale9Bitmaps[id];
