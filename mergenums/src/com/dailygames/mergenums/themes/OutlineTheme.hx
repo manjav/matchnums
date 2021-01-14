@@ -59,6 +59,7 @@ class OutlineTheme extends ClassVariantTheme {
 		// if (label.disabledTextFormat == null)
 		// 	label.disabledTextFormat = this.getDisabledTextFormat();
 	}
+
 	private function setLabelDarkStyles(label:Label):Void {
 		label.embedFonts = true;
 		if (label.textFormat == null)
@@ -70,7 +71,7 @@ class OutlineTheme extends ClassVariantTheme {
 	private function setLabelMediumStyles(label:Label):Void {
 		label.embedFonts = true;
 		if (label.textFormat == null)
-			label.textFormat = this.getTextFormat(FONT_SIZE * 2, 0xFFFFFF);
+			label.textFormat = this.getTextFormat(cast FONT_SIZE * 1.6, 0xFFFFFF);
 	}
 
 	private function setLabelWhiteLargStyles(label:Label):Void {
