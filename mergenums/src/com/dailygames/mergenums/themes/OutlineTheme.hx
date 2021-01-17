@@ -156,7 +156,7 @@ class OutlineTheme extends ClassVariantTheme {
 	 * @param name A key that matches a static constant of Bitmap type.
 	 * @return a starling scale9Textures.
 	 */
-	static private var scale9Bitmaps:Map<String, Scale9Bitmap> = new Map();
+	static private var scale9Bitmaps:Map<String, BitmapData> = new Map();
 
 	static public function getScaled9Textures(id:String, scale9grid:Rectangle):Scale9Bitmap {
 		#if !flash
@@ -169,9 +169,9 @@ class OutlineTheme extends ClassVariantTheme {
 			var destBD = new BitmapData(bitmapWidth, bitmapHeight, true, 0);
 			destBD.draw(bmp, mat);
 
-			scale9Bitmaps[id] = new Scale9Bitmap(destBD, scale9grid);
+			scale9Bitmaps[id] = destBD;
 		}
 		#end
-		return scale9Bitmaps[id];
+		return new Scale9Bitmap(scale9Bitmaps[id], scale9grid);
 	}
 }
