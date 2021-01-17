@@ -1,7 +1,7 @@
 package com.dailygames.mergenums.display;
 
-import feathers.style.Theme;
 import com.dailygames.mergenums.events.GameEvent;
+import com.dailygames.mergenums.themes.OutlineTheme.*;
 import com.dailygames.mergenums.themes.OutlineTheme;
 import com.dailygames.mergenums.utils.Prefs;
 import feathers.controls.AssetLoader;
@@ -10,6 +10,7 @@ import feathers.controls.LayoutGroup;
 import feathers.events.TriggerEvent;
 import feathers.layout.AnchorLayout;
 import feathers.layout.AnchorLayoutData;
+import feathers.style.Theme;
 
 class Indicator extends LayoutGroup {
 	private var labelDisplay:Label;
@@ -39,7 +40,7 @@ class Indicator extends LayoutGroup {
 		if (this.labelDisplay == null) {
 			this.labelDisplay = new Label();
 			this.labelDisplay.variant = OutlineTheme.VARIANT_LABEL_DARK;
-			this.labelDisplay.layoutData = AnchorLayoutData.center(20, -5);
+			this.labelDisplay.layoutData = AnchorLayoutData.center(F(24), F(-4));
 			this.addChild(this.labelDisplay);
 			this.labelDisplay.text = this.text;
 
@@ -74,8 +75,8 @@ class Indicator extends LayoutGroup {
 		this.backgroundSkin = OutlineTheme.getScaled9Textures("button-skin", OutlineTheme.SCALEGRID_BUTTON);
 
 		this.iconDisplay = new AssetLoader();
-		this.iconDisplay.layoutData = AnchorLayoutData.middleLeft(-5, 10);
-		this.iconDisplay.width = this.iconDisplay.height = 44;
+		this.iconDisplay.layoutData = AnchorLayoutData.middleLeft(F(-4), F(14));
+		this.iconDisplay.width = this.iconDisplay.height = F(56);
 		if (this.icon != null)
 			this.iconDisplay.source = this.icon;
 		this.addChild(this.iconDisplay);

@@ -87,7 +87,7 @@ class OutlineTheme extends ClassVariantTheme {
 	private function setLabelMediumStyles(label:Label):Void {
 		label.embedFonts = true;
 		if (label.textFormat == null)
-			label.textFormat = this.getTextFormat(cast FONT_SIZE * 1.6, 0xFFFFFF);
+			label.textFormat = this.getTextFormat(cast FONT_SIZE * 1.4, 0xFFFFFF);
 	}
 
 	private function setLabelWhiteLargStyles(label:Label):Void {
@@ -98,7 +98,7 @@ class OutlineTheme extends ClassVariantTheme {
 
 	private function setButtonStyles(button:Button):Void {
 		button.backgroundSkin = this.getButtonSkin();
-		button.minWidth = button.minHeight = 40;
+		button.minWidth = button.minHeight = F(80);
 
 		button.textFormat = this.getTextFormat();
 		button.setTextFormatForState(DOWN, button.textFormat);
@@ -118,7 +118,7 @@ class OutlineTheme extends ClassVariantTheme {
 	private function setButtonCloseStyles(button:Button):Void {
 		this.setButtonStyles(button);
 		button.text = "x";
-		button.paddingBottom = 4.0;
+		button.paddingBottom = F(8);
 	}
 
 	private function setItemRendererStyles(itemRenderer:ItemRenderer):Void {
@@ -162,9 +162,8 @@ class OutlineTheme extends ClassVariantTheme {
 		#if !flash
 		if (!scale9Bitmaps.exists(id)) {
 			var bmp = Assets.getBitmapData("images/" + id + ".png");
-
-			var bitmapWidth = Math.round(bmp.width * SCALE_FACTOR * 0.5) * 2;
-			var bitmapHeight = Math.round(bmp.height * SCALE_FACTOR * 0.5) * 2;
+			var bitmapWidth = I(bmp.width * 0.5) * 2;
+			var bitmapHeight = I(bmp.height * 0.5) * 2;
 			var mat = new Matrix();
 			mat.scale(bitmapWidth / bmp.width, bitmapHeight / bmp.height);
 			var destBD = new BitmapData(bitmapWidth, bitmapHeight, true, 0);
