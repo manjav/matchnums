@@ -14,7 +14,6 @@ import openfl.geom.Rectangle;
 import openfl.text.TextFormat;
 
 class OutlineTheme extends ClassVariantTheme {
-	static public final FONT_SIZE = 24;
 	static public final FONT_COLOR = 0xEDEDED;
 	static public final FONT_NAME = "Quicksand Bold";
 
@@ -22,6 +21,7 @@ class OutlineTheme extends ClassVariantTheme {
 	static public final BORDER_COLOR = 0xEDEDED;
 
 	static public var PADDING:Int;
+	static public var FONT_SIZE:Int;
 	static public var POPUP_SIZE:Int;
 	static public var SCALE_FACTOR:Float;
 
@@ -33,12 +33,28 @@ class OutlineTheme extends ClassVariantTheme {
 
 	public static final SCALEGRID_BUTTON:Rectangle = new Rectangle(21, 24, 1, 1);
 
+	public static function F(value:Float):Float {
+		return value * SCALE_FACTOR;
+	}
+
+	public static function I(value:Float):Int {
+		return Math.round(value * SCALE_FACTOR);
+	}
+
 	public function new(stage:Stage, scaleFactor:Float) {
 		super();
-
-		SCALE_FACTOR = scaleFactor;
-		PADDING = Math.round((stage.stageWidth * SCALE_FACTOR) * 0.05);
-		POPUP_SIZE = Math.round((stage.stageWidth * SCALE_FACTOR) * 0.9);
+		#if android
+		SCALE_FACTOR = stage.stageWidth / 1080;
+		#else
+		SCALE_FACTOR = 0.9;
+		#end
+		POPUP_SIZE = I(960);
+		PADDING = I(54);
+		FONT_SIZE = I(30);
+		SCALEGRID_BUTTON.x = I(SCALEGRID_BUTTON.x);
+		SCALEGRID_BUTTON.y = I(SCALEGRID_BUTTON.y);
+		SCALEGRID_BUTTON.width = I(SCALEGRID_BUTTON.width);
+		SCALEGRID_BUTTON.height = I(SCALEGRID_BUTTON.height);
 
 		this.styleProvider.setStyleFunction(Label, null, this.setLabelStyles);
 		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_DARK, this.setLabelDarkStyles);
