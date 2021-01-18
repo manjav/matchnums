@@ -55,7 +55,7 @@ class Cell extends Sprite {
 		this.addChild(this.background);
 
 		this.textDisplay = Utils.createText(80);
-		this.textDisplay.filters = [new DropShadowFilter(4, 45, 0x000000, 0.3, 1.5, 1.5)];
+		this.textDisplay.filters = [new DropShadowFilter(5, 65, 0, 0.4, 1.5, 1.5, 1, 2)];
 		this.textDisplay.width = SIZE;
 		this.textDisplay.height = RADIUS;
 		this.textDisplay.x = -RADIUS;
@@ -107,7 +107,7 @@ class Cell extends Sprite {
 
 	private function drawBackground(color:UInt):Void {
 		this.background.graphics.clear();
-		this.background.graphics.beginFill(0x000000, 0.4);
+		this.background.graphics.beginFill(0x191C1D, 0.4);
 		this.background.graphics.drawRoundRect(BORDER - RADIUS - 6, BORDER - RADIUS - 6, SIZE - BORDER * 2 + 12, SIZE - BORDER * 2 + 12, ROUND + 8, ROUND + 8);
 		this.background.graphics.endFill();
 		this.background.graphics.beginFill(color, 0.7);
