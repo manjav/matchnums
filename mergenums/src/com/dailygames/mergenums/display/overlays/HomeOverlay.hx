@@ -5,7 +5,6 @@ import com.dailygames.mergenums.display.Indicator;
 import com.dailygames.mergenums.display.overlays.BaseOverlay.ScreenType;
 import com.dailygames.mergenums.display.popups.*;
 import com.dailygames.mergenums.events.GameEvent;
-import com.dailygames.mergenums.themes.OutlineTheme;
 import com.dailygames.mergenums.utils.Prefs.*;
 import com.dailygames.mergenums.utils.Prefs;
 import com.dailygames.mergenums.utils.Utils;
@@ -51,10 +50,12 @@ class HomeOverlay extends BaseOverlay {
 		// header and footert
 		this.header = new LayoutGroup();
 		this.header.layout = new AnchorLayout();
+		this.header.layoutData = new AnchorLayoutData(null, 0, null, 0);
 		this.addChild(this.header);
 
 		this.footer = new LayoutGroup();
 		this.footer.layout = new AnchorLayout();
+		this.footer.layoutData = this.header.layoutData;
 		this.addChild(this.footer);
 
 		var scoreboard = new LayoutGroup();
@@ -65,7 +66,7 @@ class HomeOverlay extends BaseOverlay {
 		var cupIcon = new AssetLoader();
 		cupIcon.source = "cup";
 		cupIcon.height = 76.F();
-		cupIcon.layoutData = AnchorLayoutData.topRight();
+		cupIcon.layoutData = AnchorLayoutData.topRight(5.F(), 24.F());
 		scoreboard.addChild(cupIcon);
 
 		var shadow = new DropShadowFilter(3.F(), 75, 0, 1.F(), 5.F(), 4.F(), 1, 3);
@@ -74,7 +75,7 @@ class HomeOverlay extends BaseOverlay {
 		score.filters = [shadow];
 		score.variant = OutlineTheme.VARIANT_LABEL_MEDIUM;
 		score.text = "0";
-		score.layoutData = AnchorLayoutData.topRight(-10.F(), 80.F());
+		score.layoutData = AnchorLayoutData.topRight(-5.F(), 100.F());
 		scoreboard.addChild(score);
 		Prefs.instance.addEventListener(SCORES, function(event:GameEvent):Void {
 			score.text = Std.string(event.data);
@@ -83,37 +84,37 @@ class HomeOverlay extends BaseOverlay {
 		var record = new Label();
 		record.filters = [shadow];
 		record.text = Std.string(Prefs.instance.get(RECORD));
-		record.layoutData = AnchorLayoutData.topRight(34.F(), 80.F());
+		record.layoutData = AnchorLayoutData.topRight(39.F(), 100.F());
 		scoreboard.addChild(record);
 		Prefs.instance.addEventListener(RECORD, function(event:GameEvent):Void {
 			record.text = Std.string(event.data);
 		});
 
 		this.coinsIndicator = new Indicator();
-		this.coinsIndicator.width = 240.F();
-		this.coinsIndicator.height = 88.F();
+		this.coinsIndicator.width = 210.F();
+		this.coinsIndicator.height = 86.F();
 		this.coinsIndicator.icon = "coin-small";
-		this.coinsIndicator.format = function(value : Float):String{
+		this.coinsIndicator.format = function(value:Float):String {
 			return Utils.toCurrency(value);
-		} 
+		}
 		this.coinsIndicator.type = COIN;
-		this.coinsIndicator.layoutData = AnchorLayoutData.middleLeft(0, 24.F());
+		this.coinsIndicator.layoutData = AnchorLayoutData.middleLeft(0, 60.F());
 		this.coinsIndicator.addEventListener(TriggerEvent.TRIGGER, this.coinsIndicator_triggerHandler);
 		this.header.addChild(this.coinsIndicator);
 
 		function addButton(name:String, layoutData:AnchorLayoutData, inHeader:Bool):Button {
 			var button = new Button();
 			button.name = name;
-			button.height = button.width = 86.F();
+			button.height = button.width = 76.F();
 			button.layoutData = layoutData;
 			button.icon = new Bitmap(Assets.getBitmapData("images/" + name + ".png"));
 			button.addEventListener(MouseEvent.CLICK, buttons_clickHandler);
 			inHeader ? this.header.addChild(button) : this.footer.addChild(button);
 			return button;
 		}
-		addButton("dynamite", AnchorLayoutData.middleRight(), false);
-		addButton("dynamites", AnchorLayoutData.middleRight(0, 96.F()), false);
-		addButton("pause", AnchorLayoutData.middleLeft(), false);
+		addButton("dynamite", AnchorLayoutData.middleRight(0, 60.F()), false);
+		addButton("dynamites", AnchorLayoutData.middleRight(0, 152.F()), false);
+		addButton("pause", AnchorLayoutData.middleLeft(0, 60.F()), false);
 
 		this.start();
 	}
@@ -264,8 +265,6 @@ class HomeOverlay extends BaseOverlay {
 		this.game.x = (this.actualWidth - (currentWidth * gameScale)) * 0.5;
 		this.game.y = (this.actualHeight - (currentHeight * gameScale)) * 0.45;
 
-		this.footer.x = this.header.x = this.game.x;
-		this.footer.width = this.header.width = this.game.width - 40.F();
 		this.header.y = this.game.y - 120.F();
 		this.footer.y = this.game.y + this.game.height;
 

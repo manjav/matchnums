@@ -40,13 +40,13 @@ class Indicator extends LayoutGroup {
 		if (this.labelDisplay == null) {
 			this.labelDisplay = new Label();
 			this.labelDisplay.variant = OutlineTheme.VARIANT_LABEL_DARK;
-			this.labelDisplay.layoutData = AnchorLayoutData.center(F(5), F(-4));
+			this.labelDisplay.layoutData = AnchorLayoutData.center(F(6), F(0));
 			this.addChild(this.labelDisplay);
 			this.labelDisplay.text = this.text;
 
 			if (this.autoSizeText) {
 				var format = this.labelDisplay.textFormat;
-				var size = Math.round(OutlineTheme.FONT_SIZE * (6 / this.text.length));
+				var size = Math.round(OutlineTheme.FONT_SIZE * (5 / this.text.length));
 				if (format == null)
 					format = cast(Theme.getTheme(), OutlineTheme).getTextFormat(size, 1);
 				format.size = size;
@@ -72,10 +72,10 @@ class Indicator extends LayoutGroup {
 		super.initialize();
 
 		this.layout = new AnchorLayout();
-		this.backgroundSkin = OutlineTheme.getScaled9Textures("button-skin", OutlineTheme.SCALEGRID_BUTTON);
+		this.backgroundSkin = cast(Theme.getTheme(), OutlineTheme).getButtonSkin();
 
 		this.iconDisplay = new AssetLoader();
-		this.iconDisplay.layoutData = AnchorLayoutData.middleLeft(F(-4), F(14));
+		this.iconDisplay.layoutData = AnchorLayoutData.middleLeft(F(-2), F(8));
 		this.iconDisplay.width = this.iconDisplay.height = F(56);
 		if (this.icon != null)
 			this.iconDisplay.source = this.icon;
@@ -83,7 +83,7 @@ class Indicator extends LayoutGroup {
 
 		var plus = new Label();
 		plus.variant = OutlineTheme.VARIANT_LABEL_DARK_MEDIUM;
-		plus.layoutData = AnchorLayoutData.middleRight(F(-4), F(24));
+		plus.layoutData = AnchorLayoutData.middleRight(F(-2), F(20));
 		plus.text = "+";
 		this.addChild(plus);
 	}

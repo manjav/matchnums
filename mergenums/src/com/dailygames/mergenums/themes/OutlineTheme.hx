@@ -4,14 +4,18 @@ import feathers.controls.Button;
 import feathers.controls.Label;
 import feathers.controls.dataRenderers.ItemRenderer;
 import feathers.display.Scale9Bitmap;
+import feathers.skins.ProgrammaticSkin;
 import feathers.themes.ClassVariantTheme;
 import openfl.Assets;
 import openfl.display.BitmapData;
 import openfl.display.DisplayObject;
 import openfl.display.Stage;
+import openfl.filters.DropShadowFilter;
 import openfl.geom.Matrix;
 import openfl.geom.Rectangle;
 import openfl.text.TextFormat;
+
+using com.dailygames.mergenums.themes.OutlineTheme;
 
 class OutlineTheme extends ClassVariantTheme {
 	static public final FONT_NAME = "Quicksand Bold";
@@ -120,7 +124,7 @@ class OutlineTheme extends ClassVariantTheme {
 		button.setTextFormatForState(DOWN, button.textFormat);
 	}
 
-	private function setButtonCloseStyles(button:Button):Void {
+	public function setButtonCloseStyles(button:Button):Void {
 		this.setButtonStyles(button);
 		button.text = "x";
 		button.paddingBottom = F(8);
@@ -149,7 +153,10 @@ class OutlineTheme extends ClassVariantTheme {
 	}
 
 	public function getButtonSkin():DisplayObject {
-		return getScaled9Textures("button-skin", SCALEGRID_BUTTON);
+		
+		var skin = new MyButtonSkin();
+		skin.filters = [new DropShadowFilter(4.F(), 80, 0, 1.F(), 5.F(), 4.F(), 1, 3)];
+		return skin;//getScaled9Textures("button-skin", SCALEGRID_BUTTON);
 	}
 
 	public function getTextFormat(size:UInt = 0, color:UInt = 0, bold:Bool = false):TextFormat {
@@ -178,5 +185,26 @@ class OutlineTheme extends ClassVariantTheme {
 		}
 		#end
 		return new Scale9Bitmap(scale9Bitmaps[id], scale9grid);
+	}
+}
+
+class MyButtonSkin extends ProgrammaticSkin {
+	public function new() {
+		super();
+	}
+
+	override private function update():Void {
+		var r = 32.F();
+		var b = 3.6.F();
+		this.graphics.clear();
+		this.graphics.beginFill(OutlineTheme.DARK_COLOR);
+		this.graphics.drawRoundRect(0, 0, this.actualWidth, this.actualHeight, r + 6.F(), r + 6.F());
+		this.graphics.endFill();
+		this.graphics.beginFill(0xBFBFBF);
+		this.graphics.drawRoundRect(b, b, this.actualWidth - b * 2, this.actualHeight - b * 2, r, r);
+		this.graphics.endFill();
+		this.graphics.beginFill(OutlineTheme.LIGHT_COLOR);
+		this.graphics.drawRoundRect(b, b, this.actualWidth - b * 2, this.actualHeight - b * 2 - 4.F(), r, r);
+		this.graphics.endFill();
 	}
 }
