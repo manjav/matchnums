@@ -107,7 +107,7 @@ class Cell extends Sprite {
 
 	private function drawBackground(color:UInt):Void {
 		this.background.graphics.clear();
-		this.background.graphics.beginFill(0x191C1D, 0.4);
+		this.background.graphics.beginFill(0x191C1D);
 		this.background.graphics.drawRoundRect(BORDER - RADIUS - 6, BORDER - RADIUS - 6, SIZE - BORDER * 2 + 12, SIZE - BORDER * 2 + 12, ROUND + 8, ROUND + 8);
 		this.background.graphics.endFill();
 		this.background.graphics.beginFill(color, 0.7);
