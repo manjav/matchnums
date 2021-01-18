@@ -25,9 +25,10 @@ class OutlineTheme extends ClassVariantTheme {
 	static public var POPUP_SIZE:Int;
 	static public var SCALE_FACTOR:Float;
 
-	public static final VARIANT_LABEL_DARK:String = "variantLabelDark";
 	public static final VARIANT_LABEL_MEDIUM:String = "variantLabelMedium";
 	public static final VARIANT_LABEL_LARG:String = "variantLabelLarg";
+	public static final VARIANT_LABEL_DARK:String = "variantLabelDark";
+	public static final VARIANT_LABEL_DARK_MEDIUM:String = "variantLabelDarkLarg";
 	public static final VARIANT_BUTTON_LINK:String = "variantButtonLink";
 	public static final VARIANT_BUTTON_CLOSE:String = "variantButtonClose";
 
@@ -57,9 +58,10 @@ class OutlineTheme extends ClassVariantTheme {
 		SCALEGRID_BUTTON.height = I(SCALEGRID_BUTTON.height);
 
 		this.styleProvider.setStyleFunction(Label, null, this.setLabelStyles);
-		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_DARK, this.setLabelDarkStyles);
 		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_MEDIUM, this.setLabelMediumStyles);
 		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_LARG, this.setLabelWhiteLargStyles);
+		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_DARK, this.setLabelDarkStyles);
+		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_DARK_MEDIUM, this.setLabelDarkMediumStyles);
 
 		this.styleProvider.setStyleFunction(Button, null, this.setButtonStyles);
 		this.styleProvider.setStyleFunction(Button, VARIANT_BUTTON_LINK, this.setButtonLinkStyles);
@@ -80,8 +82,12 @@ class OutlineTheme extends ClassVariantTheme {
 		label.embedFonts = true;
 		if (label.textFormat == null)
 			label.textFormat = this.getTextFormat(FONT_SIZE, 1);
-		// if (label.disabledTextFormat == null)
-		// 	label.disabledTextFormat = this.getDisabledTextFormat();
+	}
+
+	private function setLabelDarkMediumStyles(label:Label):Void {
+		label.embedFonts = true;
+		if (label.textFormat == null)
+			label.textFormat = this.getTextFormat(cast FONT_SIZE * 1.4, 1);
 	}
 
 	private function setLabelMediumStyles(label:Label):Void {

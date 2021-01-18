@@ -82,7 +82,7 @@ class Indicator extends LayoutGroup {
 		this.addChild(this.iconDisplay);
 
 		var plus = new Label();
-		plus.variant = OutlineTheme.VARIANT_LABEL_DARK_LARG;
+		plus.variant = OutlineTheme.VARIANT_LABEL_DARK_MEDIUM;
 		plus.layoutData = AnchorLayoutData.middleRight(F(-4), F(24));
 		plus.text = "+";
 		this.addChild(plus);
