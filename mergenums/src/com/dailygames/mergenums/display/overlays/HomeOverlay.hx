@@ -21,6 +21,7 @@ import openfl.Assets;
 import openfl.display.Bitmap;
 import openfl.events.Event;
 import openfl.events.MouseEvent;
+import openfl.filters.DropShadowFilter;
 import openfl.geom.Rectangle;
 
 using com.dailygames.mergenums.themes.OutlineTheme;
@@ -67,7 +68,10 @@ class HomeOverlay extends BaseOverlay {
 		cupIcon.layoutData = AnchorLayoutData.topRight();
 		scoreboard.addChild(cupIcon);
 
+		var shadow = new DropShadowFilter(3.F(), 75, 0, 1.F(), 5.F(), 4.F(), 1, 3);
+
 		var score = new Label();
+		score.filters = [shadow];
 		score.variant = OutlineTheme.VARIANT_LABEL_MEDIUM;
 		score.text = "0";
 		score.layoutData = AnchorLayoutData.topRight(-10.F(), 80.F());
@@ -77,6 +81,7 @@ class HomeOverlay extends BaseOverlay {
 		});
 
 		var record = new Label();
+		record.filters = [shadow];
 		record.text = Std.string(Prefs.instance.get(RECORD));
 		record.layoutData = AnchorLayoutData.topRight(34.F(), 80.F());
 		scoreboard.addChild(record);
