@@ -22,8 +22,8 @@ class PauseOverlay extends BaseOverlay {
 		this.layout = new AnchorLayout();
 
 		var triangle = new Shape();
-		triangle.graphics.beginFill(OutlineTheme.BORDER_COLOR, 0.1);
-		triangle.graphics.lineStyle(2.0 * OutlineTheme.SCALE_FACTOR, OutlineTheme.BORDER_COLOR);
+		triangle.graphics.beginFill(OutlineTheme.LIGHT_COLOR, 0.1);
+		triangle.graphics.lineStyle(2.0 * OutlineTheme.SCALE_FACTOR, OutlineTheme.LIGHT_COLOR);
 		var C = 8.0 * OutlineTheme.SCALE_FACTOR;
 		var W = 60.0 * OutlineTheme.SCALE_FACTOR;
 		var H = 72.0 * OutlineTheme.SCALE_FACTOR;
@@ -44,7 +44,7 @@ class PauseOverlay extends BaseOverlay {
 
 		var buttons = new LayoutGroup();
 		buttons.layout = new AnchorLayout();
-		buttons.backgroundSkin = new LineSkin(null, LineStyle.SolidColor(2.0 * OutlineTheme.SCALE_FACTOR, OutlineTheme.BORDER_COLOR, 0.7));
+		buttons.backgroundSkin = new LineSkin(null, LineStyle.SolidColor(2.0 * OutlineTheme.SCALE_FACTOR, OutlineTheme.LIGHT_COLOR, 0.7));
 		buttons.layoutData = new AnchorLayoutData(null, padding, null, padding, null, 200);
 		this.addChild(buttons);
 

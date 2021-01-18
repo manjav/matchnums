@@ -45,8 +45,8 @@ class StartingOfferOverlay extends BaseOverlay {
 
 	private function createBoost(icon:String, text:String, layoutData:AnchorLayoutData):LayoutGroup {
 		var skin = new RectangleSkin();
-		skin.fill = SolidColor(OutlineTheme.FILL_COLOR, 1);
-		skin.border = SolidColor(2.0 * OutlineTheme.SCALE_FACTOR, OutlineTheme.BORDER_COLOR);
+		skin.fill = SolidColor(OutlineTheme.DARK_COLOR, 1);
+		skin.border = SolidColor(2.0 * OutlineTheme.SCALE_FACTOR, OutlineTheme.LIGHT_COLOR);
 		skin.cornerRadius = 5.0;
 
 		var layout = new VerticalLayout();

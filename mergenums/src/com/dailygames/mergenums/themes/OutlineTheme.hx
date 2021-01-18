@@ -14,11 +14,10 @@ import openfl.geom.Rectangle;
 import openfl.text.TextFormat;
 
 class OutlineTheme extends ClassVariantTheme {
-	static public final FONT_COLOR = 0xEDEDED;
 	static public final FONT_NAME = "Quicksand Bold";
 
-	static public final FILL_COLOR = 0x001122;
-	static public final BORDER_COLOR = 0xEDEDED;
+	static public final LIGHT_COLOR = 0xEDEDED;
+	static public final DARK_COLOR = 0x212527;
 
 	static public var PADDING:Int;
 	static public var FONT_SIZE:Int;
@@ -81,25 +80,25 @@ class OutlineTheme extends ClassVariantTheme {
 	private function setLabelDarkStyles(label:Label):Void {
 		label.embedFonts = true;
 		if (label.textFormat == null)
-			label.textFormat = this.getTextFormat(FONT_SIZE, 1);
+			label.textFormat = this.getTextFormat(FONT_SIZE, DARK_COLOR);
 	}
 
 	private function setLabelDarkMediumStyles(label:Label):Void {
 		label.embedFonts = true;
 		if (label.textFormat == null)
-			label.textFormat = this.getTextFormat(cast FONT_SIZE * 1.4, 1);
+			label.textFormat = this.getTextFormat(cast FONT_SIZE * 1.4, DARK_COLOR);
 	}
 
 	private function setLabelMediumStyles(label:Label):Void {
 		label.embedFonts = true;
 		if (label.textFormat == null)
-			label.textFormat = this.getTextFormat(cast FONT_SIZE * 1.4, 0xFFFFFF);
+			label.textFormat = this.getTextFormat(cast FONT_SIZE * 1.4, LIGHT_COLOR);
 	}
 
 	private function setLabelWhiteLargStyles(label:Label):Void {
 		label.embedFonts = true;
 		if (label.textFormat == null)
-			label.textFormat = this.getTextFormat(FONT_SIZE * 2, 0xFFFFFF);
+			label.textFormat = this.getTextFormat(FONT_SIZE * 2, DARK_COLOR);
 	}
 
 	private function setButtonStyles(button:Button):Void {
@@ -154,7 +153,7 @@ class OutlineTheme extends ClassVariantTheme {
 	}
 
 	public function getTextFormat(size:UInt = 0, color:UInt = 0, bold:Bool = false):TextFormat {
-		return new TextFormat(FONT_NAME, size == 0 ? FONT_SIZE : size, color == 0 ? FONT_COLOR : color, bold);
+		return new TextFormat(FONT_NAME, size == 0 ? FONT_SIZE : size, color == 0 ? LIGHT_COLOR : color, bold);
 	}
 
 	/**
