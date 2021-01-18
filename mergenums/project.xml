@@ -7,7 +7,6 @@
 	<window width="540" height="1100" background="#2c3134"/>
 	<window width="0" height="0" if="html5" />
 	<window fps="40"/><!-- fullscreen="false" antialiasing="4" vsync="true" /> -->
-	<window orientation="portrait" />
 
 	<source path="src" />
 	
@@ -18,6 +17,7 @@
 	<!-- <haxelib name="extension-natives" />  -->
 	<haxelib name="extension-iap" /> 
 	<haxelib name="extension-unityads" />
+	<haxelib name="extension-orientation" /> 
 		
 	<icon path="Assets/images/icon.svg" />
 	<assets id="coin-small" path="assets/images/coin-small.png"/>
