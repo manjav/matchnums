@@ -40,13 +40,13 @@ class Indicator extends LayoutGroup {
 		if (this.labelDisplay == null) {
 			this.labelDisplay = new Label();
 			this.labelDisplay.variant = OutlineTheme.VARIANT_LABEL_DARK;
-			this.labelDisplay.layoutData = AnchorLayoutData.center(F(24), F(-4));
+			this.labelDisplay.layoutData = AnchorLayoutData.center(F(5), F(-4));
 			this.addChild(this.labelDisplay);
 			this.labelDisplay.text = this.text;
 
 			if (this.autoSizeText) {
 				var format = this.labelDisplay.textFormat;
-				var size = Math.round(OutlineTheme.FONT_SIZE * (8 / this.text.length));
+				var size = Math.round(OutlineTheme.FONT_SIZE * (6 / this.text.length));
 				if (format == null)
 					format = cast(Theme.getTheme(), OutlineTheme).getTextFormat(size, 1);
 				format.size = size;
@@ -80,6 +80,12 @@ class Indicator extends LayoutGroup {
 		if (this.icon != null)
 			this.iconDisplay.source = this.icon;
 		this.addChild(this.iconDisplay);
+
+		var plus = new Label();
+		plus.variant = OutlineTheme.VARIANT_LABEL_DARK_LARG;
+		plus.layoutData = AnchorLayoutData.middleRight(F(-4), F(24));
+		plus.text = "+";
+		this.addChild(plus);
 	}
 
 	public dynamic function format(value:Float):String {

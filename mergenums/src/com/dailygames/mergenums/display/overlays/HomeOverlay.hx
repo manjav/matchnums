@@ -47,7 +47,7 @@ class HomeOverlay extends BaseOverlay {
 		this.game.addEventListener(GameEvent.NEW_RECORD, this.game_eventsChangeHandler);
 		this.game.addEventListener(MouseEvent.CLICK, this.game_clickHandler);
 		this.addChild(this.game);
-		
+
 		// header and footert
 		this.header = new LayoutGroup();
 		this.header.layout = new AnchorLayout();
@@ -93,9 +93,9 @@ class HomeOverlay extends BaseOverlay {
 		this.coinsIndicator.width = 240.F();
 		this.coinsIndicator.height = 88.F();
 		this.coinsIndicator.icon = "coin-small";
-		this.coinsIndicator.format = function(value:Float):String {
-			return Utils.toCurrency(value) + "  +";
-		}
+		this.coinsIndicator.format = function(value : Float):String{
+			return Utils.toCurrency(value);
+		} 
 		this.coinsIndicator.type = COIN;
 		this.coinsIndicator.layoutData = AnchorLayoutData.middleLeft(0, 24.F());
 		this.coinsIndicator.addEventListener(TriggerEvent.TRIGGER, this.coinsIndicator_triggerHandler);
