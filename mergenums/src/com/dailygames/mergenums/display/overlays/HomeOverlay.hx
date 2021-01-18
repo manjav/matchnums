@@ -5,7 +5,6 @@ import com.dailygames.mergenums.display.Indicator;
 import com.dailygames.mergenums.display.overlays.BaseOverlay.ScreenType;
 import com.dailygames.mergenums.display.popups.*;
 import com.dailygames.mergenums.events.GameEvent;
-import com.dailygames.mergenums.themes.OutlineTheme.*;
 import com.dailygames.mergenums.themes.OutlineTheme;
 import com.dailygames.mergenums.utils.Prefs.*;
 import com.dailygames.mergenums.utils.Prefs;
@@ -23,6 +22,8 @@ import openfl.display.Bitmap;
 import openfl.events.Event;
 import openfl.events.MouseEvent;
 import openfl.geom.Rectangle;
+
+using com.dailygames.mergenums.themes.OutlineTheme;
 
 class HomeOverlay extends BaseOverlay {
 	private var game:Game;
@@ -57,19 +58,19 @@ class HomeOverlay extends BaseOverlay {
 
 		var scoreboard = new LayoutGroup();
 		scoreboard.layout = new AnchorLayout();
-		scoreboard.layoutData = AnchorLayoutData.middleRight(0, F(24));
+		scoreboard.layoutData = AnchorLayoutData.middleRight(0, 24.F());
 		this.header.addChild(scoreboard);
 
 		var cupIcon = new AssetLoader();
 		cupIcon.source = "cup";
-		cupIcon.height = F(76);
+		cupIcon.height = 76.F();
 		cupIcon.layoutData = AnchorLayoutData.topRight();
 		scoreboard.addChild(cupIcon);
 
 		var score = new Label();
 		score.variant = OutlineTheme.VARIANT_LABEL_MEDIUM;
 		score.text = "0";
-		score.layoutData = AnchorLayoutData.topRight(F(-10), F(80));
+		score.layoutData = AnchorLayoutData.topRight(-10.F(), 80.F());
 		scoreboard.addChild(score);
 		Prefs.instance.addEventListener(SCORES, function(event:GameEvent):Void {
 			score.text = Std.string(event.data);
@@ -77,29 +78,28 @@ class HomeOverlay extends BaseOverlay {
 
 		var record = new Label();
 		record.text = Std.string(Prefs.instance.get(RECORD));
-		record.layoutData = AnchorLayoutData.topRight(F(34), F(80));
+		record.layoutData = AnchorLayoutData.topRight(34.F(), 80.F());
 		scoreboard.addChild(record);
 		Prefs.instance.addEventListener(RECORD, function(event:GameEvent):Void {
 			record.text = Std.string(event.data);
 		});
 
-
 		this.coinsIndicator = new Indicator();
-		this.coinsIndicator.width = F(240);
-		this.coinsIndicator.height = F(92);
+		this.coinsIndicator.width = 240.F();
+		this.coinsIndicator.height = 88.F();
 		this.coinsIndicator.icon = "coin-small";
 		this.coinsIndicator.format = function(value:Float):String {
 			return Utils.toCurrency(value) + "  +";
 		}
 		this.coinsIndicator.type = COIN;
-		this.coinsIndicator.layoutData = AnchorLayoutData.middleLeft(0, F(24));
+		this.coinsIndicator.layoutData = AnchorLayoutData.middleLeft(0, 24.F());
 		this.coinsIndicator.addEventListener(TriggerEvent.TRIGGER, this.coinsIndicator_triggerHandler);
 		this.header.addChild(this.coinsIndicator);
 
 		function addButton(name:String, layoutData:AnchorLayoutData, inHeader:Bool):Button {
 			var button = new Button();
 			button.name = name;
-			button.height = button.width = F(86);
+			button.height = button.width = 86.F();
 			button.layoutData = layoutData;
 			button.icon = new Bitmap(Assets.getBitmapData("images/" + name + ".png"));
 			button.addEventListener(MouseEvent.CLICK, buttons_clickHandler);
@@ -107,7 +107,7 @@ class HomeOverlay extends BaseOverlay {
 			return button;
 		}
 		addButton("dynamite", AnchorLayoutData.middleRight(), false);
-		addButton("dynamites", AnchorLayoutData.middleRight(0, F(96)), false);
+		addButton("dynamites", AnchorLayoutData.middleRight(0, 96.F()), false);
 		addButton("pause", AnchorLayoutData.middleLeft(), false);
 
 		this.start();
@@ -260,8 +260,8 @@ class HomeOverlay extends BaseOverlay {
 		this.game.y = (this.actualHeight - (currentHeight * gameScale)) * 0.45;
 
 		this.footer.x = this.header.x = this.game.x;
-		this.footer.width = this.header.width = this.game.width - F(40);
-		this.header.y = this.game.y - F(120);
+		this.footer.width = this.header.width = this.game.width - 40.F();
+		this.header.y = this.game.y - 120.F();
 		this.footer.y = this.game.y + this.game.height;
 
 		super.refreshBackgroundLayout();
