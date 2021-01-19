@@ -20,11 +20,16 @@
 	<haxelib name="extension-orientation" /> 
 		
 	<icon path="Assets/images/icon.svg" />
+	<assets id="pause" path="assets/images/pause.png"/>
+	<assets id="skip" path="assets/images/skip.png"/>
 	<assets id="close" path="assets/images/close.png"/>
 	<assets id="coin" path="assets/images/coin.png"/>
 	<assets id="cup" path="assets/images/cup.png"/>
+	<assets id="ads" path="assets/images/ads.png"/>
+	<assets id="kill" path="assets/images/kill.png"/>
+	<assets id="killAll" path="assets/images/killAll.png"/>
 	
-	<assets path="Assets/images" rename="images" include="*" exclude="icon.svg" />
+	<!-- <assets path="Assets/images" rename="images" include="*" exclude="icon.svg" /> -->
 	<assets path="Assets/sounds" rename="sounds" include="*" />
 	<assets path="Assets/texts" rename="texts" include="*" />
 	<assets path="Assets/fonts" rename="fonts" include="*.ttf" />

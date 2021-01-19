@@ -83,7 +83,7 @@ class StartingOfferOverlay extends BaseOverlay {
 		boostByAds.height = this.padding * 2;
 		boostByAds.name = icon;
 		boostByAds.text = " Free ";
-		boostByAds.icon = new Bitmap(Assets.getBitmapData("images/video.png"));
+		boostByAds.icon = new Bitmap(Assets.getBitmapData("ads"));
 		boostByAds.addEventListener(MouseEvent.CLICK, this.adsButton_clickHandler);
 		boost.addChild(boostByAds);
 

@@ -42,7 +42,7 @@ class RevivePopup extends ConfirmPopup implements IGamePlayPopup {
 		this.reviveByAdsButton.width = OutlineTheme.PADDING * 7;
 		this.reviveByAdsButton.height = OutlineTheme.PADDING * 3;
 		this.reviveByAdsButton.text = " Free ";
-		this.reviveByAdsButton.icon = new Bitmap(Assets.getBitmapData("images/video.png"));
+		this.reviveByAdsButton.icon = new Bitmap(Assets.getBitmapData("ads"));
 		this.reviveByAdsButton.layoutData = AnchorLayoutData.bottomLeft(this.padding, this.padding);
 		this.reviveByAdsButton.addEventListener(MouseEvent.CLICK, this.reviveByAdsButton_clickHandler);
 		this.content.addChild(this.reviveByAdsButton);

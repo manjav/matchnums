@@ -107,13 +107,13 @@ class HomeOverlay extends BaseOverlay {
 			button.name = name;
 			button.height = button.width = 76.F();
 			button.layoutData = layoutData;
-			button.icon = new Bitmap(Assets.getBitmapData("images/" + name + ".png"));
+			button.icon = new Bitmap(Assets.getBitmapData(name));
 			button.addEventListener(MouseEvent.CLICK, buttons_clickHandler);
 			inHeader ? this.header.addChild(button) : this.footer.addChild(button);
 			return button;
 		}
-		addButton("dynamite", AnchorLayoutData.middleRight(0, 60.F()), false);
-		addButton("dynamites", AnchorLayoutData.middleRight(0, 152.F()), false);
+		addButton("kill", AnchorLayoutData.middleRight(0, 60.F()), false);
+		addButton("killAll", AnchorLayoutData.middleRight(0, 152.F()), false);
 		addButton("pause", AnchorLayoutData.middleLeft(0, 60.F()), false);
 
 		this.start();
@@ -166,7 +166,7 @@ class HomeOverlay extends BaseOverlay {
 		var cell = cast(event.target, Cell);
 		if (cell.state != Fixed)
 			return;
-		if (this.removeCellMode == "dynamite")
+		if (this.removeCellMode == "kill")
 			this.game.removeCell(cell.column, cell.row, true);
 		else
 			this.game.removeCellsByValue(cell.value);
@@ -201,7 +201,7 @@ class HomeOverlay extends BaseOverlay {
 		switch (button.name) {
 			case "pause":
 				this.pause();
-			case "dynamite" | "dynamites":
+			case "kill" | "killAll":
 				var popup = cast(this.addOverlay(RemoveCell, true, false), RemoveCellPopup);
 				this.removeCellMode = popup.mode = button.name;
 				popup.addEventListener(Event.CANCEL, this.pauseOverlay_eventsHandler);
