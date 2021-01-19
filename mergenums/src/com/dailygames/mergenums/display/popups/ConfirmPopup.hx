@@ -1,6 +1,5 @@
 package com.dailygames.mergenums.display.popups;
 
-import com.dailygames.mergenums.themes.OutlineTheme;
 import feathers.controls.Label;
 import feathers.layout.AnchorLayoutData;
 
@@ -31,8 +30,7 @@ class ConfirmPopup extends BasePopup {
 
 		if (this.titleDisplay == null) {
 			this.titleDisplay = new Label();
-			this.titleDisplay.variant = OutlineTheme.VARIANT_LABEL_MEDIUM;
-			this.titleDisplay.layoutData = AnchorLayoutData.topCenter(this.padding);
+			this.titleDisplay.layoutData = AnchorLayoutData.topLeft(-this.padding * 1.85, this.padding);
 		}
 		this.titleDisplay.text = this.title;
 		if (this.titleDisplay.parent == null)

@@ -53,8 +53,8 @@ class OutlineTheme extends ClassVariantTheme {
 		#else
 		SCALE_FACTOR = 0.9;
 		#end
-		POPUP_SIZE = I(960);
-		PADDING = I(54);
+		POPUP_SIZE = I(480);
+		PADDING = I(40);
 		FONT_SIZE = I(30);
 		SCALEGRID_BUTTON.x = I(SCALEGRID_BUTTON.x);
 		SCALEGRID_BUTTON.y = I(SCALEGRID_BUTTON.y);
