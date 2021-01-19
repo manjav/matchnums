@@ -158,27 +158,27 @@ class OutlineTheme extends ClassVariantTheme {
 	}
 
 	/**
-	 * Returns a scale9Textures from this class based on a string key.
+	 * Returns a scaledBitmaps from this class based on a string key.
 	 * @param name A key that matches a static constant of Bitmap type.
-	 * @return a starling scale9Textures.
+	 * @return Bitmap.
 	 */
-	static private var scale9Bitmaps:Map<String, BitmapData> = new Map();
+	static private var scaledBitmaps:Map<String, BitmapData> = new Map();
 
-	static public function getScaled9Textures(id:String, scale9grid:Rectangle):Scale9Bitmap {
+	static public function getScaledBitmap(id:String):BitmapData {
 		#if !flash
-		if (!scale9Bitmaps.exists(id)) {
-			var bmp = Assets.getBitmapData("images/" + id + ".png");
+		if (!scaledBitmaps.exists(id)) {
+			var bmp = Assets.getBitmapData(id);
 			var bitmapWidth = I(bmp.width * 0.5) * 2;
 			var bitmapHeight = I(bmp.height * 0.5) * 2;
 			var mat = new Matrix();
 			mat.scale(bitmapWidth / bmp.width, bitmapHeight / bmp.height);
 			var destBD = new BitmapData(bitmapWidth, bitmapHeight, true, 0);
-			destBD.draw(bmp, mat);
+			destBD.draw(bmp, mat, null, null, null, true);
 
-			scale9Bitmaps[id] = destBD;
+			scaledBitmaps[id] = destBD;
 		}
 		#end
-		return new Scale9Bitmap(scale9Bitmaps[id], scale9grid);
+		return scaledBitmaps[id];
 	}
 }
 
@@ -186,6 +186,7 @@ class MyButtonSkin extends ProgrammaticSkin {
 	private var color:UInt;
 	private var deepness:Float;
 	private var cornerRadius:Float;
+
 	public function new(color:UInt, deepness:Float, cornerRadius:Float) {
 		super();
 		this.color = color == 0 ? OutlineTheme.LIGHT_COLOR : color;
