@@ -1,7 +1,7 @@
 package com.dailygames.mergenums.display.overlays;
 
-import com.dailygames.mergenums.display.popups.*;
 import com.dailygames.mergenums.themes.OutlineTheme;
+import com.dailygames.mergenums.display.popups.*;
 import feathers.controls.LayoutGroup;
 import feathers.layout.AnchorLayoutData;
 import feathers.skins.RectangleSkin;
@@ -85,7 +85,7 @@ class BaseOverlay extends LayoutGroup {
 
 	private function overlayFactory():Void {
 		this.overlay = new RectangleSkin();
-		this.overlay.fill = SolidColor(0x000000, 0.8);
+		this.overlay.fill = SolidColor(OutlineTheme.GRAY_COLOR, 0.8);
 		this.backgroundSkin = this.overlay;
 	}
 

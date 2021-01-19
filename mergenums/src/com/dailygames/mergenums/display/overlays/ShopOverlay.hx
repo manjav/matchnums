@@ -51,7 +51,7 @@ class ShopOverlay extends BaseOverlay {
 		this.addChild(this.listView);
 
 		this.coinsIndicator = new Indicator();
-		this.coinsIndicator.icon = "images/coin-small.png";
+		this.coinsIndicator.icon = "coin";
 		this.coinsIndicator.format = function(value:Float):String {
 			return " " + Utils.toCurrency(value) + " +";
 		}

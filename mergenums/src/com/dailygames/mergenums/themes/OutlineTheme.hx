@@ -21,7 +21,9 @@ class OutlineTheme extends ClassVariantTheme {
 	static public final FONT_NAME = "Quicksand Bold";
 
 	static public final LIGHT_COLOR = 0xEDEDED;
-	static public final DARK_COLOR = 0x212527;
+	static public final GRAY_COLOR = 0x212527;
+	static public final DARK_COLOR = 0x131415;
+	static public final NEUTRAL_COLOR = 0x0070C0;
 
 	static public var PADDING:Int;
 	static public var FONT_SIZE:Int;
@@ -84,13 +86,13 @@ class OutlineTheme extends ClassVariantTheme {
 	private function setLabelDarkStyles(label:Label):Void {
 		label.embedFonts = true;
 		if (label.textFormat == null)
-			label.textFormat = this.getTextFormat(FONT_SIZE, DARK_COLOR);
+			label.textFormat = this.getTextFormat(FONT_SIZE, GRAY_COLOR);
 	}
 
 	private function setLabelDarkMediumStyles(label:Label):Void {
 		label.embedFonts = true;
 		if (label.textFormat == null)
-			label.textFormat = this.getTextFormat(cast FONT_SIZE * 1.4, DARK_COLOR);
+			label.textFormat = this.getTextFormat(cast FONT_SIZE * 1.4, GRAY_COLOR);
 	}
 
 	private function setLabelMediumStyles(label:Label):Void {
@@ -102,7 +104,7 @@ class OutlineTheme extends ClassVariantTheme {
 	private function setLabelWhiteLargStyles(label:Label):Void {
 		label.embedFonts = true;
 		if (label.textFormat == null)
-			label.textFormat = this.getTextFormat(FONT_SIZE * 2, DARK_COLOR);
+			label.textFormat = this.getTextFormat(FONT_SIZE * 2, GRAY_COLOR);
 	}
 
 	private function setButtonStyles(button:Button):Void {
