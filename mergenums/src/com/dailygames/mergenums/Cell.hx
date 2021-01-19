@@ -48,7 +48,7 @@ class Cell extends Sprite {
 	private var textDisplay:TextField;
 	private var textFormat:TextFormat;
 
-	public function new(column:Int, row:Int, value:Int, reward:Int = 0, ?initAnimationFactory:IAnimationFactory) {
+	public function new(column:Int, row:Int, value:Int, reward:Int, initAnimationFactory:IAnimationFactory) {
 		super();
 
 		this.background = new Shape();
@@ -62,16 +62,16 @@ class Cell extends Sprite {
 		this.addChild(this.textDisplay);
 
 		this.textFormat = this.textDisplay.getTextFormat();
-		this.initAnimationFactory = initAnimationFactory;
 
-		this.init(column, row, value, reward);
+		this.init(column, row, value, reward, initAnimationFactory);
 	}
 
-	public function init(column:Int, row:Int, value:Int, reward:Int = 0):Cell {
+	public function init(column:Int, row:Int, value:Int, reward:Int, initAnimationFactory:IAnimationFactory):Cell {
 		this.column = column;
 		this.row = row;
 		this.value = value;
 		this.reward = reward;
+		this.initAnimationFactory = initAnimationFactory;
 		this.state = Init;
 
 		this.drawBackground(COLORS[value]);
@@ -155,7 +155,7 @@ class Cell extends Sprite {
 	static public function instantiate(column:Int, row:Int, value:Int, reward:Int, initAnimationFactory:IAnimationFactory):Cell {
 		if (i > 0) {
 			i--;
-			return pool[i].init(column, row, value, reward);
+			return pool[i].init(column, row, value, reward, initAnimationFactory);
 		}
 		return new Cell(column, row, value, reward, initAnimationFactory);
 	}

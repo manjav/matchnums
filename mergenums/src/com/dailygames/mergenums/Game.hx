@@ -106,11 +106,11 @@ class Game extends Sprite {
 		this.haveRecord = false;
 		this.numRevives = 0;
 		this.numRewardCells = 0;
-		this.valueRecord = 8;
+		this.valueRecord = 3;
 		this.scores = 0;
 		this.lastColumn = Math.floor(Math.random() * CellMap.NUM_COLUMNS);
 		this.nextCell.showValue = this.hasBoostNext;
-		this.nextCell.init(0, 0, Cell.getNextValue());
+		this.nextCell.init(0, 0, Cell.getNextValue(), 0, this.cellInitAnimationFactory);
 		this.nextCell.x = this.lastColumn * Cell.SIZE + Cell.RADIUS;
 
 		// Add initial cells
@@ -159,7 +159,7 @@ class Game extends Sprite {
 		this.cells.add(cell);
 		this.addChild(cell);
 
-		this.nextCell.init(0, 0, Cell.getNextValue());
+		this.nextCell.init(0, 0, Cell.getNextValue(), 0, this.cellInitAnimationFactory);
 
 		this.fallingEffect.transform.colorTransform.color = Cell.COLORS[cell.value];
 		GameEvent.dispatch(this, GameEvent.SPAWN);
@@ -280,7 +280,7 @@ class Game extends Sprite {
 			if (matchs.length > 0) {
 				this.collectReward(c);
 				c.addEventListener(Event.INIT, this.cell_initHandler);
-				c.init(c.column, c.row, c.value + matchs.length);
+				c.init(c.column, c.row, c.value + matchs.length, 0, this.cellInitAnimationFactory);
 					merges += matchs.length;
 			}
 			// trace("match", c, matchs.length, needsRepeat);

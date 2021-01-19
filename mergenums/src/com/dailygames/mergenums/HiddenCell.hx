@@ -15,11 +15,12 @@ class HiddenCell extends Cell {
 		this.background.graphics.drawRoundRect(BORDER - RADIUS, BORDER - RADIUS, SIZE - BORDER * 2, SIZE - BORDER * 2, ROUND, ROUND);
 	}
 
-	override public function init(column:Int, row:Int, value:Int, reward:Int = 0):Cell {
+	override public function init(column:Int, row:Int, value:Int, reward:Int, initAnimationFactory:IAnimationFactory):Cell {
 		this.column = column;
 		this.row = row;
 		this.value = value;
 		this.reward = reward;
+		this.initAnimationFactory = initAnimationFactory;
 		this.state = Init;
 
 		if (this.showValue) {
