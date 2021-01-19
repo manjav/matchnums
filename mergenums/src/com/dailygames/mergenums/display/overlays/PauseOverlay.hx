@@ -60,6 +60,8 @@ class PauseOverlay extends ConfirmPopup {
 		super.closeButton_clickHandler(event);
 	}
 
+	override private function contentBackgroundFactory():Void {}
+
 	private function buttons_clickHandler(event:MouseEvent):Void {
 		var button = cast(event.target, Button);
 		switch (button.name) {

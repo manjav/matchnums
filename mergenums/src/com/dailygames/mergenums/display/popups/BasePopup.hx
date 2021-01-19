@@ -1,12 +1,13 @@
 package com.dailygames.mergenums.display.popups;
 
-import openfl.Assets;
-import openfl.display.Bitmap;
 import com.dailygames.mergenums.display.overlays.BaseOverlay;
 import feathers.controls.Button;
 import feathers.controls.LayoutGroup;
 import feathers.layout.AnchorLayout;
 import feathers.layout.AnchorLayoutData;
+import feathers.skins.RectangleSkin;
+import openfl.Assets;
+import openfl.display.Bitmap;
 import openfl.events.MouseEvent;
 import openfl.geom.Rectangle;
 
@@ -53,7 +54,7 @@ class BasePopup extends BaseOverlay {
 	private function adjustContentLayout():Void {
 		if (this.contentRect == null) {
 			this.content.width = OutlineTheme.POPUP_SIZE;
-			this.content.height = OutlineTheme.POPUP_SIZE;
+			this.content.height = OutlineTheme.POPUP_SIZE * 1.2;
 			this.content.layoutData = AnchorLayoutData.center();
 		} else {
 			this.content.x = this.contentRect.x;
@@ -65,6 +66,10 @@ class BasePopup extends BaseOverlay {
 	}
 
 	private function contentBackgroundFactory():Void {
+		var skin = new RectangleSkin();
+		skin.cornerRadius = 28.0.F();
+		skin.fill = SolidColor(OutlineTheme.DARK_COLOR);
+		this.content.backgroundSkin = skin;
 	}
 
 	public function closeButtonFactory():Void {
