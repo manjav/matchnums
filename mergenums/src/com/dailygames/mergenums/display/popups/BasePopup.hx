@@ -79,8 +79,9 @@ class BasePopup extends BaseOverlay {
 
 		if (this.closeButton == null) {
 			this.closeButton = new Button();
-			this.closeButton.variant = OutlineTheme.VARIANT_BUTTON_CLOSE;
-			this.closeButton.layoutData = AnchorLayoutData.topRight(this.padding, this.padding);
+			this.closeButton.variant = OutlineTheme.VARIANT_BUTTON_LINK;
+			this.closeButton.icon = new Bitmap(Assets.getBitmapData("close"));
+			this.closeButton.layoutData = AnchorLayoutData.topRight(-this.padding * 2.2, this.padding);
 			this.closeButton.addEventListener(MouseEvent.CLICK, this.closeButton_clickHandler);
 		}
 		this.content.addChild(this.closeButton);

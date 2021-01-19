@@ -35,7 +35,6 @@ class OutlineTheme extends ClassVariantTheme {
 	public static final VARIANT_LABEL_DARK:String = "variantLabelDark";
 	public static final VARIANT_LABEL_DARK_MEDIUM:String = "variantLabelDarkLarg";
 	public static final VARIANT_BUTTON_LINK:String = "variantButtonLink";
-	public static final VARIANT_BUTTON_CLOSE:String = "variantButtonClose";
 
 	public static final SCALEGRID_BUTTON:Rectangle = new Rectangle(21, 24, 1, 1);
 
@@ -70,7 +69,6 @@ class OutlineTheme extends ClassVariantTheme {
 
 		this.styleProvider.setStyleFunction(Button, null, this.setButtonStyles);
 		this.styleProvider.setStyleFunction(Button, VARIANT_BUTTON_LINK, this.setButtonLinkStyles);
-		this.styleProvider.setStyleFunction(Button, VARIANT_BUTTON_CLOSE, this.setButtonCloseStyles);
 
 		this.styleProvider.setStyleFunction(ItemRenderer, null, this.setItemRendererStyles);
 	}
@@ -121,15 +119,10 @@ class OutlineTheme extends ClassVariantTheme {
 	}
 
 	private function setButtonLinkStyles(button:Button):Void {
-		button.backgroundSkin = null;
+		this.setButtonStyles(button);
+		button.backgroundSkin.alpha = 0;
 		button.textFormat = this.getTextFormat(Math.round(FONT_SIZE * 0.7));
 		button.setTextFormatForState(DOWN, button.textFormat);
-	}
-
-	public function setButtonCloseStyles(button:Button):Void {
-		this.setButtonStyles(button);
-		button.text = "x";
-		button.paddingBottom = F(8);
 	}
 
 	private function setItemRendererStyles(itemRenderer:ItemRenderer):Void {

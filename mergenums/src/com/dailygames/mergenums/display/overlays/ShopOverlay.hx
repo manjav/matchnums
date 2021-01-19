@@ -60,7 +60,8 @@ class ShopOverlay extends BaseOverlay {
 		this.addChild(this.coinsIndicator);
 
 		var closeButton = new Button();
-		closeButton.variant = OutlineTheme.VARIANT_BUTTON_CLOSE;
+		closeButton.variant = OutlineTheme.VARIANT_BUTTON_LINK;
+		closeButton.icon = new Bitmap(Assets.getBitmapData("close"));
 		closeButton.layoutData = AnchorLayoutData.topRight(this.padding, this.padding);
 		closeButton.addEventListener(MouseEvent.CLICK, closeButton_clickHandler);
 		this.addChild(closeButton);
