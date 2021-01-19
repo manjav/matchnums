@@ -25,7 +25,12 @@
 	<assets id="close" path="assets/images/close.png"/>
 	<assets id="coin" path="assets/images/coin.png"/>
 	<assets id="cup" path="assets/images/cup.png"/>
+	<assets id="restart" path="assets/images/restart.png"/>
+	<assets id="continue" path="assets/images/continue.png"/>
 	<assets id="ads" path="assets/images/ads.png"/>
+	<assets id="noads" path="assets/images/noads.png"/>
+	<assets id="mute" path="assets/images/mute.png"/>
+	<assets id="unmute" path="assets/images/unmute.png"/>
 	<assets id="kill" path="assets/images/kill.png"/>
 	<assets id="killAll" path="assets/images/killAll.png"/>
 	

@@ -41,7 +41,7 @@ class PauseOverlay extends ConfirmPopup {
 			button.height = height;
 			button.backgroundSkin = skin;
 			button.layoutData = layoutData;
-			button.icon = new Bitmap(Assets.getBitmapData("images/" + name + ".png"));
+			button.icon = new Bitmap(Assets.getBitmapData(name));
 			button.addEventListener(MouseEvent.CLICK, buttons_clickHandler);
 			content.addChild(button);
 		}
@@ -49,7 +49,7 @@ class PauseOverlay extends ConfirmPopup {
 		var theme = cast(Theme.getTheme(), OutlineTheme);
 		addButton("restart", theme.getButtonSkin(OutlineTheme.NEUTRAL_COLOR, 8, 54), AnchorLayoutData.topLeft(adsHolder.height + 32.F()), 230.F(), 120.F());
 		addButton("continue", theme.getButtonSkin(OutlineTheme.LIGHT_COLOR, 8, 54), AnchorLayoutData.topRight(adsHolder.height + 32.F()), 230.F(), 120.F());
-		addButton("no-ads", theme.getButtonSkin(OutlineTheme.LIGHT_COLOR, 8, 48), new AnchorLayoutData(adsHolder.height + 180.F(), null, null, null, -65.F()),
+		addButton("noads", theme.getButtonSkin(OutlineTheme.LIGHT_COLOR, 8, 48), new AnchorLayoutData(adsHolder.height + 180.F(), null, null, null, -65.F()),
 			96.F(), 96.F());
 		addButton(Sounds.mute ? "mute" : "unmute", theme.getButtonSkin(OutlineTheme.LIGHT_COLOR, 8, 48),
 			new AnchorLayoutData(adsHolder.height + 180.F(), null, null, null, 65.F()), 96.F(), 96.F());
@@ -68,14 +68,14 @@ class PauseOverlay extends ConfirmPopup {
 			case "mute":
 			case "unmute":
 				Sounds.mute = !Sounds.mute;
-				button.icon = new Bitmap(Assets.getBitmapData("images/" + (Sounds.mute ? "mute" : "unmute") + ".png"));
+				button.icon = new Bitmap(Assets.getBitmapData(Sounds.mute ? "mute" : "unmute"));
 				Prefs.instance.set(MUTE, Sounds.mute ? 1.0 : 0.0);
 				return;
 			case "continue":
 				this.dispatchEvent(new Event(Event.CANCEL));
 			case "restart":
 				this.dispatchEvent(new Event(Event.CLEAR));
-			case "no-ads":
+			case "noads":
 				this.dispatchEvent(new Event(Event.ACTIVATE));
 		};
 		this.close();

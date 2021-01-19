@@ -35,7 +35,7 @@ class Reward extends Sprite {
 		this.y = y;
 		this.alpha = 1;
 
-		this.iconDisplay.bitmapData = Assets.getBitmapData("images/" + type);
+		this.iconDisplay.bitmapData = Assets.getBitmapData(Std.string(type));
 		this.iconDisplay.x = -this.width;
 
 		parent.addChild(this);
