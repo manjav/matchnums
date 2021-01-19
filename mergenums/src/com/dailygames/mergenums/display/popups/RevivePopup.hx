@@ -33,7 +33,7 @@ class RevivePopup extends ConfirmPopup implements IGamePlayPopup {
 		this.reviveByCoinButton = new Button();
 		this.reviveByCoinButton.width = OutlineTheme.PADDING * 7;
 		this.reviveByCoinButton.height = OutlineTheme.PADDING * 3;
-		this.reviveByCoinButton.icon = new Bitmap(Assets.getBitmapData("images/coin-small.png"));
+		this.reviveByCoinButton.icon = new Bitmap(Assets.getBitmapData("coin"));
 		this.reviveByCoinButton.layoutData = AnchorLayoutData.bottomRight(this.padding, this.padding);
 		this.reviveByCoinButton.addEventListener(MouseEvent.CLICK, this.reviveByCoinButton_clickHandler);
 		this.content.addChild(this.reviveByCoinButton);

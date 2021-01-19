@@ -45,7 +45,7 @@ class StartingOfferOverlay extends BaseOverlay {
 
 	private function createBoost(icon:String, text:String, layoutData:AnchorLayoutData):LayoutGroup {
 		var skin = new RectangleSkin();
-		skin.fill = SolidColor(OutlineTheme.DARK_COLOR, 1);
+		skin.fill = SolidColor(OutlineTheme.GRAY_COLOR, 1);
 		skin.border = SolidColor(2.0 * OutlineTheme.SCALE_FACTOR, OutlineTheme.LIGHT_COLOR);
 		skin.cornerRadius = 5.0;
 
@@ -75,7 +75,7 @@ class StartingOfferOverlay extends BaseOverlay {
 		boostByCoin.height = this.padding * 2;
 		boostByCoin.name = icon;
 		boostByCoin.text = " 100 ";
-		boostByCoin.icon = new Bitmap(Assets.getBitmapData("images/coin-small.png"));
+		boostByCoin.icon = new Bitmap(Assets.getBitmapData("coin"));
 		boostByCoin.addEventListener(MouseEvent.CLICK, this.coinButton_clickHandler);
 		boost.addChild(boostByCoin);
 

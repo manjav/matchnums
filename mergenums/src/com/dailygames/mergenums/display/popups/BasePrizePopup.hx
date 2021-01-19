@@ -31,7 +31,7 @@ class BasePrizePopup extends ConfirmPopup implements IGamePlayPopup {
 		this.adsButton = new Button();
 		this.adsButton.width = this.padding * 8;
 		this.adsButton.height = this.padding * 2.5;
-		this.adsButton.icon = new Bitmap(Assets.getBitmapData("images/coin-small.png"));
+		this.adsButton.icon = new Bitmap(Assets.getBitmapData("coin"));
 		this.adsButton.layoutData = AnchorLayoutData.bottomCenter(this.padding * 3, 0);
 		this.adsButton.addEventListener(MouseEvent.CLICK, this.adsButton_clickHandler);
 		this.content.addChild(this.adsButton);
