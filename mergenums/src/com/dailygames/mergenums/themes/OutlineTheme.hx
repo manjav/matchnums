@@ -147,10 +147,9 @@ class OutlineTheme extends ClassVariantTheme {
 		itemRenderer.gap = PADDING;
 	}
 
-	public function getButtonSkin():DisplayObject {
-		
-		var skin = new MyButtonSkin();
-		skin.filters = [new DropShadowFilter(4.F(), 80, 0, 1.F(), 5.F(), 4.F(), 1, 3)];
+	public function getButtonSkin(color:UInt = 0, deepness:Float = 5, cornerRadius:Float = 32):DisplayObject {
+		var skin = new MyButtonSkin(color, deepness, cornerRadius);
+		skin.filters = [new DropShadowFilter(deepness.F(), 80, 0, 1.F(), deepness.F(), deepness.F(), 1, 3)];
 		return skin;//getScaled9Textures("button-skin", SCALEGRID_BUTTON);
 	}
 
@@ -184,22 +183,27 @@ class OutlineTheme extends ClassVariantTheme {
 }
 
 class MyButtonSkin extends ProgrammaticSkin {
-	public function new() {
+	private var color:UInt;
+	private var deepness:Float;
+	private var cornerRadius:Float;
+	public function new(color:UInt, deepness:Float, cornerRadius:Float) {
 		super();
+		this.color = color == 0 ? OutlineTheme.LIGHT_COLOR : color;
+		this.cornerRadius = cornerRadius.F();
+		this.deepness = deepness.F();
 	}
 
 	override private function update():Void {
-		var r = 32.F();
-		var b = 3.6.F();
+		var b = 3.F();
 		this.graphics.clear();
-		this.graphics.beginFill(OutlineTheme.DARK_COLOR);
-		this.graphics.drawRoundRect(0, 0, this.actualWidth, this.actualHeight, r + 6.F(), r + 6.F());
+		this.graphics.beginFill(OutlineTheme.GRAY_COLOR);
+		this.graphics.drawRoundRect(0, 0, this.actualWidth, this.actualHeight, cornerRadius + 6.F(), cornerRadius * 1.2);
 		this.graphics.endFill();
-		this.graphics.beginFill(0xBFBFBF);
-		this.graphics.drawRoundRect(b, b, this.actualWidth - b * 2, this.actualHeight - b * 2, r, r);
+		this.graphics.beginFill(this.color, 0.7);
+		this.graphics.drawRoundRect(b, b, this.actualWidth - b * 2, this.actualHeight - b * 2, cornerRadius, cornerRadius);
 		this.graphics.endFill();
-		this.graphics.beginFill(OutlineTheme.LIGHT_COLOR);
-		this.graphics.drawRoundRect(b, b, this.actualWidth - b * 2, this.actualHeight - b * 2 - 4.F(), r, r);
+		this.graphics.beginFill(this.color);
+		this.graphics.drawRoundRect(b, b, this.actualWidth - b * 2, this.actualHeight - b * 2 - deepness, cornerRadius, cornerRadius);
 		this.graphics.endFill();
 	}
 }
