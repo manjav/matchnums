@@ -13,6 +13,7 @@ class NewRecordPopup extends BasePrizePopup {
 		this.value = value;
 		this.prize = 10 * value;
 		this.title = "New Record!\nDouble It?";
+		this.setInvalid(DATA);
 		return value;
 	}
 
@@ -27,7 +28,7 @@ class NewRecordPopup extends BasePrizePopup {
 			this.content.addChild(recordIcon);
 
 			var recordLabel = new Label();
-			recordLabel.variant = OutlineTheme.VARIANT_LABEL_LARG;
+			recordLabel.variant = OutlineTheme.VARIANT_LABEL_MEDIUM;
 			recordLabel.layoutData = AnchorLayoutData.center(0, -48);
 			recordLabel.text = Utils.toCurrency(this.value);
 			this.content.addChild(recordLabel);
