@@ -1,5 +1,7 @@
 package com.dailygames.mergenums.display;
 
+import feathers.events.FeathersEvent;
+import openfl.events.Event;
 import openfl.events.MouseEvent;
 import feathers.controls.AssetLoader;
 import feathers.controls.Label;
@@ -19,28 +21,6 @@ class MessageButton extends LayoutGroup {
 	private var _text:String;
 	private var _message:String;
 	private var _icon:String;
-
-	// public var textVariant(default, set):String;
-
-	// private function set_textVariant(value:String):String {
-	// 	if (this.textVariant == value)
-	// 		return value;
-	// 	this.textVariant = value;
-	// 	if (textDisplay != null)
-	// 		textDisplay.variant = value;
-	// 	return value;
-	// }
-
-	// public var messageVariant(default, set):String;
-
-	// private function set_messageVariant(value:String):String {
-	// 	if (this.messageVariant == value)
-	// 		return value;
-	// 	this.messageVariant = value;
-	// 	if (messageDisplay != null)
-	// 		messageDisplay.variant = value;
-	// 	return value;
-	// }
 
 	/**
 		The text displayed by the button.
@@ -119,21 +99,23 @@ class MessageButton extends LayoutGroup {
 		this.mouseChildren = true;
 
 		this.iconDisplay = new AssetLoader();
-		this.iconDisplay.layoutData = AnchorLayoutData.middleLeft(0, padding);
-		this.iconDisplay.width = 60.I();
+		this.iconDisplay.height = 60.I();
 		this.iconDisplay.source = this.icon;
+		this.iconDisplay.layoutData = AnchorLayoutData.middleLeft(0, padding);
+		this.iconDisplay.addEventListener(Event.RESIZE, this.iconDisplay_completeHandler);
 		this.addChild(this.iconDisplay);
 
 		this.textDisplay = new Label();
-		// this.textDisplay.variant = textVariant;
-		this.textDisplay.layoutData = AnchorLayoutData.middleLeft(-padding * 1.3, 70);
 		this.textDisplay.text = this.text;
 		this.addChild(this.textDisplay);
-
+		
 		this.messageDisplay = new Label();
-		// this.messageDisplay.variant = messageVariant;
-		this.messageDisplay.layoutData = AnchorLayoutData.middleLeft(padding * 1.3, 70);
 		this.messageDisplay.text = this.message;
 		this.addChild(this.messageDisplay);
+	}
+	
+	private function iconDisplay_completeHandler(event:Event):Void {
+		this.textDisplay.layoutData = AnchorLayoutData.middleLeft(-padding * 1.3, this.iconDisplay.width + padding * 1.3);
+		this.messageDisplay.layoutData = AnchorLayoutData.middleLeft(padding * 1.3, this.iconDisplay.width + padding * 1.3);
 	}
 }
