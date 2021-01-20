@@ -39,7 +39,6 @@ class Indicator extends LayoutGroup {
 		this.text = value;
 		if (this.labelDisplay == null) {
 			this.labelDisplay = new Label();
-			this.labelDisplay.variant = OutlineTheme.VARIANT_LABEL_DARK;
 			this.labelDisplay.layoutData = AnchorLayoutData.center(F(6), F(0));
 			this.addChild(this.labelDisplay);
 			this.labelDisplay.text = this.text;
@@ -82,7 +81,7 @@ class Indicator extends LayoutGroup {
 		this.addChild(this.iconDisplay);
 
 		var plus = new Label();
-		plus.variant = OutlineTheme.VARIANT_LABEL_DARK_MEDIUM;
+		plus.variant = OutlineTheme.VARIANT_LABEL_MEDIUM;
 		plus.layoutData = AnchorLayoutData.middleRight(F(-2), F(20));
 		plus.text = "+";
 		this.addChild(plus);

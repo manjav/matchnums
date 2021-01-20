@@ -1,9 +1,9 @@
 package com.dailygames.mergenums.themes;
 
+import com.dailygames.mergenums.display.MessageButton;
 import feathers.controls.Button;
 import feathers.controls.Label;
 import feathers.controls.dataRenderers.ItemRenderer;
-import feathers.display.Scale9Bitmap;
 import feathers.skins.ProgrammaticSkin;
 import feathers.themes.ClassVariantTheme;
 import openfl.Assets;
@@ -22,6 +22,8 @@ class OutlineTheme extends ClassVariantTheme {
 
 	static public final LIGHT_COLOR = 0xEDEDED;
 	static public final GRAY_COLOR = 0x212527;
+	static public final RED_COLOR = 0xFA4444;
+	static public final GREEN_COLOR = 0x44FA44;
 	static public final DARK_COLOR = 0x131415;
 	static public final NEUTRAL_COLOR = 0x0070C0;
 
@@ -30,11 +32,15 @@ class OutlineTheme extends ClassVariantTheme {
 	static public var POPUP_SIZE:Int;
 	static public var SCALE_FACTOR:Float;
 
-	public static final VARIANT_LABEL_MEDIUM:String = "variantLabelMedium";
-	public static final VARIANT_LABEL_LARG:String = "variantLabelLarg";
-	public static final VARIANT_LABEL_DARK:String = "variantLabelDark";
-	public static final VARIANT_LABEL_DARK_MEDIUM:String = "variantLabelDarkLarg";
-	public static final VARIANT_BUTTON_LINK:String = "variantButtonLink";
+	public static final VARIANT_LABEL_LIGHT:String = "vLabelLight";
+	public static final VARIANT_LABEL_MEDIUM:String = "vLabelMedium";
+	public static final VARIANT_LABEL_MEDIUM_LIGHT:String = "vLabelMediumLight";
+
+	public static final VARIANT_BUTTON_LINK:String = "vButtonLink";
+
+	public static final VARIANT_MBUTTON_WHITE:String = "vMButton";
+	public static final VARIANT_MBUTTON_RED:String = "vMButtonRed";
+	public static final VARIANT_MBUTTON_GREEN:String = "vMButtonGreen";
 
 	public static final SCALEGRID_BUTTON:Rectangle = new Rectangle(21, 24, 1, 1);
 
@@ -55,61 +61,60 @@ class OutlineTheme extends ClassVariantTheme {
 		#end
 		POPUP_SIZE = I(480);
 		PADDING = I(40);
-		FONT_SIZE = I(30);
+		FONT_SIZE = I(26);
 		SCALEGRID_BUTTON.x = I(SCALEGRID_BUTTON.x);
 		SCALEGRID_BUTTON.y = I(SCALEGRID_BUTTON.y);
 		SCALEGRID_BUTTON.width = I(SCALEGRID_BUTTON.width);
 		SCALEGRID_BUTTON.height = I(SCALEGRID_BUTTON.height);
 
 		this.styleProvider.setStyleFunction(Label, null, this.setLabelStyles);
+		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_LIGHT, this.setLabelLightStyles);
 		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_MEDIUM, this.setLabelMediumStyles);
-		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_LARG, this.setLabelWhiteLargStyles);
-		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_DARK, this.setLabelDarkStyles);
-		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_DARK_MEDIUM, this.setLabelDarkMediumStyles);
+		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_MEDIUM_LIGHT, this.setLabelMediumLightStyles);
 
 		this.styleProvider.setStyleFunction(Button, null, this.setButtonStyles);
 		this.styleProvider.setStyleFunction(Button, VARIANT_BUTTON_LINK, this.setButtonLinkStyles);
+
+		this.styleProvider.setStyleFunction(MessageButton, null, this.setMessageButtonStyles);
+		this.styleProvider.setStyleFunction(MessageButton, VARIANT_MBUTTON_RED, this.setMessageButtonRedStyles);
+		this.styleProvider.setStyleFunction(MessageButton, VARIANT_MBUTTON_GREEN, this.setMessageButtonGreenStyles);
 
 		this.styleProvider.setStyleFunction(ItemRenderer, null, this.setItemRendererStyles);
 	}
 
 	private function setLabelStyles(label:Label):Void {
-		label.embedFonts = true;
-		if (label.textFormat == null)
-			label.textFormat = this.getTextFormat();
-		// if (label.disabledTextFormat == null)
-		// 	label.disabledTextFormat = this.getDisabledTextFormat();
+		this.setCustomLabelStyles(label, FONT_SIZE, GRAY_COLOR);
 	}
 
-	private function setLabelDarkStyles(label:Label):Void {
-		label.embedFonts = true;
-		if (label.textFormat == null)
-			label.textFormat = this.getTextFormat(FONT_SIZE, GRAY_COLOR);
-	}
-
-	private function setLabelDarkMediumStyles(label:Label):Void {
-		label.embedFonts = true;
-		if (label.textFormat == null)
-			label.textFormat = this.getTextFormat(cast FONT_SIZE * 1.4, GRAY_COLOR);
+	private function setLabelLightStyles(label:Label):Void {
+		this.setCustomLabelStyles(label, FONT_SIZE, LIGHT_COLOR);
 	}
 
 	private function setLabelMediumStyles(label:Label):Void {
-		label.embedFonts = true;
-		if (label.textFormat == null)
-			label.textFormat = this.getTextFormat(cast FONT_SIZE * 1.4, LIGHT_COLOR);
+		this.setCustomLabelStyles(label, cast FONT_SIZE * 1.6, GRAY_COLOR);
 	}
 
-	private function setLabelWhiteLargStyles(label:Label):Void {
+	private function setLabelMediumLightStyles(label:Label):Void {
+		this.setCustomLabelStyles(label, cast FONT_SIZE * 1.6, LIGHT_COLOR);
+	}
+
+	private function setCustomLabelStyles(label:Label, fontSize:UInt, fontColor:UInt):Void {
 		label.embedFonts = true;
 		if (label.textFormat == null)
-			label.textFormat = this.getTextFormat(FONT_SIZE * 2, GRAY_COLOR);
+			label.textFormat = this.getTextFormat(fontSize, fontColor);
 	}
+
+	// private function setLabelWhiteLargStyles(label:Label):Void {
+	// 	label.embedFonts = true;
+	// 	if (label.textFormat == null)
+	// 		label.textFormat = this.getTextFormat(FONT_SIZE * 2, GRAY_COLOR);
+	// }
 
 	private function setButtonStyles(button:Button):Void {
 		button.backgroundSkin = this.getButtonSkin();
 		button.minWidth = button.minHeight = F(80);
 
-		button.textFormat = this.getTextFormat();
+		button.textFormat = this.getTextFormat(0, DARK_COLOR);
 		button.setTextFormatForState(DOWN, button.textFormat);
 
 		button.paddingTop = 0.0;
@@ -123,6 +128,26 @@ class OutlineTheme extends ClassVariantTheme {
 		button.backgroundSkin.alpha = 0;
 		button.textFormat = this.getTextFormat(Math.round(FONT_SIZE * 0.7));
 		button.setTextFormatForState(DOWN, button.textFormat);
+	}
+
+	private function setMessageButtonStyles(button:MessageButton):Void {
+		this.setCustomMButtonStyles(button, LIGHT_COLOR, VARIANT_LABEL_MEDIUM, null);
+	}
+
+	private function setMessageButtonRedStyles(button:MessageButton):Void {
+		this.setCustomMButtonStyles(button, RED_COLOR, VARIANT_LABEL_MEDIUM_LIGHT, VARIANT_LABEL_LIGHT);
+	}
+
+	private function setMessageButtonGreenStyles(button:MessageButton):Void {
+		this.setCustomMButtonStyles(button, GREEN_COLOR, VARIANT_LABEL_MEDIUM, null);
+	}
+
+	private function setCustomMButtonStyles(button:MessageButton, color:UInt, textVariant:String, messageVariant:String):Void {
+		button.backgroundSkin = this.getButtonSkin(color, 8, 54);
+		button.textDisplay.variant = textVariant;
+		button.textDisplay.filters = [getDefaultShadow(10)];
+		button.messageDisplay.variant = messageVariant;
+		button.messageDisplay.filters = [getDefaultShadow()];
 	}
 
 	private function setItemRendererStyles(itemRenderer:ItemRenderer):Void {
@@ -149,12 +174,16 @@ class OutlineTheme extends ClassVariantTheme {
 
 	public function getButtonSkin(color:UInt = 0, deepness:Float = 5, cornerRadius:Float = 32):DisplayObject {
 		var skin = new MyButtonSkin(color, deepness, cornerRadius);
-		skin.filters = [new DropShadowFilter(deepness.F(), 80, 0, 1.F(), deepness.F(), deepness.F(), 1, 3)];
-		return skin;//getScaled9Textures("button-skin", SCALEGRID_BUTTON);
+		skin.filters = [getDefaultShadow(deepness)];
+		return skin; // getScaled9Textures("button-skin", SCALEGRID_BUTTON);
 	}
 
 	public function getTextFormat(size:UInt = 0, color:UInt = 0, bold:Bool = false):TextFormat {
-		return new TextFormat(FONT_NAME, size == 0 ? FONT_SIZE : size, color == 0 ? LIGHT_COLOR : color, bold);
+		return new TextFormat(FONT_NAME, size == 0 ? FONT_SIZE : size, color == 0 ? GRAY_COLOR : color, bold);
+	}
+
+	public function getDefaultShadow(size:Float = 5, value:Float = 1):DropShadowFilter {
+		return new DropShadowFilter(size.F(), 80, 0, 0.9, size.F(), size.F(), value, 3);
 	}
 
 	/**

@@ -73,7 +73,7 @@ class HomeOverlay extends BaseOverlay {
 
 		var score = new Label();
 		score.filters = [shadow];
-		score.variant = OutlineTheme.VARIANT_LABEL_MEDIUM;
+		score.variant = OutlineTheme.VARIANT_LABEL_MEDIUM_LIGHT;
 		score.text = "0";
 		score.layoutData = AnchorLayoutData.topRight(-5.F(), 100.F());
 		scoreboard.addChild(score);
@@ -83,6 +83,7 @@ class HomeOverlay extends BaseOverlay {
 
 		var record = new Label();
 		record.filters = [shadow];
+		record.variant = OutlineTheme.VARIANT_LABEL_LIGHT;
 		record.text = Std.string(Prefs.instance.get(RECORD));
 		record.layoutData = AnchorLayoutData.topRight(39.F(), 100.F());
 		scoreboard.addChild(record);

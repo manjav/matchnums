@@ -39,7 +39,7 @@ class GameOverPopup extends ConfirmPopup implements IGamePlayPopup {
 		this.resetButton.text = "Reset";
 		this.resetButton.width = OutlineTheme.PADDING * 12;
 		this.resetButton.height = OutlineTheme.PADDING * 3;
-		this.resetButton.icon = new Bitmap(Assets.getBitmapData("images/reset.png"));
+		this.resetButton.icon = new Bitmap(Assets.getBitmapData("reset"));
 		this.resetButton.layoutData = AnchorLayoutData.bottomCenter(this.padding);
 		this.resetButton.addEventListener(MouseEvent.CLICK, this.resetButton_clickHandler);
 		this.content.addChild(this.resetButton);
