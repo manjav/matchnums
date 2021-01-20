@@ -54,7 +54,7 @@ class Cell extends Sprite {
 		this.background = new Shape();
 		this.addChild(this.background);
 
-		this.textDisplay = Utils.createText(80);
+		this.textDisplay = Utils.createText(this.textSize);
 		this.textDisplay.filters = [new DropShadowFilter(5, 65, 0, 0.4, 1.5, 1.5, 1, 2)];
 		this.textDisplay.width = SIZE;
 		this.textDisplay.height = RADIUS;

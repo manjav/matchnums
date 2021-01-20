@@ -30,6 +30,7 @@ class HiddenCell extends Cell {
 			this.transform.colorTransform.color = 0xFFFFFF;
 			this.textDisplay.text = "?";
 		}
+		this.textDisplay.y = -RADIUS * 0.2 - this.textDisplay.getTextFormat().size * 0.5;
 
 		if (this.rewardDisplay != null) {
 			Reward.dispose(this.rewardDisplay);
