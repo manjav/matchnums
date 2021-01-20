@@ -1,17 +1,15 @@
 package com.dailygames.mergenums.display.popups;
 
 import com.dailygames.mergenums.events.GameEvent;
-import com.dailygames.mergenums.themes.OutlineTheme;
 import com.dailygames.mergenums.utils.Prefs;
-import feathers.controls.Button;
 import feathers.layout.AnchorLayoutData;
-import openfl.Assets;
-import openfl.display.Bitmap;
 import openfl.events.MouseEvent;
 
+using com.dailygames.mergenums.themes.OutlineTheme;
+
 class RevivePopup extends ConfirmPopup implements IGamePlayPopup {
-	private var reviveByCoinButton:Button;
-	private var reviveByAdsButton:Button;
+	private var coinButton:MessageButton;
+	private var adsButton:MessageButton;
 
 	public var cost(default, default):Int;
 	public var isFirst(default, default):Bool;
@@ -28,59 +26,32 @@ class RevivePopup extends ConfirmPopup implements IGamePlayPopup {
 
 	override private function initialize():Void {
 		super.initialize();
-		this.title = "Revive your game";
+		this.title = "Revive";
+		this.title = "Revive";
 
-		this.reviveByCoinButton = new Button();
-		this.reviveByCoinButton.width = OutlineTheme.PADDING * 7;
-		this.reviveByCoinButton.height = OutlineTheme.PADDING * 3;
-		this.reviveByCoinButton.icon = new Bitmap(Assets.getBitmapData("coin"));
-		this.reviveByCoinButton.layoutData = AnchorLayoutData.bottomRight(this.padding, this.padding);
-		this.reviveByCoinButton.addEventListener(MouseEvent.CLICK, this.reviveByCoinButton_clickHandler);
-		this.content.addChild(this.reviveByCoinButton);
-
-		this.reviveByAdsButton = new Button();
-		this.reviveByAdsButton.width = OutlineTheme.PADDING * 7;
-		this.reviveByAdsButton.height = OutlineTheme.PADDING * 3;
-		this.reviveByAdsButton.text = " Free ";
-		this.reviveByAdsButton.icon = new Bitmap(Assets.getBitmapData("ads"));
-		this.reviveByAdsButton.layoutData = AnchorLayoutData.bottomLeft(this.padding, this.padding);
-		this.reviveByAdsButton.addEventListener(MouseEvent.CLICK, this.reviveByAdsButton_clickHandler);
-		this.content.addChild(this.reviveByAdsButton);
+		this.coinButton = this.addButton("coin", "Revive", null, AnchorLayoutData.bottomLeft(44.F(), 28.F()), 180.F());
+		this.adsButton = this.addButton("ads", "Revive", OutlineTheme.VARIANT_MBUTTON_ORANGE, AnchorLayoutData.bottomRight(44.F(), 28.F()), 230.F());
+		this.adsButton.text = "Free";
 	}
 
 	override public function validateNow():Void {
 		if (this.isInvalid(InvalidationFlag.CUSTOM("value"))) {
-			this.reviveByCoinButton.text = " " + this.cost + " ";
+			this.coinButton.text = Std.string(this.cost);
 		}
 		super.validateNow();
 	}
 
-	override private function titleFactory():Void {
-		super.titleFactory();
-		this.titleDisplay.variant = null;
-		// this.titleDisplay.layoutData = AnchorLayoutData.topCenter(0, padding * 3);
-		var textFormat = this.titleDisplay.textFormat;
-		textFormat.align = CENTER;
-		this.titleDisplay.textFormat = textFormat;
-	}
+	override private function buttons_clickHandler(event:MouseEvent):Void {
+		var button = cast(event.currentTarget, MessageButton);
+		if (button.message == "%") {
+			// this.showAds();
+			return;
+		}
 
-	// override private function refreshBackgroundLayout():Void {
-	// 	super.refreshBackgroundLayout();
-	// 	if (this.cellDisplay != null) {
-	// 		this.cellDisplay.x = this.actualWidth * 0.5;
-	// 		this.cellDisplay.y = this.actualHeight * 0.4;
-	// 	}
-	// }
-
-	private function reviveByCoinButton_clickHandler(event:MouseEvent):Void {
 		var newValue = Prefs.instance.get(Prefs.COIN) - cost;
 		Prefs.instance.set(Prefs.COIN, newValue);
 		if (newValue >= 0)
 			GameEvent.dispatch(this, GameEvent.REVIVE_BY_COIN);
-		this.close();
-	}
-
-	private function reviveByAdsButton_clickHandler(event:MouseEvent):Void {
 		this.close();
 	}
 

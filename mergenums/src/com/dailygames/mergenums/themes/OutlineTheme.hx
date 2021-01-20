@@ -23,6 +23,7 @@ class OutlineTheme extends ClassVariantTheme {
 	static public final LIGHT_COLOR = 0xEDEDED;
 	static public final GRAY_COLOR = 0x212527;
 	static public final RED_COLOR = 0xFA4444;
+	static public final ORANGE_COLOR = 0xf25d26;
 	static public final GREEN_COLOR = 0x44FA44;
 	static public final DARK_COLOR = 0x131415;
 	static public final NEUTRAL_COLOR = 0x0070C0;
@@ -40,6 +41,7 @@ class OutlineTheme extends ClassVariantTheme {
 
 	public static final VARIANT_MBUTTON_WHITE:String = "vMButton";
 	public static final VARIANT_MBUTTON_RED:String = "vMButtonRed";
+	public static final VARIANT_MBUTTON_ORANGE:String = "vMButtonOrange";
 	public static final VARIANT_MBUTTON_GREEN:String = "vMButtonGreen";
 
 	public static final SCALEGRID_BUTTON:Rectangle = new Rectangle(21, 24, 1, 1);
@@ -76,7 +78,7 @@ class OutlineTheme extends ClassVariantTheme {
 		this.styleProvider.setStyleFunction(Button, VARIANT_BUTTON_LINK, this.setButtonLinkStyles);
 
 		this.styleProvider.setStyleFunction(MessageButton, null, this.setMessageButtonStyles);
-		this.styleProvider.setStyleFunction(MessageButton, VARIANT_MBUTTON_RED, this.setMessageButtonRedStyles);
+		this.styleProvider.setStyleFunction(MessageButton, VARIANT_MBUTTON_ORANGE, this.setMessageButtonAccentStyles);
 		this.styleProvider.setStyleFunction(MessageButton, VARIANT_MBUTTON_GREEN, this.setMessageButtonGreenStyles);
 
 		this.styleProvider.setStyleFunction(ItemRenderer, null, this.setItemRendererStyles);
@@ -134,8 +136,8 @@ class OutlineTheme extends ClassVariantTheme {
 		this.setCustomMButtonStyles(button, LIGHT_COLOR, VARIANT_LABEL_MEDIUM, null);
 	}
 
-	private function setMessageButtonRedStyles(button:MessageButton):Void {
-		this.setCustomMButtonStyles(button, RED_COLOR, VARIANT_LABEL_MEDIUM_LIGHT, VARIANT_LABEL_LIGHT);
+	private function setMessageButtonAccentStyles(button:MessageButton):Void {
+		this.setCustomMButtonStyles(button, ORANGE_COLOR, VARIANT_LABEL_MEDIUM_LIGHT, VARIANT_LABEL_LIGHT);
 	}
 
 	private function setMessageButtonGreenStyles(button:MessageButton):Void {
