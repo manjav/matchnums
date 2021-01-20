@@ -147,9 +147,9 @@ class OutlineTheme extends ClassVariantTheme {
 	private function setCustomMButtonStyles(button:MessageButton, color:UInt, textVariant:String, messageVariant:String):Void {
 		button.backgroundSkin = this.getButtonSkin(color, 4.I(), 30.I());
 		button.textDisplay.variant = textVariant;
-		button.textDisplay.filters = [getDefaultShadow(10)];
+		button.textDisplay.filters = [getDefaultShadow(5.F())];
 		button.messageDisplay.variant = messageVariant;
-		button.messageDisplay.filters = [getDefaultShadow()];
+		button.messageDisplay.filters = [getDefaultShadow(5.F())];
 	}
 
 	private function setItemRendererStyles(itemRenderer:ItemRenderer):Void {
@@ -185,7 +185,7 @@ class OutlineTheme extends ClassVariantTheme {
 	}
 
 	public function getDefaultShadow(size:Float = 3, value:Float = 1):DropShadowFilter {
-		return new DropShadowFilter(size.F(), 80, 0, 0.9, size.F(), size.F(), value, 3);
+		return new DropShadowFilter(size.F(), 80, 0, 0.95, size.F(), size.F(), value, 3);
 	}
 
 	/**
