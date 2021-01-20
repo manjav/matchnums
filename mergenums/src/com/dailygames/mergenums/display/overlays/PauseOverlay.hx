@@ -47,10 +47,10 @@ class PauseOverlay extends ConfirmPopup {
 		}
 
 		var theme = cast(Theme.getTheme(), OutlineTheme);
-		addButton("restart", theme.getButtonSkin(OutlineTheme.NEUTRAL_COLOR, 4.F(), 30.F()), AnchorLayoutData.topLeft(adsHolder.height + 22.F()), 154.F(), 80.F());
-		addButton("continue", theme.getButtonSkin(OutlineTheme.LIGHT_COLOR, 4.F(), 30.F()), AnchorLayoutData.topRight(adsHolder.height + 22.F()), 154.F(), 80.F());
-		addButton("noads", theme.getButtonSkin(OutlineTheme.LIGHT_COLOR, 3.F(), 22.F()), new AnchorLayoutData(adsHolder.height + 120.F(), null, null, null, -44.F()), 64.F(), 64.F());
-		addButton(Sounds.mute ? "mute" : "unmute", theme.getButtonSkin(OutlineTheme.LIGHT_COLOR, 3.F(), 22.F()), new AnchorLayoutData(adsHolder.height + 120.F(), null, null, null, 44.F()), 64.F(), 64.F());
+		addButton("restart", theme.getButtonSkin(OutlineTheme.ORANGE_COLORS, 4.F(), 30.F()), AnchorLayoutData.topLeft(adsHolder.height + 22.F()), 154.F(), 80.F());
+		addButton("continue", theme.getButtonSkin(OutlineTheme.LIGHT_COLORS, 4.F(), 30.F()), AnchorLayoutData.topRight(adsHolder.height + 22.F()), 154.F(), 80.F());
+		addButton("noads", theme.getButtonSkin(OutlineTheme.LIGHT_COLORS, 3.F(), 22.F()), new AnchorLayoutData(adsHolder.height + 120.F(), null, null, null, -44.F()), 64.F(), 64.F());
+		addButton(Sounds.mute ? "mute" : "unmute", theme.getButtonSkin(OutlineTheme.LIGHT_COLORS, 3.F(), 22.F()), new AnchorLayoutData(adsHolder.height + 120.F(), null, null, null, 44.F()), 64.F(), 64.F());
 	}
 
 	override private function closeButton_clickHandler(event:MouseEvent):Void {

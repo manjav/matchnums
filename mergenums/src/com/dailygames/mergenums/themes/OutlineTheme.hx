@@ -22,9 +22,11 @@ class OutlineTheme extends ClassVariantTheme {
 
 	static public final LIGHT_COLOR = 0xEDEDED;
 	static public final GRAY_COLOR = 0x212527;
-	static public final RED_COLOR = 0xFA4444;
-	static public final ORANGE_COLOR = 0xf25d26;
-	static public final GREEN_COLOR = 0x44FA44;
+	static public final LIGHT_COLORS = [0xEDEDED, 0xEDEDED, 0xCCCCCC];
+	static public final YELLOW_COLORS = [0xFFC000, 0xFE9C0F, 0xEB6D0A];
+	static public final BLUE_COLORS = [0x00B0F0, 0x0070C0, 0x00619F];
+	static public final ORANGE_COLORS = [0xFB6127, 0xFA3838, 0xE92A26];
+	static public final GREEN_COLORS = [0x71D32c, 0x00B050, 0x0A903D];
 	static public final DARK_COLOR = 0x131415;
 	static public final NEUTRAL_COLOR = 0x0070C0;
 
@@ -57,7 +59,7 @@ class OutlineTheme extends ClassVariantTheme {
 	public function new(stage:Stage, scaleFactor:Float) {
 		super();
 		#if android
-		SCALE_FACTOR = 1;//stage.stageWidth / 1080;
+		SCALE_FACTOR = 1; // stage.stageWidth / 1080;
 		#else
 		SCALE_FACTOR = 1.35;
 		#end
@@ -93,11 +95,11 @@ class OutlineTheme extends ClassVariantTheme {
 	}
 
 	private function setLabelMediumStyles(label:Label):Void {
-		this.setCustomLabelStyles(label, cast FONT_SIZE * 1.6, GRAY_COLOR);
+		this.setCustomLabelStyles(label, cast FONT_SIZE * 1.5, GRAY_COLOR);
 	}
 
 	private function setLabelMediumLightStyles(label:Label):Void {
-		this.setCustomLabelStyles(label, cast FONT_SIZE * 1.6, LIGHT_COLOR);
+		this.setCustomLabelStyles(label, cast FONT_SIZE * 1.5, LIGHT_COLOR);
 	}
 
 	private function setCustomLabelStyles(label:Label, fontSize:UInt, fontColor:UInt):Void {
@@ -133,19 +135,19 @@ class OutlineTheme extends ClassVariantTheme {
 	}
 
 	private function setMessageButtonStyles(button:MessageButton):Void {
-		this.setCustomMButtonStyles(button, LIGHT_COLOR, VARIANT_LABEL_MEDIUM, null);
+		this.setCustomMButtonStyles(button, LIGHT_COLORS, VARIANT_LABEL_MEDIUM, null);
 	}
 
 	private function setMessageButtonAccentStyles(button:MessageButton):Void {
-		this.setCustomMButtonStyles(button, ORANGE_COLOR, VARIANT_LABEL_MEDIUM_LIGHT, VARIANT_LABEL_LIGHT);
+		this.setCustomMButtonStyles(button, ORANGE_COLORS, VARIANT_LABEL_MEDIUM_LIGHT, VARIANT_LABEL_LIGHT);
 	}
 
 	private function setMessageButtonGreenStyles(button:MessageButton):Void {
-		this.setCustomMButtonStyles(button, GREEN_COLOR, VARIANT_LABEL_MEDIUM, null);
+		this.setCustomMButtonStyles(button, GREEN_COLORS, VARIANT_LABEL_MEDIUM, null);
 	}
 
-	private function setCustomMButtonStyles(button:MessageButton, color:UInt, textVariant:String, messageVariant:String):Void {
-		button.backgroundSkin = this.getButtonSkin(color, 4.I(), 30.I());
+	private function setCustomMButtonStyles(button:MessageButton, colors:Array<UInt>, textVariant:String, messageVariant:String):Void {
+		button.backgroundSkin = this.getButtonSkin(colors, 4.I(), 30.I());
 		button.textDisplay.variant = textVariant;
 		button.textDisplay.filters = [getDefaultShadow(5.F())];
 		button.messageDisplay.variant = messageVariant;
@@ -174,8 +176,8 @@ class OutlineTheme extends ClassVariantTheme {
 		itemRenderer.gap = PADDING;
 	}
 
-	public function getButtonSkin(color:UInt = 0, deepness:Float = 3, cornerRadius:Float = 22):DisplayObject {
-		var skin = new MyButtonSkin(color, deepness, cornerRadius);
+	public function getButtonSkin(colors:Array<UInt> = null, deepness:Float = 3, cornerRadius:Float = 22):DisplayObject {
+		var skin = new MyButtonSkin(colors, deepness, cornerRadius);
 		skin.filters = [getDefaultShadow(deepness)];
 		return skin; // getScaled9Textures("button-skin", SCALEGRID_BUTTON);
 	}
@@ -214,13 +216,13 @@ class OutlineTheme extends ClassVariantTheme {
 }
 
 class MyButtonSkin extends ProgrammaticSkin {
-	private var color:UInt;
+	private var colors:Array<UInt>;
 	private var deepness:Float;
 	private var cornerRadius:Float;
 
-	public function new(color:UInt, deepness:Float, cornerRadius:Float) {
+	public function new(colors:Array<UInt>, deepness:Float, cornerRadius:Float) {
 		super();
-		this.color = color == 0 ? OutlineTheme.LIGHT_COLOR : color;
+		this.colors = colors == null ? OutlineTheme.LIGHT_COLORS : colors;
 		this.cornerRadius = cornerRadius.F();
 		this.deepness = deepness.F();
 	}
@@ -231,10 +233,13 @@ class MyButtonSkin extends ProgrammaticSkin {
 		this.graphics.beginFill(OutlineTheme.GRAY_COLOR);
 		this.graphics.drawRoundRect(0, 0, this.actualWidth, this.actualHeight, cornerRadius + 4.F(), cornerRadius * 1.2);
 		this.graphics.endFill();
-		this.graphics.beginFill(this.color, 0.7);
+		this.graphics.beginFill(this.colors[2]);
 		this.graphics.drawRoundRect(b, b, this.actualWidth - b * 2, this.actualHeight - b * 2, cornerRadius, cornerRadius);
 		this.graphics.endFill();
-		this.graphics.beginFill(this.color);
+
+		var matrix = new Matrix();
+		matrix.createGradientBox(0, this.actualHeight - b * 3, Math.PI * 0.5);
+		this.graphics.beginGradientFill(LINEAR, [this.colors[0], this.colors[1]], [1, 1], [170, 255], matrix);
 		this.graphics.drawRoundRect(b, b, this.actualWidth - b * 2, this.actualHeight - b * 2 - deepness, cornerRadius, cornerRadius);
 		this.graphics.endFill();
 	}
