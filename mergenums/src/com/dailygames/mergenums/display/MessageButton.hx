@@ -1,23 +1,46 @@
 package com.dailygames.mergenums.display;
 
-import feathers.style.Theme;
-import feathers.layout.AnchorLayoutData;
-import feathers.layout.AnchorLayout;
+import openfl.events.MouseEvent;
 import feathers.controls.AssetLoader;
 import feathers.controls.Label;
 import feathers.controls.LayoutGroup;
+import feathers.layout.AnchorLayout;
+import feathers.layout.AnchorLayoutData;
 
 using com.dailygames.mergenums.themes.OutlineTheme;
 
+@:styleContext
 class MessageButton extends LayoutGroup {
 	public var padding = 12.I();
 
-	private var textDisplay:Label;
-	private var messageDisplay:Label;
+	public var textDisplay:Label;
+	public var messageDisplay:Label;
 	private var iconDisplay:AssetLoader;
 	private var _text:String;
 	private var _message:String;
 	private var _icon:String;
+
+	// public var textVariant(default, set):String;
+
+	// private function set_textVariant(value:String):String {
+	// 	if (this.textVariant == value)
+	// 		return value;
+	// 	this.textVariant = value;
+	// 	if (textDisplay != null)
+	// 		textDisplay.variant = value;
+	// 	return value;
+	// }
+
+	// public var messageVariant(default, set):String;
+
+	// private function set_messageVariant(value:String):String {
+	// 	if (this.messageVariant == value)
+	// 		return value;
+	// 	this.messageVariant = value;
+	// 	if (messageDisplay != null)
+	// 		messageDisplay.variant = value;
+	// 	return value;
+	// }
 
 	/**
 		The text displayed by the button.
@@ -37,9 +60,8 @@ class MessageButton extends LayoutGroup {
 	}
 
 	private function set_text(value:String):String {
-		if (this._text == value) {
+		if (this._text == value)
 			return this._text;
-		}
 		this._text = value;
 		if (textDisplay != null)
 			textDisplay.text = _text;
@@ -65,9 +87,8 @@ class MessageButton extends LayoutGroup {
 	}
 
 	private function set_message(value:String):String {
-		if (this._message == value) {
+		if (this._message == value)
 			return this._message;
-		}
 		this._message = value;
 		if (messageDisplay != null)
 			messageDisplay.text = _message;
@@ -93,7 +114,9 @@ class MessageButton extends LayoutGroup {
 		super.initialize();
 
 		layout = new AnchorLayout();
-		// backgroundSkin = cast(Theme.getTheme(), OutlineTheme).getButtonSkin();
+		this.buttonMode = true;
+		this.mouseEnabled = true;
+		this.mouseChildren = true;
 
 		this.iconDisplay = new AssetLoader();
 		this.iconDisplay.layoutData = AnchorLayoutData.middleLeft(0, padding);
@@ -102,13 +125,13 @@ class MessageButton extends LayoutGroup {
 		this.addChild(this.iconDisplay);
 
 		this.textDisplay = new Label();
-		this.textDisplay.variant = OutlineTheme.VARIANT_LABEL_DARK_MEDIUM;
+		// this.textDisplay.variant = textVariant;
 		this.textDisplay.layoutData = AnchorLayoutData.middleLeft(-padding * 1.3, 70);
 		this.textDisplay.text = this.text;
 		this.addChild(this.textDisplay);
 
 		this.messageDisplay = new Label();
-		this.messageDisplay.variant = OutlineTheme.VARIANT_LABEL_DARK;
+		// this.messageDisplay.variant = messageVariant;
 		this.messageDisplay.layoutData = AnchorLayoutData.middleLeft(padding * 1.3, 70);
 		this.messageDisplay.text = this.message;
 		this.addChild(this.messageDisplay);
