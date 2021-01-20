@@ -25,43 +25,19 @@ class BasePrizePopup extends ConfirmPopup implements IGamePlayPopup {
 	override private function initialize():Void {
 		super.initialize();
 
-		this.skipButton = addButton("coin", "Claim", OutlineTheme.VARIANT_MBUTTON_RED, AnchorLayoutData.bottomLeft(44.F(), 28.F()), 174.F());
-		this.adsButton = addButton("coin", "%", OutlineTheme.VARIANT_MBUTTON_GREEN, AnchorLayoutData.bottomRight(44.F(), 28.F()), 230.F());
-	}
-
-	private function addButton(name:String, message:String, variant:String, layoutData:AnchorLayoutData, width:Float):MessageButton {
-		var button = new MessageButton();
-		button.name = name;
-		button.width = width;
-		button.height = 120.F();
-		button.message = message;
-		button.icon = name;
-		button.variant = variant;
-		button.layoutData = layoutData;
-		button.addEventListener(MouseEvent.CLICK, buttons_clickHandler);
-		content.addChild(button);
-		return button;
+		this.skipButton = this.addButton("coin", "Claim", null, AnchorLayoutData.bottomLeft(44.F(), 28.F()), 180.F());
+		this.adsButton = this.addButton("coin", "%", OutlineTheme.VARIANT_MBUTTON_ORANGE, AnchorLayoutData.bottomRight(44.F(), 28.F()), 230.F());
 	}
 
 	override public function validateNow():Void {
 		if (this.isInvalid(DATA)) {
 			this.skipButton.text = Std.string(this.prize);
-			this.adsButton.text = "x3 " + (this.prize * 3);
+			this.adsButton.text = "x3=" + (this.prize * 3);
 		}
 		super.validateNow();
 	}
 
-	override private function titleFactory():Void {
-		super.titleFactory();
-		if (this.titleDisplay == null)
-			return;
-		this.titleDisplay.layoutData = AnchorLayoutData.center(0, 0);
-		var textFormat = this.titleDisplay.textFormat;
-		textFormat.align = CENTER;
-		this.titleDisplay.textFormat = textFormat;
-	}
-
-	private function buttons_clickHandler(event:MouseEvent):Void {
+	override private function buttons_clickHandler(event:MouseEvent):Void {
 		var button = cast(event.currentTarget, MessageButton);
 		if (button.message == "%") {
 			this.showAds();

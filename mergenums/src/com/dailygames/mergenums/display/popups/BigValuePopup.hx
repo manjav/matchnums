@@ -14,12 +14,12 @@ class BigValuePopup extends BasePrizePopup {
 		this.value = value;
 		this.prize = 10 * value;
 
-		var _title:String = "";
+		var _message:String = "";
 		// if (this.isFirst)
-		// 	_title = "First " + Cell.getScore(value) + " Created!";
+		// 	_message = "First " + Cell.getScore(value) + " Created!";
 		// else
-		// 	_title = "You made " + Cell.getScore(value) + " again !";
-		this.title = _title + "\nEarn more rewards!";
+		// 	_message = "You made " + Cell.getScore(value) + " again !";
+		this.message = _message + "\nEarn more rewards!";
 		this.setInvalid(DATA);
 
 		return value;
@@ -37,16 +37,12 @@ class BigValuePopup extends BasePrizePopup {
 		super.validateNow();
 	}
 
-	override private function initialize():Void {
-		super.initialize();
-	}
-
 	override private function refreshBackgroundLayout():Void {
 		super.refreshBackgroundLayout();
 
 		if (this.cellDisplay != null) {
 			this.cellDisplay.x = this.actualWidth * 0.50;
-			this.cellDisplay.y = this.actualHeight * 0.35;
+			this.cellDisplay.y = this.actualHeight * 0.33;
 		}
 	}
 }

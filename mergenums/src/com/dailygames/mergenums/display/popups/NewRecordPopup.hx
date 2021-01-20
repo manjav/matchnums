@@ -12,13 +12,13 @@ class NewRecordPopup extends BasePrizePopup {
 			return value;
 		this.value = value;
 		this.prize = 10 * value;
-		this.title = "New Record!\nDouble It?";
+		this.message = "New Record!\nDouble It?";
 		this.setInvalid(DATA);
 		return value;
 	}
 
 	override public function validateNow():Void {
-		if (this.isInvalid(InvalidationFlag.CUSTOM("title"))) {
+		if (this.isInvalid(InvalidationFlag.CUSTOM("message"))) {
 			this.adsButton.text = " " + this.prize + " ";
 
 			var recordIcon = new AssetLoader();
