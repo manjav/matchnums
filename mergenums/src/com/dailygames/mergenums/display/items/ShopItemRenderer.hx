@@ -58,9 +58,9 @@ class ShopItemRenderer extends ItemRenderer {
 	}
 
 	private function getIcon():Bitmap {
-		var path = "images/coin.png";
+		var path = "coin";
 		if (this.data.text == "Ads Free")
-			path = "images/noads.png";
+			path = "noads";
 		return new Bitmap(Assets.getBitmapData(path));
 	}
 }

@@ -23,7 +23,7 @@ class NewRecordPopup extends BasePrizePopup {
 			var recordIcon = new AssetLoader();
 			recordIcon.variant = OutlineTheme.VARIANT_BUTTON_LINK;
 			recordIcon.layoutData = AnchorLayoutData.topCenter(3);
-			recordIcon.source = "images/medal.png";
+			recordIcon.source = "medal";
 			this.content.addChild(recordIcon);
 
 			var recordLabel = new Label();

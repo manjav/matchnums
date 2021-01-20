@@ -10,7 +10,7 @@ import openfl.display.Sprite;
 import openfl.text.TextField;
 
 enum abstract RewardType(String) {
-	var Coin = "coin.png";
+	var Coin = "coin";
 }
 
 class Reward extends Sprite {
