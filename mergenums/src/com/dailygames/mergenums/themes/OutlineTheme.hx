@@ -44,7 +44,7 @@ class OutlineTheme extends ClassVariantTheme {
 	public static final VARIANT_MBUTTON_ORANGE:String = "vMButtonOrange";
 	public static final VARIANT_MBUTTON_GREEN:String = "vMButtonGreen";
 
-	public static final SCALEGRID_BUTTON:Rectangle = new Rectangle(21, 24, 1, 1);
+	public static final SCALEGRID_BUTTON:Rectangle = new Rectangle(14, 16, 1, 1);
 
 	public static function F(value:Float):Float {
 		return value * SCALE_FACTOR;
@@ -57,13 +57,13 @@ class OutlineTheme extends ClassVariantTheme {
 	public function new(stage:Stage, scaleFactor:Float) {
 		super();
 		#if android
-		SCALE_FACTOR = stage.stageWidth / 1080;
+		SCALE_FACTOR = 1;//stage.stageWidth / 1080;
 		#else
-		SCALE_FACTOR = 0.9;
+		SCALE_FACTOR = 1.35;
 		#end
-		POPUP_SIZE = I(480);
-		PADDING = I(40);
-		FONT_SIZE = I(26);
+		POPUP_SIZE = I(320);
+		PADDING = I(26);
+		FONT_SIZE = I(18);
 		SCALEGRID_BUTTON.x = I(SCALEGRID_BUTTON.x);
 		SCALEGRID_BUTTON.y = I(SCALEGRID_BUTTON.y);
 		SCALEGRID_BUTTON.width = I(SCALEGRID_BUTTON.width);
@@ -114,7 +114,7 @@ class OutlineTheme extends ClassVariantTheme {
 
 	private function setButtonStyles(button:Button):Void {
 		button.backgroundSkin = this.getButtonSkin();
-		button.minWidth = button.minHeight = F(80);
+		button.minWidth = button.minHeight = F(54);
 
 		button.textFormat = this.getTextFormat(0, DARK_COLOR);
 		button.setTextFormatForState(DOWN, button.textFormat);
@@ -145,7 +145,7 @@ class OutlineTheme extends ClassVariantTheme {
 	}
 
 	private function setCustomMButtonStyles(button:MessageButton, color:UInt, textVariant:String, messageVariant:String):Void {
-		button.backgroundSkin = this.getButtonSkin(color, 8, 54);
+		button.backgroundSkin = this.getButtonSkin(color, 4.I(), 30.I());
 		button.textDisplay.variant = textVariant;
 		button.textDisplay.filters = [getDefaultShadow(10)];
 		button.messageDisplay.variant = messageVariant;
@@ -174,7 +174,7 @@ class OutlineTheme extends ClassVariantTheme {
 		itemRenderer.gap = PADDING;
 	}
 
-	public function getButtonSkin(color:UInt = 0, deepness:Float = 5, cornerRadius:Float = 32):DisplayObject {
+	public function getButtonSkin(color:UInt = 0, deepness:Float = 3, cornerRadius:Float = 22):DisplayObject {
 		var skin = new MyButtonSkin(color, deepness, cornerRadius);
 		skin.filters = [getDefaultShadow(deepness)];
 		return skin; // getScaled9Textures("button-skin", SCALEGRID_BUTTON);
@@ -184,7 +184,7 @@ class OutlineTheme extends ClassVariantTheme {
 		return new TextFormat(FONT_NAME, size == 0 ? FONT_SIZE : size, color == 0 ? GRAY_COLOR : color, bold);
 	}
 
-	public function getDefaultShadow(size:Float = 5, value:Float = 1):DropShadowFilter {
+	public function getDefaultShadow(size:Float = 3, value:Float = 1):DropShadowFilter {
 		return new DropShadowFilter(size.F(), 80, 0, 0.9, size.F(), size.F(), value, 3);
 	}
 
@@ -226,10 +226,10 @@ class MyButtonSkin extends ProgrammaticSkin {
 	}
 
 	override private function update():Void {
-		var b = 3.F();
+		var b = 2.F();
 		this.graphics.clear();
 		this.graphics.beginFill(OutlineTheme.GRAY_COLOR);
-		this.graphics.drawRoundRect(0, 0, this.actualWidth, this.actualHeight, cornerRadius + 6.F(), cornerRadius * 1.2);
+		this.graphics.drawRoundRect(0, 0, this.actualWidth, this.actualHeight, cornerRadius + 4.F(), cornerRadius * 1.2);
 		this.graphics.endFill();
 		this.graphics.beginFill(this.color, 0.7);
 		this.graphics.drawRoundRect(b, b, this.actualWidth - b * 2, this.actualHeight - b * 2, cornerRadius, cornerRadius);

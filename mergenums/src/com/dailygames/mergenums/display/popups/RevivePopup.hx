@@ -29,8 +29,8 @@ class RevivePopup extends ConfirmPopup implements IGamePlayPopup {
 		this.title = "Revive";
 		this.title = "Revive";
 
-		this.coinButton = this.addButton("coin", "Revive", null, AnchorLayoutData.bottomLeft(44.F(), 28.F()), 180.F());
-		this.adsButton = this.addButton("ads", "Revive", OutlineTheme.VARIANT_MBUTTON_ORANGE, AnchorLayoutData.bottomRight(44.F(), 28.F()), 230.F());
+		this.coinButton = this.addButton("coin", "Revive", null, AnchorLayoutData.bottomLeft(30.F(), 18.F()), 120.F());
+		this.adsButton = this.addButton("ads", "Revive", OutlineTheme.VARIANT_MBUTTON_ORANGE, AnchorLayoutData.bottomRight(30.F(), 18.F()), 154.F());
 		this.adsButton.text = "Free";
 	}
 

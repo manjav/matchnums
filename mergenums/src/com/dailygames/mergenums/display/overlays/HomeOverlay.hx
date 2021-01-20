@@ -60,22 +60,22 @@ class HomeOverlay extends BaseOverlay {
 
 		var scoreboard = new LayoutGroup();
 		scoreboard.layout = new AnchorLayout();
-		scoreboard.layoutData = AnchorLayoutData.middleRight(0, 24.F());
+		scoreboard.layoutData = AnchorLayoutData.middleRight(0, 16.F());
 		this.header.addChild(scoreboard);
 
 		var cupIcon = new AssetLoader();
 		cupIcon.source = "cup";
-		cupIcon.height = 76.F();
-		cupIcon.layoutData = AnchorLayoutData.topRight(5.F(), 24.F());
+		cupIcon.height = 50.F();
+		cupIcon.layoutData = AnchorLayoutData.topRight(3.F(), 16.F());
 		scoreboard.addChild(cupIcon);
 
-		var shadow = new DropShadowFilter(3.F(), 75, 0, 1.F(), 5.F(), 4.F(), 1, 3);
+		var shadow = new DropShadowFilter(2.F(), 75, 0, 1.F(), 3.F(), 3.F(), 1, 3);
 
 		var score = new Label();
 		score.filters = [shadow];
 		score.variant = OutlineTheme.VARIANT_LABEL_MEDIUM_LIGHT;
 		score.text = "0";
-		score.layoutData = AnchorLayoutData.topRight(-5.F(), 100.F());
+		score.layoutData = AnchorLayoutData.topRight(-3.F(), 66.F());
 		scoreboard.addChild(score);
 		Prefs.instance.addEventListener(SCORES, function(event:GameEvent):Void {
 			score.text = Std.string(event.data);
@@ -85,37 +85,37 @@ class HomeOverlay extends BaseOverlay {
 		record.filters = [shadow];
 		record.variant = OutlineTheme.VARIANT_LABEL_LIGHT;
 		record.text = Std.string(Prefs.instance.get(RECORD));
-		record.layoutData = AnchorLayoutData.topRight(39.F(), 100.F());
+		record.layoutData = AnchorLayoutData.topRight(26.F(), 66.F());
 		scoreboard.addChild(record);
 		Prefs.instance.addEventListener(RECORD, function(event:GameEvent):Void {
 			record.text = Std.string(event.data);
 		});
 
 		this.coinsIndicator = new Indicator();
-		this.coinsIndicator.width = 210.F();
-		this.coinsIndicator.height = 86.F();
+		this.coinsIndicator.width = 140.F();
+		this.coinsIndicator.height = 58.F();
 		this.coinsIndicator.icon = "coin";
 		this.coinsIndicator.format = function(value:Float):String {
 			return Utils.toCurrency(value);
 		}
 		this.coinsIndicator.type = COIN;
-		this.coinsIndicator.layoutData = AnchorLayoutData.middleLeft(0, 60.F());
+		this.coinsIndicator.layoutData = AnchorLayoutData.middleLeft(0, 40.F());
 		this.coinsIndicator.addEventListener(TriggerEvent.TRIGGER, this.coinsIndicator_triggerHandler);
 		this.header.addChild(this.coinsIndicator);
 
 		function addButton(name:String, layoutData:AnchorLayoutData, inHeader:Bool):Button {
 			var button = new Button();
 			button.name = name;
-			button.height = button.width = 76.F();
+			button.height = button.width = 50.F();
 			button.layoutData = layoutData;
 			button.icon = new Bitmap(Assets.getBitmapData(name));
 			button.addEventListener(MouseEvent.CLICK, buttons_clickHandler);
 			inHeader ? this.header.addChild(button) : this.footer.addChild(button);
 			return button;
 		}
-		addButton("kill", AnchorLayoutData.middleRight(0, 60.F()), false);
-		addButton("killAll", AnchorLayoutData.middleRight(0, 152.F()), false);
-		addButton("pause", AnchorLayoutData.middleLeft(0, 60.F()), false);
+		addButton("kill", AnchorLayoutData.middleRight(0, 40.F()), false);
+		addButton("killAll", AnchorLayoutData.middleRight(0, 100.F()), false);
+		addButton("pause", AnchorLayoutData.middleLeft(0, 40.F()), false);
 
 		this.start();
 	}
@@ -266,7 +266,7 @@ class HomeOverlay extends BaseOverlay {
 		this.game.x = (this.actualWidth - (currentWidth * gameScale)) * 0.5;
 		this.game.y = (this.actualHeight - (currentHeight * gameScale)) * 0.45;
 
-		this.header.y = this.game.y - 120.F();
+		this.header.y = this.game.y - 80.F();
 		this.footer.y = this.game.y + this.game.height;
 
 		super.refreshBackgroundLayout();

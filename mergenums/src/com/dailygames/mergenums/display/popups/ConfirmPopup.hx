@@ -77,7 +77,7 @@ class ConfirmPopup extends BasePopup {
 		var button = new MessageButton();
 		button.name = name;
 		button.width = width;
-		button.height = 120.F();
+		button.height = 80.F();
 		button.message = message;
 		button.icon = name;
 		button.variant = variant;

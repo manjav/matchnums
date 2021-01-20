@@ -25,8 +25,8 @@ class BasePrizePopup extends ConfirmPopup implements IGamePlayPopup {
 	override private function initialize():Void {
 		super.initialize();
 
-		this.skipButton = this.addButton("coin", "Claim", null, AnchorLayoutData.bottomLeft(44.F(), 28.F()), 180.F());
-		this.adsButton = this.addButton("coin", "%", OutlineTheme.VARIANT_MBUTTON_ORANGE, AnchorLayoutData.bottomRight(44.F(), 28.F()), 230.F());
+		this.skipButton = this.addButton("coin", "Claim", null, AnchorLayoutData.bottomLeft(30.F(), 18.F()), 120.F());
+		this.adsButton = this.addButton("coin", "%", OutlineTheme.VARIANT_MBUTTON_ORANGE, AnchorLayoutData.bottomRight(30.F(), 18.F()), 154.F());
 	}
 
 	override public function validateNow():Void {

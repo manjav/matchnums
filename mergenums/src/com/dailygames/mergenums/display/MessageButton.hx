@@ -13,7 +13,7 @@ using com.dailygames.mergenums.themes.OutlineTheme;
 
 @:styleContext
 class MessageButton extends LayoutGroup {
-	public var padding = 12.I();
+	public var padding = 8.I();
 
 	public var textDisplay:Label;
 	public var messageDisplay:Label;
@@ -99,7 +99,7 @@ class MessageButton extends LayoutGroup {
 		this.mouseChildren = true;
 
 		this.iconDisplay = new AssetLoader();
-		this.iconDisplay.height = 60.I();
+		this.iconDisplay.height = 40.I();
 		this.iconDisplay.source = this.icon;
 		this.iconDisplay.layoutData = AnchorLayoutData.middleLeft(0, padding);
 		this.iconDisplay.addEventListener(Event.RESIZE, this.iconDisplay_completeHandler);
