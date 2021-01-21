@@ -28,7 +28,6 @@ class MessageButton extends LayoutGroup {
 		button.text = "Its button's messeage";
 		```
 		@default null
-		@see `Button.textFormat`
 		@since 1.0.0
 	**/
 	public var text(get, set):String;
@@ -47,17 +46,16 @@ class MessageButton extends LayoutGroup {
 	}
 
 	/**
-		The text displayed by the button.
+		The message displayed by the button.
 		The following example sets the button's message:
 		```hx
 		button.message = "Its button's messeage";
 		```
 
 		@default null
-		@see `Button.textFormat`
 		@since 1.0.0
 	**/
-	@:flash.property
+
 	public var message(get, set):String;
 
 	private function get_message():String {

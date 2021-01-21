@@ -69,7 +69,7 @@ class HomeOverlay extends BaseOverlay {
 		cupIcon.layoutData = AnchorLayoutData.topRight(3.F(), 16.F());
 		scoreboard.addChild(cupIcon);
 
-		var shadow = new DropShadowFilter(2.F(), 75, 0, 1.F(), 3.F(), 3.F(), 1, 3);
+		var shadow = new DropShadowFilter(3.F(), 75, 0, 0.92, 3.F(), 3.F(), 1, 3);
 
 		var score = new Label();
 		score.filters = [shadow];
@@ -129,8 +129,8 @@ class HomeOverlay extends BaseOverlay {
 	private function starterCloseHandler(event:Event):Void {
 		var starter = cast(event.target, StartingOfferOverlay);
 		starter.removeEventListener(Event.CLOSE, this.starterCloseHandler);
-		this.game.hasBoostBig = starter.hasBoostBig;
-		this.game.hasBoostNext = starter.hasBoostNext;
+		this.game.hasBoostBig = starter.boostBig.active;
+		this.game.hasBoostNext = starter.boostNext.active;
 		this.game.reset();
 	}
 
