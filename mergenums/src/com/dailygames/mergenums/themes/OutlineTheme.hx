@@ -38,6 +38,8 @@ class OutlineTheme extends ClassVariantTheme {
 	public static final VARIANT_LABEL_LIGHT:String = "vLabelLight";
 	public static final VARIANT_LABEL_MEDIUM:String = "vLabelMedium";
 	public static final VARIANT_LABEL_MEDIUM_LIGHT:String = "vLabelMediumLight";
+	public static final VARIANT_LABEL_SMALL:String = "vLabelSmall";
+	public static final VARIANT_LABEL_SMALL_LIGHT:String = "vLabelSmallLight";
 
 	public static final VARIANT_BUTTON_LINK:String = "vButtonLink";
 
@@ -76,6 +78,8 @@ class OutlineTheme extends ClassVariantTheme {
 		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_LIGHT, this.setLabelLightStyles);
 		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_MEDIUM, this.setLabelMediumStyles);
 		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_MEDIUM_LIGHT, this.setLabelMediumLightStyles);
+		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_SMALL, this.setLabelSmallStyles);
+		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_SMALL_LIGHT, this.setLabelSmallLightStyles);
 
 		this.styleProvider.setStyleFunction(Button, null, this.setButtonStyles);
 		this.styleProvider.setStyleFunction(Button, VARIANT_BUTTON_LINK, this.setButtonLinkStyles);
@@ -103,6 +107,14 @@ class OutlineTheme extends ClassVariantTheme {
 
 	private function setLabelMediumLightStyles(label:Label):Void {
 		this.setCustomLabelStyles(label, cast FONT_SIZE * 1.4, LIGHT_COLOR);
+	}
+
+	private function setLabelSmallStyles(label:Label):Void {
+		this.setCustomLabelStyles(label, cast FONT_SIZE * 0.65, GRAY_COLOR);
+	}
+
+	private function setLabelSmallLightStyles(label:Label):Void {
+		this.setCustomLabelStyles(label, cast FONT_SIZE * 0.65, LIGHT_COLOR);
 	}
 
 	private function setCustomLabelStyles(label:Label, fontSize:UInt, fontColor:UInt):Void {
@@ -146,7 +158,7 @@ class OutlineTheme extends ClassVariantTheme {
 	}
 
 	private function setMessageButtonGreenStyles(button:MessageButton):Void {
-		this.setCustomMButtonStyles(button, GREEN_COLORS, VARIANT_LABEL_MEDIUM, null);
+		this.setCustomMButtonStyles(button, GREEN_COLORS, VARIANT_LABEL_MEDIUM_LIGHT, VARIANT_LABEL_LIGHT);
 	}
 
 	private function setMessageButtonYellowStyles(button:MessageButton):Void {
