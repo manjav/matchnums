@@ -41,10 +41,11 @@ class OutlineTheme extends ClassVariantTheme {
 
 	public static final VARIANT_BUTTON_LINK:String = "vButtonLink";
 
-	public static final VARIANT_MBUTTON_WHITE:String = "vMButton";
-	public static final VARIANT_MBUTTON_RED:String = "vMButtonRed";
-	public static final VARIANT_MBUTTON_ORANGE:String = "vMButtonOrange";
+	public static final VARIANT_MBUTTON_LIGHT:String = "vMButton";
+	public static final VARIANT_MBUTTON_BLUE:String = "vMButtonBlue";
 	public static final VARIANT_MBUTTON_GREEN:String = "vMButtonGreen";
+	public static final VARIANT_MBUTTON_YELLOW:String = "vMButtonYellow";
+	public static final VARIANT_MBUTTON_ORANGE:String = "vMButtonOrange";
 
 	public static final SCALEGRID_BUTTON:Rectangle = new Rectangle(14, 16, 1, 1);
 
@@ -65,7 +66,7 @@ class OutlineTheme extends ClassVariantTheme {
 		#end
 		POPUP_SIZE = I(320);
 		PADDING = I(25);
-		FONT_SIZE = I(18);
+		FONT_SIZE = I(20);
 		SCALEGRID_BUTTON.x = I(SCALEGRID_BUTTON.x);
 		SCALEGRID_BUTTON.y = I(SCALEGRID_BUTTON.y);
 		SCALEGRID_BUTTON.width = I(SCALEGRID_BUTTON.width);
@@ -80,8 +81,10 @@ class OutlineTheme extends ClassVariantTheme {
 		this.styleProvider.setStyleFunction(Button, VARIANT_BUTTON_LINK, this.setButtonLinkStyles);
 
 		this.styleProvider.setStyleFunction(MessageButton, null, this.setMessageButtonStyles);
-		this.styleProvider.setStyleFunction(MessageButton, VARIANT_MBUTTON_ORANGE, this.setMessageButtonAccentStyles);
+		this.styleProvider.setStyleFunction(MessageButton, VARIANT_MBUTTON_BLUE, this.setMessageButtonBlueStyles);
 		this.styleProvider.setStyleFunction(MessageButton, VARIANT_MBUTTON_GREEN, this.setMessageButtonGreenStyles);
+		this.styleProvider.setStyleFunction(MessageButton, VARIANT_MBUTTON_YELLOW, this.setMessageButtonYellowStyles);
+		this.styleProvider.setStyleFunction(MessageButton, VARIANT_MBUTTON_ORANGE, this.setMessageButtonOrangeStyles);
 
 		this.styleProvider.setStyleFunction(ItemRenderer, null, this.setItemRendererStyles);
 	}
@@ -95,11 +98,11 @@ class OutlineTheme extends ClassVariantTheme {
 	}
 
 	private function setLabelMediumStyles(label:Label):Void {
-		this.setCustomLabelStyles(label, cast FONT_SIZE * 1.5, GRAY_COLOR);
+		this.setCustomLabelStyles(label, cast FONT_SIZE * 1.4, GRAY_COLOR);
 	}
 
 	private function setLabelMediumLightStyles(label:Label):Void {
-		this.setCustomLabelStyles(label, cast FONT_SIZE * 1.5, LIGHT_COLOR);
+		this.setCustomLabelStyles(label, cast FONT_SIZE * 1.4, LIGHT_COLOR);
 	}
 
 	private function setCustomLabelStyles(label:Label, fontSize:UInt, fontColor:UInt):Void {
@@ -138,12 +141,20 @@ class OutlineTheme extends ClassVariantTheme {
 		this.setCustomMButtonStyles(button, LIGHT_COLORS, VARIANT_LABEL_MEDIUM, null);
 	}
 
-	private function setMessageButtonAccentStyles(button:MessageButton):Void {
-		this.setCustomMButtonStyles(button, ORANGE_COLORS, VARIANT_LABEL_MEDIUM_LIGHT, VARIANT_LABEL_LIGHT);
+	private function setMessageButtonBlueStyles(button:MessageButton):Void {
+		this.setCustomMButtonStyles(button, BLUE_COLORS, VARIANT_LABEL_MEDIUM_LIGHT, VARIANT_LABEL_LIGHT);
 	}
 
 	private function setMessageButtonGreenStyles(button:MessageButton):Void {
 		this.setCustomMButtonStyles(button, GREEN_COLORS, VARIANT_LABEL_MEDIUM, null);
+	}
+
+	private function setMessageButtonYellowStyles(button:MessageButton):Void {
+		this.setCustomMButtonStyles(button, YELLOW_COLORS, VARIANT_LABEL_MEDIUM_LIGHT, VARIANT_LABEL_LIGHT);
+	}
+
+	private function setMessageButtonOrangeStyles(button:MessageButton):Void {
+		this.setCustomMButtonStyles(button, ORANGE_COLORS, VARIANT_LABEL_MEDIUM_LIGHT, VARIANT_LABEL_LIGHT);
 	}
 
 	private function setCustomMButtonStyles(button:MessageButton, colors:Array<UInt>, textVariant:String, messageVariant:String):Void {
