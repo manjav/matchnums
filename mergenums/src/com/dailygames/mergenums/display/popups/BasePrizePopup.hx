@@ -9,7 +9,7 @@ using com.dailygames.mergenums.themes.OutlineTheme;
 
 class BasePrizePopup extends ConfirmPopup implements IGamePlayPopup {
 	private var adsButton:MessageButton;
-	private var skipButton:MessageButton;
+	private var claimButton:MessageButton;
 
 	public var prize(default, default):Int;
 	public var value(default, set):Int;
@@ -26,13 +26,13 @@ class BasePrizePopup extends ConfirmPopup implements IGamePlayPopup {
 	override private function initialize():Void {
 		super.initialize();
 
-		this.skipButton = this.addButton("coin", "Claim", null, AnchorLayoutData.bottomLeft(30.F(), 18.F()), 120.F());
-		this.adsButton = this.addButton("coin", "%", OutlineTheme.VARIANT_MBUTTON_ORANGE, AnchorLayoutData.bottomRight(30.F(), 18.F()), 154.F());
+		this.claimButton = this.addButton("coin", "Claim", null, AnchorLayoutData.bottomLeft(28.F(), 18.F()), 120.F());
+		this.adsButton = this.addButton("coin", "%", OutlineTheme.VARIANT_MBUTTON_ORANGE, AnchorLayoutData.bottomRight(28.F(), 18.F()), 154.F());
 	}
 
 	override public function validateNow():Void {
 		if (this.isInvalid(DATA)) {
-			this.skipButton.text = Std.string(this.prize);
+			this.claimButton.text = Std.string(this.prize);
 			this.adsButton.text = "x3=" + (this.prize * 3);
 		}
 		super.validateNow();
