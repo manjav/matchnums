@@ -33,6 +33,7 @@
 	<assets id="unmute" path="assets/images/unmute.png"/>
 	<assets id="kill" path="assets/images/kill.png"/>
 	<assets id="killAll" path="assets/images/killAll.png"/>
+	<assets id="heart" path="assets/images/heart.png"/>
 	
 	<!-- <assets path="Assets/images" rename="images" include="*" exclude="icon.svg" /> -->
 	<assets path="Assets/sounds" rename="sounds" include="*" />

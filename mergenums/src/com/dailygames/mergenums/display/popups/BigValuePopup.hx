@@ -25,6 +25,11 @@ class BigValuePopup extends BasePrizePopup {
 		return value;
 	}
 
+	override private function initialize():Void {
+		super.initialize();
+		this.title = "Big Block!";
+	}
+
 	override public function validateNow():Void {
 		if (this.isInvalid(DATA)) {
 			// Create or update cell
@@ -42,7 +47,7 @@ class BigValuePopup extends BasePrizePopup {
 
 		if (this.cellDisplay != null) {
 			this.cellDisplay.x = this.actualWidth * 0.50;
-			this.cellDisplay.y = this.actualHeight * 0.33;
+			this.cellDisplay.y = this.actualHeight * 0.40;
 		}
 	}
 }
