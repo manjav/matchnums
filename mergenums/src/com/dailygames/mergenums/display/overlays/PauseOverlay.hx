@@ -1,5 +1,6 @@
 package com.dailygames.mergenums.display.overlays;
 
+import com.dailygames.mergenums.display.buttons.MessageButton;
 import com.dailygames.mergenums.display.popups.ConfirmPopup;
 import com.dailygames.mergenums.utils.Prefs.*;
 import com.dailygames.mergenums.utils.Prefs;
@@ -26,7 +27,7 @@ class PauseOverlay extends ConfirmPopup {
 
 		var adsSkin = new RectangleSkin();
 		adsSkin.fill = SolidColor(OutlineTheme.DARK_COLOR, 0.8);
-		adsSkin.cornerRadius = 28.F();
+		adsSkin.cornerRadius = 20.F();
 
 		var adsHolder = new LayoutGroup();
 		adsHolder.backgroundSkin = adsSkin;
@@ -34,23 +35,11 @@ class PauseOverlay extends ConfirmPopup {
 		adsHolder.height = 234.F();
 		content.addChild(adsHolder);
 
-		function addButton(name:String, skin:DisplayObject, layoutData:AnchorLayoutData, width:Float, height:Float):Void {
-			var button = new Button();
-			button.name = name;
-			button.width = width;
-			button.height = height;
-			button.backgroundSkin = skin;
-			button.layoutData = layoutData;
-			button.icon = new Bitmap(Assets.getBitmapData(name));
-			button.addEventListener(MouseEvent.CLICK, buttons_clickHandler);
-			content.addChild(button);
-		}
-
-		var theme = cast(Theme.getTheme(), OutlineTheme);
-		addButton("restart", theme.getButtonSkin(OutlineTheme.ORANGE_COLORS, 4.F(), 30.F()), AnchorLayoutData.topLeft(adsHolder.height + 22.F()), 154.F(), 80.F());
-		addButton("continue", theme.getButtonSkin(OutlineTheme.LIGHT_COLORS, 4.F(), 30.F()), AnchorLayoutData.topRight(adsHolder.height + 22.F()), 154.F(), 80.F());
-		addButton("noads", theme.getButtonSkin(OutlineTheme.LIGHT_COLORS, 3.F(), 22.F()), new AnchorLayoutData(adsHolder.height + 120.F(), null, null, null, -44.F()), 64.F(), 64.F());
-		addButton(Sounds.mute ? "mute" : "unmute", theme.getButtonSkin(OutlineTheme.LIGHT_COLORS, 3.F(), 22.F()), new AnchorLayoutData(adsHolder.height + 120.F(), null, null, null, 44.F()), 64.F(), 64.F());
+		addButton("restart", "Restart", OutlineTheme.VARIANT_MBUTTON_GREEN, AnchorLayoutData.topLeft(adsHolder.height + 22.F()), 154.F());
+		addButton("continue", "Continue", OutlineTheme.VARIANT_MBUTTON_BLUE, AnchorLayoutData.topRight(adsHolder.height + 22.F()), 154.F());
+		addButton("noads", null, OutlineTheme.VARIANT_MBUTTON_ORANGE, new AnchorLayoutData(adsHolder.height + 120.F(), null, null, null, -50.F()), 80.F());
+		addButton(Sounds.mute ? "mute" : "unmute", null, OutlineTheme.VARIANT_MBUTTON_YELLOW,
+			new AnchorLayoutData(adsHolder.height + 120.F(), null, null, null, 50.F()), 80.F());
 	}
 
 	override private function closeButton_clickHandler(event:MouseEvent):Void {
@@ -61,12 +50,12 @@ class PauseOverlay extends ConfirmPopup {
 	override private function contentBackgroundFactory():Void {}
 
 	override private function buttons_clickHandler(event:MouseEvent):Void {
-		var button = cast(event.target, Button);
+		var button = cast(event.currentTarget, MessageButton);
 		switch (button.name) {
 			case "mute":
 			case "unmute":
 				Sounds.mute = !Sounds.mute;
-				button.icon = new Bitmap(Assets.getBitmapData(Sounds.mute ? "mute" : "unmute"));
+				button.icon = Sounds.mute ? "mute" : "unmute";
 				Prefs.instance.set(MUTE, Sounds.mute ? 1.0 : 0.0);
 				return;
 			case "continue":

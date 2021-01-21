@@ -27,7 +27,6 @@ class MessageButton extends LayoutGroup {
 		```hx
 		button.text = "Its button's messeage";
 		```
-
 		@default null
 		@see `Button.textFormat`
 		@since 1.0.0
@@ -42,8 +41,8 @@ class MessageButton extends LayoutGroup {
 		if (this._text == value)
 			return this._text;
 		this._text = value;
-		if (textDisplay != null)
-			textDisplay.text = _text;
+		if (this.textDisplay != null)
+			this.textDisplay.text = this._text;
 		return this._text;
 	}
 
@@ -69,8 +68,8 @@ class MessageButton extends LayoutGroup {
 		if (this._message == value)
 			return this._message;
 		this._message = value;
-		if (messageDisplay != null)
-			messageDisplay.text = _message;
+		if (this.messageDisplay != null)
+			this.messageDisplay.text = this._message;
 		return this._message;
 	}
 
@@ -84,15 +83,15 @@ class MessageButton extends LayoutGroup {
 		if (this._icon == value)
 			return this._icon;
 		this._icon = value;
-		if (iconDisplay != null)
-			iconDisplay.source = icon;
+		if (this.iconDisplay != null)
+			this.iconDisplay.source = this._icon;
 		return this._icon;
 	}
 
 	override private function initialize() {
 		super.initialize();
 
-		layout = new AnchorLayout();
+		this.layout = new AnchorLayout();
 		this.buttonMode = true;
 		this.mouseEnabled = true;
 		this.mouseChildren = true;
@@ -114,7 +113,8 @@ class MessageButton extends LayoutGroup {
 	}
 
 	private function iconDisplay_completeHandler(event:Event):Void {
+		var msgLayout = AnchorLayoutData.middleLeft(this.text == null ? -3.I() : 10.I() , this.iconDisplay.width + 4.I());
 		this.textDisplay.layoutData = AnchorLayoutData.middleLeft(-10.I(), this.iconDisplay.width + 4.I());
-		this.messageDisplay.layoutData = AnchorLayoutData.middleLeft(10.I(), this.iconDisplay.width + 4.I());
+		this.messageDisplay.layoutData = msgLayout;
 	}
 }
