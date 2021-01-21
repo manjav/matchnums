@@ -106,7 +106,7 @@ class Game extends Sprite {
 		this.haveRecord = false;
 		this.numRevives = 0;
 		this.numRewardCells = 0;
-		this.valueRecord = 3;
+		this.valueRecord = 8;
 		this.scores = 0;
 		this.lastColumn = Math.floor(Math.random() * CellMap.NUM_COLUMNS);
 		this.nextCell.showValue = this.hasBoostNext;
