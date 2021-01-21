@@ -1,5 +1,6 @@
 package com.dailygames.mergenums.display.popups;
 
+import com.dailygames.mergenums.display.buttons.MessageButton;
 import feathers.controls.Label;
 import feathers.layout.AnchorLayoutData;
 import feathers.layout.ILayoutData;

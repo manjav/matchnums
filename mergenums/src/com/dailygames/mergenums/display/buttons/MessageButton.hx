@@ -1,13 +1,11 @@
-package com.dailygames.mergenums.display;
+package com.dailygames.mergenums.display.buttons;
 
-import feathers.events.FeathersEvent;
-import openfl.events.Event;
-import openfl.events.MouseEvent;
 import feathers.controls.AssetLoader;
 import feathers.controls.Label;
 import feathers.controls.LayoutGroup;
 import feathers.layout.AnchorLayout;
 import feathers.layout.AnchorLayoutData;
+import openfl.events.Event;
 
 using com.dailygames.mergenums.themes.OutlineTheme;
 
@@ -17,6 +15,7 @@ class MessageButton extends LayoutGroup {
 
 	public var textDisplay:Label;
 	public var messageDisplay:Label;
+
 	private var iconDisplay:AssetLoader;
 	private var _text:String;
 	private var _message:String;
@@ -108,12 +107,12 @@ class MessageButton extends LayoutGroup {
 		this.textDisplay = new Label();
 		this.textDisplay.text = this.text;
 		this.addChild(this.textDisplay);
-		
+
 		this.messageDisplay = new Label();
 		this.messageDisplay.text = this.message;
 		this.addChild(this.messageDisplay);
 	}
-	
+
 	private function iconDisplay_completeHandler(event:Event):Void {
 		this.textDisplay.layoutData = AnchorLayoutData.middleLeft(-padding * 1.3, this.iconDisplay.width + padding * 1.3);
 		this.messageDisplay.layoutData = AnchorLayoutData.middleLeft(padding * 1.3, this.iconDisplay.width + padding * 1.3);
