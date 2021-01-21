@@ -80,13 +80,13 @@ class Game extends Sprite {
 		this.endLine = new Shape();
 		this.endLine.alpha = 0.5;
 		this.endLine.graphics.beginFill(0xFFFFFF);
-		this.endLine.graphics.drawRoundRect(Cell.BORDER, Cell.SIZE - 8, background.width -Cell.BORDER * 4 , 14, 14, 14);
+		this.endLine.graphics.drawRoundRect(Cell.BORDER, Cell.SIZE - 8, background.width - Cell.BORDER * 4, 14, 14, 14);
 		this.endLine.transform.colorTransform.color = 0x444444;
 		this.addChild(this.endLine);
 
 		this.fallingEffect = new Shape();
 		this.fallingEffect.graphics.beginFill(0xFFFFFF, 0.8);
-		this.fallingEffect.graphics.drawRoundRect(Cell.BORDER - Cell.RADIUS, -Cell.BORDER, Cell.SIZE - Cell.BORDER * 2, background.height, 0, 0);
+		this.fallingEffect.graphics.drawRoundRect(Cell.BORDER - Cell.RADIUS, Cell.SIZE - Cell.BORDER, Cell.SIZE - Cell.BORDER * 2, background.height - Cell.SIZE - Cell.RADIUS, 0, 0);
 		this.fallingEffect.alpha = 0;
 		this.addChild(this.fallingEffect);
 
@@ -266,25 +266,25 @@ class Game extends Sprite {
 			for (j in 0...CellMap.NUM_ROWS) {
 				var c = this.cells.get(i, j);
 				if (c == null || c.state != Fell)
-				continue;
-			c.state = Fixed;
+					continue;
+				c.state = Fixed;
 
-			var matchs = this.cells.getMatchs(c.column, c.row, c.value);
-			// Relaese all cells over matchs
-			for (m in matchs) {
-				this.cells.accumulateColumn(m.column, m.row);
-				this.collectReward(m);
-				Actuate.tween(m, 0.1, {x: c.x, y: c.y}).ease(Expo.easeOut).onComplete(Cell.dispose, [m]);
-			}
+				var matchs = this.cells.getMatchs(c.column, c.row, c.value);
+				// Relaese all cells over matchs
+				for (m in matchs) {
+					this.cells.accumulateColumn(m.column, m.row);
+					this.collectReward(m);
+					Actuate.tween(m, 0.1, {x: c.x, y: c.y}).ease(Expo.easeOut).onComplete(Cell.dispose, [m]);
+				}
 
-			if (matchs.length > 0) {
-				this.collectReward(c);
-				c.addEventListener(Event.INIT, this.cell_initHandler);
-				c.init(c.column, c.row, c.value + matchs.length, 0, this.cellInitAnimationFactory);
+				if (matchs.length > 0) {
+					this.collectReward(c);
+					c.addEventListener(Event.INIT, this.cell_initHandler);
+					c.init(c.column, c.row, c.value + matchs.length, 0, this.cellInitAnimationFactory);
 					merges += matchs.length;
+				}
+				// trace("match", c, matchs.length, needsRepeat);
 			}
-			// trace("match", c, matchs.length, needsRepeat);
-		}
 			return merges;
 		}
 

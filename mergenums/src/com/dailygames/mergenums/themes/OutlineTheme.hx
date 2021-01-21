@@ -1,6 +1,6 @@
 package com.dailygames.mergenums.themes;
 
-import com.dailygames.mergenums.display.MessageButton;
+import com.dailygames.mergenums.display.buttons.MessageButton;
 import feathers.controls.Button;
 import feathers.controls.Label;
 import feathers.controls.dataRenderers.ItemRenderer;
@@ -64,7 +64,7 @@ class OutlineTheme extends ClassVariantTheme {
 		SCALE_FACTOR = 1.35;
 		#end
 		POPUP_SIZE = I(320);
-		PADDING = I(26);
+		PADDING = I(25);
 		FONT_SIZE = I(18);
 		SCALEGRID_BUTTON.x = I(SCALEGRID_BUTTON.x);
 		SCALEGRID_BUTTON.y = I(SCALEGRID_BUTTON.y);

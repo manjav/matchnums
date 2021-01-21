@@ -1,20 +1,18 @@
 package com.dailygames.mergenums.display.popups;
 
+import com.dailygames.mergenums.display.buttons.IconButton;
 import com.dailygames.mergenums.display.overlays.BaseOverlay;
-import feathers.controls.Button;
 import feathers.controls.LayoutGroup;
 import feathers.layout.AnchorLayout;
 import feathers.layout.AnchorLayoutData;
 import feathers.skins.RectangleSkin;
-import openfl.Assets;
-import openfl.display.Bitmap;
 import openfl.events.MouseEvent;
 import openfl.geom.Rectangle;
 
 using com.dailygames.mergenums.themes.OutlineTheme;
 
 class BasePopup extends BaseOverlay {
-	private var closeButton:Button;
+	private var closeButton:IconButton;
 	private var content:LayoutGroup;
 
 	public var contentRect(default, set):Rectangle;
@@ -54,7 +52,7 @@ class BasePopup extends BaseOverlay {
 	private function adjustContentLayout():Void {
 		if (this.contentRect == null) {
 			this.content.width = OutlineTheme.POPUP_SIZE;
-			this.content.height = OutlineTheme.POPUP_SIZE * 1.2;
+			this.content.height = OutlineTheme.POPUP_SIZE;
 			this.content.layoutData = AnchorLayoutData.center();
 		} else {
 			this.content.x = this.contentRect.x;
@@ -80,10 +78,10 @@ class BasePopup extends BaseOverlay {
 		}
 
 		if (this.closeButton == null) {
-			this.closeButton = new Button();
-			this.closeButton.variant = OutlineTheme.VARIANT_BUTTON_LINK;
-			this.closeButton.icon = new Bitmap(Assets.getBitmapData("close"));
-			this.closeButton.layoutData = AnchorLayoutData.topRight(-this.padding * 2.2, this.padding);
+			this.closeButton = new IconButton();
+			this.closeButton.icon = "close";
+			this.closeButton.width = this.closeButton.height = 32.I();
+			this.closeButton.layoutData = AnchorLayoutData.topRight(-this.padding * 1.6, this.padding);
 			this.closeButton.addEventListener(MouseEvent.CLICK, this.closeButton_clickHandler);
 		}
 		this.content.addChild(this.closeButton);
