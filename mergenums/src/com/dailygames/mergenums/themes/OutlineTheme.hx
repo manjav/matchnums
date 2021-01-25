@@ -45,13 +45,13 @@ class OutlineTheme extends ClassVariantTheme {
 
 	public static final VARIANT_BUTTON_LINK:String = "vButtonLink";
 
-	public static final VARIANT_MBUTTON_LIGHT:String = "vMButton";
+	public static final VARIANT_MBUTTON:String = "vMButton";
 	public static final VARIANT_MBUTTON_BLUE:String = "vMButtonBlue";
 	public static final VARIANT_MBUTTON_GREEN:String = "vMButtonGreen";
 	public static final VARIANT_MBUTTON_YELLOW:String = "vMButtonYellow";
 	public static final VARIANT_MBUTTON_ORANGE:String = "vMButtonOrange";
 
-	public static final VARIANT_MSBUTTON_LIGHT:String = "vMSButton";
+	public static final VARIANT_MSBUTTON:String = "vMSButton";
 	public static final VARIANT_MSBUTTON_BLUE:String = "vMSButtonBlue";
 	public static final VARIANT_MSBUTTON_GREEN:String = "vMSButtonGreen";
 	public static final VARIANT_MSBUTTON_YELLOW:String = "vMSButtonYellow";
@@ -88,6 +88,8 @@ class OutlineTheme extends ClassVariantTheme {
 		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_MEDIUM_LIGHT, this.setLabelMediumLightStyles);
 		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_SMALL, this.setLabelSmallStyles);
 		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_SMALL_LIGHT, this.setLabelSmallLightStyles);
+		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_DETAILS, this.setLabelDetailsStyles);
+		this.styleProvider.setStyleFunction(Label, VARIANT_LABEL_DETAILS_LIGHT, this.setLabelDetailsLightStyles);
 
 		this.styleProvider.setStyleFunction(Button, null, this.setButtonStyles);
 		this.styleProvider.setStyleFunction(Button, VARIANT_BUTTON_LINK, this.setButtonLinkStyles);
@@ -98,11 +100,11 @@ class OutlineTheme extends ClassVariantTheme {
 		this.styleProvider.setStyleFunction(MessageButton, VARIANT_MBUTTON_YELLOW, this.setMessageButtonYellowStyles);
 		this.styleProvider.setStyleFunction(MessageButton, VARIANT_MBUTTON_ORANGE, this.setMessageButtonOrangeStyles);
 		
-		this.styleProvider.setStyleFunction(MessageButton, null, this.setSmallMessageButtonStyles);
+		this.styleProvider.setStyleFunction(MessageButton, VARIANT_MSBUTTON, this.setSmallMessageButtonStyles);
 		this.styleProvider.setStyleFunction(MessageButton, VARIANT_MSBUTTON_BLUE, this.setSmallMessageButtonBlueStyles);
 		this.styleProvider.setStyleFunction(MessageButton, VARIANT_MSBUTTON_GREEN, this.setSmallMessageButtonGreenStyles);
 		this.styleProvider.setStyleFunction(MessageButton, VARIANT_MSBUTTON_YELLOW, this.setSmallMessageButtonYellowStyles);
-		this.styleProvider.setStyleFunction(MessageButton, VARIANT_MSBUTTON_LIGHT, this.setSmallMessageButtonOrangeStyles);
+		this.styleProvider.setStyleFunction(MessageButton, VARIANT_MSBUTTON_ORANGE, this.setSmallMessageButtonOrangeStyles);
 
 		this.styleProvider.setStyleFunction(ItemRenderer, null, this.setItemRendererStyles);
 	}
@@ -247,7 +249,7 @@ class OutlineTheme extends ClassVariantTheme {
 	}
 
 	public function getDefaultShadow(size:Float = 3, value:Float = 1):DropShadowFilter {
-		return new DropShadowFilter(size.F(), 80, 0, 0.95, size.F(), size.F(), value, 3);
+		return new DropShadowFilter(size.F(), 80, 0, 0.92, size.F(), size.F(), value, 3);
 	}
 
 	/**
