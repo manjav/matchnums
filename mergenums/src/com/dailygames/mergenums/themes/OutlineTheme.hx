@@ -140,10 +140,10 @@ class OutlineTheme extends ClassVariantTheme {
 		this.setCustomLabelStyles(label, cast FONT_SIZE * 0.72, LIGHT_COLOR, true);
 	}
 
-	private function setCustomLabelStyles(label:Label, fontSize:UInt, fontColor:UInt, bold:Bool = false):Void {
+	private function setCustomLabelStyles(label:Label, fontSize:UInt, fontColor:UInt, bold:Bool = false, align:String = "center"):Void {
 		label.embedFonts = true;
 		if (label.textFormat == null)
-			label.textFormat = this.getTextFormat(fontSize, fontColor, bold);
+			label.textFormat = this.getTextFormat(fontSize, fontColor, bold, align);
 	}
 
 	private function setButtonStyles(button:Button):Void {
@@ -244,8 +244,8 @@ class OutlineTheme extends ClassVariantTheme {
 		return skin; // getScaled9Textures("button-skin", SCALEGRID_BUTTON);
 	}
 
-	public function getTextFormat(size:UInt = 0, color:UInt = 0, bold:Bool = false):TextFormat {
-		return new TextFormat(FONT_NAME, size == 0 ? FONT_SIZE : size, color == 0 ? GRAY_COLOR : color, bold);
+	public function getTextFormat(size:UInt = 0, color:UInt = 0, bold:Bool = false, align:String = "center"):TextFormat {
+		return new TextFormat(FONT_NAME, size == 0 ? FONT_SIZE : size, color == 0 ? GRAY_COLOR : color, bold, null, null, null, null, align);
 	}
 
 	public function getDefaultShadow(size:Float = 3, value:Float = 1):DropShadowFilter {
