@@ -87,7 +87,7 @@ class BoostActivator extends LayoutGroup {
 		var textDisplay = new Label();
 		textDisplay.text = text;
 		textDisplay.wordWrap = true;
-		textDisplay.variant = OutlineTheme.VARIANT_LABEL_DETAILS;
+		textDisplay.textFormat = theme.getTextFormat(Math.round(OutlineTheme.FONT_SIZE * 0.72), 0, true, "center");
 		textDisplay.layoutData= new AnchorLayoutData(null, 16.I(), 120.I(), 16.I());
 		this.addChild(textDisplay);
 
