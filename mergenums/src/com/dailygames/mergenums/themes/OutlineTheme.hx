@@ -40,6 +40,8 @@ class OutlineTheme extends ClassVariantTheme {
 	public static final VARIANT_LABEL_MEDIUM_LIGHT:String = "vLabelMediumLight";
 	public static final VARIANT_LABEL_SMALL:String = "vLabelSmall";
 	public static final VARIANT_LABEL_SMALL_LIGHT:String = "vLabelSmallLight";
+	public static final VARIANT_LABEL_DETAILS:String = "vLabelDetails";
+	public static final VARIANT_LABEL_DETAILS_LIGHT:String = "vLabelDetailsLight";
 
 	public static final VARIANT_BUTTON_LINK:String = "vButtonLink";
 
@@ -128,18 +130,19 @@ class OutlineTheme extends ClassVariantTheme {
 	private function setLabelSmallLightStyles(label:Label):Void {
 		this.setCustomLabelStyles(label, cast FONT_SIZE * 0.65, LIGHT_COLOR);
 	}
-
-	private function setCustomLabelStyles(label:Label, fontSize:UInt, fontColor:UInt):Void {
-		label.embedFonts = true;
-		if (label.textFormat == null)
-			label.textFormat = this.getTextFormat(fontSize, fontColor);
+	private function setLabelDetailsStyles(label:Label):Void {
+		this.setCustomLabelStyles(label, cast FONT_SIZE * 0.72, DARK_COLOR, true);
 	}
 
-	// private function setLabelWhiteLargStyles(label:Label):Void {
-	// 	label.embedFonts = true;
-	// 	if (label.textFormat == null)
-	// 		label.textFormat = this.getTextFormat(FONT_SIZE * 2, GRAY_COLOR);
-	// }
+	private function setLabelDetailsLightStyles(label:Label):Void {
+		this.setCustomLabelStyles(label, cast FONT_SIZE * 0.72, LIGHT_COLOR, true);
+	}
+
+	private function setCustomLabelStyles(label:Label, fontSize:UInt, fontColor:UInt, bold:Bool = false, align:String = "center"):Void {
+		label.embedFonts = true;
+		if (label.textFormat == null)
+			label.textFormat = this.getTextFormat(fontSize, fontColor, bold, align);
+	}
 
 	private function setButtonStyles(button:Button):Void {
 		button.backgroundSkin = this.getButtonSkin();
@@ -239,8 +242,8 @@ class OutlineTheme extends ClassVariantTheme {
 		return skin; // getScaled9Textures("button-skin", SCALEGRID_BUTTON);
 	}
 
-	public function getTextFormat(size:UInt = 0, color:UInt = 0, bold:Bool = false):TextFormat {
-		return new TextFormat(FONT_NAME, size == 0 ? FONT_SIZE : size, color == 0 ? GRAY_COLOR : color, bold);
+	public function getTextFormat(size:UInt = 0, color:UInt = 0, bold:Bool = false, align:String = "center"):TextFormat {
+		return new TextFormat(FONT_NAME, size == 0 ? FONT_SIZE : size, color == 0 ? GRAY_COLOR : color, bold, null, null, null, null, align);
 	}
 
 	public function getDefaultShadow(size:Float = 3, value:Float = 1):DropShadowFilter {
