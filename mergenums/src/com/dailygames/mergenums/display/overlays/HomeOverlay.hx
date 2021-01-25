@@ -2,6 +2,8 @@ package com.dailygames.mergenums.display.overlays;
 
 import com.dailygames.mergenums.Game.GameState;
 import com.dailygames.mergenums.display.Indicator;
+import com.dailygames.mergenums.display.buttons.IconButton;
+import com.dailygames.mergenums.display.buttons.MessageButton;
 import com.dailygames.mergenums.display.overlays.BaseOverlay.ScreenType;
 import com.dailygames.mergenums.display.popups.*;
 import com.dailygames.mergenums.events.GameEvent;
@@ -9,15 +11,13 @@ import com.dailygames.mergenums.utils.Prefs.*;
 import com.dailygames.mergenums.utils.Prefs;
 import com.dailygames.mergenums.utils.Utils;
 import feathers.controls.AssetLoader;
-import feathers.controls.Button;
 import feathers.controls.Label;
 import feathers.controls.LayoutGroup;
 import feathers.events.TriggerEvent;
 import feathers.layout.AnchorLayout;
 import feathers.layout.AnchorLayoutData;
+import feathers.style.Theme;
 import haxe.Timer;
-import openfl.Assets;
-import openfl.display.Bitmap;
 import openfl.events.Event;
 import openfl.events.MouseEvent;
 import openfl.filters.DropShadowFilter;
@@ -103,21 +103,32 @@ class HomeOverlay extends BaseOverlay {
 		this.coinsIndicator.addEventListener(TriggerEvent.TRIGGER, this.coinsIndicator_triggerHandler);
 		this.header.addChild(this.coinsIndicator);
 
-		function addButton(name:String, layoutData:AnchorLayoutData, inHeader:Bool):Button {
-			var button = new Button();
-			button.name = name;
-			button.height = button.width = 50.F();
-			button.layoutData = layoutData;
-			button.icon = new Bitmap(Assets.getBitmapData(name));
-			button.addEventListener(MouseEvent.CLICK, buttons_clickHandler);
-			inHeader ? this.header.addChild(button) : this.footer.addChild(button);
-			return button;
-		}
-		addButton("kill", AnchorLayoutData.middleRight(0, 40.F()), false);
-		addButton("killAll", AnchorLayoutData.middleRight(0, 100.F()), false);
-		addButton("pause", AnchorLayoutData.middleLeft(0, 40.F()), false);
+		addButton("kill", OutlineTheme.LIGHT_COLORS, AnchorLayoutData.middleRight(0, 40.F()), false);
+		addButton("killAll", OutlineTheme.LIGHT_COLORS, AnchorLayoutData.middleRight(0, 100.F()), false);
+		addButton("pause", OutlineTheme.LIGHT_COLORS, AnchorLayoutData.middleLeft(0, 40.F()), false);
 
 		this.start();
+	}
+
+	private function addButton(name:String, colors:Array<UInt>, layoutData:AnchorLayoutData, inHeader:Bool):LayoutGroup {
+		var theme = cast(Theme.getTheme(), OutlineTheme);
+		var button:LayoutGroup;
+		if (name == "pause") {
+			button = new IconButton();
+			cast(button, IconButton).padding = 2.I();
+			cast(button, IconButton).icon = name;
+		} else {
+			button = new MessageButton();
+			cast(button, MessageButton).icon = name;
+			button.backgroundSkin = theme.getButtonSkin(colors, 2.F(), 14.F());
+		}
+		button.name = name;
+		button.width = 48.I();
+		button.height = 48.I();
+		button.layoutData = layoutData;
+		button.addEventListener(MouseEvent.CLICK, this.buttons_clickHandler);
+		inHeader ? this.header.addChild(button) : this.footer.addChild(button);
+		return button;
 	}
 
 	private function start():Void {
@@ -198,7 +209,7 @@ class HomeOverlay extends BaseOverlay {
 	}
 
 	private function buttons_clickHandler(event:MouseEvent):Void {
-		var button = cast(event.target, Button);
+		var button = cast(event.currentTarget, LayoutGroup);
 		switch (button.name) {
 			case "pause":
 				this.pause();
