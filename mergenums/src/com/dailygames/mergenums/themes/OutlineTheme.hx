@@ -99,7 +99,7 @@ class OutlineTheme extends ClassVariantTheme {
 		this.styleProvider.setStyleFunction(MessageButton, VARIANT_MBUTTON_GREEN, this.setMessageButtonGreenStyles);
 		this.styleProvider.setStyleFunction(MessageButton, VARIANT_MBUTTON_YELLOW, this.setMessageButtonYellowStyles);
 		this.styleProvider.setStyleFunction(MessageButton, VARIANT_MBUTTON_ORANGE, this.setMessageButtonOrangeStyles);
-		
+
 		this.styleProvider.setStyleFunction(MessageButton, VARIANT_MSBUTTON, this.setSmallMessageButtonStyles);
 		this.styleProvider.setStyleFunction(MessageButton, VARIANT_MSBUTTON_BLUE, this.setSmallMessageButtonBlueStyles);
 		this.styleProvider.setStyleFunction(MessageButton, VARIANT_MSBUTTON_GREEN, this.setSmallMessageButtonGreenStyles);
@@ -110,7 +110,7 @@ class OutlineTheme extends ClassVariantTheme {
 	}
 
 	private function setLabelStyles(label:Label):Void {
-		this.setCustomLabelStyles(label, FONT_SIZE, GRAY_COLOR);
+		this.setCustomLabelStyles(label, FONT_SIZE, DARK_COLOR);
 	}
 
 	private function setLabelLightStyles(label:Label):Void {
@@ -118,7 +118,7 @@ class OutlineTheme extends ClassVariantTheme {
 	}
 
 	private function setLabelMediumStyles(label:Label):Void {
-		this.setCustomLabelStyles(label, cast FONT_SIZE * 1.4, GRAY_COLOR);
+		this.setCustomLabelStyles(label, cast FONT_SIZE * 1.4, DARK_COLOR);
 	}
 
 	private function setLabelMediumLightStyles(label:Label):Void {
@@ -126,7 +126,7 @@ class OutlineTheme extends ClassVariantTheme {
 	}
 
 	private function setLabelSmallStyles(label:Label):Void {
-		this.setCustomLabelStyles(label, cast FONT_SIZE * 0.65, GRAY_COLOR);
+		this.setCustomLabelStyles(label, cast FONT_SIZE * 0.65, DARK_COLOR);
 	}
 
 	private function setLabelSmallLightStyles(label:Label):Void {
@@ -187,26 +187,26 @@ class OutlineTheme extends ClassVariantTheme {
 	}
 
 	private function setSmallMessageButtonStyles(button:MessageButton):Void {
-		this.setCustomMButtonStyles(button, LIGHT_COLORS, VARIANT_LABEL_MEDIUM, null, 4, 22);
+		this.setCustomMButtonStyles(button, LIGHT_COLORS, VARIANT_LABEL_MEDIUM, null, 4, 20);
 	}
 
 	private function setSmallMessageButtonBlueStyles(button:MessageButton):Void {
-		this.setCustomMButtonStyles(button, BLUE_COLORS, VARIANT_LABEL_MEDIUM_LIGHT, VARIANT_LABEL_LIGHT, 4, 22);
+		this.setCustomMButtonStyles(button, BLUE_COLORS, VARIANT_LABEL_MEDIUM_LIGHT, VARIANT_LABEL_LIGHT, 4, 20);
 	}
 
 	private function setSmallMessageButtonGreenStyles(button:MessageButton):Void {
-		this.setCustomMButtonStyles(button, GREEN_COLORS, VARIANT_LABEL_MEDIUM_LIGHT, VARIANT_LABEL_LIGHT, 4, 22);
+		this.setCustomMButtonStyles(button, GREEN_COLORS, VARIANT_LABEL_MEDIUM_LIGHT, VARIANT_LABEL_LIGHT, 4, 20);
 	}
 
 	private function setSmallMessageButtonYellowStyles(button:MessageButton):Void {
-		this.setCustomMButtonStyles(button, YELLOW_COLORS, VARIANT_LABEL_MEDIUM_LIGHT, VARIANT_LABEL_LIGHT, 4, 22);
+		this.setCustomMButtonStyles(button, YELLOW_COLORS, VARIANT_LABEL_MEDIUM_LIGHT, VARIANT_LABEL_LIGHT, 4, 20);
 	}
 
 	private function setSmallMessageButtonOrangeStyles(button:MessageButton):Void {
-		this.setCustomMButtonStyles(button, ORANGE_COLORS, VARIANT_LABEL_MEDIUM_LIGHT, VARIANT_LABEL_LIGHT, 4, 22);
+		this.setCustomMButtonStyles(button, ORANGE_COLORS, VARIANT_LABEL_MEDIUM_LIGHT, VARIANT_LABEL_LIGHT, 4, 20);
 	}
 
-	public function setCustomMButtonStyles(button:MessageButton, colors:Array<UInt>, textVariant:String, messageVariant:String, deep:Float = 4,
+	public function setCustomMButtonStyles(button:MessageButton, colors:Array<UInt>, textVariant:String, messageVariant:String, deep:Float = 5,
 			radius:Float = 30):Void {
 		if (button.backgroundSkin == null)
 			button.backgroundSkin = this.getButtonSkin(colors, deep, radius);
