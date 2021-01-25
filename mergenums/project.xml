@@ -34,6 +34,8 @@
 	<assets id="killAll" path="assets/images/killAll.png"/>
 	<assets id="heart" path="assets/images/heart.png"/>
 	<assets id="crown" path="assets/images/crown.png"/>
+	<assets id="boost-big" path="assets/images/boost-big.png"/>
+	<assets id="boost-next" path="assets/images/boost-next.png"/>
 	
 	<!-- <assets path="Assets/images" rename="images" include="*" exclude="icon.svg" /> -->
 	<assets path="Assets/sounds" rename="sounds" include="*" />

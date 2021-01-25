@@ -85,7 +85,7 @@ class BaseOverlay extends LayoutGroup {
 
 	private function overlayFactory():Void {
 		this.overlay = new RectangleSkin();
-		this.overlay.fill = SolidColor(OutlineTheme.GRAY_COLOR, 0.8);
+		this.overlay.fill = SolidColor(OutlineTheme.GRAY_COLOR, 0.96);
 		this.backgroundSkin = this.overlay;
 	}
 

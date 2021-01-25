@@ -66,7 +66,7 @@ class BasePopup extends BaseOverlay {
 	private function contentBackgroundFactory():Void {
 		var skin = new RectangleSkin();
 		skin.cornerRadius = 28.0.F();
-		skin.fill = SolidColor(OutlineTheme.DARK_COLOR, 0.8);
+		skin.fill = SolidColor(OutlineTheme.DARK_COLOR, 0.85);
 		this.content.backgroundSkin = skin;
 	}
 
