@@ -74,15 +74,15 @@ class ConfirmPopup extends BasePopup {
 			this.content.addChild(label);
 	}
 
-	private function addButton(name:String, message:String, variant:String, layoutData:AnchorLayoutData, width:Float):MessageButton {
+	private function addButton(name:String, message:String, variant:String, layoutData:AnchorLayoutData, width:Float = 0, height:Float = 0):MessageButton {
 		var button = new MessageButton();
-		button.name = name;
-		button.width = width;
-		button.height = 80.F();
-		button.message = message;
 		button.icon = name;
+		button.name = name;
+		button.message = message;
 		button.variant = variant;
 		button.layoutData = layoutData;
+		button.width = width <= 0 ? 180.F() : width;
+		button.height = height <= 0 ? 80.F() : height;
 		button.addEventListener(MouseEvent.CLICK, this.buttons_clickHandler);
 		this.content.addChild(button);
 		return button;
