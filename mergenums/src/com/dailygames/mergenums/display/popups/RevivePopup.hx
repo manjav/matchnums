@@ -25,7 +25,7 @@ class RevivePopup extends ConfirmPopup implements IGamePlayPopup {
 			return value;
 		this.value = value;
 		this.cost = 100 * (value + 1);
-		this.coinButton.text = Std.string(value);
+		this.coinButton.text = Std.string(this.cost);
 		this.ranksDisplay.updateData();
 		return value;
 	}
@@ -46,8 +46,8 @@ class RevivePopup extends ConfirmPopup implements IGamePlayPopup {
 		Actuate.tween(heartIcon, 0.5, {alpha: 1, width: 128.I(), height: 128.I()}).delay(0.3).ease(Back.easeOut);
 		this.content.addChild(heartIcon);
 
-		this.coinButton = this.addButton("coin", "Revive", null, AnchorLayoutData.bottomLeft(28.F(), 18.F()), 120.F());
-		this.adsButton = this.addButton("ads", "Revive", OutlineTheme.VARIANT_MBUTTON_ORANGE, AnchorLayoutData.bottomRight(28.F(), 18.F()), 154.F());
+		this.coinButton = this.addButton("coin", "Revive", null, AnchorLayoutData.bottomLeft(28.F(), 16.F()), 124.F());
+		this.adsButton = this.addButton("ads", "Revive", OutlineTheme.VARIANT_MBUTTON_ORANGE, AnchorLayoutData.bottomRight(28.F(), 16.F()), 156.F());
 		this.adsButton.text = "Free";
 	}
 

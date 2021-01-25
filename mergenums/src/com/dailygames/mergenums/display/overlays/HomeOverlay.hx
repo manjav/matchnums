@@ -93,7 +93,7 @@ class HomeOverlay extends BaseOverlay {
 
 		this.coinsIndicator = new Indicator();
 		this.coinsIndicator.width = 140.F();
-		this.coinsIndicator.height = 58.F();
+		this.coinsIndicator.height = 54.F();
 		this.coinsIndicator.icon = "coin";
 		this.coinsIndicator.format = function(value:Float):String {
 			return Utils.toCurrency(value);

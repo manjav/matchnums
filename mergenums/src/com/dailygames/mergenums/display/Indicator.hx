@@ -39,13 +39,13 @@ class Indicator extends LayoutGroup {
 		this.text = value;
 		if (this.labelDisplay == null) {
 			this.labelDisplay = new Label();
-			this.labelDisplay.layoutData = AnchorLayoutData.center(F(4), F(0));
+			this.labelDisplay.layoutData = AnchorLayoutData.center(F(0), F(-2));
 			this.addChild(this.labelDisplay);
 			this.labelDisplay.text = this.text;
 
 			if (this.autoSizeText) {
 				var format = this.labelDisplay.textFormat;
-				var size = Math.round(OutlineTheme.FONT_SIZE * (7 / this.text.length));
+				var size = Math.round(OutlineTheme.FONT_SIZE * (6 / this.text.length));
 				if (format == null)
 					format = cast(Theme.getTheme(), OutlineTheme).getTextFormat(size, 1);
 				format.size = size;
@@ -74,8 +74,8 @@ class Indicator extends LayoutGroup {
 		this.backgroundSkin = cast(Theme.getTheme(), OutlineTheme).getButtonSkin();
 
 		this.iconDisplay = new AssetLoader();
-		this.iconDisplay.layoutData = AnchorLayoutData.middleLeft(F(-2), F(6));
-		this.iconDisplay.width = this.iconDisplay.height = F(38);
+		this.iconDisplay.height = height * 0.65;
+		this.iconDisplay.layoutData = AnchorLayoutData.middleLeft(0, F(6));
 		if (this.icon != null)
 			this.iconDisplay.source = this.icon;
 		this.addChild(this.iconDisplay);

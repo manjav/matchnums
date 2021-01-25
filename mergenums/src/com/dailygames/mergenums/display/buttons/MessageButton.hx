@@ -95,9 +95,9 @@ class MessageButton extends LayoutGroup {
 		this.mouseChildren = true;
 
 		this.iconDisplay = new AssetLoader();
-		this.iconDisplay.height = 54.I();
+		this.iconDisplay.height = height * 0.65;
 		this.iconDisplay.source = this.icon;
-		this.iconDisplay.layoutData = AnchorLayoutData.middleLeft(4.I(), padding);
+		this.iconDisplay.layoutData = AnchorLayoutData.middleLeft(0, padding);
 		this.iconDisplay.addEventListener(Event.RESIZE, this.iconDisplay_completeHandler);
 		this.addChild(this.iconDisplay);
 
@@ -111,8 +111,8 @@ class MessageButton extends LayoutGroup {
 	}
 
 	private function iconDisplay_completeHandler(event:Event):Void {
-		var msgLayout = AnchorLayoutData.middleLeft(this.text == null ? -3.I() : 10.I() , this.iconDisplay.width + 4.I());
-		this.textDisplay.layoutData = AnchorLayoutData.middleLeft(-10.I(), this.iconDisplay.width + 4.I());
+		var msgLayout = new AnchorLayoutData(null, 10.I(), null, this.iconDisplay.width + 4.I(), null, this.text == null ? -3.I() : 10.I());
+		this.textDisplay.layoutData = new AnchorLayoutData(null, 10.I(), null, this.iconDisplay.width + 4.I(), null, -10.I());
 		this.messageDisplay.layoutData = msgLayout;
 	}
 }
