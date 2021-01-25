@@ -49,6 +49,12 @@ class OutlineTheme extends ClassVariantTheme {
 	public static final VARIANT_MBUTTON_YELLOW:String = "vMButtonYellow";
 	public static final VARIANT_MBUTTON_ORANGE:String = "vMButtonOrange";
 
+	public static final VARIANT_MSBUTTON_LIGHT:String = "vMSButton";
+	public static final VARIANT_MSBUTTON_BLUE:String = "vMSButtonBlue";
+	public static final VARIANT_MSBUTTON_GREEN:String = "vMSButtonGreen";
+	public static final VARIANT_MSBUTTON_YELLOW:String = "vMSButtonYellow";
+	public static final VARIANT_MSBUTTON_ORANGE:String = "vMSButtonOrange";
+
 	public static final SCALEGRID_BUTTON:Rectangle = new Rectangle(14, 16, 1, 1);
 
 	public static function F(value:Float):Float {
@@ -89,6 +95,12 @@ class OutlineTheme extends ClassVariantTheme {
 		this.styleProvider.setStyleFunction(MessageButton, VARIANT_MBUTTON_GREEN, this.setMessageButtonGreenStyles);
 		this.styleProvider.setStyleFunction(MessageButton, VARIANT_MBUTTON_YELLOW, this.setMessageButtonYellowStyles);
 		this.styleProvider.setStyleFunction(MessageButton, VARIANT_MBUTTON_ORANGE, this.setMessageButtonOrangeStyles);
+		
+		this.styleProvider.setStyleFunction(MessageButton, null, this.setSmallMessageButtonStyles);
+		this.styleProvider.setStyleFunction(MessageButton, VARIANT_MSBUTTON_BLUE, this.setSmallMessageButtonBlueStyles);
+		this.styleProvider.setStyleFunction(MessageButton, VARIANT_MSBUTTON_GREEN, this.setSmallMessageButtonGreenStyles);
+		this.styleProvider.setStyleFunction(MessageButton, VARIANT_MSBUTTON_YELLOW, this.setSmallMessageButtonYellowStyles);
+		this.styleProvider.setStyleFunction(MessageButton, VARIANT_MSBUTTON_LIGHT, this.setSmallMessageButtonOrangeStyles);
 
 		this.styleProvider.setStyleFunction(ItemRenderer, null, this.setItemRendererStyles);
 	}
@@ -169,8 +181,30 @@ class OutlineTheme extends ClassVariantTheme {
 		this.setCustomMButtonStyles(button, ORANGE_COLORS, VARIANT_LABEL_MEDIUM_LIGHT, VARIANT_LABEL_LIGHT);
 	}
 
-	private function setCustomMButtonStyles(button:MessageButton, colors:Array<UInt>, textVariant:String, messageVariant:String):Void {
-		button.backgroundSkin = this.getButtonSkin(colors, 4.I(), 30.I());
+	private function setSmallMessageButtonStyles(button:MessageButton):Void {
+		this.setCustomMButtonStyles(button, LIGHT_COLORS, VARIANT_LABEL_MEDIUM, null, 4, 22);
+	}
+
+	private function setSmallMessageButtonBlueStyles(button:MessageButton):Void {
+		this.setCustomMButtonStyles(button, BLUE_COLORS, VARIANT_LABEL_MEDIUM_LIGHT, VARIANT_LABEL_LIGHT, 4, 22);
+	}
+
+	private function setSmallMessageButtonGreenStyles(button:MessageButton):Void {
+		this.setCustomMButtonStyles(button, GREEN_COLORS, VARIANT_LABEL_MEDIUM_LIGHT, VARIANT_LABEL_LIGHT, 4, 22);
+	}
+
+	private function setSmallMessageButtonYellowStyles(button:MessageButton):Void {
+		this.setCustomMButtonStyles(button, YELLOW_COLORS, VARIANT_LABEL_MEDIUM_LIGHT, VARIANT_LABEL_LIGHT, 4, 22);
+	}
+
+	private function setSmallMessageButtonOrangeStyles(button:MessageButton):Void {
+		this.setCustomMButtonStyles(button, ORANGE_COLORS, VARIANT_LABEL_MEDIUM_LIGHT, VARIANT_LABEL_LIGHT, 4, 22);
+	}
+
+	public function setCustomMButtonStyles(button:MessageButton, colors:Array<UInt>, textVariant:String, messageVariant:String, deep:Float = 4,
+			radius:Float = 30):Void {
+		if (button.backgroundSkin == null)
+			button.backgroundSkin = this.getButtonSkin(colors, deep, radius);
 		button.textDisplay.variant = textVariant;
 		button.textDisplay.filters = [getDefaultShadow(5.F())];
 		button.messageDisplay.variant = messageVariant;
