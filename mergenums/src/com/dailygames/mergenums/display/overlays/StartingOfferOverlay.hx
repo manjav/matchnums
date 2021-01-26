@@ -88,7 +88,7 @@ class BoostActivator extends LayoutGroup {
 		textDisplay.text = text;
 		textDisplay.wordWrap = true;
 		textDisplay.textFormat = theme.getTextFormat(Math.round(OutlineTheme.FONT_SIZE * 0.72), 0, true, "center");
-		textDisplay.layoutData= new AnchorLayoutData(null, 16.I(), 120.I(), 16.I());
+		textDisplay.layoutData= new AnchorLayoutData(null, 12.I(), 120.I(), 12.I());
 		this.addChild(textDisplay);
 
 		coinButton = addButton("coin", "100", OutlineTheme.VARIANT_MSBUTTON, new AnchorLayoutData(null, 24.I(), 68.I(), 24.I()));
