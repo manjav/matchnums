@@ -137,7 +137,7 @@ class OutlineTheme extends ClassVariantTheme {
 	}
 
 	private function setLabelDetailsLightStyles(label:Label):Void {
-		this.setCustomLabelStyles(label, cast FONT_SIZE * 0.72, LIGHT_COLOR, true);
+		this.setCustomLabelStyles(label, cast FONT_SIZE * 0.92, LIGHT_COLOR, true);
 	}
 
 	private function setCustomLabelStyles(label:Label, fontSize:UInt, fontColor:UInt, bold:Bool = false):Void {
@@ -290,19 +290,19 @@ class MyButtonSkin extends ProgrammaticSkin {
 	}
 
 	override private function update():Void {
-		var b = 2.F();
+		var b = 1.6.F();
 		this.graphics.clear();
 		this.graphics.beginFill(OutlineTheme.GRAY_COLOR);
-		this.graphics.drawRoundRect(0, 0, this.actualWidth, this.actualHeight, cornerRadius + 4.F(), cornerRadius * 1.2);
+		this.graphics.drawRoundRect(0, 0, this.actualWidth, this.actualHeight, this.cornerRadius * 1.2, cornerRadius * 1.2);
 		this.graphics.endFill();
 		this.graphics.beginFill(this.colors[2]);
-		this.graphics.drawRoundRect(b, b, this.actualWidth - b * 2, this.actualHeight - b * 2, cornerRadius, cornerRadius);
+		this.graphics.drawRoundRect(b, b, this.actualWidth - b * 2, this.actualHeight - b * 2, this.cornerRadius, cornerRadius);
 		this.graphics.endFill();
 
 		var matrix = new Matrix();
 		matrix.createGradientBox(0, this.actualHeight - b * 3, Math.PI * 0.5);
 		this.graphics.beginGradientFill(LINEAR, [this.colors[0], this.colors[1]], [1, 1], [170, 255], matrix);
-		this.graphics.drawRoundRect(b, b, this.actualWidth - b * 2, this.actualHeight - b * 2 - deepness, cornerRadius, cornerRadius);
+		this.graphics.drawRoundRect(b, b, this.actualWidth - b * 2, this.actualHeight - b * 2 - this.deepness, this.cornerRadius, this.cornerRadius);
 		this.graphics.endFill();
 	}
 }
