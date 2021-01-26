@@ -19,6 +19,7 @@ class Indicator extends LayoutGroup {
 
 	public var autoSizeText = true;
 
+	public var clickable(default, default):Bool = true;
 	public var type(default, set):String;
 
 	public function set_type(_type:String):String {
@@ -38,11 +39,8 @@ class Indicator extends LayoutGroup {
 		if (this.text == value)
 			return value;
 		this.text = value;
-		if (this.labelDisplay == null) {
-			this.labelDisplay = new Label();
-			this.labelDisplay.layoutData = AnchorLayoutData.center(F(0), F(-2));
-			this.addChild(this.labelDisplay);
-			this.labelDisplay.text = this.text;
+		if (this.labelDisplay != null) {
+			this.labelDisplay.text = value;
 
 			if (this.autoSizeText) {
 				var format = this.labelDisplay.textFormat;
@@ -81,13 +79,20 @@ class Indicator extends LayoutGroup {
 			this.iconDisplay.source = this.icon;
 		this.addChild(this.iconDisplay);
 
-		var plus = new Label();
-		plus.variant = OutlineTheme.VARIANT_LABEL_MEDIUM;
-		plus.layoutData = AnchorLayoutData.middleRight(F(-2), F(14));
-		plus.text = "+";
-		this.addChild(plus);
+		this.labelDisplay = new Label();
+		this.labelDisplay.layoutData = AnchorLayoutData.center(F(this.clickable ? 0 : 10), F(-2));
+		this.labelDisplay.text = this.text;
+		this.addChild(this.labelDisplay);
 
-		this.addEventListener(MouseEvent.CLICK, this.clickHandler);
+		if (this.clickable) {
+			var plus = new Label();
+			plus.variant = OutlineTheme.VARIANT_LABEL_MEDIUM;
+			plus.layoutData = AnchorLayoutData.middleRight(F(-2), F(14));
+			plus.text = "+";
+			this.addChild(plus);
+
+			this.addEventListener(MouseEvent.CLICK, this.clickHandler);
+		}
 	}
 
 	public dynamic function format(value:Float):String {

@@ -272,6 +272,7 @@ class HomeOverlay extends BaseOverlay {
 		});
 
 		var coinsIndicator = new Indicator();
+		coinsIndicator.clickable = listener != null;
 		coinsIndicator.width = 140.F();
 		coinsIndicator.height = 54.F();
 		coinsIndicator.icon = "coin";
