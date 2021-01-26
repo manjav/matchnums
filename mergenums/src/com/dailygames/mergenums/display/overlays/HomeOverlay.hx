@@ -30,9 +30,6 @@ class HomeOverlay extends BaseOverlay {
 	private var header:LayoutGroup;
 	private var footer:LayoutGroup;
 	private var removeCellMode:String;
-	private var scoresIndicator:Indicator;
-	private var recordIndicator:Indicator;
-	private var coinsIndicator:Indicator;
 
 	override private function initialize():Void {
 		super.initialize();
@@ -48,8 +45,7 @@ class HomeOverlay extends BaseOverlay {
 		this.addChild(this.game);
 
 		// header and footert
-		this.header = new LayoutGroup();
-		this.header.layout = new AnchorLayout();
+		this.header = createHeader(this.coinsIndicator_triggerHandler);
 		this.header.layoutData = new AnchorLayoutData(null, 0, null, 0);
 		this.addChild(this.header);
 
@@ -58,59 +54,14 @@ class HomeOverlay extends BaseOverlay {
 		this.footer.layoutData = this.header.layoutData;
 		this.addChild(this.footer);
 
-		var scoreboard = new LayoutGroup();
-		scoreboard.layout = new AnchorLayout();
-		scoreboard.layoutData = AnchorLayoutData.middleRight(0, 16.F());
-		this.header.addChild(scoreboard);
-
-		var cupIcon = new AssetLoader();
-		cupIcon.source = "cup";
-		cupIcon.height = 50.F();
-		cupIcon.layoutData = AnchorLayoutData.topRight(3.F(), 16.F());
-		scoreboard.addChild(cupIcon);
-
-		var shadow = new DropShadowFilter(3.F(), 75, 0, 0.92, 3.F(), 3.F(), 1, 3);
-
-		var score = new Label();
-		score.filters = [shadow];
-		score.variant = OutlineTheme.VARIANT_LABEL_MEDIUM_LIGHT;
-		score.text = "0";
-		score.layoutData = AnchorLayoutData.topRight(-3.F(), 66.F());
-		scoreboard.addChild(score);
-		Prefs.instance.addEventListener(SCORES, function(event:GameEvent):Void {
-			score.text = Std.string(event.data);
-		});
-
-		var record = new Label();
-		record.filters = [shadow];
-		record.variant = OutlineTheme.VARIANT_LABEL_LIGHT;
-		record.text = Std.string(Prefs.instance.get(RECORD));
-		record.layoutData = AnchorLayoutData.topRight(26.F(), 66.F());
-		scoreboard.addChild(record);
-		Prefs.instance.addEventListener(RECORD, function(event:GameEvent):Void {
-			record.text = Std.string(event.data);
-		});
-
-		this.coinsIndicator = new Indicator();
-		this.coinsIndicator.width = 140.F();
-		this.coinsIndicator.height = 54.F();
-		this.coinsIndicator.icon = "coin";
-		this.coinsIndicator.format = function(value:Float):String {
-			return Utils.toCurrency(value);
-		}
-		this.coinsIndicator.type = COIN;
-		this.coinsIndicator.layoutData = AnchorLayoutData.middleLeft(0, 40.F());
-		this.coinsIndicator.addEventListener(TriggerEvent.TRIGGER, this.coinsIndicator_triggerHandler);
-		this.header.addChild(this.coinsIndicator);
-
-		addButton("kill", OutlineTheme.LIGHT_COLORS, AnchorLayoutData.middleRight(0, 40.F()), false);
-		addButton("killAll", OutlineTheme.LIGHT_COLORS, AnchorLayoutData.middleRight(0, 100.F()), false);
-		addButton("pause", OutlineTheme.LIGHT_COLORS, AnchorLayoutData.middleLeft(0, 40.F()), false);
+		addButton("kill", OutlineTheme.LIGHT_COLORS, AnchorLayoutData.middleRight(0, 40.F()));
+		addButton("killAll", OutlineTheme.LIGHT_COLORS, AnchorLayoutData.middleRight(0, 100.F()));
+		addButton("pause", OutlineTheme.LIGHT_COLORS, AnchorLayoutData.middleLeft(0, 40.F()));
 
 		this.start();
 	}
 
-	private function addButton(name:String, colors:Array<UInt>, layoutData:AnchorLayoutData, inHeader:Bool):LayoutGroup {
+	private function addButton(name:String, colors:Array<UInt>, layoutData:AnchorLayoutData):LayoutGroup {
 		var theme = cast(Theme.getTheme(), OutlineTheme);
 		var button:LayoutGroup;
 		if (name == "pause") {
@@ -127,7 +78,7 @@ class HomeOverlay extends BaseOverlay {
 		button.height = 48.I();
 		button.layoutData = layoutData;
 		button.addEventListener(MouseEvent.CLICK, this.buttons_clickHandler);
-		inHeader ? this.header.addChild(button) : this.footer.addChild(button);
+		this.footer.addChild(button);
 		return button;
 	}
 
@@ -281,5 +232,58 @@ class HomeOverlay extends BaseOverlay {
 		this.footer.y = this.game.y + this.game.height;
 
 		super.refreshBackgroundLayout();
+	}
+
+	static public function createHeader(listener:Dynamic):LayoutGroup {
+		var container = new LayoutGroup();
+		container.layout = new AnchorLayout();
+
+		var scoreboard = new LayoutGroup();
+		scoreboard.layout = new AnchorLayout();
+		scoreboard.layoutData = AnchorLayoutData.middleRight(0, 16.F());
+		container.addChild(scoreboard);
+
+		var cupIcon = new AssetLoader();
+		cupIcon.source = "cup";
+		cupIcon.height = 50.F();
+		cupIcon.layoutData = AnchorLayoutData.topRight(3.F(), 16.F());
+		scoreboard.addChild(cupIcon);
+
+		var shadow = new DropShadowFilter(3.F(), 75, 0, 0.92, 3.F(), 3.F(), 1, 3);
+
+		var score = new Label();
+		score.filters = [shadow];
+		score.variant = OutlineTheme.VARIANT_LABEL_MEDIUM_LIGHT;
+		score.text = "0";
+		score.layoutData = AnchorLayoutData.topRight(-3.F(), 66.F());
+		scoreboard.addChild(score);
+		Prefs.instance.addEventListener(SCORES, function(event:GameEvent):Void {
+			score.text = Std.string(event.data);
+		});
+
+		var record = new Label();
+		record.filters = [shadow];
+		record.variant = OutlineTheme.VARIANT_LABEL_LIGHT;
+		record.text = Std.string(Prefs.instance.get(RECORD));
+		record.layoutData = AnchorLayoutData.topRight(26.F(), 66.F());
+		scoreboard.addChild(record);
+		Prefs.instance.addEventListener(RECORD, function(event:GameEvent):Void {
+			record.text = Std.string(event.data);
+		});
+
+		var coinsIndicator = new Indicator();
+		coinsIndicator.width = 140.F();
+		coinsIndicator.height = 54.F();
+		coinsIndicator.icon = "coin";
+		coinsIndicator.format = function(value:Float):String {
+			return Utils.toCurrency(value);
+		}
+		coinsIndicator.type = COIN;
+		coinsIndicator.layoutData = AnchorLayoutData.middleLeft(0, 40.F());
+		container.addChild(coinsIndicator);
+		if (listener != null)
+			coinsIndicator.addEventListener(TriggerEvent.TRIGGER, listener);
+
+		return container;
 	}
 }
