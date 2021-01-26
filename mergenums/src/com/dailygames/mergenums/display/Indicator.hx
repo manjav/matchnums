@@ -11,6 +11,7 @@ import feathers.events.TriggerEvent;
 import feathers.layout.AnchorLayout;
 import feathers.layout.AnchorLayoutData;
 import feathers.style.Theme;
+import openfl.events.MouseEvent;
 
 class Indicator extends LayoutGroup {
 	private var labelDisplay:Label;
@@ -85,19 +86,29 @@ class Indicator extends LayoutGroup {
 		plus.layoutData = AnchorLayoutData.middleRight(F(-2), F(14));
 		plus.text = "+";
 		this.addChild(plus);
+
+		this.addEventListener(MouseEvent.CLICK, this.clickHandler);
 	}
 
 	public dynamic function format(value:Float):String {
 		return Std.string(value);
 	}
 
-	@:access(feathers.events.TriggerEvent)
+	private function clickHandler(event:MouseEvent):Void {
+		this.trigger();
+	}
+
 	private function prefs_changeHandler(event:GameEvent):Void {
 		var newValue = cast(event.data, Float);
 		if (this.type == Prefs.COIN && newValue < 0) {
-			this.dispatchEvent(new TriggerEvent(TriggerEvent.TRIGGER));
+			this.trigger();
 			return;
 		}
 		this.text = this.format(newValue);
+	}
+
+	@:access(feathers.events.TriggerEvent)
+	private function trigger():Void {
+		this.dispatchEvent(new TriggerEvent(TriggerEvent.TRIGGER));
 	}
 }
