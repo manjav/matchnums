@@ -1,66 +1,78 @@
 package com.dailygames.mergenums.display.items;
 
-import feathers.controls.Button;
-import feathers.controls.dataRenderers.ItemRenderer;
-import openfl.Assets;
-import openfl.display.Bitmap;
+import feathers.controls.AssetLoader;
+import feathers.controls.Label;
+import feathers.controls.LayoutGroup;
+import feathers.controls.dataRenderers.IDataRenderer;
+import feathers.layout.AnchorLayout;
+import feathers.layout.AnchorLayoutData;
+import feathers.style.Theme;
 
-class ShopItemRenderer extends ItemRenderer {
-	/* override private function set_data(value:Dynamic):Dynamic {
-		if (this.data == value)
-			return value;
-		if (value == null)
-			return value;
-		// this.tool = cast(value, Tool);
-		// this.icon = new ScaledBitmap(tool.type);
-		// this.selectedIcon = new ScaledBitmap(tool.type + "-blue");
-		return super.set_data(value);
-	}*/
-	static public var SIZE:Float = 72;
+using com.dailygames.mergenums.themes.OutlineTheme;
 
-	private var buttonDisplay:Button;
+class ShopItemRenderer extends LayoutGroup implements IDataRenderer {
+	private var _data:Dynamic;
+
+	/**
+		@see `feathers.controls.dataRenderers.IDataRenderer.data`
+	**/
+	public var data(get, set):Dynamic;
+
+	private function get_data():Dynamic {
+		return this._data;
+	}
+
+	private function set_data(value:Dynamic):Dynamic {
+		if (this._data == value)
+			return this._data;
+		return this._data = value;
+	}
+
+	static public var SIZE:Float;
 
 	public function new() {
 		super();
-		this.height = this.width = SIZE;
-	}
-
-	override private function update():Void {
-		if (this.isInvalid(DATA)) {
-			if (this.icon == null)
-				this.icon = getIcon();
-			this.buttonDisplay.text = this.data.value;
-		}
-
-		super.update();
+		this.height = this.width = SIZE = 106.I();
 	}
 
 	override function initialize():Void {
 		super.initialize();
+		var theme = cast(Theme.getTheme(), OutlineTheme);
+		this.layout = new AnchorLayout();
+		this.backgroundSkin = theme.getButtonSkin(OutlineTheme.LIGHT_COLORS, 5, 26);
 
-		this.buttonDisplay = new Button();
-		this.buttonDisplay.enabled = false;
-		this.buttonDisplay.width = 120;
-		this.addChild(this.buttonDisplay);
-	}
+		var iconDisplay = new AssetLoader();
+		iconDisplay.height = 40.I();
+		iconDisplay.layoutData = AnchorLayoutData.topLeft(12.F(), 6.F());
+		iconDisplay.source = this._data.icon;
+		this.addChild(iconDisplay);
 
-	override private function layoutContent():Void {
-		super.layoutContent();
-		
-		if (this.icon != null) {
-			this.icon.height = this.icon.width = this.actualHeight * 0.5;
-			this.icon.x = this.actualHeight * 0.2;
+		var textDisplay = new Label();
+		textDisplay.textFormat = theme.getTextFormat(0, 0, false, "center");
+		textDisplay.text = this._data.text;
+		textDisplay.layoutData = new AnchorLayoutData(13.F(), 8.F(), null, 30.F());
+		this.addChild(textDisplay);
+
+		var buttonDisplay = new LayoutGroup();
+		buttonDisplay.height = 42.I();
+		buttonDisplay.layout = new AnchorLayout();
+		buttonDisplay.layoutData = new AnchorLayoutData(null, 8.I(), 15.I(), 8.I());
+		buttonDisplay.backgroundSkin = theme.getButtonSkin(this._data.badge != null ? OutlineTheme.ORANGE_COLORS : OutlineTheme.GREEN_COLORS, 5, 18);
+		this.addChild(buttonDisplay);
+
+		var buttonText = new Label();
+		buttonText.variant = OutlineTheme.VARIANT_LABEL_DETAILS_LIGHT;
+		buttonText.text = "$ " + this._data.value;
+		buttonText.layoutData = AnchorLayoutData.center(0, -4.F());
+		buttonText.filters = [theme.getDefaultShadow(3.F())];
+		buttonDisplay.addChild(buttonText);
+
+		if (this._data.badge != null) {
+			var badgeDisplay = new AssetLoader();
+			badgeDisplay.height = 40.I();
+			badgeDisplay.layoutData = AnchorLayoutData.topRight(-12.F(), -12.F());
+			badgeDisplay.source = this._data.badge;
+			this.addChild(badgeDisplay);
 		}
-		this.textField.x = this.actualHeight;
-
-		this.buttonDisplay.x = this.actualWidth -this.buttonDisplay.width - this.actualHeight * 0.2;
-		this.buttonDisplay.y = (this.actualHeight - this.buttonDisplay.height) * 0.5;
-	}
-
-	private function getIcon():Bitmap {
-		var path = "coin";
-		if (this.data.text == "Ads Free")
-			path = "noads";
-		return new Bitmap(Assets.getBitmapData(path));
 	}
 }
