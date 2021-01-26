@@ -26,7 +26,7 @@ class ConfirmPopup extends BasePopup {
 	}
 
 	private function titleFactory():Void {
-		this.labelFactory(this.titleDisplay, this.title, AnchorLayoutData.topLeft(-this.padding * 1.65, this.padding));
+		this.labelFactory(this.titleDisplay, this.title, AnchorLayoutData.topLeft(-this.padding * 1.8, this.padding));
 	}
 
 	/**

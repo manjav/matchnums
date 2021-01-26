@@ -81,7 +81,7 @@ class BasePopup extends BaseOverlay {
 			this.closeButton = new IconButton();
 			this.closeButton.icon = "close";
 			this.closeButton.width = this.closeButton.height = 32.I();
-			this.closeButton.layoutData = AnchorLayoutData.topRight(-this.padding * 1.6, this.padding);
+			this.closeButton.layoutData = AnchorLayoutData.topRight(-this.padding * 1.75, this.padding);
 			this.closeButton.addEventListener(MouseEvent.CLICK, this.closeButton_clickHandler);
 		}
 		this.content.addChild(this.closeButton);
