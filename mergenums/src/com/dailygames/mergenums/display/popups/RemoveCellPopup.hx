@@ -11,7 +11,7 @@ class RemoveCellPopup extends ConfirmPopup {
 		if (this.mode == value)
 			return value;
 		this.mode = value;
-		this.title = value == "kill" ? "Select the Number" : "Select the Color";
+		this.title = value == "hammer-one" ? "Select Block" : "Select the Color";
 		return value;
 	}
 

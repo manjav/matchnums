@@ -31,14 +31,14 @@
 	<assets id="noadsi" path="assets/images/noadsi.png"/>
 	<assets id="mute" path="assets/images/mute.png"/>
 	<assets id="unmute" path="assets/images/unmute.png"/>
-	<assets id="kill" path="assets/images/kill.png"/>
-	<assets id="killAll" path="assets/images/killAll.png"/>
 	<assets id="heart" path="assets/images/heart.png"/>
 	<assets id="crown" path="assets/images/crown.png"/>
 	<assets id="boost-big" path="assets/images/boost-big.png"/>
 	<assets id="boost-next" path="assets/images/boost-next.png"/>
 	<assets id="badge-hot" path="assets/images/badge-hot.png"/>
 	<assets id="badge-best" path="assets/images/badge-best.png"/>
+	<assets id="hammer-one" path="assets/images/hammer-one.png"/>
+	<assets id="hammer-color" path="assets/images/hammer-color.png"/>
 	
 	<!-- <assets path="Assets/images" rename="images" include="*" exclude="icon.svg" /> -->
 	<assets path="Assets/sounds" rename="sounds" include="*" />

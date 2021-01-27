@@ -54,8 +54,8 @@ class HomeOverlay extends BaseOverlay {
 		this.footer.layoutData = this.header.layoutData;
 		this.addChild(this.footer);
 
-		addButton("kill", OutlineTheme.LIGHT_COLORS, AnchorLayoutData.middleRight(0, 40.F()));
-		addButton("killAll", OutlineTheme.LIGHT_COLORS, AnchorLayoutData.middleRight(0, 100.F()));
+		addButton("hammer-one", OutlineTheme.LIGHT_COLORS, AnchorLayoutData.middleRight(0, 40.F()));
+		addButton("hammer-color", OutlineTheme.LIGHT_COLORS, AnchorLayoutData.middleRight(0, 100.F()));
 		addButton("pause", OutlineTheme.LIGHT_COLORS, AnchorLayoutData.middleLeft(0, 40.F()));
 
 		this.start();
@@ -129,7 +129,7 @@ class HomeOverlay extends BaseOverlay {
 		var cell = cast(event.target, Cell);
 		if (cell.state != Fixed)
 			return;
-		if (this.removeCellMode == "kill")
+		if (this.removeCellMode == "hammer-one")
 			this.game.removeCell(cell.column, cell.row, true);
 		else
 			this.game.removeCellsByValue(cell.value);
@@ -164,7 +164,7 @@ class HomeOverlay extends BaseOverlay {
 		switch (button.name) {
 			case "pause":
 				this.pause();
-			case "kill" | "killAll":
+			case "hammer-one" | "hammer-color":
 				var popup = cast(this.addOverlay(RemoveCell, true, false), RemoveCellPopup);
 				this.removeCellMode = popup.mode = button.name;
 				popup.addEventListener(Event.CANCEL, this.pauseOverlay_eventsHandler);
