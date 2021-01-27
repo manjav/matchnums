@@ -19,7 +19,7 @@
 	<haxelib name="extension-unityads" />
 	<haxelib name="extension-orientation" /> 
 		
-	<icon path="Assets/images/icon.svg" />
+	<icon path="assets/images/icon.png"/>
 	<assets id="pause" path="assets/images/pause.png"/>
 	<assets id="close" path="assets/images/close.png"/>
 	<assets id="coin" path="assets/images/coin.png"/>
