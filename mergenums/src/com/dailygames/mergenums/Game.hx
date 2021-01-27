@@ -150,7 +150,7 @@ class Game extends Sprite {
 			Actuate.tween(this.endLine, 1.0, {alpha: 0.2}).repeat(1).onComplete(gameOver);
 			return;
 		}
-		var reward = numRewardCells > 0 || Math.random() > 0.05 ? 0 : Math.round(this.nextCell.value * 10);
+		var reward = 0;//numRewardCells > 0 || Math.random() > 0.05 ? 0 : Math.round(this.nextCell.value * 10);
 		if (reward > 0)
 			numRewardCells++;
 		var cell = Cell.instantiate(this.lastColumn, row, this.nextCell.value, reward, this.cellInitAnimationFactory);
