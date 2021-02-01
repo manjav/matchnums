@@ -168,7 +168,7 @@ class HomeOverlay extends BaseOverlay {
 				var popup = cast(this.addOverlay(RemoveCell, true, false), RemoveCellPopup);
 				this.removeCellMode = popup.mode = button.name;
 				popup.addEventListener(Event.CANCEL, this.pauseOverlay_eventsHandler);
-				popup.contentRect = new Rectangle(this.footer.x, this.footer.y, this.footer.width, 100);
+				popup.contentRect = new Rectangle(this.footer.x, this.footer.y - 16.I(), this.footer.width, 72.I());
 		}
 	}
 
@@ -229,7 +229,7 @@ class HomeOverlay extends BaseOverlay {
 		this.game.y = (this.actualHeight - (currentHeight * gameScale)) * 0.45;
 
 		this.header.y = this.game.y - 80.F();
-		this.footer.y = this.game.y + this.game.height;
+		this.footer.y = this.game.y + this.game.height + 5.I();
 
 		super.refreshBackgroundLayout();
 	}
