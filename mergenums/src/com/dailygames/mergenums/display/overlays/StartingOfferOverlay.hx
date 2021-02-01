@@ -40,7 +40,7 @@ class StartingOfferOverlay extends ConfirmPopup {
 	}
 
 	override private function titleFactory():Void {
-		this.labelFactory(this.titleDisplay, this.title, AnchorLayoutData.topCenter(-this.padding * 1.65));
+		this.titleDisplay = this.labelFactory(this.titleDisplay, this.title, AnchorLayoutData.topCenter(-this.padding * 1.65));
 	}
 
 	override private function buttons_clickHandler(event:MouseEvent):Void {

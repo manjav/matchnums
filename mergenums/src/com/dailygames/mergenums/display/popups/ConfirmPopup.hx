@@ -26,7 +26,7 @@ class ConfirmPopup extends BasePopup {
 	}
 
 	private function titleFactory():Void {
-		this.labelFactory(this.titleDisplay, this.title, AnchorLayoutData.topLeft(-this.padding * 1.8, this.padding));
+		this.titleDisplay = this.labelFactory(this.titleDisplay, this.title, AnchorLayoutData.topLeft(-this.padding * 1.8, this.padding));
 	}
 
 	/**
@@ -43,7 +43,7 @@ class ConfirmPopup extends BasePopup {
 	}
 
 	private function messageFactory():Void {
-		this.labelFactory(this.messageDisplay, this.message, AnchorLayoutData.center(0, 0));
+		this.messageDisplay = this.labelFactory(this.messageDisplay, this.message, AnchorLayoutData.center(0, 0));
 		if (this.messageDisplay == null)
 			return;
 		var textFormat = this.messageDisplay.textFormat;
@@ -57,11 +57,11 @@ class ConfirmPopup extends BasePopup {
 		this.hasCloseButton = true;
 	}
 
-	private function labelFactory(label:Label, data:String, layoutData:ILayoutData):Void {
+	private function labelFactory(label:Label, data:String, layoutData:ILayoutData):Label {
 		if (data == null) {
 			if (label != null && label.parent != null)
 				label.parent.removeChild(label);
-			return;
+			return null;
 		}
 
 		if (label == null) {
@@ -72,6 +72,7 @@ class ConfirmPopup extends BasePopup {
 		label.text = data;
 		if (label.parent == null)
 			this.content.addChild(label);
+		return label;
 	}
 
 	private function addButton(name:String, message:String, variant:String, layoutData:AnchorLayoutData, width:Float = 0, height:Float = 0):MessageButton {
