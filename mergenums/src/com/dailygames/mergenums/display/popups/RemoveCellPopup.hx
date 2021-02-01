@@ -33,6 +33,11 @@ class RemoveCellPopup extends ConfirmPopup {
 
 	override private function overlayFactory():Void {}
 
+	override private function contentBackgroundFactory():Void {
+		super.contentBackgroundFactory();
+		this.content.backgroundSkin.alpha = 0.95;
+	}
+
 	override private function closeButton_clickHandler(event:MouseEvent):Void {
 		super.closeButton_clickHandler(event);
 		this.dispatchEvent(new Event(Event.CANCEL));
