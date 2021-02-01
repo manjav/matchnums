@@ -18,6 +18,7 @@
 	<haxelib name="extension-iap" /> 
 	<haxelib name="extension-unityads" />
 	<haxelib name="extension-orientation" /> 
+	<haxelib name="extension-alarmmanager" /> 
 		
 	<icon path="assets/images/icon.png"/>
 	<assets id="pause" path="assets/images/pause.png"/>
