@@ -39,18 +39,7 @@ class Indicator extends LayoutGroup {
 		if (this.text == value)
 			return value;
 		this.text = value;
-		if (this.labelDisplay != null) {
-			this.labelDisplay.text = value;
-
-			if (this.autoSizeText) {
-				var format = this.labelDisplay.textFormat;
-				var size = Math.round(OutlineTheme.FONT_SIZE * (6 / this.text.length));
-				if (format == null)
-					format = cast(Theme.getTheme(), OutlineTheme).getTextFormat(size, 1);
-				format.size = size;
-				this.labelDisplay.textFormat = format;
-			}
-		}
+		this.labelFactory(value);
 		return value;
 	}
 
@@ -79,11 +68,6 @@ class Indicator extends LayoutGroup {
 			this.iconDisplay.source = this.icon;
 		this.addChild(this.iconDisplay);
 
-		this.labelDisplay = new Label();
-		this.labelDisplay.layoutData = AnchorLayoutData.center(F(this.clickable ? 0 : 10), F(-2));
-		this.labelDisplay.text = this.text;
-		this.addChild(this.labelDisplay);
-
 		if (this.clickable) {
 			var plus = new Label();
 			plus.variant = OutlineTheme.VARIANT_LABEL_MEDIUM;
@@ -92,6 +76,25 @@ class Indicator extends LayoutGroup {
 			this.addChild(plus);
 
 			this.addEventListener(MouseEvent.CLICK, this.clickHandler);
+		}
+	}
+
+	public function labelFactory(text:String):Void {
+		if (this.labelDisplay == null) {
+			this.labelDisplay = new Label();
+			this.labelDisplay.layoutData = AnchorLayoutData.center(F(this.clickable ? 0 : 10), F(-2));
+			this.addChild(this.labelDisplay);
+		}
+
+		this.labelDisplay.text = text;
+
+		if (this.autoSizeText) {
+			var format = this.labelDisplay.textFormat;
+			var size = Math.round(OutlineTheme.FONT_SIZE * (6 / text.length));
+			if (format == null)
+				format = cast(Theme.getTheme(), OutlineTheme).getTextFormat(size, 1);
+			format.size = size;
+			this.labelDisplay.textFormat = format;
 		}
 	}
 
