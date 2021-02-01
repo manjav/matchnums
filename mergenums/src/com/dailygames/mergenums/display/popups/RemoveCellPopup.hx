@@ -4,6 +4,8 @@ import feathers.layout.AnchorLayoutData;
 import openfl.events.Event;
 import openfl.events.MouseEvent;
 
+using com.dailygames.mergenums.themes.OutlineTheme;
+
 class RemoveCellPopup extends ConfirmPopup {
 	public var mode(default, set):String;
 
@@ -11,7 +13,7 @@ class RemoveCellPopup extends ConfirmPopup {
 		if (this.mode == value)
 			return value;
 		this.mode = value;
-		this.title = value == "hammer-one" ? "Select Block" : "Select the Color";
+		this.title = this.mode == "hammer-one" ? "Select Block" : "Select the Color";
 		return value;
 	}
 
@@ -20,9 +22,7 @@ class RemoveCellPopup extends ConfirmPopup {
 	}
 
 	override private function titleFactory():Void {
-		super.titleFactory();
-		this.titleDisplay.variant = null;
-		this.titleDisplay.layoutData = AnchorLayoutData.center();
+		this.titleDisplay = this.labelFactory(this.titleDisplay, this.title, AnchorLayoutData.center(-26.I(), -2.I()));
 	}
 
 	override public function closeButtonFactory():Void {
