@@ -3,20 +3,19 @@ package com.dailygames.mergenums.display.overlays;
 import com.dailygames.mergenums.Game.GameState;
 import com.dailygames.mergenums.display.Indicator;
 import com.dailygames.mergenums.display.buttons.IconButton;
-import com.dailygames.mergenums.display.buttons.MessageButton;
 import com.dailygames.mergenums.display.overlays.BaseOverlay.ScreenType;
 import com.dailygames.mergenums.display.popups.*;
 import com.dailygames.mergenums.events.GameEvent;
 import com.dailygames.mergenums.utils.Prefs.*;
 import com.dailygames.mergenums.utils.Prefs;
 import com.dailygames.mergenums.utils.Utils;
+import com.gerantech.extension.alarmmanager.AlarmManager;
 import feathers.controls.AssetLoader;
 import feathers.controls.Label;
 import feathers.controls.LayoutGroup;
 import feathers.events.TriggerEvent;
 import feathers.layout.AnchorLayout;
 import feathers.layout.AnchorLayoutData;
-import feathers.style.Theme;
 import haxe.Timer;
 import openfl.events.Event;
 import openfl.events.MouseEvent;
@@ -59,20 +58,21 @@ class HomeOverlay extends BaseOverlay {
 		addButton("pause", OutlineTheme.LIGHT_COLORS, AnchorLayoutData.middleLeft(0, 40.F()));
 
 		this.start();
+
+		// Notifications process
+		// trace(AlarmManager.getParams());
+		var day = 3600000 * 24;
+		var title = stage.application.meta["name"];
+		AlarmManager.cancelLocalNotifications();
+		AlarmManager.scheduleLocalNotification(title, "You are really awesome!", day, 0, false, "{\"channel\":\"Reminder\"}");
+		AlarmManager.scheduleLocalNotification(title, "You are really awesome!", day * 3, 0, false, "{\"channel\":\"Reminder\"}");
+		AlarmManager.scheduleLocalNotification(title, "You are really awesome!", day * 7, 0, false, "{\"channel\":\"Reminder\"}");
 	}
 
-	private function addButton(name:String, colors:Array<UInt>, layoutData:AnchorLayoutData):LayoutGroup {
-		var theme = cast(Theme.getTheme(), OutlineTheme);
-		var button:LayoutGroup;
-		if (name == "pause") {
-			button = new IconButton();
-			cast(button, IconButton).padding = 2.I();
-			cast(button, IconButton).icon = name;
-		} else {
-			button = new MessageButton();
-			cast(button, MessageButton).icon = name;
-			button.backgroundSkin = theme.getButtonSkin(colors, 2.F(), 14.F());
-		}
+	private function addButton(name:String, colors:Array<UInt>, layoutData:AnchorLayoutData):IconButton {
+		var button = new IconButton();
+		button.padding = name == "pause" ? 2.I() : -3.I();
+		button.icon = name;
 		button.name = name;
 		button.width = 48.I();
 		button.height = 48.I();
