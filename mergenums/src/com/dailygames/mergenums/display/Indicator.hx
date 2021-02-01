@@ -90,7 +90,8 @@ class Indicator extends LayoutGroup {
 
 		if (this.autoSizeText) {
 			var format = this.labelDisplay.textFormat;
-			var size = Math.round(OutlineTheme.FONT_SIZE * (6 / text.length));
+			var ratio = Math.min(1.3, Math.max(6 / text.length, 0.8));
+			var size = Math.round(OutlineTheme.FONT_SIZE * ratio);
 			if (format == null)
 				format = cast(Theme.getTheme(), OutlineTheme).getTextFormat(size, 1);
 			format.size = size;
