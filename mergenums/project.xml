@@ -17,6 +17,7 @@
 	<!-- <haxelib name="extension-natives" />  -->
 	<haxelib name="extension-iap" /> 
 	<haxelib name="extension-unityads" />
+	<haxelib name="extension-appmetrica" />
 	<haxelib name="extension-orientation" /> 
 	<haxelib name="extension-alarmmanager" /> 
 		

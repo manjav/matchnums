@@ -3,6 +3,7 @@ package com.dailygames.mergenums;
 import com.dailygames.mergenums.display.overlays.HomeOverlay;
 import com.dailygames.mergenums.themes.OutlineTheme;
 import com.dailygames.mergenums.utils.Prefs;
+import com.gerantech.extension.appmetrica.AppMetrica;
 import extension.eightsines.EsOrientation;
 import feathers.controls.Application;
 import feathers.layout.AnchorLayout;
@@ -18,6 +19,7 @@ class Main extends Application {
 	public function new() {
 		Prefs.instance.load();
 		EsOrientation.setScreenOrientation(EsOrientation.ORIENTATION_PORTRAIT);
+		AppMetrica.init("9fba4bd1-1851-48c9-a42d-754072c60e17");
 		super();
 		// com.dailygames.mergenums.utils.Analytics.create();
 		Theme.setTheme(new OutlineTheme(stage, 1 / this.getScaleFactor()));
