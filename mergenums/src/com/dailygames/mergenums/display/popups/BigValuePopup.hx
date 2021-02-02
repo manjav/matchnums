@@ -12,7 +12,7 @@ class BigValuePopup extends BasePrizePopup {
 		if (this.value == value)
 			return value;
 		this.value = value;
-		this.prize = 10 * value;
+		this.prize = Math.round(100 * (value - Cell.FIRST_BIG_VALUE));
 
 		var _message:String = "";
 		// if (this.isFirst)

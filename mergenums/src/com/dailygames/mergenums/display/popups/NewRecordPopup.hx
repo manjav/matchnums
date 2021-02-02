@@ -11,7 +11,7 @@ class NewRecordPopup extends BasePrizePopup {
 		if (this.value == value)
 			return value;
 		this.value = value;
-		this.prize = 10 * value;
+		this.prize = Math.floor(value/1000) * 100;
 		this.message = "New Record!\nDouble It?";
 		this.setInvalid(DATA);
 		return value;
