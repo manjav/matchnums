@@ -24,6 +24,7 @@ class Cell extends Sprite {
 	static public final RADIUS = SIZE * 0.5;
 	static public final BORDER = 10;
 	static public final ROUND = 44;
+	static public final FIRST_BIG_VALUE = 8;
 	static public final COLORS = [
 		0x000000, 0x9600ff, 0xf0145a, 0xffc91b, 0x00c419, 0x009ade, 0xce007b4, 0xff5518, 0x78e0bc, 0x3c14ae, 0xff0024, 0x41046a, 0x41046a, 0x41046a, 0x41046a
 	];
