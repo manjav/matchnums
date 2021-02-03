@@ -60,13 +60,17 @@ class Prefs extends EventDispatcher {
 		}
 		this.set(COIN, cast(so.data.coin, Float), false);
 		this.set(RECORD, cast(so.data.record, Float), false);
-	}
+		this.set(REMOVE_ONE, cast(so.data.removeOne, Float), false);
+		this.set(REMOVE_COLOR, cast(so.data.removeColor, Float), false);
+}
 
 	private function save():Void {
 		var so = SharedObject.getLocal("prefs");
 		so.data.coin = this.get(COIN);
 		so.data.record = this.get(RECORD);
-		so.flush(100000);
+		so.data.removeOne = this.get(REMOVE_ONE);
+		so.data.removeColor = this.get(REMOVE_COLOR);
+	so.flush(100000);
 	}
 
 	private function clear():Void {
