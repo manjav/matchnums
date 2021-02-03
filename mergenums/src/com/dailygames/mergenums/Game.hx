@@ -114,6 +114,7 @@ class Game extends Sprite {
 		this.nextCell.x = this.lastColumn * Cell.SIZE + Cell.RADIUS;
 
 		// Add initial cells
+		this.cellInitAnimationFactory.volume = 0;
 		function addCell(column:Int, value:Int):Void {
 			var row = this.cells.length(column);
 			while (this.cells.getMatchs(column, row, value).length > 0)
@@ -135,6 +136,7 @@ class Game extends Sprite {
 		this.timer.stop();
 		this.state = Play;
 		this.spawn();
+		this.cellInitAnimationFactory.volume = 1;
 	}
 
 	private function spawn():Void {

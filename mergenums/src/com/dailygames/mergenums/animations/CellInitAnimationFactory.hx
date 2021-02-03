@@ -7,6 +7,7 @@ import motion.easing.Back;
 class CellInitAnimationFactory implements IAnimationFactory {
 	public function new() {}
 
+	public var volume(default, default):Float = 1.0;
 	public var scale(default, default):Float = 1;
 	public var time(default, default):Float = 0.3;
 	public var delay(default, default):Float = 0.0;
@@ -25,6 +26,6 @@ class CellInitAnimationFactory implements IAnimationFactory {
 		if (handler != null)
 			ease.onComplete(handler);
 
-		Sounds.play("merge");
+		Sounds.play("merge", volume);
 	}
 }
