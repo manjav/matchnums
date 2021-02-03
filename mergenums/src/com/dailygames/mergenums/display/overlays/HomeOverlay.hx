@@ -133,6 +133,8 @@ class HomeOverlay extends BaseOverlay {
 			this.game.removeCell(cell.column, cell.row, true);
 		else
 			this.game.removeCellsByValue(cell.value);
+
+		Prefs.instance.reduce(this.removeCellMode, 1);
 		this.removeCellMode = null;
 		Timer.delay(resumeAndFall, 1500);
 	}
@@ -162,14 +164,17 @@ class HomeOverlay extends BaseOverlay {
 	private function buttons_clickHandler(event:MouseEvent):Void {
 		var button = cast(event.currentTarget, LayoutGroup);
 		if (button.name == "pause") {
-				this.pause();
+			this.pause();
 			return;
 		}
-				var popup = cast(this.addOverlay(RemoveCell, true, false), RemoveCellPopup);
-				this.removeCellMode = popup.mode = button.name;
-				popup.addEventListener(Event.CANCEL, this.pauseOverlay_eventsHandler);
-				popup.contentRect = new Rectangle(this.footer.x, this.footer.y - 16.I(), this.footer.width, 72.I());
+		if (Prefs.instance.get(button.name) <= 0) {
+			return;
 		}
+		var popup = cast(this.addOverlay(RemoveCell, true, false), RemoveCellPopup);
+		this.removeCellMode = popup.mode = button.name;
+		popup.addEventListener(Event.CANCEL, this.pauseOverlay_eventsHandler);
+		popup.contentRect = new Rectangle(this.footer.x, this.footer.y - 16.I(), this.footer.width, 72.I());
+	}
 
 	private function coinsIndicator_triggerHandler(event:TriggerEvent):Void {
 		this.addOverlay(Shop);
