@@ -178,6 +178,7 @@ class HomeOverlay extends BaseOverlay {
 	private function showRemovePopup(mode:String):Void {
 		if (Prefs.instance.get(mode) <= 2) {
 			var callout = cast(this.addOverlay(Alternative, true, false), AlternativeCallout);
+			callout.mode = mode;
 			callout.contentRect = new Rectangle(this.actualWidth - 210.I(), this.footer.y - 90.I(), 190.I(), 76.I());
 			callout.addEventListener(Event.CANCEL, this.pauseOverlay_eventsHandler);
 			return;

@@ -10,13 +10,30 @@ import feathers.skins.RectangleSkin;
 using com.dailygames.mergenums.themes.OutlineTheme;
 
 class AlternativeCallout extends ConfirmPopup {
+	public var mode:String;
+	public var cost:Int = 100;
+
 	override private function initialize():Void {
 		this.hasCloseButton = false;
 		this.title = "Get new powerup!";
 		super.initialize();
 
-		this.addButton("coin", "100", OutlineTheme.VARIANT_MSBUTTON_GREEN, AnchorLayoutData.bottomLeft(6.I(), 6.I()), 86.F(), 40.I());
+		this.addButton("coin", cost + "", OutlineTheme.VARIANT_MSBUTTON_GREEN, AnchorLayoutData.bottomLeft(6.I(), 6.I()), 86.F(), 40.I());
 		this.addButton("ads", "free", OutlineTheme.VARIANT_MSBUTTON_ORANGE, AnchorLayoutData.bottomRight(6.I(), 6.I()), 86.F(), 40.I());
+	}
+
+	override private function buttons_clickHandler(event:MouseEvent):Void {
+		var button = cast(event.currentTarget, MessageButton);
+		if (button.name == "coin") {
+			var newValue = Prefs.instance.get(Prefs.COIN) - cost;
+			Prefs.instance.set(Prefs.COIN, newValue);
+			if (newValue < 0)
+				return;
+			this.close();
+		} else {
+			trace("show ad");
+		}
+	}
 
 	override private function titleFactory():Void {
 		this.titleDisplay = this.labelFactory(this.titleDisplay, this.title, AnchorLayoutData.topLeft(5.I(), 5.I()));
