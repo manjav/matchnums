@@ -1,18 +1,23 @@
 package com.dailygames.mergenums.utils;
 
+import openfl.media.SoundTransform;
 import openfl.Assets;
 import openfl.media.Sound;
 
 class Sounds {
 	static private final map:Map<String, Sound> = new Map();
 
-	static public function play(name:String):Void {
+	static public function play(name:String, volume:Float = 1.0):Void {
 		if (!map.exists(name))
 			map[name] = Assets.getSound("sounds/" + name + ".ogg");
 		if (mute)
 			return;
-		if (map[name] != null)
-			map[name].play();
+		if (map[name] == null)
+			return;
+
+		var channel = map[name].play();
+		if (volume < 1)
+			channel.soundTransform = new SoundTransform(volume);
 	}
 
 	static public var mute(default, default):Bool;
