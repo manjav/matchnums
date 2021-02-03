@@ -49,6 +49,8 @@ class Prefs extends EventDispatcher {
 		if (so.data.coin == null) {
 			this.set(COIN, 500.0);
 			this.set(RECORD, 0.0);
+			this.set(REMOVE_ONE, 3);
+			this.set(REMOVE_COLOR, 3);
 			return;
 		}
 		this.set(COIN, cast(so.data.coin, Float), false);
