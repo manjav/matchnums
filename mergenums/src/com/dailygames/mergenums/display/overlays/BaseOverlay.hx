@@ -18,6 +18,7 @@ enum ScreenType {
 	GameOver;
 	RemoveCell;
 	StartingOffer;
+	Alternative;
 }
 
 class BaseOverlay extends LayoutGroup {
@@ -45,6 +46,8 @@ class BaseOverlay extends LayoutGroup {
 					new RemoveCellPopup();
 				case StartingOffer:
 					new StartingOfferOverlay();
+				case Alternative:
+					new AlternativeCallout();
 				default: null;
 			}
 			screen.layoutData = AnchorLayoutData.fill();

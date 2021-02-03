@@ -172,12 +172,18 @@ class HomeOverlay extends BaseOverlay {
 			this.pause();
 			return;
 		}
-		if (Prefs.instance.get(button.name) <= 0) {
-			trace("show dialog");
+		this.showRemovePopup(button.name);
+	}
+
+	private function showRemovePopup(mode:String):Void {
+		if (Prefs.instance.get(mode) <= 2) {
+			var callout = cast(this.addOverlay(Alternative, true, false), AlternativeCallout);
+			callout.contentRect = new Rectangle(this.actualWidth - 210.I(), this.footer.y - 90.I(), 190.I(), 76.I());
+			callout.addEventListener(Event.CANCEL, this.pauseOverlay_eventsHandler);
 			return;
 		}
 		var popup = cast(this.addOverlay(RemoveCell, true, false), RemoveCellPopup);
-		this.removeCellMode = popup.mode = button.name;
+		this.removeCellMode = popup.mode = mode;
 		popup.addEventListener(Event.CANCEL, this.pauseOverlay_eventsHandler);
 		popup.contentRect = new Rectangle(this.footer.x, this.footer.y - 16.I(), this.footer.width, 72.I());
 	}
