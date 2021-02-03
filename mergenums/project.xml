@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="Drop and Merge Number" package="com.dailygames.mergenums" version="0.3.1" build-number="3001" company="DailyGames" />
+	<meta title="Drop and Merge Number" package="com.dailygames.mergenums" version="0.4.2" build-number="4002" company="DailyGames" />
 	<app path="bin" file="mergenums" main="com.dailygames.mergenums.Main"/>
 	
 	<window width="540" height="1100" background="#2c3134"/>
@@ -63,7 +63,7 @@
 	</assets> -->
 	
 	<config:android minimum-sdk-version="19"/>
-	<config:android target-sdk-version="30"/>
+	<config:android target-sdk-version="29"/>
 	<certificate path="../../ks.keystore" password="Vahid@4822" alias="mergenums" alias-password="m3r63num5" if="android" /><!--  unless="debug" -->
 	<architecture exclude="arm64" if="android" />
 	<haxeflag name="-dce" value="full" />
