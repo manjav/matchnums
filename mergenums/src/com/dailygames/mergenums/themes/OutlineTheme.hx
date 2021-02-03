@@ -132,6 +132,7 @@ class OutlineTheme extends ClassVariantTheme {
 	private function setLabelSmallLightStyles(label:Label):Void {
 		this.setCustomLabelStyles(label, cast FONT_SIZE * 0.65, LIGHT_COLOR);
 	}
+
 	private function setLabelDetailsStyles(label:Label):Void {
 		this.setCustomLabelStyles(label, cast FONT_SIZE * 0.72, DARK_COLOR, true);
 	}
@@ -244,6 +245,12 @@ class OutlineTheme extends ClassVariantTheme {
 		return skin; // getScaled9Textures("button-skin", SCALEGRID_BUTTON);
 	}
 
+	public function getBadgeSkin(colors:UInt = null, cornerRadius:Float = 16):DisplayObject {
+		var skin = new BadgeSkin(colors, cornerRadius);
+		skin.filters = [getDefaultShadow(4.F())];
+		return skin;
+	}
+
 	public function getTextFormat(size:UInt = 0, color:UInt = 0, bold:Bool = false, align:String = "left"):TextFormat {
 		return new TextFormat(FONT_NAME, size == 0 ? FONT_SIZE : size, color == 0 ? GRAY_COLOR : color, bold, null, null, null, null, align);
 	}
@@ -303,6 +310,25 @@ class MyButtonSkin extends ProgrammaticSkin {
 		matrix.createGradientBox(0, this.actualHeight - b * 3, Math.PI * 0.5);
 		this.graphics.beginGradientFill(LINEAR, [this.colors[0], this.colors[1]], [1, 1], [170, 255], matrix);
 		this.graphics.drawRoundRect(b, b, this.actualWidth - b * 2, this.actualHeight - b * 2 - this.deepness, this.cornerRadius, this.cornerRadius);
+		this.graphics.endFill();
+	}
+}
+
+class BadgeSkin extends ProgrammaticSkin {
+	private var color:UInt;
+	private var cornerRadius:Float;
+
+	public function new(color:UInt = 0, cornerRadius:Float = 4) {
+		super();
+		this.color = color == 0 ? 0xFF0066 : color;
+		this.cornerRadius = cornerRadius.F();
+	}
+
+	override private function update():Void {
+		this.graphics.clear();
+		this.graphics.beginFill(this.color);
+		this.graphics.lineStyle(1.5.F(), OutlineTheme.DARK_COLOR);
+		this.graphics.drawRoundRect(0, 0, this.actualWidth, this.actualHeight, this.cornerRadius, cornerRadius);
 		this.graphics.endFill();
 	}
 }
