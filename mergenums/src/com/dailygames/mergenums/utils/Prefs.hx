@@ -8,6 +8,8 @@ class Prefs extends EventDispatcher {
 	static public final COIN:String = "coin";
 	static public final SCORES:String = "scores";
 	static public final RECORD:String = "record";
+	static public final REMOVE_ONE:String = "remove-one";
+	static public final REMOVE_COLOR:String = "remove-color";
 	static public final MUTE:String = "mute";
 
 	static public final instance:Prefs = new Prefs();
@@ -31,7 +33,7 @@ class Prefs extends EventDispatcher {
 	public function increase(type:String, value:Float, save:Bool = true):Float {
 		return this.set(type, this.get(type) + value, save);
 	}
-
+	
 	public function get(type:String):Float {
 		return this.map.get(type);
 	}

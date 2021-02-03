@@ -1,5 +1,6 @@
 package com.dailygames.mergenums.display.popups;
 
+import com.dailygames.mergenums.utils.Prefs;
 import feathers.layout.AnchorLayoutData;
 import openfl.events.Event;
 import openfl.events.MouseEvent;
@@ -13,7 +14,7 @@ class RemoveCellPopup extends ConfirmPopup {
 		if (this.mode == value)
 			return value;
 		this.mode = value;
-		this.title = this.mode == "hammer-one" ? "Select Block" : "Select the Color";
+		this.title = this.mode == Prefs.REMOVE_ONE ? "Select Block" : "Select the Color";
 		return value;
 	}
 

@@ -53,8 +53,8 @@ class HomeOverlay extends BaseOverlay {
 		this.footer.layoutData = this.header.layoutData;
 		this.addChild(this.footer);
 
-		addButton("hammer-one", OutlineTheme.LIGHT_COLORS, AnchorLayoutData.middleRight(0, 40.F()));
-		addButton("hammer-color", OutlineTheme.LIGHT_COLORS, AnchorLayoutData.middleRight(0, 100.F()));
+		addButton(REMOVE_ONE, OutlineTheme.LIGHT_COLORS, AnchorLayoutData.middleRight(0, 40.F()));
+		addButton(REMOVE_COLOR, OutlineTheme.LIGHT_COLORS, AnchorLayoutData.middleRight(0, 100.F()));
 		addButton("pause", OutlineTheme.LIGHT_COLORS, AnchorLayoutData.middleLeft(0, 40.F()));
 
 		this.start();
@@ -129,7 +129,7 @@ class HomeOverlay extends BaseOverlay {
 		var cell = cast(event.target, Cell);
 		if (cell.state != Fixed)
 			return;
-		if (this.removeCellMode == "hammer-one")
+		if (this.removeCellMode == REMOVE_ONE)
 			this.game.removeCell(cell.column, cell.row, true);
 		else
 			this.game.removeCellsByValue(cell.value);
@@ -161,16 +161,15 @@ class HomeOverlay extends BaseOverlay {
 
 	private function buttons_clickHandler(event:MouseEvent):Void {
 		var button = cast(event.currentTarget, LayoutGroup);
-		switch (button.name) {
-			case "pause":
+		if (button.name == "pause") {
 				this.pause();
-			case "hammer-one" | "hammer-color":
+			return;
+		}
 				var popup = cast(this.addOverlay(RemoveCell, true, false), RemoveCellPopup);
 				this.removeCellMode = popup.mode = button.name;
 				popup.addEventListener(Event.CANCEL, this.pauseOverlay_eventsHandler);
 				popup.contentRect = new Rectangle(this.footer.x, this.footer.y - 16.I(), this.footer.width, 72.I());
 		}
-	}
 
 	private function coinsIndicator_triggerHandler(event:TriggerEvent):Void {
 		this.addOverlay(Shop);
