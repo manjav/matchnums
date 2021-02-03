@@ -29,6 +29,7 @@ class AlternativeCallout extends ConfirmPopup {
 			Prefs.instance.set(Prefs.COIN, newValue);
 			if (newValue < 0)
 				return;
+			this.dispatchEvent(new Event(Event.COMPLETE));
 			this.close();
 		} else {
 			trace("show ad");

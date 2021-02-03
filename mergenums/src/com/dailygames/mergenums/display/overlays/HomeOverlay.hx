@@ -176,17 +176,25 @@ class HomeOverlay extends BaseOverlay {
 	}
 
 	private function showRemovePopup(mode:String):Void {
-		if (Prefs.instance.get(mode) <= 2) {
+		if (Prefs.instance.get(mode) <= 0) {
 			var callout = cast(this.addOverlay(Alternative, true, false), AlternativeCallout);
 			callout.mode = mode;
 			callout.contentRect = new Rectangle(this.actualWidth - 210.I(), this.footer.y - 90.I(), 190.I(), 76.I());
 			callout.addEventListener(Event.CANCEL, this.pauseOverlay_eventsHandler);
+			callout.addEventListener(Event.COMPLETE, this.callout_completeHandler);
 			return;
 		}
 		var popup = cast(this.addOverlay(RemoveCell, true, false), RemoveCellPopup);
 		this.removeCellMode = popup.mode = mode;
 		popup.addEventListener(Event.CANCEL, this.pauseOverlay_eventsHandler);
 		popup.contentRect = new Rectangle(this.footer.x, this.footer.y - 16.I(), this.footer.width, 72.I());
+	}
+
+	private function callout_completeHandler(event:Event):Void {
+		var callout = cast(event.target, AlternativeCallout);
+		callout.removeEventListener(Event.COMPLETE, this.callout_completeHandler);
+		Prefs.instance.increase(callout.mode, 1);
+		this.showRemovePopup(callout.mode);
 	}
 
 	private function coinsIndicator_triggerHandler(event:TriggerEvent):Void {
