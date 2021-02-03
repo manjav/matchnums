@@ -28,6 +28,7 @@ class HomeOverlay extends BaseOverlay {
 	private var game:Game;
 	private var header:LayoutGroup;
 	private var footer:LayoutGroup;
+	private var removeButtons:Map<String, IconButton> = new Map();
 	private var removeCellMode:String;
 
 	override private function initialize():Void {
@@ -53,9 +54,11 @@ class HomeOverlay extends BaseOverlay {
 		this.footer.layoutData = this.header.layoutData;
 		this.addChild(this.footer);
 
-		addButton(REMOVE_ONE, OutlineTheme.LIGHT_COLORS, AnchorLayoutData.middleRight(0, 40.F()));
-		addButton(REMOVE_COLOR, OutlineTheme.LIGHT_COLORS, AnchorLayoutData.middleRight(0, 100.F()));
 		addButton("pause", OutlineTheme.LIGHT_COLORS, AnchorLayoutData.middleLeft(0, 40.F()));
+		this.removeButtons[REMOVE_ONE] = addButton(REMOVE_ONE, OutlineTheme.LIGHT_COLORS, AnchorLayoutData.middleRight(0, 40.F()));
+		this.removeButtons[REMOVE_COLOR] = addButton(REMOVE_COLOR, OutlineTheme.LIGHT_COLORS, AnchorLayoutData.middleRight(0, 100.F()));
+		this.removeButtons[REMOVE_ONE].badge = Prefs.instance.get(REMOVE_ONE);
+		this.removeButtons[REMOVE_COLOR].badge = Prefs.instance.get(REMOVE_COLOR);
 
 		this.start();
 
@@ -135,6 +138,8 @@ class HomeOverlay extends BaseOverlay {
 			this.game.removeCellsByValue(cell.value);
 
 		Prefs.instance.reduce(this.removeCellMode, 1);
+		this.removeButtons[this.removeCellMode].badge = Prefs.instance.get(this.removeCellMode);
+
 		this.removeCellMode = null;
 		Timer.delay(resumeAndFall, 1500);
 	}
@@ -168,6 +173,7 @@ class HomeOverlay extends BaseOverlay {
 			return;
 		}
 		if (Prefs.instance.get(button.name) <= 0) {
+			trace("show dialog");
 			return;
 		}
 		var popup = cast(this.addOverlay(RemoveCell, true, false), RemoveCellPopup);

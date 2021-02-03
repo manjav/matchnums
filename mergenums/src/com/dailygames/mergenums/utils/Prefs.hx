@@ -48,6 +48,7 @@ class Prefs extends EventDispatcher {
 
 	public function load():Void {
 		var so:SharedObject = SharedObject.getLocal("prefs");
+		// so.clear();
 		this.map = new Map();
 		this.set(SCORES, 0.0);
 		if (so.data.coin == null) {
