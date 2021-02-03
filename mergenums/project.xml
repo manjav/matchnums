@@ -39,8 +39,8 @@
 	<assets id="boost-next" path="assets/images/boost-next.png"/>
 	<assets id="badge-hot" path="assets/images/badge-hot.png"/>
 	<assets id="badge-best" path="assets/images/badge-best.png"/>
-	<assets id="hammer-one" path="assets/images/hammer-one.png"/>
-	<assets id="hammer-color" path="assets/images/hammer-color.png"/>
+	<assets id="remove-one" path="assets/images/remove-one.png"/>
+	<assets id="remove-color" path="assets/images/remove-color.png"/>
 	
 	<!-- <assets path="Assets/images" rename="images" include="*" exclude="icon.svg" /> -->
 	<assets path="Assets/sounds" rename="sounds" include="*" />
