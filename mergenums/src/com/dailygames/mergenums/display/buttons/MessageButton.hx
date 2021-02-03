@@ -86,6 +86,13 @@ class MessageButton extends LayoutGroup {
 		return this._icon;
 	}
 
+	override private function set_enabled(value:Bool):Bool {
+		var ret = super.set_enabled(value);
+		this.mouseEnabled = value;
+		this.alpha = value ? 1 : 0.7;
+		return ret;
+	}
+
 	override private function initialize() {
 		super.initialize();
 
