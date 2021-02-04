@@ -76,9 +76,12 @@ class BaseOverlay extends LayoutGroup {
 		this.overlayFactory();
 	}
 
+	private function open():Void {}
+
 	override private function feathersControl_addedToStageHandler(event:Event):Void {
 		super.feathersControl_addedToStageHandler(event);
 		this.isOpen = true;
+		this.open();
 	}
 
 	override private function feathersControl_removedFromStageHandler(event:Event):Void {
