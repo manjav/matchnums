@@ -1,5 +1,6 @@
 package com.dailygames.mergenums.display.overlays;
 
+import com.dailygames.mergenums.utils.Ads;
 import com.dailygames.mergenums.Game.GameState;
 import com.dailygames.mergenums.display.Indicator;
 import com.dailygames.mergenums.display.buttons.IconButton;
@@ -57,8 +58,13 @@ class HomeOverlay extends BaseOverlay {
 		addButton("pause", OutlineTheme.LIGHT_COLORS, AnchorLayoutData.middleLeft(0, 40.F()));
 		this.removeButtons[REMOVE_ONE] = addButton(REMOVE_ONE, OutlineTheme.LIGHT_COLORS, AnchorLayoutData.middleRight(0, 40.F()));
 		this.removeButtons[REMOVE_COLOR] = addButton(REMOVE_COLOR, OutlineTheme.LIGHT_COLORS, AnchorLayoutData.middleRight(0, 100.F()));
-		this.removeButtons[REMOVE_ONE].badge = Prefs.instance.get(REMOVE_ONE);
-		this.removeButtons[REMOVE_COLOR].badge = Prefs.instance.get(REMOVE_COLOR);
+		function prefs_changeHandler(event:GameEvent) {
+			this.removeButtons[REMOVE_ONE].badge = Prefs.instance.get(REMOVE_ONE);
+			this.removeButtons[REMOVE_COLOR].badge = Prefs.instance.get(REMOVE_COLOR);
+		}
+		Prefs.instance.addEventListener(REMOVE_ONE, prefs_changeHandler);
+		Prefs.instance.addEventListener(REMOVE_COLOR, prefs_changeHandler);
+		prefs_changeHandler(null);
 
 		this.start();
 
@@ -70,6 +76,8 @@ class HomeOverlay extends BaseOverlay {
 		AlarmManager.scheduleLocalNotification(title, "You are really awesome!", day, 0, false, "{\"channel\":\"Reminder\"}");
 		AlarmManager.scheduleLocalNotification(title, "You are really awesome!", day * 3, 0, false, "{\"channel\":\"Reminder\"}");
 		AlarmManager.scheduleLocalNotification(title, "You are really awesome!", day * 7, 0, false, "{\"channel\":\"Reminder\"}");
+
+		Ads.instance.init();
 	}
 
 	private function addButton(name:String, colors:Array<UInt>, layoutData:AnchorLayoutData):IconButton {
