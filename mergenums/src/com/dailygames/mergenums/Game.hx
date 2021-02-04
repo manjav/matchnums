@@ -1,5 +1,6 @@
 package com.dailygames.mergenums;
 
+import com.dailygames.mergenums.display.popups.NewRecordPopup;
 import com.dailygames.mergenums.animations.CellDisposeAnimationFactory;
 import com.dailygames.mergenums.animations.CellInitAnimationFactory;
 import com.dailygames.mergenums.animations.Reward;
@@ -50,7 +51,7 @@ class Game extends Sprite {
 		Prefs.instance.set(SCORES, value);
 		if (Prefs.instance.get(RECORD) < value) {
 			Prefs.instance.set(RECORD, value);
-			if (value > 1000 && !haveRecord) {
+			if (value > NewRecordPopup.MIN_RECORD && !haveRecord) {
 				GameEvent.dispatch(this, GameEvent.NEW_RECORD, value);
 				haveRecord = true;
 			}
