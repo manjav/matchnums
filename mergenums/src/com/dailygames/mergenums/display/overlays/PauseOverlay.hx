@@ -22,18 +22,19 @@ class PauseOverlay extends ConfirmPopup {
 	override private function initialize():Void {
 		super.initialize();
 
-		this.content.height = OutlineTheme.POPUP_SIZE * 1.25;
 		this.title = "Pause";
 
-		var adsSkin = new RectangleSkin();
-		adsSkin.fill = SolidColor(OutlineTheme.DARK_COLOR, 0.8);
-		adsSkin.cornerRadius = 20.F();
+		// var adsSkin = new RectangleSkin();
+		// adsSkin.fill = SolidColor(OutlineTheme.DARK_COLOR, 0.8);
+		// adsSkin.cornerRadius = 20.F();
 
 		var adsHolder = new LayoutGroup();
-		adsHolder.backgroundSkin = adsSkin;
+		// adsHolder.height = 234.F();
+		// adsHolder.backgroundSkin = adsSkin;
 		adsHolder.layoutData = new AnchorLayoutData(0, 0, null, 0);
-		adsHolder.height = 234.F();
 		content.addChild(adsHolder);
+
+		this.content.height = OutlineTheme.POPUP_SIZE * 0.25 + adsHolder.height;
 
 		addButton("restart", "Restart", OutlineTheme.VARIANT_MBUTTON_GREEN, AnchorLayoutData.topLeft(adsHolder.height + 22.F()), 154.F());
 		addButton("continue", "Continue", OutlineTheme.VARIANT_MBUTTON_BLUE, AnchorLayoutData.topRight(adsHolder.height + 22.F()), 154.F());
