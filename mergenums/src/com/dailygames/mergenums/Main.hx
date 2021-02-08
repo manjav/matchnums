@@ -36,24 +36,6 @@ class Main extends Application {
 		this.addChild(this.home);
 
 		stage.addEventListener(Event.DEACTIVATE, this.stage_deactivateHandler);
-
-		/* UnityAds.onInit = function(succeed:Bool, message:String):Void {
-			trace("onInit => " + succeed, message);
-		};
-		UnityAds.onAdReady = function(placementId:String):Void {
-			trace("onAdReady => " + placementId);
-			UnityAds.showAd(placementId);
-		};
-		UnityAds.onAdStart = function(placementId:String):Void {
-			trace("onAdStart => " + placementId);
-		};
-		UnityAds.onAdFinish = function(placementId:String, result:String):Void {
-			trace("onAdFinish => " + placementId + " result => " + result);
-		};
-		UnityAds.onAdError = function(error:String, message:String):Void {
-			trace("onAdError => " + error + " message => " + message);
-		};
-		UnityAds.init("3974257", true, true); */ 
 	}
 
 	private function stage_deactivateHandler(event:Event):Void {

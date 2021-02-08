@@ -14,6 +14,7 @@ class GameEvent extends Event {
 	static public final REVIVE_BY_COIN:String = "reviveByCoin";
 	static public final REVIVE_BY_ADS:String = "reviveByAds";
 	static public final REVIVE_CANCEL:String = "reviveCancel";
+	static public final ADS_READY:String = "adsReady";
 
 	/**
 		Dispatches a pooled event with the specified properties.

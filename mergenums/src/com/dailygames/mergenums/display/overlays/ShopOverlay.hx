@@ -1,5 +1,6 @@
 package com.dailygames.mergenums.display.overlays;
 
+import com.dailygames.mergenums.utils.Ads;
 import feathers.skins.RectangleSkin;
 import com.dailygames.mergenums.display.items.ShopItemRenderer;
 import com.dailygames.mergenums.display.popups.ConfirmPopup;
@@ -24,6 +25,7 @@ using com.dailygames.mergenums.themes.OutlineTheme;
 
 class ShopOverlay extends ConfirmPopup {
 	private var listView:ListView;
+	private var adsButton:MessageButton;
 
 	override private function initialize():Void {
 		super.initialize();
@@ -68,8 +70,13 @@ class ShopOverlay extends ConfirmPopup {
 		divider.layoutData = AnchorLayoutData.bottomCenter(125.I());
 		this.content.addChild(divider);
 
-		this.addButton("ads", "100", OutlineTheme.VARIANT_MBUTTON_ORANGE, AnchorLayoutData.bottomRight(24.F(), 18.F()), 126.F()).text = "Free";
-		addButton("restart", "Purchased", OutlineTheme.VARIANT_MBUTTON_GREEN, AnchorLayoutData.bottomLeft(24.F(), 18.F()), 174.F()).text = "Restore";
+		this.addButton("restart", "Purchased", OutlineTheme.VARIANT_MBUTTON_GREEN, AnchorLayoutData.bottomLeft(24.F(), 18.F()), 174.F()).text = "Restore";
+		this.adsButton = this.addButton("ads", "100", OutlineTheme.VARIANT_MBUTTON_ORANGE, AnchorLayoutData.bottomRight(24.F(), 18.F()), 126.F());
+		this.adsButton.text = "Free";
+	}
+
+	override private function open():Void {
+		this.adsButton.enabled = Ads.instance.has("rewardedVideo");
 	}
 
 	override private function adjustContentLayout():Void {
@@ -120,7 +127,9 @@ class ShopOverlay extends ConfirmPopup {
 		this.listView.removeEventListener(Event.CHANGE, this.listView_changeHandler);
 		var text:String = this.listView.selectedItem.text;
 		if (text == "Ads Free") {
-			trace("Show Ad.");
+			Ads.instance.show("rewardedVideo", function():Void {
+				Prefs.instance.increase(Prefs.COIN, 100);
+			});
 		} else {
 			IAP.instance.addEventListener(IAPEvent.PURCHASE_SUCCESS, IAP_purchaseSuccessHandler);
 			IAP.instance.purchase("item_" + this.listView.selectedIndex);
