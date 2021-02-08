@@ -1,5 +1,6 @@
 package com.dailygames.mergenums.display.popups;
 
+import com.dailygames.mergenums.utils.Ads;
 import com.dailygames.mergenums.utils.Prefs;
 import com.dailygames.mergenums.display.buttons.MessageButton;
 import openfl.events.Event;
@@ -13,13 +14,19 @@ class AlternativeCallout extends ConfirmPopup {
 	public var mode:String;
 	public var cost:Int = 100;
 
+	private var adsButton:MessageButton;
+
 	override private function initialize():Void {
+		super.initialize();
 		this.hasCloseButton = false;
 		this.title = "Get new powerup!";
-		super.initialize();
 
 		this.addButton("coin", cost + "", OutlineTheme.VARIANT_MSBUTTON_GREEN, AnchorLayoutData.bottomLeft(6.I(), 6.I()), 86.F(), 40.I());
-		this.addButton("ads", "free", OutlineTheme.VARIANT_MSBUTTON_ORANGE, AnchorLayoutData.bottomRight(6.I(), 6.I()), 86.F(), 40.I());
+		this.adsButton = this.addButton("ads", "free", OutlineTheme.VARIANT_MSBUTTON_ORANGE, AnchorLayoutData.bottomRight(6.I(), 6.I()), 86.F(), 40.I());
+	}
+
+	override private function open():Void {
+		this.adsButton.enabled = Ads.instance.has("powerups");
 	}
 
 	override private function buttons_clickHandler(event:MouseEvent):Void {
@@ -32,7 +39,10 @@ class AlternativeCallout extends ConfirmPopup {
 			this.dispatchEvent(new Event(Event.COMPLETE));
 			this.close();
 		} else {
-			trace("show ad");
+			Ads.instance.show("powerups", function():Void {
+				this.dispatchEvent(new Event(Event.COMPLETE));
+				this.close();
+			});
 		}
 	}
 
