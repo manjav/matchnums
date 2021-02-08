@@ -1,5 +1,6 @@
 package com.dailygames.mergenums.display.popups;
 
+import com.dailygames.mergenums.utils.Ads;
 import com.dailygames.mergenums.display.buttons.MessageButton;
 import com.dailygames.mergenums.utils.Prefs;
 import feathers.layout.AnchorLayoutData;
@@ -30,6 +31,10 @@ class BasePrizePopup extends ConfirmPopup implements IGamePlayPopup {
 		this.adsButton = this.addButton("coin", "%", OutlineTheme.VARIANT_MBUTTON_ORANGE, AnchorLayoutData.bottomRight(28.F(), 16.F()), 156.F());
 	}
 
+	override private function open():Void {
+		this.adsButton.enabled = Ads.instance.has("prize");
+	}
+
 	override public function validateNow():Void {
 		if (this.isInvalid(DATA)) {
 			this.claimButton.text = Std.string(this.prize);
@@ -47,7 +52,12 @@ class BasePrizePopup extends ConfirmPopup implements IGamePlayPopup {
 		this.close();
 	}
 
-	private function showAds():Void {}
+	private function showAds():Void {
+		Ads.instance.show("prize", function():Void {
+			this.prize *= 3;
+			this.close();
+		});
+	}
 
 	override public function close():Void {
 		super.close();

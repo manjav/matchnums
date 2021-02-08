@@ -1,5 +1,6 @@
 package com.dailygames.mergenums.display.popups;
 
+import com.dailygames.mergenums.utils.Ads;
 import com.dailygames.mergenums.display.buttons.MessageButton;
 import com.dailygames.mergenums.events.GameEvent;
 import com.dailygames.mergenums.utils.Prefs;
@@ -51,6 +52,10 @@ class RevivePopup extends ConfirmPopup implements IGamePlayPopup {
 		this.adsButton.text = "Free";
 	}
 
+	override private function open():Void {
+		this.adsButton.enabled = Ads.instance.has("revive");
+	}
+
 	override private function adjustContentLayout():Void {
 		this.content.width = OutlineTheme.POPUP_SIZE;
 		this.content.height = OutlineTheme.POPUP_SIZE * 1.1;
@@ -59,8 +64,11 @@ class RevivePopup extends ConfirmPopup implements IGamePlayPopup {
 
 	override private function buttons_clickHandler(event:MouseEvent):Void {
 		var button = cast(event.currentTarget, MessageButton);
-		if (button.message == "%") {
-			// this.showAds();
+		if (button.name == "ads") {
+			Ads.instance.show("revive", function():Void {
+				GameEvent.dispatch(this, GameEvent.REVIVE_BY_ADS);
+				this.close();
+			});
 			return;
 		}
 
