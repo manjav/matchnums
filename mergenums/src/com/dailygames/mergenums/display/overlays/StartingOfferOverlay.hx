@@ -2,6 +2,8 @@ package com.dailygames.mergenums.display.overlays;
 
 import com.dailygames.mergenums.display.buttons.MessageButton;
 import com.dailygames.mergenums.display.popups.ConfirmPopup;
+import com.dailygames.mergenums.events.GameEvent;
+import com.dailygames.mergenums.utils.Ads;
 import com.dailygames.mergenums.utils.Prefs;
 import feathers.controls.AssetLoader;
 import feathers.controls.Label;
@@ -24,13 +26,18 @@ class StartingOfferOverlay extends ConfirmPopup {
 		this.hasCloseButton = false;
 		this.title = "Select Boost Items";
 
-		this.boostBig = new BoostActivator("boost-big", "Start the game with block 512!", new AnchorLayoutData(14.I(), null, 102.I(), 14.I()));
+		this.boostBig = new BoostActivator("big", "Start the game with block 512!", new AnchorLayoutData(14.I(), null, 102.I(), 14.I()));
 		this.content.addChild(this.boostBig);
-		this.boostNext = new BoostActivator("boost-next", "Preview the next upcoming block!", new AnchorLayoutData(14.I(), 14.I(), 102.I()));
+		this.boostNext = new BoostActivator("next", "Preview the next upcoming block!", new AnchorLayoutData(14.I(), 14.I(), 102.I()));
 		this.content.addChild(this.boostNext);
 
 		this.addButton("continue", "Start", OutlineTheme.VARIANT_MBUTTON_BLUE, new AnchorLayoutData(null, 14.F(), 15.F(), 14.F()));
 		this.addButton("noads", null, OutlineTheme.VARIANT_MBUTTON_ORANGE, AnchorLayoutData.bottomCenter(-90.F()), 80.I(), 80.I());
+	}
+
+	override private function open():Void {
+		this.boostBig.open();
+		this.boostNext.open();
 	}
 
 	override private function adjustContentLayout():Void {
@@ -55,15 +62,17 @@ class StartingOfferOverlay extends ConfirmPopup {
 }
 
 class BoostActivator extends LayoutGroup {
+	public var mode:String;
 	public var icon:String;
 	public var text:String;
 	public var active:Bool;
 	public var coinButton:MessageButton;
 	public var adsButton:MessageButton;
 
-	public function new(icon:String, text:String, layoutData:AnchorLayoutData) {
+	public function new(mode:String, text:String, layoutData:AnchorLayoutData) {
 		super();
-		this.icon = icon;
+		this.mode = "boost" + mode;
+		this.icon = "boost-" + mode;
 		this.text = text;
 		this.layoutData = layoutData;
 		this.width = OutlineTheme.POPUP_SIZE * 0.475;
@@ -80,7 +89,7 @@ class BoostActivator extends LayoutGroup {
 
 		var iconDisplay = new AssetLoader();
 		iconDisplay.height = 92.I();
-		iconDisplay.source = icon;
+		iconDisplay.source = this.icon;
 		iconDisplay.layoutData = AnchorLayoutData.topCenter(12.I());
 		this.addChild(iconDisplay);
 
@@ -88,11 +97,21 @@ class BoostActivator extends LayoutGroup {
 		textDisplay.text = text;
 		textDisplay.wordWrap = true;
 		textDisplay.textFormat = theme.getTextFormat(Math.round(OutlineTheme.FONT_SIZE * 0.72), 0, true, "center");
-		textDisplay.layoutData= new AnchorLayoutData(null, 12.I(), 120.I(), 12.I());
+		textDisplay.layoutData = new AnchorLayoutData(null, 12.I(), 120.I(), 12.I());
 		this.addChild(textDisplay);
 
 		coinButton = addButton("coin", "100", OutlineTheme.VARIANT_MSBUTTON, new AnchorLayoutData(null, 24.I(), 68.I(), 24.I()));
 		adsButton = addButton("ads", "Free", OutlineTheme.VARIANT_MSBUTTON_ORANGE, new AnchorLayoutData(null, 24.I(), 19.I(), 24.I()));
+		Ads.instance.addEventListener(GameEvent.ADS_READY, this.ads_completeHandler);
+	}
+
+	public function open():Void {
+		this.adsButton.enabled = Ads.instance.has(this.mode);
+	}
+
+	private function ads_completeHandler(event:GameEvent):Void {
+		if (event.data == this.mode)
+			open();
 	}
 
 	private function addButton(name:String, message:String, variant:String, layout:ILayoutData):MessageButton {
@@ -117,6 +136,9 @@ class BoostActivator extends LayoutGroup {
 				if (newValue >= 0)
 					this.updateButtons();
 			case "ads":
+				Ads.instance.show(this.mode, function():Void {
+					this.updateButtons();
+				});
 				return;
 		}
 	}
