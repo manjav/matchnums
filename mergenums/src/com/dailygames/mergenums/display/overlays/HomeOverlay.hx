@@ -186,7 +186,7 @@ class HomeOverlay extends BaseOverlay {
 
 	private function showRemovePopup(mode:String):Void {
 		if (Prefs.instance.get(mode) <= 0) {
-			var callout = cast(this.addOverlay(Alternative, true, false), AlternativeCallout);
+			var callout = cast(this.addOverlay(Powerups, true, false), PowerupsCallout);
 			callout.mode = mode;
 			callout.contentRect = new Rectangle(this.actualWidth - 210.I(), this.footer.y - 90.I(), 190.I(), 76.I());
 			callout.addEventListener(Event.CANCEL, this.pauseOverlay_eventsHandler);
@@ -200,7 +200,7 @@ class HomeOverlay extends BaseOverlay {
 	}
 
 	private function callout_completeHandler(event:Event):Void {
-		var callout = cast(event.target, AlternativeCallout);
+		var callout = cast(event.target, PowerupsCallout);
 		callout.removeEventListener(Event.COMPLETE, this.callout_completeHandler);
 		Prefs.instance.increase(callout.mode, 1);
 		this.showRemovePopup(callout.mode);

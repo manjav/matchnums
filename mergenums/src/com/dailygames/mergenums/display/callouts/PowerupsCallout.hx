@@ -8,7 +8,7 @@ import openfl.events.MouseEvent;
 
 using com.dailygames.mergenums.themes.OutlineTheme;
 
-class AlternativeCallout extends ConfirmCallout {
+class PowerupsCallout extends ConfirmCallout {
 	override private function initialize():Void {
 		super.initialize();
 		this.title = "Get new powerup!";

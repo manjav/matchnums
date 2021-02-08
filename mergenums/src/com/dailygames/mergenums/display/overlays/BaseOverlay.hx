@@ -1,8 +1,8 @@
 package com.dailygames.mergenums.display.overlays;
 
-import com.dailygames.mergenums.themes.OutlineTheme;
-import com.dailygames.mergenums.display.popups.*;
 import com.dailygames.mergenums.display.callouts.*;
+import com.dailygames.mergenums.display.popups.*;
+import com.dailygames.mergenums.themes.OutlineTheme;
 import feathers.controls.LayoutGroup;
 import feathers.layout.AnchorLayoutData;
 import feathers.skins.RectangleSkin;
@@ -19,7 +19,7 @@ enum ScreenType {
 	GameOver;
 	RemoveCell;
 	StartingOffer;
-	Alternative;
+	Powerups;
 }
 
 class BaseOverlay extends LayoutGroup {
@@ -47,8 +47,8 @@ class BaseOverlay extends LayoutGroup {
 					new RemoveCellPopup();
 				case StartingOffer:
 					new StartingOfferOverlay();
-				case Alternative:
-					new AlternativeCallout();
+				case Powerups:
+					new PowerupsCallout();
 				default: null;
 			}
 			screen.layoutData = AnchorLayoutData.fill();
