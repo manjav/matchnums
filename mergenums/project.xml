@@ -15,11 +15,11 @@
 	<haxelib name="feathersui" />
 	<!-- <haxelib name="gameanalytics" />  -->
 	<!-- <haxelib name="extension-natives" />  -->
-	<haxelib name="extension-iap" /> 
+	<haxelib name="extension-iap" />
 	<haxelib name="extension-unityads" />
 	<haxelib name="extension-appmetrica" />
-	<haxelib name="extension-orientation" /> 
-	<haxelib name="extension-alarmmanager" /> 
+	<haxelib name="extension-orientation" />
+	<haxelib name="extension-alarmmanager" />
 		
 	<icon path="assets/images/icon.png"/>
 	<assets id="pause" path="assets/images/pause.png"/>
@@ -35,6 +35,7 @@
 	<assets id="unmute" path="assets/images/unmute.png"/>
 	<assets id="heart" path="assets/images/heart.png"/>
 	<assets id="crown" path="assets/images/crown.png"/>
+	<assets id="newrecord" path="assets/images/newrecord.png"/>
 	<assets id="boost-big" path="assets/images/boost-big.png"/>
 	<assets id="boost-next" path="assets/images/boost-next.png"/>
 	<assets id="badge-hot" path="assets/images/badge-hot.png"/>
@@ -65,7 +66,7 @@
 	<config:android minimum-sdk-version="19"/>
 	<config:android target-sdk-version="29"/>
 	<certificate path="../../ks.keystore" password="Vahid@4822" alias="mergenums" alias-password="m3r63num5" if="android" /><!--  unless="debug" -->
-	<architecture exclude="arm64" if="android" />
+	<architecture exclude="armv7" if="android" />
 	<haxeflag name="-dce" value="full" />
 	<define name="release" value="true" />
 </project>

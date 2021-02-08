@@ -332,7 +332,6 @@ class TileLayout extends EventDispatcher implements ILayout {
 			item.x = this._paddingLeft + (contentWidth + this._horizontalGap) * c;
             
 			var r = Math.floor(i / numColumns);
-            trace(c, r);
 			if (r > row) {
 				row = r;
 				contentHeight += item.height + this._verticalGap;
