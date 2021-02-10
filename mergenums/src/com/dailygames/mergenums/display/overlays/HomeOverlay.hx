@@ -174,6 +174,7 @@ class HomeOverlay extends BaseOverlay {
 				popup.addEventListener(GameEvent.REVIVE_CANCEL, this.revivePopup_reviveHandler);
 			case GameEvent.NEXT_CELL:
 				this.showNextBlockOffer(cast(event.data, Rectangle));
+				return;
 		}
 		cast(popup, IGamePlayPopup).value = cast(event.data, Int);
 	}
