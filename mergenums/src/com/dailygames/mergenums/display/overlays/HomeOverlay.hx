@@ -42,6 +42,7 @@ class HomeOverlay extends BaseOverlay {
 		this.game = new Game();
 		this.game.addEventListener(GameEvent.GAME_OVER, this.game_eventsChangeHandler);
 		this.game.addEventListener(GameEvent.BIG_VALUE, this.game_eventsChangeHandler);
+		this.game.addEventListener(GameEvent.NEXT_CELL, this.game_eventsChangeHandler);
 		this.game.addEventListener(GameEvent.NEW_RECORD, this.game_eventsChangeHandler);
 		this.game.addEventListener(MouseEvent.CLICK, this.game_clickHandler);
 		this.addChild(this.game);
@@ -171,8 +172,27 @@ class HomeOverlay extends BaseOverlay {
 				popup.addEventListener(GameEvent.REVIVE_BY_COIN, this.revivePopup_reviveHandler);
 				popup.addEventListener(GameEvent.REVIVE_BY_ADS, this.revivePopup_reviveHandler);
 				popup.addEventListener(GameEvent.REVIVE_CANCEL, this.revivePopup_reviveHandler);
+			case GameEvent.NEXT_CELL:
+				this.showNextBlockOffer(cast(event.data, Rectangle));
 		}
 		cast(popup, IGamePlayPopup).value = cast(event.data, Int);
+	}
+
+	private function showNextBlockOffer(origin:Rectangle):Void {
+		var callout = cast(this.addOverlay(NextCell, true, false), NextCellCallout);
+		var rect = new Rectangle(origin.x - 65.I(), origin.y + 80.I(), 190.I(), 76.I());
+		rect.x = Math.min(Math.max(rect.x, 2.F()), this.actualWidth - rect.width - 2.F());
+		callout.contentRect = rect;
+		callout.addEventListener(Event.CANCEL, this.pauseOverlay_eventsHandler);
+		callout.addEventListener(Event.COMPLETE, this.nextCallout_completeHandler);
+	}
+
+	private function nextCallout_completeHandler(event:Event):Void {
+		var callout = cast(event.target, NextCellCallout);
+		callout.removeEventListener(Event.COMPLETE, this.nextCallout_completeHandler);
+		this.game.hasBoostNext = true;
+		this.game.updateNextCell();
+		this.resume();
 	}
 
 	private function buttons_clickHandler(event:MouseEvent):Void {

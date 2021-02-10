@@ -1,5 +1,6 @@
 package com.dailygames.mergenums.display.overlays;
 
+import com.dailygames.mergenums.display.buttons.MessageButton;
 import com.dailygames.mergenums.utils.Ads;
 import feathers.skins.RectangleSkin;
 import com.dailygames.mergenums.display.items.ShopItemRenderer;

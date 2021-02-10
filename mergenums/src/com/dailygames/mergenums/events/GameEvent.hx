@@ -14,6 +14,7 @@ class GameEvent extends Event {
 	static public final REVIVE_BY_COIN:String = "reviveByCoin";
 	static public final REVIVE_BY_ADS:String = "reviveByAds";
 	static public final REVIVE_CANCEL:String = "reviveCancel";
+	static public final NEXT_CELL:String = "nextCell";
 	static public final ADS_READY:String = "adsReady";
 
 	/**

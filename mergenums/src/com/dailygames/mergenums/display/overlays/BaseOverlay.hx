@@ -20,6 +20,7 @@ enum ScreenType {
 	RemoveCell;
 	StartingOffer;
 	Powerups;
+	NextCell;
 }
 
 class BaseOverlay extends LayoutGroup {
@@ -49,6 +50,8 @@ class BaseOverlay extends LayoutGroup {
 					new StartingOfferOverlay();
 				case Powerups:
 					new PowerupsCallout();
+				case NextCell:
+					new NextCellCallout();
 				default: null;
 			}
 			screen.layoutData = AnchorLayoutData.fill();

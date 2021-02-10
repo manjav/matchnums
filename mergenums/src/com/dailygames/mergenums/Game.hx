@@ -1,5 +1,6 @@
 package com.dailygames.mergenums;
 
+import com.dailygames.mergenums.display.overlays.ShopOverlay;
 import com.dailygames.mergenums.display.popups.NewRecordPopup;
 import com.dailygames.mergenums.animations.CellDisposeAnimationFactory;
 import com.dailygames.mergenums.animations.CellInitAnimationFactory;
@@ -153,7 +154,7 @@ class Game extends Sprite {
 			Actuate.tween(this.endLine, 1.0, {alpha: 0.2}).repeat(1).onComplete(gameOver);
 			return;
 		}
-		var reward = 0;//numRewardCells > 0 || Math.random() > 0.05 ? 0 : Math.round(this.nextCell.value * 10);
+		var reward = 0; // numRewardCells > 0 || Math.random() > 0.05 ? 0 : Math.round(this.nextCell.value * 10);
 		if (reward > 0)
 			numRewardCells++;
 		var cell = Cell.instantiate(this.lastColumn, row, this.nextCell.value, reward, this.cellInitAnimationFactory);
@@ -191,6 +192,11 @@ class Game extends Sprite {
 	}
 
 	private function clickHandler(event:MouseEvent):Void {
+		if (this.nextCell.mouseY < Cell.RADIUS && !this.hasBoostNext) {
+			GameEvent.dispatch(this, GameEvent.NEXT_CELL, this.nextCell.getBounds(parent));
+			return;
+		}
+
 		if (this.state != Play)
 			return;
 		this.lastColumn = Math.floor(Math.min(4, Math.max(0, this.mouseX / Cell.SIZE)));
@@ -366,6 +372,10 @@ class Game extends Sprite {
 			for (j in 0...CellMap.NUM_ROWS)
 				if (this.cells.exists(i, j) && this.cells.get(i, j).value == value)
 					this.removeCell(i, j, true);
+	}
+
+	public function updateNextCell():Void {
+		this.nextCell.showValue = true;
 	}
 
 	private function cell_clearHandlre(event:Event):Void {

@@ -5,7 +5,15 @@ import com.dailygames.mergenums.animations.IAnimationFactory;
 import com.dailygames.mergenums.animations.Reward;
 
 class HiddenCell extends Cell {
-	public var showValue:Bool;
+	public var showValue(default, set):Bool;
+
+	private function set_showValue(value:Bool):Bool {
+		if (this.showValue == value)
+			return value;
+		this.updateStyle(value);
+		this.showValue = value;
+		return value;
+	}
 
 	public function new(column:Int, row:Int, value:Int, reward:Int = 0, ?initAnimationFactory:IAnimationFactory) {
 		super(column, row, value, reward, initAnimationFactory);
@@ -23,14 +31,8 @@ class HiddenCell extends Cell {
 		this.initAnimationFactory = initAnimationFactory;
 		this.state = Init;
 
-		if (this.showValue) {
-			this.transform.colorTransform.color = COLORS[value];
-			this.textDisplay.text = Std.string(getScore(value));
-		} else {
-			this.transform.colorTransform.color = 0xFFFFFF;
-			this.textDisplay.text = "?";
-		}
 		this.textDisplay.y = -RADIUS * 0.2 - this.textDisplay.getTextFormat().size * 0.5;
+		this.updateStyle(this.showValue);
 
 		if (this.rewardDisplay != null) {
 			Reward.dispose(this.rewardDisplay);
@@ -47,5 +49,17 @@ class HiddenCell extends Cell {
 		else
 			this.initAnimationFactory.call([this, this.onInit]);
 		return this;
+	}
+
+	private function updateStyle(value:Bool):Void {
+		if (value) {
+			this.transform.colorTransform.color = COLORS[this.value];
+			if (this.textDisplay != null)
+				this.textDisplay.text = Std.string(getScore(this.value));
+		} else {
+			this.transform.colorTransform.color = 0xFFFFFF;
+			if (this.textDisplay != null)
+				this.textDisplay.text = "?";
+		}
 	}
 }
