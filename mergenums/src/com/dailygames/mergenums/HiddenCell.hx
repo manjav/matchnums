@@ -21,6 +21,9 @@ class HiddenCell extends Cell {
 		this.background.graphics.clear();
 		this.background.graphics.lineStyle(5, 0xFFFFFF);
 		this.background.graphics.drawRoundRect(BORDER - RADIUS, BORDER - RADIUS, SIZE - BORDER * 2, SIZE - BORDER * 2, ROUND, ROUND);
+
+		this.background.graphics.moveTo(-RADIUS + BORDER * 2, -RADIUS - BORDER);
+		this.background.graphics.lineTo(RADIUS - BORDER * 2, -RADIUS - BORDER);
 	}
 
 	override public function init(column:Int, row:Int, value:Int, reward:Int, initAnimationFactory:IAnimationFactory):Cell {
