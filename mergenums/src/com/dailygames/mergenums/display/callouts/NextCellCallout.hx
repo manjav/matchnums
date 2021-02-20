@@ -15,7 +15,7 @@ class NextCellCallout extends ConfirmCallout {
 	}
 
 	override private function open():Void {
-		this.adsButton.enabled = Ads.instance.has("boost-next");
+		this.adsButton.enabled = Ads.instance.has("boostnext");
 	}
 
 	override private function buttons_clickHandler(event:MouseEvent):Void {

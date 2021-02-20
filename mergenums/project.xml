@@ -66,7 +66,7 @@
 	<config:android minimum-sdk-version="19"/>
 	<config:android target-sdk-version="29"/>
 	<certificate path="../../ks.keystore" password="Vahid@4822" alias="mergenums" alias-password="m3r63num5" if="android" /><!--  unless="debug" -->
-	<architecture exclude="armv7" if="android" />
+	<architecture exclude="armv64" if="android" />
 	<haxeflag name="-dce" value="full" />
 	<define name="release" value="true" />
 </project>
